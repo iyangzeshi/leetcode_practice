@@ -112,6 +112,8 @@ then store in the HashSet to deduplicate
  */
 class Solution {
     
+    private final int[][] DIRECTIONS = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+    
     public int numDistinctIslands2(int[][] grid) {
         // corner case
         if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0) {
@@ -119,14 +121,19 @@ class Solution {
         }
         int rows = grid.length;
         int cols = grid[0].length;
+        
+        /*
+        HashSet里面的只能是List<List<Integer>>, 不能是List<int[]>，否则HashSet去重会出问题
+        因为两个值相同的Array并不能equals相同, List重写过equals函数
+         */
         Set<List<List<Integer>>> existedShapes = new HashSet<>();
         Set<Integer> visited = new HashSet<>();
         int count = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (!visited.contains(i * cols + j) && grid[i][j] == 1) {
-                    List<List<Integer>> shape = new ArrayList<>();
-                    dfs(grid, i, j, shape, visited);
+                    List<List<Integer>> shape = new ArrayList<>(); //
+                    dfs(i, j, shape, visited, grid);
                     List<List<List<Integer>>> allTransformedShapes = canonical(shape);
                     boolean existed = false;
                     for (List<List<Integer>> transformedShape : allTransformedShapes) {
@@ -146,24 +153,25 @@ class Solution {
         return count;
     }
     
-    private void dfs(int[][] board, int row, int col, List<List<Integer>> shape,
-            Set<Integer> visited) {
+    private void dfs(int row, int col, List<List<Integer>> shape, Set<Integer> visited,
+            int[][] board) {
         int rows = board.length;
         int cols = board[0].length;
-        // no success case
         
-        // base case - fail
+        // base case - failure
         if (row < 0 || row >= rows || col < 0 || col >= cols || board[row][col] == 0
                 || visited.contains(row * cols + col)) {
             return;
         }
+        
         visited.add(row * cols + col);
         shape.add(Arrays.asList(row, col));
         
-        dfs(board, row - 1, col, shape, visited); // go upper
-        dfs(board, row, col + 1, shape, visited); // go right
-        dfs(board, row + 1, col, shape, visited); // go down
-        dfs(board, row, col - 1, shape, visited); // go left
+        for(int[] dir: DIRECTIONS) {
+            int i = row + dir[0];
+            int j = col + dir[1];
+            dfs(i, j, shape, visited, board);
+        }
     }
     
     private List<List<List<Integer>>> canonical(List<List<Integer>> shape) {
