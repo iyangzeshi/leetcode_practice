@@ -90,6 +90,7 @@ class Solution1_1 {
         
         // edge case
         int len = prices.length;
+        /* start 可有可没有 */
         if (k >= len / 2) {
             int sum = 0;
             for (int i = 1; i < len; i++) {
@@ -99,7 +100,8 @@ class Solution1_1 {
             }
             return sum;
         }
-        // general case
+        /* end 可有可没有 */
+
         int[][] buy = new int[k + 1][len];
         int[][] profit = new int[k + 1][len];
         for (int i = 1; i <= k; i++) {
