@@ -80,6 +80,23 @@ class Solution {
 // Solution 1_1: dynamic programming
 // T(n) = O(n), S(n) = O(n)
 // 3 ms,击败了99.23% 的Java用户, 55.5 MB,击败了35.28% 的Java用户
+/*
+DP
+buy1[i + 1]表示从0 到 i买第一个股票的最大收益（负值）
+profit1[i] 表示从0 到 i 卖第一个股票的最大收益
+
+buy1[i + 1]表示从0 到 i买第一个股票的最大收益
+profit2[i] 表示从0 到 i 卖第一个股票的最大收益
+每次遇到一个新的股票i + 1，
+    对于buy1，可以买这个股票，也可以不买这个股票，取两者最高的收益:
+        buy1[i + 1] = Math.max(buy1[i], -prices[i]);
+    对于profit1，可以卖buy1的股票，也可以不卖buy1股票，取两者最高的收益：
+        profit1[i + 1] = Math.max(profit1[i], prices[i] + buy1[i]);
+    对于buy2，可以买这个股票，也可以不买这个股票，取两者最高的收益（包含profit1的收益）：
+        buy2[i + 1] = Math.max(buy2[i], profit1[i] - prices[i]);
+    对于profit1，可以卖buy1的股票，也可以不卖buy1股票，取两者最高的收益
+        profit2[i + 1] = Math.max(profit2[i], prices[i] + buy2[i]);
+ */
 class Solution1_1 {
     
     public int maxProfit(int[] prices) {
