@@ -52,35 +52,36 @@ public class Leetcode0123BestTimeToBuyAndSellStockIii{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// Solution 2: dynamic programming, rolling(space complexity optimized)
+// Solution 1_2: dynamic programming, rolling(space complexity optimized)
 class Solution {
     public int maxProfit(int[] prices) {
         // corner case
         if (prices == null || prices.length == 0) {
             return 0;
         }
-
+        
         // general case
         int buy1 = -prices[0]; // 第一次买的最好收益（负值）
         int buy2 = -prices[0]; // 当前第一次卖 + 第二次买 的最好收益
-        int sell1 = 0; // 当前第一次卖的最好收益
-        int sell2 = 0; // 当前第一次和第二次卖的最好收益
+        int profit1 = 0; // 当前第一次卖的最好收益
+        int profit2 = 0; // 当前第一次和第二次卖的最好收益
         // 在第二次买之前，必须先完成第一次卖，而且不能是同一天，所以for循环里面，是先执行2的部分，在执行1的部分
-        for(int price: prices) {
-            buy2 = Math.max(buy2, sell1 - price);
-            sell2 = Math.max(sell2, price + buy2);
-
+        for (int price : prices) {
             buy1 = Math.max(buy1, -price);
-            sell1 = Math.max(sell1, price + buy1);
+            profit1 = Math.max(profit1, price + buy1);
+            
+            buy2 = Math.max(buy2, profit1 - price);
+            profit2 = Math.max(profit2, price + buy2);
         }
-        // 大部分情况是return sell2,但是corner case
-        return sell2;
-        // time complexity: O(n)
+        return profit2;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: dynamic programming
+// Solution 1_1: dynamic programming
+// T(n) = O(n), S(n) = O(n)
+// 3 ms,击败了99.23% 的Java用户, 55.5 MB,击败了35.28% 的Java用户
 class Solution1_1 {
+    
     public int maxProfit(int[] prices) {
         // corner case
         if (prices == null || prices.length == 0) {
@@ -89,31 +90,30 @@ class Solution1_1 {
         
         // general case
         int len = prices.length;
-        int[] buy1 = new int[len + 1]; // 第一次买的最好收益（负值）
-        int[] buy2 = new int[len + 1]; // 当前第一次卖 + 第二次买 的最好收益
+        int[] buy1 = new int[len + 1]; // buy1[i + 1] means from 0 to i, 第一次买的最好收益（负值）
+        int[] buy2 = new int[len + 1]; // buy2[i + 1] means from 0 to i, 当前第一次买 + 卖 + 第二次买的最好收益
         buy1[0] = -prices[0];
         buy2[0] = -prices[0];
-        int[] sell1 =  new int[len + 1]; // 当前第一次卖完的最好收益
-        int[] sell2 =  new int[len + 1]; // 当前第一次和第二次卖的最好收益
+        int[] profit1 = new int[len + 1]; // 当前第一次买+ 卖完的最好收益
+        int[] profit2 = new int[len + 1]; // 当前第一次和第二次卖完的最好收益
         // 在第二次买之前，必须先完成第一次卖，而且不能是同一天，所以for循环里面，是先执行2的部分，在执行1的部分
-        for(int i = 0; i < len; i++) {
-            buy2[i + 1] = Math.max(buy2[i], sell1[i] - prices[i]);
-            sell2[i + 1] = Math.max(sell2[i], prices[i] + buy2[i]);
-            
+        for (int i = 0; i < len; i++) {
             buy1[i + 1] = Math.max(buy1[i], -prices[i]);
-            sell1[i + 1] = Math.max(sell1[i], prices[i] + buy1[i]);
+            profit1[i + 1] = Math.max(profit1[i], prices[i] + buy1[i]);
+            
+            buy2[i + 1] = Math.max(buy2[i], profit1[i] - prices[i]);
+            profit2[i + 1] = Math.max(profit2[i], prices[i] + buy2[i]);
         }
-        // 大部分情况是return sell2,但是corner case
-        /*System.out.println(Arrays.toString(buy1));
-        System.out.println(Arrays.toString(sell1));
-        System.out.println(Arrays.toString(buy2));
-        System.out.println(Arrays.toString(sell2));*/
-        return sell2[len];
-        // time complexity: O(n)
+        return profit2[len];
     }
+    
 }
-// Solution 2: dynamic programming, rolling(space complexity optimized)
+
+// Solution 1_2: dynamic programming, rolling(space complexity optimized)
+// T(n) = O(n), S(n) = O(1)
+// 3 ms,击败了99.23% 的Java用户, 55.3 MB,击败了44.08% 的Java用户
 class Solution1_2 {
+    
     public int maxProfit(int[] prices) {
         // corner case
         if (prices == null || prices.length == 0) {
@@ -123,19 +123,18 @@ class Solution1_2 {
         // general case
         int buy1 = -prices[0]; // 第一次买的最好收益（负值）
         int buy2 = -prices[0]; // 当前第一次卖 + 第二次买 的最好收益
-        int sell1 = 0; // 当前第一次卖的最好收益
-        int sell2 = 0; // 当前第一次和第二次卖的最好收益
+        int profit1 = 0; // 当前第一次卖的最好收益
+        int profit2 = 0; // 当前第一次和第二次卖的最好收益
         // 在第二次买之前，必须先完成第一次卖，而且不能是同一天，所以for循环里面，是先执行2的部分，在执行1的部分
-        for(int price: prices) {
-            buy2 = Math.max(buy2, sell1 - price);
-            sell2 = Math.max(sell2, price + buy2);
-            
+        for (int price : prices) {
             buy1 = Math.max(buy1, -price);
-            sell1 = Math.max(sell1, price + buy1);
+            profit1 = Math.max(profit1, price + buy1);
+            
+            buy2 = Math.max(buy2, profit1 - price);
+            profit2 = Math.max(profit2, price + buy2);
         }
-        // 大部分情况是return sell2,但是corner case
-        return sell2;
-        // time complexity: O(n)
+        return profit2;
     }
+    
 }
 }

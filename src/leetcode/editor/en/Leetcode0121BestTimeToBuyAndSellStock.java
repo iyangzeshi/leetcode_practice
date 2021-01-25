@@ -41,29 +41,11 @@ public class Leetcode0121BestTimeToBuyAndSellStock{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// Solution 1_1:dynamic programming
+// Solution 2: Greedy
+// T(n) = O(n), S(n) = O(1)
 class Solution {
-    public int maxProfit(int[] prices) {
-        // corner case
-        if (prices == null || prices.length == 0) {
-            return 0;
-        }
-
-        // general case
-        int len = prices.length;
-        int[] buy = new int[len + 1];
-        buy[0] = prices[0];
-        int[] sell = new int[len + 1];
-        for (int i = 0; i < len; i++) {
-            sell[i + 1] = Math.max(sell[i], prices[i] - buy[i]);
-            buy[i + 1] = Math.min(buy[i], prices[i]);
-        }
-        return sell[len];
-    }
-}
-//leetcode submit region end(Prohibit modification and deletion)
-// Solution 1_1:dynamic programming
-class Solution1_1 {
+    
+    // greedy
     public int maxProfit(int[] prices) {
         // corner case
         if (prices == null || prices.length == 0) {
@@ -72,18 +54,50 @@ class Solution1_1 {
         
         // general case
         int len = prices.length;
-        int[] buy = new int[len + 1];
+        int minPrice = prices[0];
+        int maxProfit = 0;
+        for (int price : prices) {
+            maxProfit = Math.max(maxProfit, price - minPrice);
+            minPrice = Math.min(minPrice, price);
+        }
+        return maxProfit;
+    }
+    
+}
+//leetcode submit region end(Prohibit modification and deletion)
+
+// Solution 1_1:dynamic programming
+// T(n) = O(n), S(n) = O(n)
+// 3 ms,击败了21.38% 的Java用户, 48.6 MB,击败了20.82% 的Java用户
+class Solution1_1 {
+    
+    public int maxProfit(int[] prices) {
+        // corner case
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        
+        // general case
+        int len = prices.length;
+        int[] buy = new int[len + 1];// buy[i + 1] means the lowest price from start to i(including)
+        int[] profit = new int[len + 1];// profit[i + 1] means max profit from start to i(including)
+        
+        // initialization
         buy[0] = prices[0];
-        int[] sell = new int[len + 1];
         for (int i = 0; i < len; i++) {
-            sell[i + 1] = Math.max(sell[i], prices[i] - buy[i]);
+            profit[i + 1] = Math.max(profit[i], prices[i] - buy[i]);
             buy[i + 1] = Math.min(buy[i], prices[i]);
         }
-        return sell[len];
+        return profit[len];
     }
+    
 }
+
 // Solution 1_2: dynamic programming, rolling(space complexity optimized)
+// T(n) = O(n), S(n) = O(1)
+// 2 ms,击败了35.48% 的Java用户, 52.5 MB,击败了8.00% 的Java用户
 class Solution1_2 {
+    
     // dynamic programming, rolling(space complexity optimized)
     // the code is nearly the same as Solution 1, but the logic is different
     public int maxProfit(int[] prices) {
@@ -94,34 +108,40 @@ class Solution1_2 {
         
         // general case
         int len = prices.length;
-        int buy = prices[0];
-        int sell = 0;
-        for (int price: prices) {
-            sell = Math.max(sell, price - buy);
+        int buy = prices[0];// buy means the lowest price from start to i(including)
+        int profit = 0;
+        for (int price : prices) {
+            profit = Math.max(profit, price - buy);
             buy = Math.min(buy, price);
         }
-        return sell;
+        return profit;
     }
+    
 }
+
 // Solution 2: Greedy
+// T(n) = O(n), S(n) = O(1)
+// 2 ms,击败了35.48% 的Java用户, 52.7 MB,击败了7.17% 的Java用户
 class Solution2 {
+    
     // greedy
     public int maxProfit(int[] prices) {
         // corner case
         if (prices == null || prices.length == 0) {
             return 0;
         }
-
+        
         // general case
         int len = prices.length;
         int minPrice = prices[0];
         int maxProfit = 0;
-        for (int price: prices) {
+        for (int price : prices) {
             maxProfit = Math.max(maxProfit, price - minPrice);
             minPrice = Math.min(minPrice, price);
         }
         return maxProfit;
     }
+    
 }
 
 }

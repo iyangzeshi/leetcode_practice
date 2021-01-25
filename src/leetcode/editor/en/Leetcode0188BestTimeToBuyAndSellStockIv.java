@@ -44,7 +44,6 @@ public class Leetcode0188BestTimeToBuyAndSellStockIv{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // dynamic programming, rolling(space complexity optimized)
     public int maxProfit(int k, int[] prices) {
         // corner case
         if (prices == null || prices.length == 0) {
@@ -62,23 +61,27 @@ class Solution {
             }
             return sum;
         }
+        
         int[] sell = new int[k + 1];
-        int[] buy = new int[k + 1];
+        int[] profit = new int[k + 1];
         for (int i = 1; i <= k; i++) {
-            buy[i] = -prices[0];
+            profit[i] = -prices[0];
         }
         for (int j = 1; j < len; j++) { // j在 [0, len - 1]之间
             for (int i = 1; i <= k; i++) { // i在[0, k]之间
-                sell[i] = Math.max(sell[i], buy[i] + prices[j]);
-                buy[i] = Math.max(buy[i], sell[i - 1] - prices[j]);
+                sell[i] = Math.max(sell[i], profit[i] + prices[j]);
+                profit[i] = Math.max(profit[i], sell[i - 1] - prices[j]);
             }
         }
         return sell[k];
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
+// Solution 1_1: dynamic programming
+// T(n) = O(k * n), S(n) = O(k * n)
+// 5 ms,击败了64.10% 的Java用户, 38.6 MB,击败了50.86% 的Java用户
 class Solution1_1 {
-    // dynamic programming
+
     public int maxProfit(int k, int[] prices) {
         // corner case
         if (prices == null || prices.length == 0) {
@@ -97,28 +100,32 @@ class Solution1_1 {
             return sum;
         }
         // general case
-        int[][] sell = new int[k + 1][len];
         int[][] buy = new int[k + 1][len];
+        int[][] profit = new int[k + 1][len];
         for (int i = 1; i <= k; i++) {
             buy[i][0] = -prices[0];
         }
         for (int i = 1; i <= k; i++) { // i在[0, k]之间
             for (int j = 1; j < len; j++) { // j在 [0, len - 1]之间
-                sell[i][j] = Math.max(sell[i][j - 1], buy[i][j - 1] + prices[j]);
-                buy[i][j] = Math.max(buy[i][j - 1], sell[i - 1][j - 1] - prices[j]);
+                profit[i][j] = Math.max(profit[i][j - 1], buy[i][j - 1] + prices[j]);
+                buy[i][j] = Math.max(buy[i][j - 1], profit[i - 1][j - 1] - prices[j]);
             }
         }
-        return sell[k][len - 1];
+        return profit[k][len - 1];
     }
 }
+
+// Solution 1_2: dynamic programming
+// T(n) = O(k * n), S(n) = O(k)
+// 5 ms,击败了64.10% 的Java用户, 36.4 MB,击败了94.42% 的Java用户
 class Solution1_2 {
-    // dynamic programming, rolling(space complexity optimized)
+    
     public int maxProfit(int k, int[] prices) {
         // corner case
         if (prices == null || prices.length == 0) {
             return 0;
         }
-    
+        
         // edge case
         int len = prices.length;
         if (k >= len / 2) {
@@ -130,18 +137,20 @@ class Solution1_2 {
             }
             return sum;
         }
-        int[] sell = new int[k + 1];
+        
+        int[] profit = new int[k + 1];
         int[] buy = new int[k + 1];
         for (int i = 1; i <= k; i++) {
             buy[i] = -prices[0];
         }
         for (int j = 1; j < len; j++) { // j在 [0, len - 1]之间
             for (int i = 1; i <= k; i++) { // i在[0, k]之间
-                sell[i] = Math.max(sell[i], buy[i] + prices[j]);
-                buy[i] = Math.max(buy[i], sell[i - 1] - prices[j]);
+                profit[i] = Math.max(profit[i], buy[i] + prices[j]);
+                buy[i] = Math.max(buy[i], profit[i - 1] - prices[j]);
             }
         }
-        return sell[k];
+        return profit[k];
     }
+    
 }
 }

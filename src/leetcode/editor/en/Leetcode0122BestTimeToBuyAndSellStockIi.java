@@ -61,26 +61,8 @@ public class Leetcode0122BestTimeToBuyAndSellStockIi{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// Solution 2: greedy
 class Solution {
-    public int maxProfit(int[] prices) {
-        // corner case
-        if (prices == null || prices.length == 0) {
-            return 0;
-        }
-
-        // general case
-        int maxprofit = 0;
-        for (int i = 1; i < prices.length; i++) {
-            if (prices[i] > prices[i - 1])
-                maxprofit += prices[i] - prices[i - 1];
-        }
-        return maxprofit;
-    }
-}
-//leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: dynamic programming
-class Solution1 {
+    
     public int maxProfit(int[] prices) {
         // corner case
         if (prices == null || prices.length == 0) {
@@ -88,33 +70,63 @@ class Solution1 {
         }
         
         // general case
-        int buy = - prices[0];
-        int sell = 0;
         int maxprofit = 0;
-        for (int price: prices) {
-            int nextSell = Math.max(sell, buy + price);
-            int nextBuy = Math.max(buy, sell - price);
-            sell = nextSell;
-            buy = nextBuy;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1]) {
+                maxprofit += prices[i] - prices[i - 1];
+            }
         }
-        return sell;
+        return maxprofit;
     }
+    
 }
-// Solution 2: greedy
-class Solution2 {
+//leetcode submit region end(Prohibit modification and deletion)
+// Solution 1: dynamic programming
+// T(n) = O(n), S(n) = O(1)
+// 1 ms,击败了69.71% 的Java用户, 38.2 MB,击败了97.87% 的Java用户
+class Solution1 {
+    
     public int maxProfit(int[] prices) {
         // corner case
         if (prices == null || prices.length == 0) {
             return 0;
         }
+        
+        // general case
+        int buy = -prices[0];
+        int profit = 0;
+        for (int price : prices) {
+            int nextSell = Math.max(profit, buy + price); // 卖和不卖里面取一个最大利润值
+            int nextBuy = Math.max(buy, profit - price); // 买和不买里面取一个最大利润值
+            profit = nextSell;
+            buy = nextBuy;
+        }
+        return profit;
+    }
     
+}
+
+// Solution 2: greedy
+// T(n) = O(n), S(n) = O(1)
+// 0 ms,击败了100.00% 的Java用户, 38.5 MB,击败了88.39% 的Java用户
+class Solution2 {
+    
+    public int maxProfit(int[] prices) {
+        // corner case
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        
         // general case
         int maxprofit = 0;
         for (int i = 1; i < prices.length; i++) {
-            if (prices[i] > prices[i - 1])
+            if (prices[i] > prices[i - 1]) {
                 maxprofit += prices[i] - prices[i - 1];
+            }
         }
         return maxprofit;
     }
+    
 }
+
 }
