@@ -45,39 +45,37 @@ public class Leetcode0050PowxN{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    
     public double myPow(double x, int n) {
-        // edge cases
-        if (n == 0){ // 0 to the power 0
+        // corner cases
+        if (n == 0) { // 0 to the power 0
             return 1;
-        }
-        else if (n == 1) {
+        } else if (n == 1) {
             return x;
         }
-
+        
         if (x == 0) {
             return 0;
-        }
-        else if (x == 1) {
+        } else if (x == 1) {
             return 1;
+        } else if (x == -1) {
+            return (n % 2 == 0 ? 1 : -1);
         }
-        else if (x == -1) {
-            return (n % 2 == 0 ? 1: -1);
-        }
-
+        
         if (n == Integer.MIN_VALUE) {
-            return Math.abs(x) > 1 ? 0: Integer.MAX_VALUE;
+            return Math.abs(x) > 1 ? 0 : Integer.MAX_VALUE;
         }
-
-        if (n < 0){
+        
+        if (n < 0) {
             return 1.0 / myPow(x, -n);
         }
-
+        
         double temp = myPow(x, n / 2);
-
-        return n % 2 == 0 ? temp * temp: temp * temp * x;
-
-
+        
+        return n % 2 == 0 ? temp * temp : temp * temp * x;
+        
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
