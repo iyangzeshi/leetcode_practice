@@ -80,65 +80,71 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: Recursion
 class Solution1 {
-    // Time complexity : O(2^N)
-    //Space complexity : O(N)
-    public int fib(int N) {
-        if (N <= 1) {
-            return N;
+    
+    // Time complexity : O(2^n)
+    //Space complexity : O(n)
+    public int fib(int n) {
+        if (n <= 1) {
+            return n;
         }
-        return fib(N-1) + fib(N-2);
+        return fib(n - 1) + fib(n - 2);
     }
+    
 }
 
 // Solution 2: Bottom-Up Solution using Memoization
 class Solution2 {
-    public int fib(int N) {
-        if (N <= 1) {
-            return N;
+    
+    public int fib(int n) {
+        if (n <= 1) {
+            return n;
         }
-        return memoize(N);
+        return memoize(n);
     }
-
+    
     public int memoize(int N) {
         int[] cache = new int[N + 1];
         cache[1] = 1;
-
+        
         for (int i = 2; i <= N; i++) {
-            cache[i] = cache[i-1] + cache[i-2];
+            cache[i] = cache[i - 1] + cache[i - 2];
         }
         return cache[N];
     }
+    
 }
 
 // Solution 3: Top-Down Solution using Memoization
 class Solution3 {
+    
     private Integer[] cache = new Integer[31];
-
-    public int fib(int N) {
-        if (N <= 1) {
-            return N;
+    
+    public int fib(int n) {
+        if (n <= 1) {
+            return n;
         }
         cache[0] = 0;
         cache[1] = 1;
-        return memoize(N);
+        return memoize(n);
     }
-
+    
     public int memoize(int N) {
         if (cache[N] != null) {
             return cache[N];
         }
-        cache[N] = memoize(N-1) + memoize(N-2);
+        cache[N] = memoize(N - 1) + memoize(N - 2);
         return memoize(N);
     }
+    
 }
 
 // Solution 4: Iterative Top-Down Solution
 class Solution4 {
-    public int fib(int N) {
-        if (N <= 1) {
-            return N;
+    public int fib(int n) {
+        if (n <= 1) {
+            return n;
         }
-        if (N == 2) {
+        if (n == 2) {
             return 1;
         }
 
@@ -146,7 +152,7 @@ class Solution4 {
         int prev1 = 1;
         int prev2 = 1;
 
-        for (int i = 3; i <= N; i++) {
+        for (int i = 3; i <= n; i++) {
             current = prev1 + prev2;
             prev2 = prev1;
             prev1 = current;
@@ -157,9 +163,11 @@ class Solution4 {
 
 // Solution 5: Math
 class Solution5 {
-    public int fib(int N) {
+    
+    public int fib(int n) {
         double goldenRatio = (1 + Math.sqrt(5)) / 2;
-        return (int)Math.round(Math.pow(goldenRatio, N)/ Math.sqrt(5));
+        return (int) Math.round(Math.pow(goldenRatio, n) / Math.sqrt(5));
     }
+    
 }
 }

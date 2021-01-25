@@ -92,7 +92,7 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 
 
-// Solution 1: merge sort with robFrom array
+// Solution 1: merge sort with helper array
 // T(n) = O(nlog(n)), S(n) = O(n)
 // 5 ms,击败了66.26% 的Java用户, 46.5 MB,击败了59.44% 的Java用户
 class Solution1 {
@@ -104,7 +104,7 @@ class Solution1 {
         }
         int len = nums.length;
         int[] helper = new int[len];
-        mergeSort(0, len - 1, nums, helper); //TODO
+        mergeSort(0, len - 1, nums, helper);
         return nums;
     }
     
@@ -172,11 +172,11 @@ class Solution2 {
         int pivot = nums[pivotIndex];
         swap(nums, pivotIndex, end);
     
-    /*
-    每个while循环开始之前
-    [start, left) < pivotValue
-    (right, end - 1] > = pivotValue
-     */
+        /*
+        每个while循环开始之前
+        [start, left) < pivotValue
+        (right, end - 1] > = pivotValue
+         */
         int left = start; // start pointer
         int right = end - 1; // end pointer
         
@@ -192,7 +192,6 @@ class Solution2 {
             }
         }
         swap(nums, left, end);
-        
         
         quickSort(start, left, nums);
         quickSort(left + 1, end, nums);

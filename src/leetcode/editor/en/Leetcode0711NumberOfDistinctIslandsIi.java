@@ -135,7 +135,7 @@ class Solution {
                     List<List<Integer>> shape = new ArrayList<>(); //
                     dfs(i, j, shape, visited, grid);
                     List<List<List<Integer>>> allTransformedShapes = canonical(shape);
-                    boolean existed = false;
+                    boolean existed = false; // this shape exists
                     for (List<List<Integer>> transformedShape : allTransformedShapes) {
                         if (existedShapes.contains(transformedShape)) {
                             existed = true;

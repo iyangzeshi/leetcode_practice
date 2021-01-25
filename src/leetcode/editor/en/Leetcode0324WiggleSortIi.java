@@ -166,14 +166,6 @@ class Solution {
         }
     }
     
-    private int mapIndex(int i, int k, int len) {
-        if (i <= k) {
-            return - 2 * i + 2 * k;
-        } else {
-            return -2 * i + 2 * k + len + 1;
-        }
-    }
-    
     private void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];

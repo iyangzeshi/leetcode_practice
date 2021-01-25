@@ -51,28 +51,28 @@ public class Leetcode0301RemoveInvalidParentheses {
 	}
 	
 //leetcode submit region begin(Prohibit modification and deletion)
+// Solution 2: DFS + 第2类搜索树 + 跳层, deduplicate with jump DFS levels
 class Solution {
-    // Solution 1: deduplicate with HashSet
+    
     public List<String> removeInvalidParentheses(String s) {
         // corner case
         char[] chars = s.toCharArray();
         int[] rm = calMRP(chars);
-        Set<String> res = new HashSet<>();
+        List<String> res = new ArrayList<>();
         dfs(res, new StringBuilder(), chars, 0, rm[0], rm[1], 0);
-        return new ArrayList<>(res);
+        return res;
     }
     
     /**
-     *
      * @param res: result
      * @param path: temporary path
      * @param chars: String
      * @param idx: index
      * @param rml: the number of removal of left parentheses
      * @param rmr: the number of removal of right parentheses
-     * @param delta: the difference bewteen left parentheses = right parentheses
+     * @param delta: the difference between left parentheses - right parentheses
      */
-    private void dfs(Set<String> res, StringBuilder path, char[] chars, int idx, int rml,
+    private void dfs(List<String> res, StringBuilder path, char[] chars, int idx, int rml,
             int rmr, int delta) {
         // base case
         // success case
@@ -81,7 +81,7 @@ class Solution {
             return;
         }
         
-        // failture case
+        // failure case
         if (rml < 0 || rmr < 0 || delta < 0 || idx == chars.length) {
             return;
         }
@@ -93,8 +93,12 @@ class Solution {
             dfs(res, path, chars, idx + 1, rml - 1, rmr, delta);
             
             //add '('
-            path.append(ch);
-            dfs(res, path, chars, idx + 1, rml, rmr, delta + 1);
+            int skip = 1;
+            while (idx + skip < chars.length && chars[idx] == chars[idx + skip]) {
+                skip++;
+            }
+            path.append(chars, idx, skip); // append(char[] str, int offset, int len)
+            dfs(res, path, chars, idx + skip, rml, rmr, delta + skip);
             path.setLength(len);
             
         } else if (ch == ')') {
@@ -102,8 +106,12 @@ class Solution {
             dfs(res, path, chars, idx + 1, rml, rmr - 1, delta);
             
             //add ')'
-            path.append(ch);
-            dfs(res, path, chars, idx + 1, rml, rmr, delta - 1);
+            int skip = 1;
+            while (idx + skip < chars.length && chars[idx] == chars[idx + skip]) {
+                skip++;
+            }
+            path.append(chars, idx, skip);
+            dfs(res, path, chars, idx + skip, rml, rmr, delta - skip);
             path.setLength(len);
         } else {
             path.append(ch);
@@ -136,9 +144,10 @@ class Solution {
 第2中写法更好，因为第1种写法是用HashSet，很耗费资源，
 第2种写法虽然复杂，但是直接在DFS里面跳层数，节约资源
  */
-// Solution 1: DFS + HashSet
+ 
+// Solution 1: DFS + HashSet, deduplicate with HashSet
 class Solution1 {
-    // Solution 1: deduplicate with HashSet
+
     public List<String> removeInvalidParentheses(String s) {
         // corner case
         char[] chars = s.toCharArray();
@@ -149,25 +158,24 @@ class Solution1 {
     }
     
     /**
-     *
      * @param res: result
      * @param path: temporary path
      * @param chars: String
      * @param idx: index
      * @param rml: the number of removal of left parentheses
      * @param rmr: the number of removal of right parentheses
-     * @param delta: the difference bewteen left parentheses = right parentheses
+     * @param delta: the difference between left parentheses - right parentheses, chosen left
+     *             parentheses - right parentheses
      */
     private void dfs(Set<String> res, StringBuilder path, char[] chars, int idx, int rml,
             int rmr, int delta) {
-        // base case
-        // success case
+        // base case - success case
         if (rml == 0 && rmr == 0 && delta == 0 && idx == chars.length) {
             res.add(path.toString());
             return;
         }
         
-        // failture case
+        // base case - failure case
         if (rml < 0 || rmr < 0 || delta < 0 || idx == chars.length) {
             return;
         }
@@ -198,8 +206,14 @@ class Solution1 {
         }
     }
     
+    /**
+     * calculate minimum removal of parentheses
+     * @param chars given char array
+     * @return {rml, rmt}
+     * rml: the number of removal of left parentheses
+     * rmr: the number of removal of right parentheses
+     */
     private int[] calMRP(char[] chars) {
-        
         int rml = 0;
         int rmr = 0;
         for (char ch : chars) {
@@ -218,9 +232,9 @@ class Solution1 {
     
 }
 
-// Solution 2: DFS + 第2类搜索树 + 跳层
+// Solution 2: DFS + 第2类搜索树 + 跳层, deduplicate with jump DFS levels
 class Solution2 {
-    // Solution 2: deduplicate with jump DFS levels
+
     public List<String> removeInvalidParentheses(String s) {
         // corner case
         char[] chars = s.toCharArray();
@@ -249,7 +263,7 @@ class Solution2 {
             return;
         }
         
-        // failture case
+        // failure case
         if (rml < 0 || rmr < 0 || delta < 0 || idx == chars.length) {
             return;
         }
