@@ -113,6 +113,7 @@ class Solution {
  time complexity : O(e^d), Space complexity: O(v +ｅ)
 */
 /*
+好懂，但是code长
 尝试所有的路线，pre order dfs，back tracking,
 如果当前这个点能走的话，而且能遍历完所有城市的话，就加到result里面；
 否则回到当前这个点，并且剪枝prune
@@ -190,6 +191,7 @@ class Solution1_1 {
  time complexity : average: O(e * log(e/v)), worst case: O(e * log(e)), Space complexity: O(v +ｅ)
 */
 /*
+难懂，但是code短，而且效率高
 按照字母序post order 遍历，相当于topological sort
  */
 class Solution1_2 {
