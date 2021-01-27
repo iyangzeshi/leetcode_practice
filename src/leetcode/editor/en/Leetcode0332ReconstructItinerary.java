@@ -62,50 +62,73 @@ public class Leetcode0332ReconstructItinerary {
     
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // origin -> list of destinations
-    HashMap<String, LinkedList<String>> flightMap = new HashMap<>();
-    LinkedList<String> result = null;
     
     public List<String> findItinerary(List<List<String>> tickets) {
-        // Step 1). build the graph first
-        for(List<String> ticket : tickets) {
-            String origin = ticket.get(0);
-            String dest = ticket.get(1);
-            if (this.flightMap.containsKey(origin)) {
-                LinkedList<String> destList = this.flightMap.get(origin);
-                destList.add(dest);
-            } else {
-                LinkedList<String> destList = new LinkedList<String>();
-                destList.add(dest);
-                this.flightMap.put(origin, destList);
-            }
+        List<String> res = new LinkedList<>();
+        if (tickets == null || tickets.size() == 0 || tickets.get(0) == null) {
+            return res;
         }
-        
-        // Step 2). order the destinations
-        this.flightMap.forEach((key, value) -> Collections.sort(value));
-        
-        this.result = new LinkedList<String>();
-        // Step 3). post-order DFS
-        this.DFS("JFK");
-        return this.result;
+        int flightsCount = tickets.size();
+        Map<String, List<String>> graph = buildGraph(tickets);
+        Map<String, boolean[]> visitedEdges = initialVisitedEdges(graph);
+        search("JFK", flightsCount, new LinkedList<>(), res, graph, visitedEdges);
+        return res;
     }
     
-    protected void DFS(String origin) {
-        // Visit all the outgoing edges first.
-        if (this.flightMap.containsKey(origin)) {
-            LinkedList<String> destList = this.flightMap.get(origin);
-            while (!destList.isEmpty()) {
-                // while we visit the edge, we trim it off from graph.
-                String dest = destList.pollFirst();
-                DFS(dest);
+    private Map<String, List<String>> buildGraph(List<List<String>> tickets) {
+        HashMap<String, List<String>> graph = new HashMap<>();
+        for (List<String> pair : tickets) {
+            String from = pair.get(0);
+            String to = pair.get(1);
+            graph.computeIfAbsent(from, k -> new ArrayList<>()).add(to);
+        }
+        for (List<String> neighbors: graph.values()) {
+            Collections.sort(neighbors);
+        }
+        return graph;
+    }
+    
+    private Map<String,boolean[]> initialVisitedEdges(Map<String, List<String>> graph) {
+        Map<String, boolean[]> map = new HashMap<>();
+        for(Map.Entry<String, List<String>> entry: graph.entrySet()) {
+            String str = entry.getKey();
+            List<String> neighbors = entry.getValue();
+            map.put(str, new boolean[neighbors.size()]);
+        }
+        return map;
+    }
+    
+    // search cur之后(包括），res里面的是cur开始的路径
+    private boolean search(String cur, int flightsCount, List<String> route, List<String> res,
+            Map<String, List<String>> graph, Map<String, boolean[]> visitedEdges) {
+        route.add(cur);
+        List<String> nexts = graph.get(cur);
+        // base case - success case
+        if (route.size() == flightsCount + 1) {
+            res.addAll(route);
+            return true;
+        }
+        boolean[] visited = visitedEdges.get(cur); // visited[i] is false - ith edge is not visited
+        if (nexts != null) {
+            for (int i = 0; i < nexts.size(); i++) {
+                if (!visited[i]) {
+                    visited[i] = true;
+                    if (search(nexts.get(i), flightsCount, route, res, graph, visitedEdges)) {
+                        return true;
+                    }
+                    visited[i] = false;
+                }
             }
         }
-        // add the airport to the head of the itinerary
-        this.result.offerFirst(origin);
+        route.remove(route.size() - 1);
+        return false;
     }
+    
 }
+
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1_1: pre-order DFS
+// 13 ms,击败了11.41% 的Java用户, 47.7 MB,击败了5.69% 的Java用户
 /*
  assuming： e is the number of total flights，
               d is the max number of flights from the airport
@@ -184,6 +207,7 @@ class Solution1_1 {
 }
 
 // Solution 1_2:post order DFS + topological sort
+// 5 ms,击败了81.76% 的Java用户, 39.3 MB,击败了94.64% 的Java用户
 /*
  assuming： e is the number of total flights，
               d is the max number of flights from the airport
