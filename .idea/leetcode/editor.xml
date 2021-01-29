@@ -1771,6 +1771,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0373FindKPairsWithSmallestSums.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0373FindKPairsWithSmallestSums.java" />
+              <option name="questionId" value="373" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0377CombinationSumIv.java">
           <value>
             <LeetcodeEditor>

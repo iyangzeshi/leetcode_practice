@@ -34,7 +34,12 @@
 
 package leetcode.editor.en;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Set;
 // 2020-07-27 12:51:43
 // Zeshi Yang
 public class Leetcode0373FindKPairsWithSmallestSums{
@@ -50,6 +55,7 @@ public class Leetcode0373FindKPairsWithSmallestSums{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    
     // time = O(klog(min(m + n, k))), space = O(min(m + n, k))
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<List<Integer>> res = new ArrayList<>();
@@ -57,14 +63,17 @@ class Solution {
         if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) {
             return res;
         }
-
+        
         int len1 = nums1.length, len2 = nums2.length;
-        PriorityQueue<Cell> minHeap = new PriorityQueue<>((c1, c2) -> nums1[c1.i] + nums2[c1.j] - (nums1[c2.i] + nums2[c2.j]));
+        PriorityQueue<Cell> minHeap = new PriorityQueue<>(
+                (c1, c2) -> nums1[c1.i] + nums2[c1.j] - (nums1[c2.i] + nums2[c2.j]));
         HashSet<Cell> visited = new HashSet<>();
         minHeap.offer(new Cell(0, 0));
-
+        
         while (k-- > 0) {
-            if (minHeap.isEmpty()) break;
+            if (minHeap.isEmpty()) {
+                break;
+            }
             Cell cur = minHeap.poll();
             List<Integer> list = new ArrayList<>();
             list.add(nums1[cur.i]);
@@ -85,33 +94,47 @@ class Solution {
         }
         return res;
     }
-
+    
     private class Cell {
+        
         private int i;
         private int j;
+        
         public Cell(int i, int j) {
             this.i = i;
             this.j = j;
         }
+        
         @Override
         public int hashCode() {
             return i + 31 * j;
         }
+        
         @Override
         public boolean equals(Object o) {
-            if (o == null) return false;
+            if (o == null) {
+                return false;
+            }
             if (o instanceof Cell) {
                 Cell that = (Cell) o;
                 return this.i == that.i && this.j == that.j;
-            } else return false;
+            } else {
+                return false;
+            }
         }
+        
     }
-
+    
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
+/*
+面试的时候，看情况，时间多的话，用Solution 2，容易讲清楚
+时间少的话，用Solution 1，code思路一样，solution 2 wrap了一下
+ */
 // Solution 1: heap 存index = index1 * len2 + index2
 class Solution1 {
+    
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<List<Integer>> res = new LinkedList<>();
         // corner case
@@ -123,7 +146,8 @@ class Solution1 {
         int len2 = nums2.length;
         // heap to store the index of the sum from nums1 and nums2;, sum = num1 * len2 + num2
         PriorityQueue<Integer> minHeap = new PriorityQueue<>((sum1, sum2) ->
-                (nums1[sum1 / len2] + nums2[sum1 % len2]) - (nums1[sum2 / len2] + nums2[sum2 % len2]));
+                (nums1[sum1 / len2] + nums2[sum1 % len2]) - (nums1[sum2 / len2] + nums2[sum2
+                        % len2]));
         minHeap.offer(0);
         Set<Integer> visited = new HashSet<>();
         visited.add(0);
@@ -141,17 +165,19 @@ class Solution1 {
                 visited.add(neighbor);
             }
             neighbor = index1 * len2 + index2 + 1;
-            if (index2 + 1 < len2 && !visited.contains(neighbor)){
+            if (index2 + 1 < len2 && !visited.contains(neighbor)) {
                 minHeap.offer(neighbor);
                 visited.add(neighbor);
             }
         }
         return res;
     }
+    
 }
 
 // Solution 2: heap存 Cell
 class Solution2 {
+    
     // time = O(klog(min(m + n, k))), space = O(min(m + n, k))
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<List<Integer>> res = new ArrayList<>();
@@ -159,14 +185,17 @@ class Solution2 {
         if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) {
             return res;
         }
-
+        
         int len1 = nums1.length, len2 = nums2.length;
-        PriorityQueue<Cell> minHeap = new PriorityQueue<>((c1, c2) -> nums1[c1.i] + nums2[c1.j] - (nums1[c2.i] + nums2[c2.j]));
+        PriorityQueue<Cell> minHeap = new PriorityQueue<>(
+                (c1, c2) -> nums1[c1.i] + nums2[c1.j] - (nums1[c2.i] + nums2[c2.j]));
         HashSet<Cell> visited = new HashSet<>();
         minHeap.offer(new Cell(0, 0));
-
+        
         while (k-- > 0) {
-            if (minHeap.isEmpty()) break;
+            if (minHeap.isEmpty()) {
+                break;
+            }
             Cell cur = minHeap.poll();
             List<Integer> list = new ArrayList<>();
             list.add(nums1[cur.i]);
@@ -187,28 +216,37 @@ class Solution2 {
         }
         return res;
     }
-
+    
     private class Cell {
+        
         private int i;
         private int j;
+        
         public Cell(int i, int j) {
             this.i = i;
             this.j = j;
         }
+        
         @Override
         public int hashCode() {
             return i + 31 * j;
         }
+        
         @Override
         public boolean equals(Object o) {
-            if (o == null) return false;
+            if (o == null) {
+                return false;
+            }
             if (o instanceof Cell) {
                 Cell that = (Cell) o;
                 return this.i == that.i && this.j == that.j;
-            } else return false;
+            } else {
+                return false;
+            }
         }
+        
     }
-
+    
 }
 
 

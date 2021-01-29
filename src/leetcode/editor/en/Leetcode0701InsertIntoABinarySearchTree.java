@@ -83,7 +83,7 @@ public class Leetcode0701InsertIntoABinarySearchTree{
  * }
  */
 class Solution {
-    // Solution 1: Iteration
+
     public TreeNode insertIntoBST(TreeNode root, int val) {
         // corner case
         if (root == null) {
@@ -112,7 +112,7 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: iteration
 class Solution1 {
-    // Solution 1: Iteration
+
     public TreeNode insertIntoBST(TreeNode root, int val) {
         // corner case
         if (root == null) {
@@ -141,7 +141,7 @@ class Solution1 {
 
 // Solution 2: recursion
 class Solution2 {
-    // Solution 2: recursion
+
     public TreeNode insertIntoBST(TreeNode root, int val) {
         // corner case
         if (root == null) {

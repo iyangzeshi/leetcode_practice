@@ -41,8 +41,17 @@ public class Leetcode0076MinimumWindowSubstring{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// time = O(n), space = O(1)
+// T(n) = O(n), S(n) = O(1)
 // 4 ms,击败了83.71% 的Java用户, 39.3 MB,击败了64.99% 的Java用户
+/*
+用一个int[] dict统计t String里面每个字母出现的次数
+用两个指针right, left遍历s String
+int total表示还需要t里面的字母数
+right指针每次遇到一个新的值的时候，dict[ch - 'a']--，
+    如果ch还需要出现的次数dict[ch] > 0的话，就把total--
+    每次total = 0的时候，left指针就一直往右走，走到total != 0位置，
+    这个就是right 指针在当前位置的最小长度
+ */
 class Solution {
     
     public String minWindow(String s, String t) {
@@ -58,7 +67,7 @@ class Solution {
         }
         
         int start = 0;
-        int total = t.length();
+        int total = t.length(); // t里面的字母统计 - window里面的符合条件的字母个数
         int min = Integer.MAX_VALUE;
         int left = 0;
         

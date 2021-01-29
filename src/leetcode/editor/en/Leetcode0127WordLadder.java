@@ -141,6 +141,7 @@ class Solution {
 // 如果HashSet的contains和add时间复杂度是O(k),
 // 则T(n)= O(V + E) = O(min(k * 2^k, k^2 *n), S(n) = O(min(k * 2^k, k^2 * n)
 // n: 字典里单词个数，k:每个单词的长度
+// 126 ms,击败了38.94% 的Java用户, 111.6 MB,击败了5.63% 的Java用户
 class Solution1 {
 	
 	public int ladderLength(String beginWord, String endWord, List<String> wordList) {
@@ -190,6 +191,7 @@ class Solution1 {
 }
 
 // Solution 2: bidirectional BFS, 时间，空间 复杂度分析同上
+// 23 ms,击败了93.09% 的Java用户, 51.4 MB,击败了18.10% 的Java用户
 class Solution2 {
 	
 	public int ladderLength(String beginWord, String endWord, List<String> wordList) {
