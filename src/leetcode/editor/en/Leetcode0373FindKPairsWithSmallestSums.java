@@ -35,6 +35,7 @@
 package leetcode.editor.en;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -64,7 +65,8 @@ class Solution {
             return res;
         }
         
-        int len1 = nums1.length, len2 = nums2.length;
+        int len1 = nums1.length;
+        int len2 = nums2.length;
         PriorityQueue<Cell> minHeap = new PriorityQueue<>(
                 (c1, c2) -> nums1[c1.i] + nums2[c1.j] - (nums1[c2.i] + nums2[c2.j]));
         HashSet<Cell> visited = new HashSet<>();
@@ -80,15 +82,15 @@ class Solution {
             list.add(nums2[cur.j]);
             res.add(list);
             if (cur.i < len1 - 1) {
-                Cell rCell = new Cell(cur.i + 1, cur.j);
-                if (visited.add(rCell)) {
-                    minHeap.offer(rCell);
+                Cell dCell = new Cell(cur.i + 1, cur.j); // down cell
+                if (visited.add(dCell)) {
+                    minHeap.offer(dCell);
                 }
             }
             if (cur.j < len2 - 1) {
-                Cell dCell = new Cell(cur.i, cur.j + 1);
-                if (visited.add(dCell)) {
-                    minHeap.offer(dCell);
+                Cell rCell = new Cell(cur.i, cur.j + 1);// right cell
+                if (visited.add(rCell)) {
+                    minHeap.offer(rCell);
                 }
             }
         }
@@ -107,7 +109,7 @@ class Solution {
         
         @Override
         public int hashCode() {
-            return i + 31 * j;
+            return 31 * i + j;
         }
         
         @Override
@@ -132,8 +134,18 @@ class Solution {
 面试的时候，看情况，时间多的话，用Solution 2，容易讲清楚
 时间少的话，用Solution 1，code思路一样，solution 2 wrap了一下
  */
-// Solution 1: heap 存index = index1 * len2 + index2
+ 
+// Solution 1: 向量nums1 × 向量nums2 得到一个矩阵，每行每列sorted，用 heap找最小值 存index = index1 * len2 + index2
+// 6 ms,击败了59.16% 的Java用户, 40.3 MB,击败了35.18% 的Java用户
+/*
+向量nums1 × 向量nums2 得到一个矩阵，
+矩阵每行每列increasing sorted，
+用 minHeap找最小值,每次poll一个数字出来，k--，然后把它的下面和右边的点（不重复）放到Heap里面
+去重用HashSet<Integer>, key = index in the matrix, index = index1 * len2 + index2
+ */
 class Solution1 {
+    
+    private int[][] DIRECTIONS = {{1, 0}, {0, 1}};
     
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<List<Integer>> res = new LinkedList<>();
@@ -145,9 +157,19 @@ class Solution1 {
         int len1 = nums1.length;
         int len2 = nums2.length;
         // heap to store the index of the sum from nums1 and nums2;, sum = num1 * len2 + num2
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>((sum1, sum2) ->
-                (nums1[sum1 / len2] + nums2[sum1 % len2]) - (nums1[sum2 / len2] + nums2[sum2
-                        % len2]));
+        /*PriorityQueue<Integer> minHeap = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer num1, Integer num2) {
+                int index1_1 = num1 / len2; // nums[index1_1] * nums[index1_2] = num1;
+                int index1_2 = num1 % len2;
+                int index2_1 = num2 / len2; // nums[index2_1] * nums[index2_1] = num2;
+                int index2_2 = num2 % len2;
+                return (nums1[index1_1] + nums2[index1_2]) - (nums1[index2_1] + nums2[index2_2]);
+            }
+        });*/
+        // 下面简化版写法
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(
+                Comparator.comparingInt(index -> (nums1[index / len2] + nums2[index % len2])));
         minHeap.offer(0);
         Set<Integer> visited = new HashSet<>();
         visited.add(0);
@@ -159,7 +181,16 @@ class Solution1 {
             list.add(nums1[index1]);
             list.add(nums2[index2]);
             res.add(list);
-            int neighbor = (index1 + 1) * len2 + index2;
+            for(int[] dir: DIRECTIONS) { // traverse down and right
+                int i = index1 + dir[0];
+                int j = index2 + dir[1];
+                int neighbor = i * len2 + j;
+                if (i < len1 && j < len2 && !visited.contains(neighbor)) {
+                    minHeap.offer(neighbor);
+                    visited.add(neighbor);
+                }
+            }
+            /*int neighbor = (index1 + 1) * len2 + index2;
             if (index1 + 1 < len1 && !visited.contains(neighbor)) {
                 minHeap.offer(neighbor);
                 visited.add(neighbor);
@@ -168,7 +199,7 @@ class Solution1 {
             if (index2 + 1 < len2 && !visited.contains(neighbor)) {
                 minHeap.offer(neighbor);
                 visited.add(neighbor);
-            }
+            }*/
         }
         return res;
     }
@@ -176,6 +207,14 @@ class Solution1 {
 }
 
 // Solution 2: heap存 Cell
+// 4 ms,击败了76.72% 的Java用户, 40.1 MB,击败了43.35% 的Java用户
+/*
+向量nums1 × 向量nums2 得到一个矩阵，
+矩阵每行每列increasing sorted，
+用 minHeap找最小值,每次poll一个数字出来，k--，然后把它的下面和右边的点（不重复）放到Heap里面
+去重用HashSet<Cell>, key = Cell in the matrix
+Cell要重写HashCode和equals函数
+ */
 class Solution2 {
     
     // time = O(klog(min(m + n, k))), space = O(min(m + n, k))
@@ -186,7 +225,8 @@ class Solution2 {
             return res;
         }
         
-        int len1 = nums1.length, len2 = nums2.length;
+        int len1 = nums1.length;
+        int len2 = nums2.length;
         PriorityQueue<Cell> minHeap = new PriorityQueue<>(
                 (c1, c2) -> nums1[c1.i] + nums2[c1.j] - (nums1[c2.i] + nums2[c2.j]));
         HashSet<Cell> visited = new HashSet<>();
@@ -202,15 +242,15 @@ class Solution2 {
             list.add(nums2[cur.j]);
             res.add(list);
             if (cur.i < len1 - 1) {
-                Cell rCell = new Cell(cur.i + 1, cur.j);
-                if (visited.add(rCell)) {
-                    minHeap.offer(rCell);
+                Cell dCell = new Cell(cur.i + 1, cur.j); // down cell
+                if (visited.add(dCell)) {
+                    minHeap.offer(dCell);
                 }
             }
             if (cur.j < len2 - 1) {
-                Cell dCell = new Cell(cur.i, cur.j + 1);
-                if (visited.add(dCell)) {
-                    minHeap.offer(dCell);
+                Cell rCell = new Cell(cur.i, cur.j + 1);// right cell
+                if (visited.add(rCell)) {
+                    minHeap.offer(rCell);
                 }
             }
         }
@@ -229,7 +269,7 @@ class Solution2 {
         
         @Override
         public int hashCode() {
-            return i + 31 * j;
+            return 31 * i + j;
         }
         
         @Override
