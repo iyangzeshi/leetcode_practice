@@ -189,6 +189,7 @@ class Solution1 {
 		}
 	}
 }
+
 class Solution2 {
 	
 	public List<String> addOperators(String num, int target) {
@@ -205,14 +206,13 @@ class Solution2 {
 	
 	private void dfs(List<String> res, StringBuilder path, String s, int idx, long target,
 			long sum, long lastValue) {
-		// base case
-		// success case
+		// base case - success case
 		if (idx == s.length() && sum == target) {
 			res.add(path.substring(1));
 			return;
 		}
 		
-		// failure case
+		// base case - failure case
 		if (idx == s.length()) {
 			return;
 		}
