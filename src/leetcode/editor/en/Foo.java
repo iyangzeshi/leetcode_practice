@@ -20,7 +20,7 @@ public class Foo {
 	public static void main(String[] args) {
 		Solution sol = new Foo().new Solution();
         // TO TEST
-        int[] nums1 = {1,2,4,5,6};
+        int[] nums1 = {1,2,4,5,6,7};
         int[] nums2 = {3,5,7,9};
         int k = 1;
 		List<List<Integer>> res = sol.kSmallestPairs(nums1, nums2, k);
