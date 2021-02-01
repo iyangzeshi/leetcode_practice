@@ -11,3 +11,4 @@ gen
 ### Google Drive file
 *.ini
 /.tmp.drivedownload/
+/.idea/
