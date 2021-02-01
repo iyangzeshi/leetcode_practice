@@ -28,7 +28,7 @@ public class Leetcode0001TwoSum{
     public static void main(String[] args) {
         Solution sol = new Leetcode0001TwoSum().new Solution();
         // TO TEST
-        int[] nums = {2,7,11,15,16,7};
+        int[] nums = {2,7,11,15,16,7,8};
         int target = 9;
         int[] res = sol.twoSum(nums, target);
         System.out.println(Arrays.toString(res));
