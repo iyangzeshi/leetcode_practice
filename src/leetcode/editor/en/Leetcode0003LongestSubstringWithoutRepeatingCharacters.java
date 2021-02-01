@@ -59,7 +59,7 @@ public class Leetcode0003LongestSubstringWithoutRepeatingCharacters{
     public static void main(String[] args) {
         Solution sol = new Leetcode0003LongestSubstringWithoutRepeatingCharacters().new Solution();
         // TO TEST
-        String s = "aab";
+        String s = "aabc";
         int res = sol.lengthOfLongestSubstring(s);
         System.out.println(res);
     }
