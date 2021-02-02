@@ -61,7 +61,7 @@ Leetcode0992SubarraysWithKDifferentIntegers
 把每个sliding window只有2种char的case，统计最长长度
 ……
 把每个sliding window只有s里面最多有maxUnique种char种char的case，统计最长长度
-
+取上面的长度的max，就是题目要求的答案
  */
 public class Solution {
     
