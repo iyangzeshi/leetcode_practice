@@ -78,7 +78,7 @@ public class Solution {
             Arrays.fill(countChars, 0);
             int start = 0; // window start
             int end = 0; // window end
-            int idx = 0;
+            int idx;
             int unique = 0;
             int countAtLeastK = 0; // count the case of unique chars in the sliding windows
             while (end < str.length) {
@@ -115,7 +115,7 @@ public class Solution {
     
     // get the maximum number of unique letters in the string s
     int getMaxUniqueLetters(String s) {
-        boolean count[] = new boolean[26];
+        boolean[] count = new boolean[26];
         int maxUnique = 0;
         for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
