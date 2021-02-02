@@ -69,13 +69,13 @@ public class Solution {
     
     public int longestSubstring(String s, int k) {
         char[] str = s.toCharArray();
-        int[] countMap = new int[26];
+        int[] countChars = new int[26];
         int maxUnique = getMaxUniqueLetters(s); // how many unique chars in the String s
         
         int result = 0;
         for (int curUnique = 1; curUnique <= maxUnique; curUnique++) {
-            // reset countMap
-            Arrays.fill(countMap, 0);
+            // reset countChars
+            Arrays.fill(countChars, 0);
             int start = 0; // window start
             int end = 0; // window end
             int idx = 0;
@@ -85,21 +85,21 @@ public class Solution {
                 // expand the sliding window
                 if (unique <= curUnique) {
                     idx = str[end] - 'a';
-                    if (countMap[idx] == 0) {
+                    if (countChars[idx] == 0) {
                         unique++;
                     }
-                    countMap[idx]++;
-                    if (countMap[idx] == k) {
+                    countChars[idx]++;
+                    if (countChars[idx] == k) {
                         countAtLeastK++;
                     }
                     end++;
                 } else {// shrink the sliding window
                     idx = str[start] - 'a';
-                    if (countMap[idx] == k) {
+                    if (countChars[idx] == k) {
                         countAtLeastK--;
                     }
-                    countMap[idx]--;
-                    if (countMap[idx] == 0) {
+                    countChars[idx]--;
+                    if (countChars[idx] == 0) {
                         unique--;
                     }
                     start++;
@@ -115,12 +115,13 @@ public class Solution {
     
     // get the maximum number of unique letters in the string s
     int getMaxUniqueLetters(String s) {
-        boolean map[] = new boolean[26];
+        boolean count[] = new boolean[26];
         int maxUnique = 0;
         for (int i = 0; i < s.length(); i++) {
-            if (!map[s.charAt(i) - 'a']) {
+            char ch = s.charAt(i);
+            if (!count[ ch- 'a']) {
                 maxUnique++;
-                map[s.charAt(i) - 'a'] = true;
+                count[ch - 'a'] = true;
             }
         }
         return maxUnique;
