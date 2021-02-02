@@ -33,9 +33,7 @@
 
 package leetcode.editor.en;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 // 2021-01-30 17:28:52
 // Zeshi Yang
@@ -50,63 +48,84 @@ public class Leetcode0395LongestSubstringWithAtLeastKRepeatingCharacters{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+/*
+这个题目和
+Leetcode0003LongestSubstringWithoutRepeatingCharacters
+Leetcode0159LongestSubstringWithAtMostTwoDistinctCharacters
+Leetcode0340LongestSubstringWithAtMostKDistinctCharacters
+Leetcode0992SubarraysWithKDifferentIntegers
+不一样，前面这几个题目用双指针就行了，这个题目，不能用双指针。
+
+最多只有26个字母，String s里面最多有maxUnique种char
+把每个sliding window只有1种char的case，统计最长长度
+把每个sliding window只有2种char的case，统计最长长度
+……
+把每个sliding window只有s里面最多有maxUnique种char种char的case，统计最长长度
+
+ */
+public class Solution {
+    
     public int longestSubstring(String s, int k) {
-        if (s == null || s.length() == 0) {
-            return 0;
-        }
-        int len = s.length();
-        Map<Character, Integer> countMap = new HashMap<>();
-        // initialization
-        int right = 0;
-        int minCount = Integer.MAX_VALUE;
-        for (; right < len; right++) {
-            char ch = s.charAt(right);
-            countMap.put(ch, countMap.getOrDefault(ch, 0) + 1);
-            minCount = Collections.min(countMap.values());
-            if (minCount == k) {
-                break;
+        char[] str = s.toCharArray();
+        int[] countMap = new int[26];
+        int maxUnique = getMaxUniqueLetters(s); // how many unique chars in the String s
+        
+        int result = 0;
+        for (int curUnique = 1; curUnique <= maxUnique; curUnique++) {
+            // reset countMap
+            Arrays.fill(countMap, 0);
+            int start = 0; // window start
+            int end = 0; // window end
+            int idx = 0;
+            int unique = 0;
+            int countAtLeastK = 0; // count the case of unique chars in the sliding windows
+            while (end < str.length) {
+                // expand the sliding window
+                if (unique <= curUnique) {
+                    idx = str[end] - 'a';
+                    if (countMap[idx] == 0) {
+                        unique++;
+                    }
+                    countMap[idx]++;
+                    if (countMap[idx] == k) {
+                        countAtLeastK++;
+                    }
+                    end++;
+                } else {// shrink the sliding window
+                    idx = str[start] - 'a';
+                    if (countMap[idx] == k) {
+                        countAtLeastK--;
+                    }
+                    countMap[idx]--;
+                    if (countMap[idx] == 0) {
+                        unique--;
+                    }
+                    start++;
+                }
+                if (unique == curUnique && unique == countAtLeastK) {
+                    result = Math.max(end - start, result);
+                }
             }
         }
         
-        int maxLen = right + 1;
-        for (int left = 0; left < len; left++) {
-            char ch = s.charAt(left);
-            countMap.put(ch, countMap.get(ch) - 1);
-            if (countMap.get(ch) == 0) {
-                countMap.remove(ch);
-            }
-            minCount = countMap.get(ch);
-            while (minCount < k && right < len - 1) {
-                right++;
-                ch = s.charAt(right);
-                countMap.put(ch, countMap.getOrDefault(ch, 0) + 1);
-                if (ch == s.charAt(left)) {
-                    maxLen = Math.max(maxLen, right - left);
-                    break;
-                }
-            }
-            if (right == len - 1) {
-                break;
-            }
-        }
-        return maxLen;
+        return result;
     }
-}
-class Cell implements Comparable<Cell> {
-    Character ch;
-    int count;
     
-    @Override
-    public int compareTo(Cell o) {
-        if (this.count != o.count) {
-            return this.count - o.count;
-        } else {
-            return Character.compare(this.ch, o.ch);
+    // get the maximum number of unique letters in the string s
+    int getMaxUniqueLetters(String s) {
+        boolean map[] = new boolean[26];
+        int maxUnique = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (!map[s.charAt(i) - 'a']) {
+                maxUnique++;
+                map[s.charAt(i) - 'a'] = true;
+            }
         }
+        return maxUnique;
     }
     
 }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

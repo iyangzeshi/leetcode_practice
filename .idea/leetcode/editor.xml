@@ -1131,6 +1131,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0159LongestSubstringWithAtMostTwoDistinctCharacters.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0159LongestSubstringWithAtMostTwoDistinctCharacters.java" />
+              <option name="questionId" value="159" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0160IntersectionOfTwoLinkedLists.java">
           <value>
             <LeetcodeEditor>
@@ -1728,6 +1736,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0339NestedListWeightSum.java" />
               <option name="questionId" value="339" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0340LongestSubstringWithAtMostKDistinctCharacters.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0340LongestSubstringWithAtMostKDistinctCharacters.java" />
+              <option name="questionId" value="340" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -2480,6 +2496,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0987VerticalOrderTraversalOfABinaryTree.java" />
               <option name="questionId" value="1029" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0992SubarraysWithKDifferentIntegers.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0992SubarraysWithKDifferentIntegers.java" />
+              <option name="questionId" value="1034" />
             </LeetcodeEditor>
           </value>
         </entry>
