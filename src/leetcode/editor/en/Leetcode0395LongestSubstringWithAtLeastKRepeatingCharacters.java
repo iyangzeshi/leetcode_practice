@@ -63,6 +63,8 @@ Leetcode0992SubarraysWithKDifferentIntegers
 把每个sliding window只有s里面最多有maxUnique种char种char的case，统计最长长度
 取上面的长度的max，就是题目要求的答案
  */
+// T(n) = O(26 * n) = O(n), S(n) = O(n)
+// 9 ms,击败了33.56% 的Java用户, 38.9 MB,击败了32.71% 的Java用户
 public class Solution {
     
     public int longestSubstring(String s, int k) {
