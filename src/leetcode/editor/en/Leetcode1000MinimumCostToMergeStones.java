@@ -87,37 +87,53 @@ class Solution {
         } else if ((len - 1) % (K - 1) != 0) {
             return -1;
         }
-        int[][] dp = new int[len][len];
+        
         int[] preSum = new int[len];
         preSum[0] = stones[0];
         for (int i = 1; i < len; i++) {
             preSum[i] = preSum[i - 1] + stones[i];
         }
-        for (int size = K; size <= len; size++) { // size, 枚举区间长度
-            for (int i = 0; i + size - 1 < len; i++) { // i, 枚举区间起点
-                int j = i + size - 1;
-                dp[i][j] = Integer.MAX_VALUE;
-                for (int cut = i; cut < j; cut += K - 1) {  // cut, 枚举分界点
-                    dp[i][j] = Math.min(dp[i][j], dp[i][cut] + dp[cut + 1][j]);
-                }
-                if ((j - i) % (K - 1) == 0) {
-                    dp[i][j] += sum(preSum, i, j);
-                }
-            }
-        }
-        return dp[0][len - 1];
+        Integer[][][] memo = new Integer[len][len][K + 1];
+        
+        int res = minCost(0, len - 1, 1, K, memo, preSum);
+        return res < Integer.MAX_VALUE ? res : -1;
     }
     
+    private int minCost(int i, int j, int m, int K, Integer[][][] memo, int[] preSum) {
+        // if memo[i][j][m] exists
+        if (memo[i][j][m] != null) {
+            return memo[i][j][m];
+        }
+        // base case
+        if (j - i + 1 == m) { // 从stones[i ~ j] 一共有m堆，要分成m堆的cost是0（直接不用分）
+            memo[i][j][m] = 0;
+            return 0;
+        }
+        
+        if (m == 1) {
+            memo[i][j][m] = minCost(i, j, K, K, memo, preSum) + sum(preSum, i, j);
+            return memo[i][j][m];
+        }
+        int res = Integer.MAX_VALUE;
+        for (int cut = i; cut < j; cut += (K - 1)) {
+            int res1 = minCost(i, cut, 1, K, memo, preSum);
+            int res2 = minCost(cut + 1, j, m - 1, K, memo, preSum);
+            res = Math.min(res, res1 + res2);
+        }
+        memo[i][j][m] = res;
+        return res;
+    }
+    
+    // sum of stones[i ~ j]
     private int sum(int[] preSum, int i, int j) {
         return i == 0 ? preSum[j] : preSum[j] - preSum[i - 1];
     }
-    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: DFS
 
 // Solution 1_1: T(n, k) = O(n^3  / (k - 1) * k), S(n, k) = O(n^2 * K)
-// 5 ms,击败了26.64% 的Java用户, 40.1 MB,击败了5.59% 的Java用户
+// 2 ms,击败了93.09% 的Java用户, 38.3 MB,击败了45.72% 的Java用户
 /*
 memo[i][j][k] 表示将 [i, j] 区间的石头缩小成 k 堆的最小花费cost
 memo[i][j][1] = memo[i][j][k] + sum(i, j)。不能直接求出合并为1堆的成本，得先合并成k堆。
@@ -303,7 +319,7 @@ class Solution2_1 {
     
 }
 
-// Solution 2_2: 简化成2维DP
+// Solution 2_2: 简化成2维DP, T(n, k) = O(n^3  / (k - 1)), S(n, k) = O(n^2)
 //2 ms,击败了93.09% 的Java用户, 36.4 MB,击败了90.13% 的Java用户
 /*
 定义dp[i][j]为尽可能多的合并区间[i, j] 所需的成本，不一定能合并成一堆，
