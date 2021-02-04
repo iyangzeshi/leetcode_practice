@@ -90,7 +90,7 @@ public class Leetcode0010RegularExpressionMatching {
 // Solution 2: Dynamic programming
 // T(m, n) = O(m * n), S(m, n) = O(m * n)
     
-    // Solution 2: Dynamic programming
+// Solution 2: Dynamic programming
 // T(m, n) = O(m * n), S(m, n) = O(m * n)
 /*
 dp[i][j] means whether s[0, i) matches p[0, j) successfully
