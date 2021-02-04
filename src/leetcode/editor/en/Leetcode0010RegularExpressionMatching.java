@@ -458,7 +458,7 @@ dp[i][j] means s[i ~ end] can match p[j ~ end]
             dp[i][j] = true if p[j ~ j+1] match s[i ~ t), (s <= t, t < len), and dp[t][j+2] = true;
 
 */
-class Solution2 {
+class Solution2_2 {
     
     /*
     boolean dp[i][j] means whether s[i, lenS) matches p[j, lenP)

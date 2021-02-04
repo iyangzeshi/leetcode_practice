@@ -145,6 +145,7 @@ class Solution {
 
 }
 //leetcode submit region end(Prohibit modification and deletion)
+/* 面试的时候，用Solution 1_3 */
 
 // Solution 1_1: Time Limit Exceeded, DFS, 第1类搜索树
 class Solution1_1 {
