@@ -2059,6 +2059,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0485MaxConsecutiveOnes.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0485MaxConsecutiveOnes.java" />
+              <option name="questionId" value="485" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0486PredictTheWinner.java">
           <value>
             <LeetcodeEditor>
@@ -2507,6 +2515,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1000MinimumCostToMergeStones.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1000MinimumCostToMergeStones.java" />
+              <option name="questionId" value="1042" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1119RemoveVowelsFromAString.java">
           <value>
             <LeetcodeEditor>
@@ -2560,6 +2576,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1254NumberOfClosedIslands.java" />
               <option name="questionId" value="1380" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1312MinimumInsertionStepsToMakeAStringPalindrome.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1312MinimumInsertionStepsToMakeAStringPalindrome.java" />
+              <option name="questionId" value="1437" />
             </LeetcodeEditor>
           </value>
         </entry>
