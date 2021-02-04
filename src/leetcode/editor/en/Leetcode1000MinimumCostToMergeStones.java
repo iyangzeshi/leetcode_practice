@@ -219,7 +219,10 @@ class Solution1_2 {
         return minCost(0, len - 1, K, memo, preSum);
     }
     
-    // min
+    /*
+     min cost to merge stones[i to j],
+     after merge, the piles of stone may not be 1, it is (j - i) % (k - 1) + 1
+     */
     private int minCost(int i, int j, int K, Integer[][] memo, int[] preSum) {
         if (memo[i][j] != null) {
             return memo[i][j];
