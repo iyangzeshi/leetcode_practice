@@ -236,7 +236,7 @@ class Solution1_2 {
             int res2 = minCost(cut + 1, j, K, memo, preSum);
             res = Math.min(res, res1 + res2);
         }
-        if ((j - i) % (K - 1) == 0) {
+        if ((j - i) % (K - 1) == 0) { // 这里就是合并k堆和2堆的区别
             res += sum(preSum, i, j);
         }
         memo[i][j] = res;
