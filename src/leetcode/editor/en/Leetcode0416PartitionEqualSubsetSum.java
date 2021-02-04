@@ -39,7 +39,6 @@
 
 package leetcode.editor.en;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -372,11 +371,7 @@ class Solution1_4 {
 
     /**
      *
-     * @param idx
-     * @param remainSum
-     * @param nums
      * @param visited : visited[i][j]表示从nums[i]开始往后面任意取元素求和的结果能不能为j，如果是就true；否则false
-     * @return
      */
     private boolean dfs(int idx, int remainSum, int[] nums, Boolean[][] visited) {
         if (remainSum < 0) {
@@ -427,15 +422,15 @@ class Solution1_4 {
 
 // Solution 1_5: 1ms, DFS，第1类搜索树，backtracking，不明白break的地方
 class Solution1_5 {
-
+    
     public boolean canPartition(int[] nums) {
         // corner case
         if (nums == null || nums.length == 0) {
             return false;
         }
-//        nums = IntStream.of(nums).boxed().sorted(Comparator.reverseOrder()).mapToInt(Integer::intValue).toArray();
+        /*nums = IntStream.of(nums).boxed().sorted(Comparator.reverseOrder())
+                .mapToInt(Integer::intValue).toArray();*/
         decreasingOrder(nums);
-        int len = nums.length;
         int sum = 0;
         for (int n : nums) {
             sum += n;
@@ -447,7 +442,7 @@ class Solution1_5 {
         int target = sum / 2;
         return dfs(0, target, nums);
     }
-
+    
     private boolean dfs(int idx, int remainSum, int[] nums) {
         // base case
         if (remainSum == 0) {
@@ -457,7 +452,7 @@ class Solution1_5 {
         if (remainSum < 0 || idx == len) {
             return false;
         }
-
+        
         // general case
         if (remainSum - nums[idx] < 0) {
             return false;
@@ -469,7 +464,7 @@ class Solution1_5 {
         }
         return false;
     }
-
+    
     private void decreasingOrder(int[] nums) {
         Arrays.sort(nums);
         int left = 0;
@@ -482,6 +477,7 @@ class Solution1_5 {
             right--;
         }
     }
+    
 }
 
 // Solution 2_1: Time limit Exceeded, DFS 第2类搜索树
@@ -493,7 +489,6 @@ class Solution2_1 {
             return false;
         }
         decreasingOrder(nums);
-        int len = nums.length;
         int sum = 0;
         for (int n : nums) {
             sum += n;
@@ -606,7 +601,6 @@ class Solution2_3 {
         }
 //        nums = IntStream.of(nums).boxed().sorted(Comparator.reverseOrder()).mapToInt(Integer::intValue).toArray();
         decreasingOrder(nums);
-        int len = nums.length;
         int sum = 0;
         for (int n : nums) {
             sum += n;
@@ -796,7 +790,6 @@ class Solution3_2 {
         int target = sum / 2;
         boolean[] dp = new boolean[target + 1]; // dp[i]表示是否存在某些元素，使得这些元素的加合 = i
         dp[0] = true; // 空状态默认初始为true，表示空状态默认也是可以平均分割的
-        ArrayList<Integer> list = new ArrayList<>();
 //        for (int num : nums) {
 //            list.clear();
 //            for (int i = 0; i < target; i++) {
