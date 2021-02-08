@@ -43,7 +43,7 @@ public class Leetcode0113PathSumIi{
         
         System.out.println();
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
+//leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -59,28 +59,33 @@ public class Leetcode0113PathSumIi{
  *     }
  * }
  */
+// T(n) = O(n^2), S(n) = O(n).
+/*
+每条路径都有可能是结果，如果每条路径都加进去的话，就要是O(n^2)
+ */
 class Solution {
+    
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         List<List<Integer>> result = new ArrayList<>();
         // corner case
         if (root == null) {
             return result;
         }
-
-        pathSum(root, sum, new ArrayList<Integer>(), result);
-
+        
+        pathSum(root, sum, new ArrayList<>(), result);
+        
         return result;
     }
-
+    
     private void pathSum(TreeNode root, int sum, List<Integer> list, List<List<Integer>> result) {
-
+        
         // base case
         if (root == null) {
             return;
         }
-
+        
         list.add(root.val);
-
+        
         // root.left == null && root.right == null, because the path sum must reach to the leaf
         if (root.val == sum && root.left == null && root.right == null) {
             result.add(new ArrayList<>(list));
@@ -90,9 +95,10 @@ class Solution {
         // DFS moving deeper
         pathSum(root.right, sum - root.val, list, result);
         pathSum(root.left, sum - root.val, list, result);
-
+        
         list.remove(list.size() - 1); // backtracking, important to understand
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

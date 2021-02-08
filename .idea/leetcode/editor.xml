@@ -1195,6 +1195,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0187RepeatedDnaSequences.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0187RepeatedDnaSequences.java" />
+              <option name="questionId" value="187" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0188BestTimeToBuyAndSellStockIv.java">
           <value>
             <LeetcodeEditor>
@@ -1664,6 +1672,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0314BinaryTreeVerticalOrderTraversal.java" />
               <option name="questionId" value="314" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0315CountOfSmallerNumbersAfterSelf.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0315CountOfSmallerNumbersAfterSelf.java" />
+              <option name="questionId" value="315" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -2584,6 +2600,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1254NumberOfClosedIslands.java" />
               <option name="questionId" value="1380" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1306JumpGameIii.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1306JumpGameIii.java" />
+              <option name="questionId" value="1428" />
             </LeetcodeEditor>
           </value>
         </entry>
