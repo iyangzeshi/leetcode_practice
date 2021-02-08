@@ -73,8 +73,7 @@ class Solution {
         for (int start = 0; start < len - subLen + 1; start++) {
             if (start != 0) { // compute bitmask of the current sequence in O(1) time
                 bitmask <<= 2;// left shift to free the last 2 bit
-                bitmask |= nums[start + subLen
-                        - 1];// add base new 2-bits number in the last two bits
+                bitmask |= nums[start + subLen - 1];// add base new 2-bits number in the last two bits
                 bitmask &= ~(3 << 2 * subLen);// unset first two bits: 2L-bit and (2L + 1)-bit
             } else {// compute hash of the first sequence in O(subLen) time
                 for (int i = 0; i < subLen; i++) {
@@ -218,8 +217,7 @@ class Solution3 {
         for (int start = 0; start < len - subLen + 1; start++) {
             if (start != 0) { // compute bitmask of the current sequence in O(1) time
                 bitmask <<= 2;// left shift to free the last 2 bit
-                bitmask |= nums[start + subLen
-                        - 1];// add base new 2-bits number in the last two bits
+                bitmask |= nums[start + subLen - 1];// add base new 2-bits number in the last two bits
                 bitmask &= ~(3 << 2 * subLen);// unset first two bits: 2L-bit and (2L + 1)-bit
             } else {// compute hash of the first sequence in O(subLen) time
                 for (int i = 0; i < subLen; i++) {
