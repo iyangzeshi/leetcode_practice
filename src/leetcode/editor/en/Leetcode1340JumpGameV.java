@@ -116,7 +116,6 @@ class Solution {
     private int maxStepsCanJump(int[] arr, int index, int d, Integer[] dp) {
         int res = 0;
         int len = arr.length;
-        
         if (dp[index] != null) {
             return dp[index];   //当前柱子已经计算过，直接返回它的值
         }
