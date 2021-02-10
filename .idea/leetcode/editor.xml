@@ -1403,6 +1403,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0237DeleteNodeInALinkedList.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0237DeleteNodeInALinkedList.java" />
+              <option name="questionId" value="237" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0238ProductOfArrayExceptSelf.java">
           <value>
             <LeetcodeEditor>
@@ -2619,6 +2627,22 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1340JumpGameV.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1340JumpGameV.java" />
+              <option name="questionId" value="1466" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1345JumpGameIv.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1345JumpGameIv.java" />
+              <option name="questionId" value="1447" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1416RestoreTheArray.java">
           <value>
             <LeetcodeEditor>
@@ -2672,6 +2696,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1650LowestCommonAncestorOfABinaryTreeIii.java" />
               <option name="questionId" value="1790" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1696JumpGameVi.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1696JumpGameVi.java" />
+              <option name="questionId" value="1814" />
             </LeetcodeEditor>
           </value>
         </entry>

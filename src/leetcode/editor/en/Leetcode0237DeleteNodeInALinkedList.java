@@ -64,13 +64,19 @@ public class Leetcode0237DeleteNodeInALinkedList{
  */
 class Solution {
     public void deleteNode(ListNode node) {
-        if (node == null || node.next == null) {
+        /*if (node == null || node.next == null) {
+            throw new IllegalArgumentException("invalid input");
             return;
-        }
+        }*/
         node.val = node.next.val;
         node.next = node.next.next;
     }
 }
+// follow up
+/*
+if node to be deleted is the tail,
+just throw new IllegalArgumentException("invalid input");
+ */
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

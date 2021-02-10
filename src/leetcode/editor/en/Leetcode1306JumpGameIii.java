@@ -48,6 +48,11 @@
 
 package leetcode.editor.en;
 
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Queue;
+import java.util.Set;
+
 // 2021-02-06 20:47:52
 // Zeshi Yang
 public class Leetcode1306JumpGameIii{
@@ -55,15 +60,81 @@ public class Leetcode1306JumpGameIii{
     public static void main(String[] args) {
         Solution sol = new Leetcode1306JumpGameIii().new Solution();
         // TO TEST
-        
-        System.out.println();
+        int[] nums = {3,0,2,1,2};
+        int start = 2;
+        boolean res = sol.canReach(nums, start);
+        System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    
     public boolean canReach(int[] arr, int start) {
-        return false;
+        // corner case
+        if (start < 0 || start >= arr.length || arr[start] < 0) {
+            return false;
+        }
+        if (arr[start] == 0) {
+            return true;
+        }
+        int skip = arr[start];
+        arr[start] = -1;
+        return canReach(arr, start + skip) || canReach(arr, start - skip);
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
+// Solution 1: BFS T(n) = O(n), S(n) = O(n)
+// 10 ms,击败了12.95% 的Java用户, 47.1 MB,击败了70.18% 的Java用户
+class Solution1 {
+    
+    public boolean canReach(int[] arr, int start) {
+        // corner case
+        if (arr == null) {
+            return true;
+        }
+        
+        int len = arr.length;
+        Queue<Integer> queue = new ArrayDeque<>();
+        Set<Integer> visited = new HashSet<>();
+        queue.offer(start);
+        visited.add(start);
+        while (!queue.isEmpty()) {
+            int index = queue.poll();
+            if (arr[index] == 0) {
+                return true;
+            }
+            int left = index - arr[index];
+            if (left >= 0 && !visited.contains(left)) {
+                visited.add(left);
+                queue.offer(left);
+            }
+            int right = index + arr[index];
+            if (right < len && !visited.contains(right)) {
+                visited.add(right);
+                queue.offer(right);
+            }
+        }
+        return false;
+    }
+    
+}
 
+// Solution 2: DFS: T(n) = O(n), S(n) = O(n)
+// 1 ms,击败了89.81% 的Java用户, 51.2 MB,击败了50.13% 的Java用户
+class Solution2 {
+    
+    public boolean canReach(int[] arr, int start) {
+        // corner case
+        if (start < 0 || start >= arr.length || arr[start] < 0) {
+            return false;
+        }
+        if (arr[start] == 0) {
+            return true;
+        }
+        int skip = arr[start];
+        arr[start] = -1;
+        return canReach(arr, start + skip) || canReach(arr, start - skip);
+    }
+    
+}
 }

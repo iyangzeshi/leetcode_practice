@@ -51,7 +51,7 @@ public class Leetcode0239SlidingWindowMaximum{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-
+    
     public int[] maxSlidingWindow(int[] nums, int k) {
         // corner case
         int len = nums.length;
@@ -61,44 +61,48 @@ class Solution {
         if (k == 1) {
             return nums;
         }
-
+        
         // general case
-        Deque<Integer> deque = new ArrayDeque<>();
-        int[] res = new int [len - k + 1];
-
-        for(int i = 0; i < k; i++) {
-            if (deque.isEmpty()) {
-                deque.offer(nums[i]);
-                continue;
+        int[] left = new int[len];
+        left[0] = nums[0];
+        int[] right = new int[len];
+        right[len - 1] = nums[len - 1];
+        for (int i = 1; i < len; i++) {
+            // to get left array
+            if (i % k == 0) {
+                left[i] = nums[i];
             }
-
-            while (!deque.isEmpty() && deque.peekLast() < nums[i]) {
-                deque.pollLast();
+            else {
+                left[i] = Math.max(left[i - 1], nums[i]);
             }
-            deque.offerLast(nums[i]);
+            
+            // to get right array
+            int j = len - 1 - i;
+            if ((j + 1) % k == 0) {
+                right[j] = nums[j];
+            }
+            else {
+                right[j] = Math.max(right[j + 1], nums[j]);
+            }
         }
-        res[0] = deque.peekFirst();
-
-        for (int i = k; i < len; i++) {
-            if (nums[i - k] == deque.peekFirst()) {
-                deque.pollFirst();
-            }
-            while (!deque.isEmpty() && deque.peekLast() < nums[i]) {
-                deque.pollLast();
-            }
-            deque.offerLast(nums[i]);
-            res[i - k + 1] = deque.peekFirst();
+        
+        int[] res = new int[len - k + 1];
+        for (int i = 0; i < len - k + 1; i++) {
+            res[i] = Math.max(left[i + k - 1], right[i]);
         }
         return res;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-// Solution 1:  deque里面存非递增序列
+// Solution 1:  deque里面存非递增序列, T(n) = O(n), S(n) = O(k)
+// 29 ms,击败了61.48% 的Java用户, 54 MB,击败了48.61% 的Java用户
+//
 /*
 直觉
-如何优化时间复杂度呢？首先想到的是使用堆，因为在最大堆中 heap[0] 永远是最大的元素。在大小为 k 的堆中插入一个元素消耗 \log(k)log(k) 时间，因此算法的时间复杂度为 {O}(N \log(k))O(Nlog(k))。
-能否得到只要 {O}(N)O(N) 的算法？
+如何优化时间复杂度呢？首先想到的是使用堆，因为在最大堆中 heap[0] 永远是最大的元素。
+在大小为 k 的堆中插入一个元素消耗 log(k) 时间，因此算法的时间复杂度为 O(n * log(k))。
+能否得到只要 O(N) 的算法？
 我们可以使用双向队列，该数据结构可以从两端以常数时间压入/弹出元素。
 存储双向队列的索引比存储元素更方便，因为两者都能在数组解析中使用。
 算法
@@ -124,9 +128,10 @@ class Solution1 {
         }
 
         // general case
-        Deque<Integer> deque = new ArrayDeque<Integer>();
+        Deque<Integer> deque = new ArrayDeque<>(); // to store the value instead of index
         int[] res = new int [len - k + 1];
-
+        
+        // initialization
         for(int i = 0; i < k; i++) {
             if (deque.isEmpty()) {
                 deque.offer(nums[i]);
@@ -154,7 +159,8 @@ class Solution1 {
     }
 }
 
-// Solution 2: dynamic programming
+// Solution 2: dynamic programming, T(n) = O(n), S(n) = O(n)
+// 9 ms,击败了98.05% 的Java用户, 53.3 MB,击败了71.71% 的Java用户
 /*
 public int[] maxSlidingWindow(int[] nums, int k)
 将array风格，每k个一组，最后一组可以少于k个。
