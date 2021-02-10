@@ -89,6 +89,8 @@ public class Leetcode1340JumpGameV{
 // 10 ms,击败了65.35% 的Java用户, 39.3 MB,击败了51.82% 的Java用户
 /*
 用DFS， 转化公式
+base case:
+    波谷的时候，return 1
 dp[i] = max(dp[j]) + 1
     where i != j,
     0 <= j < arr.length,
