@@ -79,63 +79,78 @@ public class Leetcode1340JumpGameV{
     public static void main(String[] args) {
         Solution sol = new Leetcode1340JumpGameV().new Solution();
         // TO TEST
-        
-        System.out.println();
+        int[] arr = {7,6,5,4,3,2,1};
+        int d = 1;
+        int res = sol.maxJumps(arr, d);
+        System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+// DFS,T(n) = O(n), S(n) = O(n)
+// 10 ms,击败了65.35% 的Java用户, 39.3 MB,击败了51.82% 的Java用户
+/*
+用DFS， 转化公式
+dp[i] = max(dp[j]) + 1
+    where i != j,
+    0 <= j < arr.length,
+    i - d <= j <= i + d
+    and j的范围是一段每个值都arr[j] < arr[i]
+ */
 class Solution {
     
-    int[] arr;
-    int n; //数组长度
-    int d;
-    int[] dp;   //用来存储每个柱子的最大结果
-    
     public int maxJumps(int[] arr, int d) {
-        this.arr = arr;
-        this.n = arr.length;
-        this.d = d;
-        dp = new int[n];
+        // corner case
+        int len = arr.length;
+        if (len <= 1) {
+            return len;
+        }
+        Integer[] dp = new Integer[len];//用来存储每个柱子的最大结果
         int ans = 0;
-        for (int i = 0; i < n; i++) {
-            ans = Math.max(ans, getMaxFromOnePoint(i));
+        for (int i = 0; i < len; i++) {
+            ans = Math.max(ans, maxStepsCanJump(arr, i, d, dp));
         }
         return ans;
     }
     
-    private int getMaxFromOnePoint(int p) {
-        if (dp[p] != 0) {
-            return dp[p];   //当前柱子已经计算过，直接返回它的值
+    private int maxStepsCanJump(int[] arr, int index, int d, Integer[] dp) {
+        int res = 0;
+        int len = arr.length;
+        
+        if (dp[index] != null) {
+            return dp[index];   //当前柱子已经计算过，直接返回它的值
         }
-        // 如果没有，分别计算它往左和往右跳一次可以得到的最大值
-        int leftMax = 0;
-        int l = 1;  // 往左跳的距离
-        while (p - l >= 0 && l <= d) {
-            if (arr[p - l] >= arr[p]) {   //遇到了高柱子挡路，只能结束
+        // base case
+        if (isValley(arr, index)) {
+            dp[index] = 1;
+            res = 1;
+            return res;
+        }
+        
+        for (int i = index - 1; i >= Math.max(0, index - d); i--) {
+            if (arr[i] >= arr[index]) {
                 break;
-            } else {
-                if (dp[p - l] == 0) {
-                    dp[p - l] = getMaxFromOnePoint(p - l);
-                }
-                leftMax = Math.max(leftMax, dp[p - l]);
-                l++;
             }
+            res = Math.max(res, maxStepsCanJump(arr, i, d, dp));
         }
-        // 同理右边
-        int rightMax = 0;
-        int r = 1;
-        while (p + r < n && r <= d) {
-            if (arr[p + r] >= arr[p]) {
+        for (int i = index + 1; i <= Math.min(len - 1, index + d); i++) {
+            if (arr[i] >= arr[index]) {
                 break;
-            } else {
-                if (dp[p + r] == 0) {
-                    dp[p + r] = getMaxFromOnePoint(p + r);
-                }
-                rightMax = Math.max(rightMax, dp[p + r]);
-                r++;
             }
+            res = Math.max(res, maxStepsCanJump(arr, i, d, dp));
         }
-        dp[p] = Math.max(leftMax, rightMax) + 1;
-        return dp[p];
+        dp[index] = res + 1;
+        return res + 1;
+    }
+    
+    // 判断是不是波谷
+    private boolean isValley(int[] arr, int index) {
+        int len = arr.length;
+        if (index == 0 && arr[index] <= arr[index + 1] || index == len - 1 && arr[index] <= arr[index - 1]) {
+            return true;
+        }
+        if (index - 1 >= 0 && index + 1 <= len - 1 && arr[index - 1] >= arr[index] && arr[index] <= arr[index + 1]) {
+            return true;
+        }
+        return false;
     }
     
 }
