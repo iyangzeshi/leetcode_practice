@@ -60,8 +60,9 @@ class Solution {
             return "0";
         }
         while (num != 0) {
-            answer.append(hexs[(16 + num % 16) % 16]);
-            num = num >>> 4;
+            // answer.append(hexs[(16 + num % 16) % 16]);
+            answer.append(hexs[num & 0xf]); // 或者num & 0xf, 0b1111 0b表示二进制, oxf, 0x表示16进制
+            num = num >>> 4; // 不带符号为右移
         }
         return answer.reverse().toString();
     }
