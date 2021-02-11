@@ -71,7 +71,7 @@ public class Leetcode0885SpiralMatrixIii{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 // T(R, C) = O(max(R, C) ^2), S(R, C) = O(R, C)
-// 4 ms,击败了45.59% 的Java用户, 40.5 MB,击败了22.33% 的Java用户
+// 3 ms,击败了87.24% 的Java用户, 39.9 MB,击败了82.18% 的Java用户
 /*
 定义好方向，按顺序分别是右，下，左，上
 分别走，size步，size步, size + 1步，size + 1步
