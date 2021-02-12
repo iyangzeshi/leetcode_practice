@@ -105,6 +105,7 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 
 /*
+目标: 把所有在同一个环里面的点都label成同一个
 1. 用一个HashMap来建图，key就是图上的点，value就是这个点左右的neighbors list。
 2. 这道题最tricky的地方在于用一个timestamp来查环，当cur的timestamp <= return timestamp，则表示没有环，存在critical edge；反之则是有环。
 3. 在遍历neighbors的过程中，不能直接往回走，即cur == prev的情况要用continue直接跳过。

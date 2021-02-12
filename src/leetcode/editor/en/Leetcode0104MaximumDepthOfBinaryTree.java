@@ -22,10 +22,10 @@
 
 package leetcode.editor.en;
 
-import leetcode.editor.TreeNode;
-
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
+import leetcode.editor.TreeNode;
 
 // 2020-07-26 11:43:32
 // Zeshi Yang
@@ -37,7 +37,7 @@ public class Leetcode0104MaximumDepthOfBinaryTree{
         
         System.out.println();
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
+//leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -53,39 +53,51 @@ public class Leetcode0104MaximumDepthOfBinaryTree{
  *     }
  * }
  */
-// Solution 2: BFS
 class Solution {
+    
     public int maxDepth(TreeNode root) {
-        //corner case
+        // corner case
         if (root == null) {
             return 0;
         }
-        Queue<TreeNode> queue = new LinkedList<>();
-        int depth = 0;
-
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-
-            while(size > 0) {
-                size--;
-                TreeNode node = queue.poll();
-                if (node.left != null) {
-                    queue.offer(node.left);
+        // general case
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+        int max = 0;
+        stack.push(root);
+        max = Math.max(max, stack.size());
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.peek();
+            if (prev == null || prev.left == cur || prev.right == cur) { // 往下走
+                if (cur.left != null) { // 左边不为空,走左边
+                    stack.push(cur.left);
+                    max = Math.max(max, stack.size());
+                } else if (cur.right != null) { // 左边为空,而且右边不为空,走右边
+                    stack.push(cur.right);
+                    max = Math.max(max, stack.size());
+                } else { // 左边和右边都是空,弹栈 + 更新res
+                    stack.pop();
                 }
-                if (node.right != null) {
-                    queue.offer(node.right);
+            } else if (prev == cur.left){ // 往上走,且prev是cur的左子树
+                if (cur.right != null) { // 右边不为空,走右边
+                    stack.push(cur.right);
+                    max = Math.max(max, stack.size());
+                } else { // 右边为空,弹栈 + 更新res
+                    stack.pop();
                 }
+            } else { // prev == cur.right // 往上走,且prev是cur的右子树,说明下面走完了,更新res
+                stack.pop();
             }
-            depth++;
+            prev = cur;
         }
-        return depth;
+        return max;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: DFS recursion
-class Solution1 {
+// Solution 1_1: DFS recursion
+class Solution1_1 {
+    
     public int maxDepth(TreeNode root) {
         if (root == null) {
             return 0;
@@ -93,11 +105,58 @@ class Solution1 {
         int left = maxDepth(root.left);
         int right = maxDepth(root.right);
         return Math.max(left, right) + 1;
-
+        
     }
+    
 }
+
+// Solution 1_2: DFS using while and stack
+class Solution1_2 {
+    
+    public int maxDepth(TreeNode root) {
+        // corner case
+        if (root == null) {
+            return 0;
+        }
+        // general case
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+        int max = 0;
+        stack.push(root);
+        max = Math.max(max, stack.size());
+        // pre order push into stack, post order pop out from stack
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.peek();
+            if (prev == null || prev.left == cur || prev.right == cur) { // 往下走
+                if (cur.left != null) { // 左边不为空,走左边
+                    stack.push(cur.left);
+                    max = Math.max(max, stack.size());
+                } else if (cur.right != null) { // 左边为空,而且右边不为空,走右边
+                    stack.push(cur.right);
+                    max = Math.max(max, stack.size());
+                } else { // 左边和右边都是空,弹栈 + 更新res
+                    stack.pop();
+                }
+            } else if (prev == cur.left){ // 往上走,且prev是cur的左子树
+                if (cur.right != null) { // 右边不为空,走右边
+                    stack.push(cur.right);
+                    max = Math.max(max, stack.size());
+                } else { // 右边为空,弹栈 + 更新res
+                    stack.pop();
+                }
+            } else { // prev == cur.right // 往上走,且prev是cur的右子树,说明下面走完了,更新res
+                stack.pop();
+            }
+            prev = cur;
+        }
+        return max;
+    }
+    
+}
+
 // Solution 2: BFS
 class Solution2 {
+    
     public int maxDepth(TreeNode root) {
         //corner case
         if (root == null) {
@@ -105,13 +164,13 @@ class Solution2 {
         }
         Queue<TreeNode> queue = new LinkedList<>();
         int depth = 0;
-
+        
         queue.offer(root);
-
+        
         while (!queue.isEmpty()) {
             int size = queue.size();
-
-            while(size > 0) {
+            
+            while (size > 0) {
                 size--;
                 TreeNode node = queue.poll();
                 if (node.left != null) {
@@ -125,5 +184,6 @@ class Solution2 {
         }
         return depth;
     }
+    
 }
 }
