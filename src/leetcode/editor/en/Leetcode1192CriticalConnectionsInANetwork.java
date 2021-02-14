@@ -53,53 +53,55 @@ public class Leetcode1192CriticalConnectionsInANetwork{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // Solution 1: DFS with list denoting neighbors
+    private int time = 0;
     public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
-        List<List<Integer>> graph = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            graph.add(new ArrayList<>());
+        HashMap<Integer, List<Integer>> map = buildPath(connections);
+        boolean[] visited = new boolean[n];
+        int[] lowKey = new int[n];
+        List<List<Integer>> ans = new ArrayList<>();
+        for(int i: map.keySet()) {
+            if(visited[i] == false) {
+                dfs(map, lowKey, visited, i, -1, ans);
+            }
         }
-        // build the graph
-        for (List<Integer> neighbor: connections) {
-            graph.get(neighbor.get(0)).add(neighbor.get(1));
-            graph.get(neighbor.get(1)).add(neighbor.get(0));
-        }
-        // an array to save the timestamp that we meet a certain node
-        List<List<Integer>> res = new ArrayList<>();
-        int[] id = new int[n];
-        dfs(1, -1, 0, id, graph, res);
-        return res;
+        return ans;
     }
-
-    /**
-     * @param vertexID: the # of the vertex
-     * @param prev: index of the previous vertex
-     * @param cur: index of current vertex
-     * @param id: the time stamp array
-     * @param graph: the graph connection between vertices
-     * @param res: result
-     * @return: the # of the vertex cur
-     */
-    private int dfs(int vertexID, int prev, int cur, int[] id,
-            List<List<Integer>> graph, List<List<Integer>> res) {
-        if (id[cur] > 0) { // pruning, look up the form
-            return id[cur];
+    
+    public HashMap<Integer, List<Integer>> buildPath(List<List<Integer>> connections) {
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        for(List<Integer> list: connections) {
+            map.putIfAbsent(list.get(0), new ArrayList<Integer>());
+            map.putIfAbsent(list.get(1), new ArrayList<Integer>());
+            
+            map.get(list.get(0)).add(list.get(1));
+            map.get(list.get(1)).add(list.get(0));
         }
-        id[cur] = vertexID;
-
-        for (int next: graph.get(cur)) {
-            if (next == prev) { // ignore the edge where 'cur' comes from, 避免A走向B之后，B又走向A
+        return map;
+    }
+    
+    public void dfs(HashMap<Integer, List<Integer>> map, int[] lowKey, boolean[] visited, int cur, int parent, List<List<Integer>> ans) {
+        visited[cur] = true;
+        List<Integer> list = map.get(cur);
+        int curVal = time++;
+        lowKey[cur] = curVal;
+        if(list == null) {
+            return;
+        }
+        for(int nei: list) {
+            if(nei == parent) {
                 continue;
             }
-            id[next] = dfs(vertexID + 1, cur, next, id, graph, res);
-            id[cur] = Math.min(id[cur], id[next]);
+            if(!visited[nei]) {
+                dfs(map, lowKey, visited, nei, cur, ans);
+                if(lowKey[nei] > lowKey[cur]/*不能是curVal*/) {
+                    List<Integer> tempt = new ArrayList<>();
+                    tempt.add(cur);
+                    tempt.add(nei);
+                    ans.add(tempt);
+                }
+            }
+            lowKey[cur] = Math.min(lowKey[cur], lowKey[nei]);
         }
-
-        // determine whether (prev, cur) is a critical edge
-        if (id[cur] == vertexID && prev != -1) {
-            res.add(Arrays.asList(prev, cur));
-        }
-        return id[cur];
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

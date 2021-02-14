@@ -97,6 +97,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.stream.Collectors;
+
 // 2020-07-17 15:11:28
 // Zeshi Yang
 public class Leetcode0642DesignSearchAutocompleteSystem{
@@ -217,41 +218,44 @@ class AutocompleteSystem {
  * List<String> param_1 = obj.input(c);
  */
 //leetcode submit region end(Prohibit modification and deletion)
+/*面试的时候，用Solution 2_2或者Solution 2_3 */
 
-// Solution 1: by 算法哥 《算法加强doc》
+// Solution 1: by 算法哥 《算法加强doc》，写的不好
 class AutocompleteSystem1 {
-
+    
     class TrieNode {
-
+        
         public char ch;
         public TrieNode[] children;
         public HashMap<String, Integer> countMap; // key:word; value: count
         public boolean isLeaf;
-
+        
         public TrieNode(char ch) {
             this.ch = ch;
             children = new TrieNode[27]; // a - z 和 space
             this.isLeaf = false;
             this.countMap = new HashMap<>(3);
         }
+        
     }
-
+    
     class Pair {
-
+        
         public String str;
         public int count;
-
+        
         public Pair(String str, int count) {
             this.str = str;
             this.count = count;
         }
+        
     }
-
+    
     private final TrieNode root;
     private TrieNode curNode;
     private StringBuilder path;
     private final HashMap<String, Integer> countBook; // global HashMap 存所有句子以及对应count
-
+    
     public AutocompleteSystem1(String[] sentences, int[] times) {
         if (sentences == null || times == null || sentences.length != times.length) {
             throw new IllegalArgumentException("Not valid data");
@@ -266,7 +270,7 @@ class AutocompleteSystem1 {
             insert(sentences[i], times[i]);
         }
     }
-
+    
     public List<String> input(char c) {
         if (c == '#') { // 如果一个句子输入完毕
             curNode = root; // 回到起点，以备下一次的autocomplete
@@ -296,7 +300,7 @@ class AutocompleteSystem1 {
         // return输入到这个char时，top 3 sentences
         return getTop3String(curNode.countMap);
     }
-
+    
     // 更新Trie
     private void insert(String sentence, int times) {
         TrieNode cur = root;
@@ -317,7 +321,7 @@ class AutocompleteSystem1 {
         }
         cur.isLeaf = true;
     }
-
+    
     // 将top3 pair转成top3 String(sentences)
     private List<String> getTop3String(HashMap<String, Integer> countMap) {
         return getTop3Pair(countMap)
@@ -326,7 +330,7 @@ class AutocompleteSystem1 {
                 .collect(Collectors.toList());
         // https://www.geeksforgeeks.org/stream-in-java/
     }
-
+    
     private List<Pair> getTop3Pair(HashMap<String, Integer> countMap) {
         PriorityQueue<Pair> maxHeap = new PriorityQueue<>(
                 (a, b) ->
@@ -336,26 +340,27 @@ class AutocompleteSystem1 {
         for (Map.Entry<String, Integer> e : countMap.entrySet()) {
             maxHeap.offer(new Pair(e.getKey(), e.getValue()));
         }
-        List<Pair> ret = new ArrayList<>();
+        List<Pair> res = new ArrayList<>();
         for (int i = 0; i < 3 && !maxHeap.isEmpty(); i++) { // maxHeap里可能少于3个
-            ret.add(maxHeap.poll());
+            res.add(maxHeap.poll());
         }
-        return ret;
+        return res;
     }
+    
 }
 
 // Solution 2_1: by 算法哥 202002算法加强第22节课，上课代码改正版本
 class AutocompleteSystem2_1 {
-
+    
     class TrieNode {
-
+        
         public int num;
         public char ch;
         public TrieNode[] children;
         public boolean isWord; // 可以删除
         public HashMap<String, Integer> countMap;
         public List<String> candidates;
-
+        
         public TrieNode(char val) {
             num = 3;
             this.ch = val;
@@ -364,7 +369,7 @@ class AutocompleteSystem2_1 {
             this.countMap = new HashMap<>();
             candidates = new ArrayList<>();
         }
-
+        
         public List<String> getTop3() {
             candidates.sort(new Comparator<String>() {
                 @Override
@@ -382,7 +387,7 @@ class AutocompleteSystem2_1 {
             }
             return res;
         }
-
+        
         public void addCount(String word, int addCount) {
             int count;
             if (countMap.containsKey(word)) {
@@ -393,20 +398,21 @@ class AutocompleteSystem2_1 {
             }
             countMap.put(word, count);
         }
+        
     }
-
+    
     class Trie {
-
+        
         public TrieNode root;
         public TrieNode cur;
         public HashMap<String, Integer> countMap;// 可以删除
-
+        
         public Trie() {
             this.root = new TrieNode('\0');
             this.cur = root;
             this.countMap = new HashMap<>(); // 可以删除
         }
-
+        
         public void insert(String word, int count) {
             countMap.put(word, count);// 可以删除
             cur = root; // 每次都是从头开始插入，所以cur = root;
@@ -421,13 +427,13 @@ class AutocompleteSystem2_1 {
             cur.isWord = true; // 可以删除
             cur = root; // 插入单词之后，之后每次input检索单词之前，需要先把cur置到root
         }
-
+        
         public void insert(String word) {
             int count = countMap.getOrDefault(word, 0);// 可以删除
             countMap.put(word, ++count);// 可以删除
             this.insert(word, 1);
         }
-
+        
         public List<String> search(char ch) {
             if (cur == null) { // TODO to be deleted
                 return new ArrayList<>();
@@ -440,11 +446,12 @@ class AutocompleteSystem2_1 {
             }
             return cur.getTop3();
         }
+        
     }
-
+    
     private final Trie trie;
     StringBuilder path;
-
+    
     public AutocompleteSystem2_1(String[] sentences, int[] times) {
         if (sentences == null || times == null || sentences.length != times.length) {
             throw new IllegalArgumentException("Not valid data");
@@ -458,7 +465,7 @@ class AutocompleteSystem2_1 {
         }
         path = new StringBuilder();
     }
-
+    
     public List<String> input(char c) {
         if (c == '#') {
             String word = path.toString();
@@ -470,6 +477,7 @@ class AutocompleteSystem2_1 {
         path.append(c);
         return this.trie.search(c);
     }
+    
 }
 
 // Solution 2_2: by 算法哥 202002算法加强第22节课，上课代码改正之后，优化的版本（删除了不必要的东西）
@@ -477,15 +485,15 @@ class AutocompleteSystem2_1 {
 每个TrieNode里面都有List和HashMap
  */
 class AutocompleteSystem2_2 {
-
+    
     class TrieNode {
-
+        
         public int num;
         public char ch;
         public TrieNode[] children;
         public HashMap<String, Integer> countMap;
         public List<String> candidates;
-
+        
         public TrieNode(char val) {
             num = 3;
             this.ch = val;
@@ -493,7 +501,7 @@ class AutocompleteSystem2_2 {
             this.countMap = new HashMap<>();
             candidates = new ArrayList<>();
         }
-
+        
         public List<String> getTop3() {
             candidates.sort(new Comparator<String>() {
                 @Override
@@ -511,7 +519,7 @@ class AutocompleteSystem2_2 {
             }
             return res;
         }
-
+        
         public void addCount(String word, int addCount) {
             int count;
             if (countMap.containsKey(word)) {
@@ -522,18 +530,19 @@ class AutocompleteSystem2_2 {
             }
             countMap.put(word, count);
         }
+        
     }
-
+    
     class Trie {
-
+        
         public TrieNode root;
         public TrieNode cur;
-
+        
         public Trie() {
             this.root = new TrieNode('\0');
             this.cur = root;
         }
-
+        
         public void insert(String word, int count) {
             cur = root; // 每次都是从头开始插入，所以cur = root;
             for (char ch : word.toCharArray()) {
@@ -546,11 +555,11 @@ class AutocompleteSystem2_2 {
             }
             cur = root; // 插入单词之后，之后每次input检索单词之前，需要先把cur置到root
         }
-
+        
         public void insert(String word) {
             this.insert(word, 1);
         }
-
+        
         public List<String> search(char ch) {
             if (cur == null) { // TODO to be deleted
                 return new ArrayList<>();
@@ -563,11 +572,12 @@ class AutocompleteSystem2_2 {
             }
             return cur.getTop3();
         }
+        
     }
-
+    
     private final Trie trie;
     StringBuilder path;
-
+    
     public AutocompleteSystem2_2(String[] sentences, int[] times) {
         if (sentences == null || times == null || sentences.length != times.length) {
             throw new IllegalArgumentException("Not valid data");
@@ -581,7 +591,7 @@ class AutocompleteSystem2_2 {
         }
         path = new StringBuilder();
     }
-
+    
     public List<String> input(char c) {
         if (c == '#') {
             String word = path.toString();
@@ -592,27 +602,28 @@ class AutocompleteSystem2_2 {
         path.append(c);
         return this.trie.search(c);
     }
+    
 }
 
 // Solution 2_3:
 class AutocompleteSystem2_3 {
-
+    
     class Trie {
-
+        
         class TrieNode {
-
+            
             public int num;
             public char ch;
             public TrieNode[] children;
             public List<String> candidates;
-
+            
             public TrieNode(char val) {
                 num = 3;
                 this.ch = val;
                 this.children = new TrieNode[27];
                 candidates = new ArrayList<>();
             }
-
+            
             public List<String> getTop3() {
                 candidates.sort(new Comparator<String>() {
                     @Override
@@ -630,24 +641,25 @@ class AutocompleteSystem2_3 {
                 }
                 return res;
             }
-
+            
             public void addCandidate(String word) {
                 if (!candidates.contains(word)) {
                     candidates.add(word);
                 }
             }
+            
         }
-
+        
         public TrieNode root;
         public TrieNode cur;
         public HashMap<String, Integer> countMap;// 可以删除
-
+        
         public Trie() {
             this.root = new TrieNode('\0');
             this.cur = root;
             this.countMap = new HashMap<>(); // 可以删除
         }
-
+        
         public void insert(String word, int count) {
             countMap.put(word, countMap.getOrDefault(word, 0) + count);// 可以删除
             cur = root; // 每次都是从头开始插入，所以cur = root;
@@ -661,13 +673,13 @@ class AutocompleteSystem2_3 {
             }
             cur = root; // 插入单词之后，之后每次input检索单词之前，需要先把cur置到root
         }
-
+        
         public void insert(String word) {
 //            int count = countMap.getOrDefault(word, 0);// 可以删除
 //            countMap.put(word, ++count);// 可以删除
             this.insert(word, 1);
         }
-
+        
         public List<String> search(char ch) {
             if (cur == null) { // TODO to be deleted
                 return new ArrayList<>();
@@ -680,11 +692,12 @@ class AutocompleteSystem2_3 {
             }
             return cur.getTop3();
         }
+        
     }
-
+    
     private final Trie trie;
     StringBuilder path;
-
+    
     public AutocompleteSystem2_3(String[] sentences, int[] times) {
         if (sentences == null || times == null || sentences.length != times.length) {
             throw new IllegalArgumentException("Not valid data");
@@ -698,7 +711,7 @@ class AutocompleteSystem2_3 {
         }
         path = new StringBuilder();
     }
-
+    
     public List<String> input(char c) {
         if (c == '#') {
             String word = path.toString();
@@ -710,5 +723,6 @@ class AutocompleteSystem2_3 {
         path.append(c);
         return this.trie.search(c);
     }
+    
 }
 }

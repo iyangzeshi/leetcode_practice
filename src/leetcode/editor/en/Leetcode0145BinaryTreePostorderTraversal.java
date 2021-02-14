@@ -58,20 +58,38 @@ public class Leetcode0145BinaryTreePostorderTraversal{
  * }
  */
 class Solution {
+    
     public List<Integer> postorderTraversal(TreeNode root) {
-        LinkedList<Integer> output = new LinkedList();
-        Stack<TreeNode> stack = new Stack();
-
-        if (root == null) return output;
-
+        LinkedList<Integer> output = new LinkedList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if (root == null) {
+            return output;
+        }
         stack.push(root);
         while (!stack.isEmpty()) {
-            root = stack.pop();
-            output.addFirst(root.val);
-            if (root.left != null) stack.push(root.left);
-            if (root.right != null) stack.push(root.right);
+            // 先一直往下走，能往左边走往左边走，否则往右边走
+            TreeNode top = stack.peek();
+            TreeNode left = top.left;
+            TreeNode right = top.right;
+            if (left != null) { // 有left child,可能也有right child
+                stack.push(left);
+            } else if (right != null) { // 只有right child
+                int cur = stack.pop().val;
+                output.add(cur);
+                stack.push(right);
+            } else { // 左右子树都没有
+                // 把路径里面遍历过的没有right child的ancestor给pop()出来
+                TreeNode parent = stack.pop();
+                output.add(parent.val);
+                while (!stack.isEmpty() && parent.right == null) {
+                    parent = stack.pop();
+                    output.add(parent.val);
+                }
+                if (parent.right != null) {
+                    stack.push(parent.right);
+                }
+            }
         }
-
         return output;
     }
 }
@@ -80,12 +98,13 @@ class Solution {
 // 推荐答案Solution 1, 3_1, 3_2
 // Solution 1: recursion
 class Solution1 {
+    
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         postorderTraversal(root, res);
         return res;
     }
-
+    
     private void postorderTraversal(TreeNode root, List<Integer> res) {
         // base case
         if (root == null) {
@@ -96,9 +115,10 @@ class Solution1 {
         postorderTraversal(root.right, res);
         res.add(root.val);
     }
+    
 }
-
-// Solution 2_1: O(h)老刘给的模板，先走右边在左边,最后得到res再reverse,不推荐
+// Solution 2: while loop.
+// Solution 2_1: O(h)老刘给的模板，先走右边再左边,最后得到res再reverse,不推荐
 class Solution2_1 {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
@@ -123,7 +143,7 @@ class Solution2_1 {
     }
 }
 
-// Solution 2_2: O(2h) leetcode的答案，res用LinkedList，弹栈的时候addFirst()
+// Solution 2_2: O(2h) leetcode的答案，res用LinkedList，弹栈的时候addFirst()，然后顺序把左右child加进去
 class Solution2_2 {
     
     public List<Integer> postorderTraversal(TreeNode root) {
@@ -145,7 +165,6 @@ class Solution2_2 {
                 stack.push(root.right);
             }
         }
-        
         return output;
     }
 }
@@ -157,13 +176,14 @@ Stack 先一直往左走走到底，不能走的时候pop，并加入result
     如果本身就是父节点的right，什么都不做
  */
 class Solution3_1 {
+    
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         // corner case
         if (root == null) {
             return res;
         }
-
+        
         // general case
         Stack<TreeNode> stack = new Stack<>();
         TreeNode cur = root;
@@ -192,6 +212,7 @@ class Solution3_1 {
         }
         return res;
     }
+    
 }
 
 // Solution 3_2: O(h)算法哥的模板,大概思路同上,弹栈的时候,把val加到res里面, 但是keep一个prev来确定这是往下走还是往上走

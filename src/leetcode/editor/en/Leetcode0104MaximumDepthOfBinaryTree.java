@@ -126,7 +126,7 @@ class Solution1_2 {
         max = Math.max(max, stack.size());
         // pre order push into stack, post order pop out from stack
         while (!stack.isEmpty()) {
-            TreeNode cur = stack.peek();
+            /*TreeNode cur = stack.peek();
             if (prev == null || prev.left == cur || prev.right == cur) { // 往下走
                 if (cur.left != null) { // 左边不为空,走左边
                     stack.push(cur.left);
@@ -147,7 +147,26 @@ class Solution1_2 {
             } else { // prev == cur.right // 往上走,且prev是cur的右子树,说明下面走完了,更新res
                 stack.pop();
             }
-            prev = cur;
+            prev = cur;*/
+            TreeNode top = stack.peek();
+            TreeNode left = top.left;
+            TreeNode right = top.right;
+            if (left != null) { // 有left child,可能也有right child
+                stack.push(left);
+            } else if (right != null) { // 只有right child
+                stack.pop();
+                stack.push(right);
+            } else { // 左右子树都没有
+                // 把路径里面遍历过的没有right child的ancestor给pop()出来
+                TreeNode parent = stack.pop();
+                while (!stack.isEmpty() && parent.right == null) {
+                    parent = stack.pop();
+                }
+                if (parent.right != null) {
+                    stack.push(parent.right);
+                }
+            }
+            max = Math.max(max, stack.size());
         }
         return max;
     }
