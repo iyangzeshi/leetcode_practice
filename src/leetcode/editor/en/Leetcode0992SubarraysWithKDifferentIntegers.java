@@ -252,7 +252,7 @@ class Solution2 {
     
     public int subarraysWithKDistinct(int[] A, int K) {
         Window window1 = new Window(); // largest window ends with current location with size K - 1
-        Window window2 = new Window();// largest window ends with current location with size K
+        Window window2 = new Window(); // largest window ends with current location with size K
         int res = 0;
         int left1 = 0;
         int left2 = 0;
