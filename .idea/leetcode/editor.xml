@@ -2155,6 +2155,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0516LongestPalindromicSubsequence.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0516LongestPalindromicSubsequence.java" />
+              <option name="questionId" value="516" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0523ContinuousSubarraySum.java">
           <value>
             <LeetcodeEditor>
