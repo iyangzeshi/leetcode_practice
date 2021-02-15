@@ -168,7 +168,7 @@ class Solution2_2 {
      * @param n:        n pairs of parentheses
      * @param left:     number of left parentheses
      * @param right:    number of left parentheses
-     * @param sb:       temporary answer carrieer
+     * @param sb:       temporary answer carrier
      * @param result:   result
      */
     private void DFS(int n, int left, int right, StringBuilder sb, List<String> result) {
