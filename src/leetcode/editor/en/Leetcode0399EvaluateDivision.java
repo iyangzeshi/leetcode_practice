@@ -417,7 +417,6 @@ class Solution2_2 {
     
 }
 
-
 // Solution 3: union find
 // assuming equations size n, queries size m, T(n, m) = O((n + m) * lg(n)), S(n, m) = O(n)
 // 0 ms,击败了100.00% 的Java用户, 38.1 MB,击败了37.47% 的Java用户
