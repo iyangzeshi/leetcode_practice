@@ -161,6 +161,13 @@ Solution 1 BFS, 好解释;
 如果要改进的话，用Solution 3 Union Find，时间空间复杂度好
 */
 
+/*
+Solution 1 和2的思路，建立图形，
+Map<String, Map<String, Integer>> 每个点是一个key，然后value是他的neighbor和this.val / neighbor.val的值组成的Map
+然后做BFS或者DFS搜索就行了
+如果从start开始能搜索到target，就把中间的路径全部累乘起来
+如果搜索不到，就return -1
+ */
 // Solution 1: BFS
 // assuming equations size n, queries size m, T(n, m) = O(n * m), S(n, m) = O(n)
 // 1 ms,击败了89.33% 的Java用户, 38 MB,击败了49.23% 的Java用户
@@ -420,6 +427,13 @@ class Solution2_2 {
 // Solution 3: union find
 // assuming equations size n, queries size m, T(n, m) = O((n + m) * lg(n)), S(n, m) = O(n)
 // 0 ms,击败了100.00% 的Java用户, 38.1 MB,击败了37.47% 的Java用户
+/*
+union find，Vertex来表示build graph的时候，让当前点的node的val 设置为 this.val / parent.val的值
+每个Vertex设置好name, parent, val, size
+两个要计算的点
+    不属于一个union的时候，return -1
+    属于一个union，就把dividend.val / divider.val
+ */
 class Solution3 {
     
     class Vertex {
