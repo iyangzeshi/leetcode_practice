@@ -1779,6 +1779,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0342PowerOfFour.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0342PowerOfFour.java" />
+              <option name="questionId" value="342" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0348DesignTicTacToe.java">
           <value>
             <LeetcodeEditor>
@@ -1904,6 +1912,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0398RandomPickIndex.java" />
               <option name="questionId" value="398" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0399EvaluateDivision.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0399EvaluateDivision.java" />
+              <option name="questionId" value="399" />
             </LeetcodeEditor>
           </value>
         </entry>
