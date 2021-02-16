@@ -300,6 +300,7 @@ class Solution2_1 {
     
     /*
     top down DFS
+    accProduct是root.val / cur.val的值
     return true if find target, then set quotient[0] to the right value
     */
     private boolean dfsEvaluate(Map<String, Map<String, Double>> graph,
