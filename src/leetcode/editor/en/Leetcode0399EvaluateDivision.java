@@ -513,21 +513,21 @@ class Solution3 {
         if (root1.size < root2.size) { // root1 -> root2
             root1.parent = root2.parent;
             root2.size += root1.size;
-/*
-每个点都是child指向parent，也就是被除数指向除数
-两个union连起来之后，root1指向root2，
-∴ quotient = v1.val * root1.val ÷ v2.val
-∴ root1.val = 1 / v1.val * v2.val
- */
+            /*
+            每个点都是child指向parent，也就是被除数指向除数
+            两个union连起来之后，root1指向root2，
+            ∴ quotient = v1.val * root1.val ÷ v2.val
+            ∴ root1.val = 1 / v1.val * v2.val
+             */
             root1.val = quotient * v2.val / v1.val;
         } else { // root2 -> root1
             root2.parent = root1.parent;
             root1.size += root2.size;
-/*
-同理
-quotient = v1.val ÷ root2.val ÷ v2.val
-∴ root2.val = v1.val ÷ quotient ÷ v2.val
- */
+            /*
+            同理
+            quotient = v1.val ÷ root2.val ÷ v2.val
+            ∴ root2.val = v1.val ÷ quotient ÷ v2.val
+             */
             root2.val = v1.val / quotient / v2.val;
         }
     }
