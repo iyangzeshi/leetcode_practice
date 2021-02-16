@@ -389,30 +389,30 @@ class Solution2_2 {
      */
     private double dfsEvaluate(Map<String, Map<String, Double>> graph, String cur, String target,
             Set<String> visited) {
-        // base case
+        // base case - success case
         if (cur.equals(target)) {
             return 1d;
         }
+        // base case- failure case, has been visited
+        if (visited.contains(cur)) {
+            return -1d;
+        }
         
         visited.add(cur);
-        double res = -1.0;
-        
+        double quotient = -1.0;
         Map<String, Double> neighbors = graph.get(cur);
         for (Map.Entry<String, Double> pair : neighbors.entrySet()) {
             String neighbor = pair.getKey();
-            if (visited.contains(neighbor)) {
-                continue;
-            }
             Double val = pair.getValue();
-            res = dfsEvaluate(graph, neighbor, target, visited);
-            if (res > 0) {
-                res *= val;
+            double subQuotient = dfsEvaluate(graph, neighbor, target, visited);
+            if (subQuotient > 0) {
+                quotient = subQuotient * val;
                 break;
             }
         }
         
         visited.remove(cur);
-        return res;
+        return quotient;
     }
     
 }
