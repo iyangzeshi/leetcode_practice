@@ -244,8 +244,8 @@ class Solution1 {
 	
 }
 
-// Solution 2: dfs
-// Solution 2_1: top down dfs
+// Solution 2: DFS
+// Solution 2_1: top down DFS
 // assuming equations size n, queries size m, T(n, m) = O(n * m), S(n, m) = O(n)
 // 1 ms,击败了89.33% 的Java用户, 38 MB,击败了49.23% 的Java用户
 class Solution2_1 {
@@ -330,7 +330,7 @@ class Solution2_1 {
 	
 }
 
-// Solution 2_2: bottom up dfs
+// Solution 2_2: bottom up DFS
 // assuming equations size n, queries size m, T(n, m) = O(n * m), S(n, m) = O(n)
 // 1 ms,击败了89.33% 的Java用户, 38 MB,击败了49.23% 的Java用户
 class Solution2_2 {
