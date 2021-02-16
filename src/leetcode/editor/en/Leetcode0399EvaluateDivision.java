@@ -161,7 +161,7 @@ Solution 1 BFS, 好解释;
 如果要改进的话，用Solution 3 Union Find，时间空间复杂度好
 */
 
-// Solution 1: BFS
+// Solution 1: bfs
 // assuming equations size n, queries size m, T(n, m) = O(n * m), S(n, m) = O(n)
 // 1 ms,击败了89.33% 的Java用户, 38 MB,击败了49.23% 的Java用户
 class Solution1 {
