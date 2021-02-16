@@ -162,7 +162,7 @@ Solution 1 BFS, 好解释;
 */
 
 /*
-Solution 1 和2的思路，建立图形，
+Solution 1和2的思路，建立图形，
 Map<String, Map<String, Integer>> 每个点是一个key，然后value是他的neighbor和this.val / neighbor.val的值组成的Map
 然后做BFS或者DFS搜索就行了
 如果从start开始能搜索到target，就把中间的路径全部累乘起来
