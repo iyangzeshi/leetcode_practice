@@ -92,7 +92,7 @@ class Solution {
             } else if (dividend.equals(divisor)) {
                 results[i] = 1.0;
             } else {
-                results[i] = bfsFindQuotient(dividend, divisor, graph);
+                results[i] = dfsEvaluate(graph, dividend, divisor, new HashSet<>());
             }
             i++;
         }
@@ -100,7 +100,7 @@ class Solution {
         return results;
     }
     
-    /** build bi-directional graph, every node store its neighbor and value(this / neighbor) */
+    // build bi-directional graph, every node store its neighbor and value(this / neighbor)
     private Map<String, Map<String, Double>> buildGraph(List<List<String>> equations, double[] values) {
         Map<String, Map<String, Double>> graph = new HashMap<>();
         
@@ -123,35 +123,38 @@ class Solution {
         return graph;
     }
     
-    private double bfsFindQuotient(String start, String target,
-            Map<String, Map<String, Double>> graph) {
-        Queue<String> nodeQueue = new ArrayDeque<>();
-        Queue<Double> valQueue = new ArrayDeque<>();
-        Set<String> visited = new HashSet<>();
-        nodeQueue.add(start);
-        valQueue.add(1d);
-        visited.add(start);
-        while (!nodeQueue.isEmpty()) {
-            String cur = nodeQueue.poll();
-            Double quotient = valQueue.poll();
-            Map<String, Double> neighbors = graph.get(cur);
-            for (Map.Entry<String, Double> pair: neighbors.entrySet()) {
-                String next = pair.getKey();
-                Double val = pair.getValue();
-                if (next.equals(target)) {
-                    return quotient * val;
-                }
-                if (visited.contains(next)) {
-                    continue;
-                }
-                visited.add(next);
-                nodeQueue.offer(next);
-                valQueue.offer(quotient * val);
+    /*
+    bottom up, post order DFS
+    return value of cur / target if cur can reach to target
+    else return - 1
+     */
+    private double dfsEvaluate(Map<String, Map<String, Double>> graph, String cur, String target,
+            Set<String> visited) {
+        // base case - success case
+        if (cur.equals(target)) {
+            return 1d;
+        }
+        // base case- failure case, has been visited
+        if (visited.contains(cur)) {
+            return -1d;
+        }
+        
+        visited.add(cur);
+        double quotient = -1.0;
+        Map<String, Double> neighbors = graph.get(cur);
+        for (Map.Entry<String, Double> pair : neighbors.entrySet()) {
+            String neighbor = pair.getKey();
+            Double val = pair.getValue();
+            double subQuotient = dfsEvaluate(graph, neighbor, target, visited);
+            if (subQuotient > 0) {
+                quotient = subQuotient * val;
+                break;
             }
         }
-        return -1d;
+        
+        // visited.remove(cur);
+        return quotient;
     }
-    
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -332,7 +335,7 @@ class Solution2_1 {
                 break;
             }
         }
-        visited.remove(cur);
+        // visited.remove(cur);
         return res;
     }
     
@@ -418,7 +421,7 @@ class Solution2_2 {
             }
         }
         
-        visited.remove(cur);
+        // visited.remove(cur);
         return quotient;
     }
     
