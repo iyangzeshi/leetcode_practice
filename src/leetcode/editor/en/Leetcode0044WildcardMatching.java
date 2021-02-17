@@ -84,6 +84,7 @@ public class Leetcode0044WildcardMatching{
 class Solution {
     
     public boolean isMatch(String s, String p) {
+        // corner case
         if (s == null && p == null) {
             return true;
         }
@@ -91,46 +92,56 @@ class Solution {
             return false;
         }
         
-        return isMatch(s, p, 0, 0) == 2;
-    }
-    
-    private int isMatch(String s, String p, int i, int j) {
-        if (i == s.length() && j == p.length()) {
-            return 2;
+        int sLen = s.length();
+        int pLen = p.length();
+        
+        //edge case
+        int countNotStar = 0;
+        for (int i = 0; i < pLen; i++) {
+            if (p.charAt(i) != '*') {
+                countNotStar += 1;
+            }
         }
-        if (i == s.length() && p.charAt(j) != '*') {
-            return 0;
-        }
-        if (j == p.length()) {
-            return 1;
+        //如果非star数目比s长度还大，不可能匹配
+        if (countNotStar > sLen) {
+            return false;
         }
         
-        if (p.charAt(j) == '*') {
-            if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
-                return isMatch(s, p, i, j + 1);
+        boolean[][] dp = new boolean[pLen + 1][sLen + 1];
+        dp[0][0] = true;
+        //初始化第一列，找出开始的最长的连续 *， 它可以匹配所有字符，对应的dp赋值成true
+        int i;
+        for (i = 1; i <= pLen; i++) {
+            if (p.charAt(i - 1) != '*') {
+                break;
             }
-            for (int k = 0; k <= s.length() - i; k++) {
-                int result = isMatch(s, p, i + k, j + 1);
-                if (result == 0 || result == 2) {
-                    return result;
+        }
+        for (int j = 1; j < i; j++) {
+            dp[j][0] = true;
+        }
+        
+        for (i = 1; i <= pLen; i++) {
+            for (int j = 1; j <= sLen; j++) {
+                if (p.charAt(i - 1) == '*') {
+                    dp[i][j] = dp[i - 1][j - 1] || dp[i - 1][j] || dp[i][j - 1];
+                } else if (p.charAt(i - 1) == '?') {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = dp[i - 1][j - 1] && p.charAt(i - 1) == s.charAt(j - 1);
                 }
             }
         }
-        
-        if (p.charAt(j) == '?' || (p.charAt(j) == s.charAt(i))) {
-            return isMatch(s, p, i + 1, j + 1);
-        }
-        
-        return 1;
+        return dp[pLen][sLen];
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: dynamic programming, T(n,m) = O(n * m), S(n, m) = O(n * m)
-// 19 ms,击败了67.70% 的Java用户, 39.3 MB,击败了69.00% 的Java用户
+// 18 ms,击败了69.03% 的Java用户, 39.3 MB,击败了69.00% 的Java用户
 /*
                 a	    d	    c	    e	    b       s String
         0	    1	    2	    3	    4	    5
-    0	TRUE	FALSE	FALSE	FALSE	FALSE	FALSE
+    0   TRUE	FALSE	FALSE	FALSE	FALSE	FALSE
  *	1	TRUE	TRUE	TRUE	TRUE	TRUE	TRUE
  a	2	FALSE	TRUE	FALSE	FALSE	FALSE	FALSE
  *	3	FALSE	TRUE	TRUE	TRUE	TRUE	TRUE
@@ -188,7 +199,7 @@ class Solution1 {
                 if (p.charAt(i - 1) == '*') {
                     dp[i][j] = dp[i - 1][j - 1] || dp[i - 1][j] || dp[i][j - 1];
                 } else if (p.charAt(i - 1) == '?') {
-                    dp[i][j] = dp[i - 1][j - 1] || dp[i - 1][j - 1];
+                    dp[i][j] = dp[i - 1][j - 1];
                 } else {
                     dp[i][j] = dp[i - 1][j - 1] && p.charAt(i - 1) == s.charAt(j - 1);
                 }
