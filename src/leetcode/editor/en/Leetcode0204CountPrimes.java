@@ -20,14 +20,14 @@ public class Leetcode0204CountPrimes{
     public static void main(String[] args) {
         // TO TEST
         int n = 10000000;
-        // testSolution1(n);
+        testSolution1(n);
         testSolution2(n);
         testSolution3(n);
     }
     
     private static void testSolution1(int n) {
         Solution1 sol = new Leetcode0204CountPrimes().new Solution1();
-        System.out.print("test normal way" + ":");
+        System.out.print("test normal way" + ": ");
         long startTime = System.currentTimeMillis();   //获取开始时间
         int res = sol.countPrimes(n);  //测试的代码段
         System.out.println(res);
@@ -38,7 +38,7 @@ public class Leetcode0204CountPrimes{
     
     private static void testSolution2(int n) {
         Solution2 sol = new Leetcode0204CountPrimes().new Solution2();
-        System.out.print("test the sieve of Eratosthenes" + ":");
+        System.out.print("test the sieve of Eratosthenes" + ": ");
         long startTime = System.currentTimeMillis();   //获取开始时间
         int res = sol.countPrimes(n);  //测试的代码段
         System.out.println(res);
@@ -49,7 +49,7 @@ public class Leetcode0204CountPrimes{
     
     private static void testSolution3(int n) {
         Solution3 sol = new Leetcode0204CountPrimes().new Solution3();
-        System.out.print("test the sieve of Euler" + ":");
+        System.out.print("test the sieve of Euler" + ": ");
         long startTime = System.currentTimeMillis();   //获取开始时间
         int res = sol.countPrimes(n);  //测试的代码段
         System.out.println(res);
@@ -90,7 +90,7 @@ class Solution {
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
-/* 一般情况下，用Solution 1就可以了，最优解是Solution 3, 欧拉素数筛 */
+/* 一般情况下，用Solution 1就可以了，最优解是Solution 3, The sieve of Euler欧拉素数筛 */
 
 // Solution 1: normal way, T(n) = O(n * sqrt(n)), S(n) = O(1)
 // 554 ms,击败了7.35% 的Java用户, 35.7 MB,击败了94.00% 的Java用户
