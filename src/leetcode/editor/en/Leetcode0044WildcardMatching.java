@@ -81,15 +81,8 @@ public class Leetcode0044WildcardMatching{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// Solution 3: not figure out yet
 class Solution {
-    // S3: Laoliu's solution, I do not figure out yet
-    /**
-     返回0表示匹配到了s串的末尾，但是未匹配成功；
-     返回1表示未匹配到s串的末尾就失败了；
-     返回2表示成功匹配。那么只有返回值大于1，才表示成功匹配。
-     */
-
+    
     public boolean isMatch(String s, String p) {
         if (s == null && p == null) {
             return true;
@@ -97,10 +90,10 @@ class Solution {
         if (s == null || p == null) {
             return false;
         }
-
+        
         return isMatch(s, p, 0, 0) == 2;
     }
-
+    
     private int isMatch(String s, String p, int i, int j) {
         if (i == s.length() && j == p.length()) {
             return 2;
@@ -111,7 +104,7 @@ class Solution {
         if (j == p.length()) {
             return 1;
         }
-
+        
         if (p.charAt(j) == '*') {
             if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
                 return isMatch(s, p, i, j + 1);
@@ -123,35 +116,35 @@ class Solution {
                 }
             }
         }
-
+        
         if (p.charAt(j) == '?' || (p.charAt(j) == s.charAt(i))) {
             return isMatch(s, p, i + 1, j + 1);
         }
-
+        
         return 1;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: dynamic programming
+// Solution 1: dynamic programming, T(n,m) = O(n * m), S(n, m) = O(n * m)
+// 19 ms,击败了67.70% 的Java用户, 39.3 MB,击败了69.00% 的Java用户
+/**
+ a	    d	    c	    e	    b       s String
+ 0	    1	    2	    3	    4	    5
+ 0	    TRUE	FALSE	FALSE	FALSE	FALSE	FALSE
+ *	1	TRUE	TRUE	TRUE	TRUE	TRUE	TRUE
+ a	2	FALSE	TRUE	FALSE	FALSE	FALSE	FALSE
+ *	3	FALSE	TRUE	TRUE	TRUE	TRUE	TRUE
+ b	4	FALSE	FALSE	FALSE	FALSE	FALSE	TRUE
+ 
+ p String
+ 
+ 从左到右，从上往下填表格
+ boolean dp[][] = new boolean[pLength][sLength]
+ if p[i] == * : dp[i][j] = dp[i - 1][j - 1] || dp[i - 1][j] || d[i][j - 1]
+ if p[i] == ? :dp[i][j] = dp[i - 1][j - 1];
+ else :dp[i][j] = dp[i - 1][j - 1] && p[i] == s[i]
+ */
 class Solution1 {
-    // S2 dynamic programming
-    /**
-     a	    d	    c	    e	    b       s String
-     0	    1	    2	    3	    4	    5
-     0	TRUE	FALSE	FALSE	FALSE	FALSE	FALSE
-     *	1	TRUE	TRUE	TRUE	TRUE	TRUE	TRUE
-     a	2	FALSE	TRUE	FALSE	FALSE	FALSE	FALSE
-     *	3	FALSE	TRUE	TRUE	TRUE	TRUE	TRUE
-     b	4	FALSE	FALSE	FALSE	FALSE	FALSE	TRUE
-
-     p String
-
-     从左到右，从上往下填表格
-     boolean dp[][] = new boolean[pLength][sLength]
-     if p[i] == * : dp[i][j] = dp[i - 1][j - 1] || dp[i - 1][j] || d[i][j - 1]
-     if p[i] == ? :dp[i][j] = dp[i - 1][j - 1];
-     else :dp[i][j] = dp[i - 1][j - 1] && p[i] == s[i]
-     */
 
     public boolean isMatch(String s, String p) {
         // corner case
@@ -200,19 +193,21 @@ class Solution1 {
 }
 
 // Solution 2: 按照人类思维匹配
+// 2 ms,击败了100.00% 的Java用户,38.7 MB,击败了99.22% 的Java用户
+/*
+ S1: Greedy最原始的做法
+ 按照s的字符顺序进行while loop
+ 如果是s, p指针sIndex, pIndex对应的字符一样，或者p中字符出现 ? ，s, p都往后走一个单位;
+ 如果p中出现*号，把这是s， p指针的位置记录下来sStar， pStar，假设*不匹配字符；然后把p指针往后挪一个位置；
+ 如果可以直接匹配，一直往后做。
+ 如果出现不能匹配的现象，
+ 如果前面有 * : 回溯：把s中sStar的位置往后挪一个位置，表示p中的 * 在s中再多匹配一个字符；sIndex从sStar + 1开始匹配
+ 如果前面没有 * ，不匹配，返回false
+ 把s遍历完之后，看p是否到终点，到终点了，就return false；如果没到终点，看p中有没有不能匹配的部分
+*/
 class Solution2 {
+    
     public boolean isMatch(String s, String p) {
-        // Zeshi Yang'Code
-        // S1: Greedy最原始的做法
-        // 按照s的字符顺序进行while loop
-        // 如果是s, p指针sIndex, pIndex对应的字符一样，或者p中字符出现 ? ，s, p都往后走一个单位;
-        // 如果p中出现*号，把这是s， p指针的位置记录下来sStar， pStar，假设*不匹配字符；然后把p指针往后挪一个位置；
-        // 如果可以直接匹配，一直往后做。
-        // 如果出现不能匹配的现象，
-        // 如果前面有 * : 回溯：把s中sStar的位置往后挪一个位置，表示p中的 * 在s中再多匹配一个字符；sIndex从sStar + 1开始匹配
-        // 如果前面没有 * ，不匹配，返回false
-        // 把s遍历完之后，看p是否到终点，到终点了，就return false；如果没到终点，看p中有没有不能匹配的部分
-
         //corner case
         if (s == null && p == null) {
             return true;
@@ -261,15 +256,15 @@ class Solution2 {
     }
 }
 
-// Solution 3: not figure out yet
+// Solution 3: not figure out yet, Laoliu's solution, I do not figure out yet
+// 2 ms,击败了100.00% 的Java用户, 39.9 MB,击败了35.07% 的Java用户
+/**
+ 返回0表示匹配到了s串的末尾，但是未匹配成功；
+ 返回1表示未匹配到s串的末尾就失败了；
+ 返回2表示成功匹配。那么只有返回值大于1，才表示成功匹配。
+ */
 class Solution3 {
-    // S3: Laoliu's solution, I do not figure out yet
-    /**
-     返回0表示匹配到了s串的末尾，但是未匹配成功；
-     返回1表示未匹配到s串的末尾就失败了；
-     返回2表示成功匹配。那么只有返回值大于1，才表示成功匹配。
-     */
-
+    
     public boolean isMatch(String s, String p) {
         if (s == null && p == null) {
             return true;
