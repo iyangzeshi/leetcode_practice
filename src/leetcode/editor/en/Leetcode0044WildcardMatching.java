@@ -127,10 +127,10 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: dynamic programming, T(n,m) = O(n * m), S(n, m) = O(n * m)
 // 19 ms,击败了67.70% 的Java用户, 39.3 MB,击败了69.00% 的Java用户
-/**
- a	    d	    c	    e	    b       s String
- 0	    1	    2	    3	    4	    5
- 0	    TRUE	FALSE	FALSE	FALSE	FALSE	FALSE
+/*
+                a	    d	    c	    e	    b       s String
+        0	    1	    2	    3	    4	    5
+    0	TRUE	FALSE	FALSE	FALSE	FALSE	FALSE
  *	1	TRUE	TRUE	TRUE	TRUE	TRUE	TRUE
  a	2	FALSE	TRUE	FALSE	FALSE	FALSE	FALSE
  *	3	FALSE	TRUE	TRUE	TRUE	TRUE	TRUE
@@ -145,51 +145,58 @@ class Solution {
  else :dp[i][j] = dp[i - 1][j - 1] && p[i] == s[i]
  */
 class Solution1 {
-
+    
     public boolean isMatch(String s, String p) {
         // corner case
-        if(s == null && p == null) return true;
-        if(s == null || p == null) return false;
-
+        if (s == null && p == null) {
+            return true;
+        }
+        if (s == null || p == null) {
+            return false;
+        }
+        
         int sLen = s.length();
         int pLen = p.length();
-
+        
         //edge case
         int countNotStar = 0;
-        for(int i = 0; i < pLen; i++){
-            if(p.charAt(i) != '*'){
+        for (int i = 0; i < pLen; i++) {
+            if (p.charAt(i) != '*') {
                 countNotStar += 1;
             }
         }
         //如果非star数目比s长度还大，不可能匹配
-        if(countNotStar > sLen) return false;
-
-        boolean dp[][]=new boolean[pLen + 1][sLen + 1];
+        if (countNotStar > sLen) {
+            return false;
+        }
+        
+        boolean[][] dp = new boolean[pLen + 1][sLen + 1];
         dp[0][0] = true;
         //初始化第一列，找出开始的最长的连续 *， 它可以匹配所有字符，对应的dp赋值成true
         int i;
         for (i = 1; i <= pLen; i++) {
-            if (p.charAt(i - 1) != '*') break;
+            if (p.charAt(i - 1) != '*') {
+                break;
+            }
         }
         for (int j = 1; j < i; j++) {
             dp[j][0] = true;
         }
-
+        
         for (i = 1; i <= pLen; i++) {
             for (int j = 1; j <= sLen; j++) {
                 if (p.charAt(i - 1) == '*') {
-                    dp[i][j] = dp[i-1][j-1] || dp[i - 1][j] || dp[i][j - 1];
-                }
-                else if(p.charAt(i - 1) == '?') {
+                    dp[i][j] = dp[i - 1][j - 1] || dp[i - 1][j] || dp[i][j - 1];
+                } else if (p.charAt(i - 1) == '?') {
                     dp[i][j] = dp[i - 1][j - 1] || dp[i - 1][j - 1];
-                }
-                else {
+                } else {
                     dp[i][j] = dp[i - 1][j - 1] && p.charAt(i - 1) == s.charAt(j - 1);
                 }
             }
         }
         return dp[pLen][sLen];
     }
+    
 }
 
 // Solution 2: 按照人类思维匹配
@@ -212,48 +219,54 @@ class Solution2 {
         if (s == null && p == null) {
             return true;
         }
-        if (s== null || p == null) {
+        if (s == null || p == null) {
             return false;
         }
-
+        
         int lengths = s.length();
         int lengthp = p.length();
-
+        
         int sStar = -1; // 用来记录*匹配到的位置
         int pStar = -1; // 用来记录p中*的位置
         int sIndex = 0;
         int pIndex = 0;
-
-        while(sIndex < lengths){
-            if(pIndex == lengthp){//false，回溯
-                if(pStar == -1) return false;
+        
+        while (sIndex < lengths) {
+            if (pIndex == lengthp) {//false，回溯
+                if (pStar == -1) {
+                    return false;
+                }
                 pIndex = pStar + 1;
                 sIndex = sStar++;
             }
             //两个字符串的相应位置字符相同；或者p出现？匹配任意字符
-            else if(p.charAt(pIndex) == '?' || s.charAt(sIndex) == p.charAt(pIndex)){
+            else if (p.charAt(pIndex) == '?' || s.charAt(sIndex) == p.charAt(pIndex)) {
                 pIndex++;
                 sIndex++;
                 // 如果p出现 * 号
-            }else if(p.charAt(pIndex) == '*'){
+            } else if (p.charAt(pIndex) == '*') {
                 pStar = pIndex;
                 sStar = sIndex;
                 pIndex = pStar + 1;
                 //发现有字符不匹配之后，看前面p有没有*号：
                 //没有的话return false；有的话，p中的*号在s中往后匹配一个
-            }else{
-                if(pStar == -1) return false;
+            } else {
+                if (pStar == -1) {
+                    return false;
+                }
                 pIndex = pStar + 1;
                 sIndex = sStar++;
             }
         }
-        while(pIndex < lengthp){
-            if(p.charAt(pIndex) != '*')
+        while (pIndex < lengthp) {
+            if (p.charAt(pIndex) != '*') {
                 break;
+            }
             pIndex++;
         }
         return pIndex == lengthp;
     }
+    
 }
 
 // Solution 3: not figure out yet, Laoliu's solution, I do not figure out yet
@@ -272,10 +285,10 @@ class Solution3 {
         if (s == null || p == null) {
             return false;
         }
-
+        
         return isMatch(s, p, 0, 0) == 2;
     }
-
+    
     private int isMatch(String s, String p, int i, int j) {
         if (i == s.length() && j == p.length()) {
             return 2;
@@ -286,7 +299,7 @@ class Solution3 {
         if (j == p.length()) {
             return 1;
         }
-
+        
         if (p.charAt(j) == '*') {
             if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
                 return isMatch(s, p, i, j + 1);
@@ -298,12 +311,13 @@ class Solution3 {
                 }
             }
         }
-
+        
         if (p.charAt(j) == '?' || (p.charAt(j) == s.charAt(i))) {
             return isMatch(s, p, i + 1, j + 1);
         }
-
+        
         return 1;
     }
+    
 }
 }
