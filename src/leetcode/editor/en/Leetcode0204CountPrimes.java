@@ -30,10 +30,7 @@ public class Leetcode0204CountPrimes{
         System.out.print("test normal way" + ": ");
         long startTime = System.currentTimeMillis();   //获取开始时间
         int res = sol.countPrimes(n);  //测试的代码段
-        System.out.println(res);
-        long endTime = System.currentTimeMillis(); //获取结束时间
-        System.out.println("time:" + (endTime - startTime) + "ms");
-        System.out.println();
+        printOutRes(startTime, res);
     }
     
     private static void testSolution2(int n) {
@@ -41,10 +38,7 @@ public class Leetcode0204CountPrimes{
         System.out.print("test the sieve of Eratosthenes" + ": ");
         long startTime = System.currentTimeMillis();   //获取开始时间
         int res = sol.countPrimes(n);  //测试的代码段
-        System.out.println(res);
-        long endTime = System.currentTimeMillis(); //获取结束时间
-        System.out.println("time:" + (endTime - startTime) + "ms");
-        System.out.println();
+        printOutRes(startTime, res);
     }
     
     private static void testSolution3(int n) {
@@ -52,6 +46,10 @@ public class Leetcode0204CountPrimes{
         System.out.print("test the sieve of Euler" + ": ");
         long startTime = System.currentTimeMillis();   //获取开始时间
         int res = sol.countPrimes(n);  //测试的代码段
+        printOutRes(startTime, res);
+    }
+    
+    private static void printOutRes(long startTime, int res) {
         System.out.println(res);
         long endTime = System.currentTimeMillis(); //获取结束时间
         System.out.println("time:" + (endTime - startTime) + "ms");
@@ -124,6 +122,7 @@ class Solution1 {
 // Solution 2: The sieve of Eratosthenes
 // 10 ms,击败了97.00% 的Java用户, 37.4 MB,击败了74.17% 的Java用户
 class Solution2 {
+    
     public int countPrimes(int n) {
         if (n <= 1) {
             return 0;
@@ -150,6 +149,7 @@ class Solution2 {
         }
         return result;
     }
+    
 }
 
 // Solution 3: The sieve of Euler
