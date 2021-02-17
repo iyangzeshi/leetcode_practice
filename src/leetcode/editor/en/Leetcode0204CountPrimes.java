@@ -18,56 +18,49 @@ import java.util.*;
 public class Leetcode0204CountPrimes{
     // Java: count-primes
     public static void main(String[] args) {
-        Solution1 sol1 = new Leetcode0204CountPrimes().new Solution1();
-        Solution2 sol2 = new Leetcode0204CountPrimes().new Solution2();
-
         // TO TEST
         int n = 10000000;
-
-        System.out.println("test the sieve of Euler" + ":");
-        long startTime1 = System.currentTimeMillis();   //获取开始时间
-        int res1 = sol1.countPrimes(n);  //测试的代码段
-        long endTime1 = System.currentTimeMillis(); //获取结束时间
-        System.out.println("time:" + (endTime1 - startTime1) + "ms");
-
-        System.out.println("test the sieve of Eratosthenes" + ":");
-        long startTime2 = System.currentTimeMillis();   //获取开始时间
-        int res2 = sol2.countPrimes(n);  //测试的代码段
-        long endTime2 = System.currentTimeMillis(); //获取结束时间
-        System.out.println("time:" + (endTime2 - startTime2) + "ms");
-
-        System.out.println(res1);
-        System.out.println(res2);
+        // testSolution1(n);
+        testSolution2(n);
+        testSolution3(n);
     }
+    
+    private static void testSolution1(int n) {
+        Solution1 sol = new Leetcode0204CountPrimes().new Solution1();
+        System.out.print("test normal way" + ":");
+        long startTime = System.currentTimeMillis();   //获取开始时间
+        int res = sol.countPrimes(n);  //测试的代码段
+        System.out.println(res);
+        long endTime = System.currentTimeMillis(); //获取结束时间
+        System.out.println("time:" + (endTime - startTime) + "ms");
+        System.out.println();
+    }
+    
+    private static void testSolution2(int n) {
+        Solution2 sol = new Leetcode0204CountPrimes().new Solution2();
+        System.out.print("test the sieve of Eratosthenes" + ":");
+        long startTime = System.currentTimeMillis();   //获取开始时间
+        int res = sol.countPrimes(n);  //测试的代码段
+        System.out.println(res);
+        long endTime = System.currentTimeMillis(); //获取结束时间
+        System.out.println("time:" + (endTime - startTime) + "ms");
+        System.out.println();
+    }
+    
+    private static void testSolution3(int n) {
+        Solution3 sol = new Leetcode0204CountPrimes().new Solution3();
+        System.out.print("test the sieve of Euler" + ":");
+        long startTime = System.currentTimeMillis();   //获取开始时间
+        int res = sol.countPrimes(n);  //测试的代码段
+        System.out.println(res);
+        long endTime = System.currentTimeMillis(); //获取结束时间
+        System.out.println("time:" + (endTime - startTime) + "ms");
+        System.out.println();
+    }
+    
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int countPrimes(int n) {
-        if (n <= 2) {
-            return 0;
-        }
-        List<Integer> primeList = new ArrayList<>();
-        primeList.add(2);
-        for (int i = 3; i < n; i++) {
-            boolean isPrime = true; // whether i is prime
-            for (Integer prime: primeList) {
-                if (prime * prime > i) {
-                    break;
-                }
-                if (i % prime == 0) {
-                    isPrime = false;
-                    break;
-                }
-            }
-            if (isPrime) {
-                primeList.add(i);
-            }
-        }
-        return primeList.size();
-    }
-}
-//leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: The sieve of Euler
-class Solution1 {
+    
     public int countPrimes(int n) {
         if (n <= 2) {
             return 0;
@@ -75,27 +68,61 @@ class Solution1 {
         List<Integer> primeList = new ArrayList<>();
         primeList.add(2);
         int count = 1;
-        for (int i = 3; i < n; i++) {
-            boolean isPrime = true; // whether i is prime
+        for (int num = 3; num < n; num++) {
+            boolean isPrime = true; // whether num is prime
+            int sqrt = (int) Math.sqrt(num);
             for (Integer prime : primeList) {
-                if (prime * prime > i) {
+                if (prime > sqrt) {
                     break;
                 }
-                if (i % prime == 0) {
+                if (num % prime == 0) {
                     isPrime = false;
                     break;
                 }
             }
             if (isPrime) {
                 count++;
-                primeList.add(i);
+                primeList.add(num);
             }
         }
         return count;
     }
+    
+}
+//leetcode submit region end(Prohibit modification and deletion)
+/* 一般情况下，用Solution 1就可以了，最优解是Solution 3, 欧拉素数筛 */
+
+// Solution 1: normal way, T(n) = O(n * sqrt(n)), S(n) = O(1)
+// 554 ms,击败了7.35% 的Java用户, 35.7 MB,击败了94.00% 的Java用户
+class Solution1 {
+    
+    public int countPrimes(int n) {
+        if (n <= 2) {
+            return 0;
+        }
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (isPrime(i)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    private boolean isPrime(int i) {
+        int sqrt = (int) Math.sqrt(i);
+        for (int j = 2; j <= sqrt; j++) {
+            if (i % j == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
 }
 
 // Solution 2: The sieve of Eratosthenes
+// 10 ms,击败了97.00% 的Java用户, 37.4 MB,击败了74.17% 的Java用户
 class Solution2 {
     public int countPrimes(int n) {
         if (n <= 1) {
@@ -125,4 +152,36 @@ class Solution2 {
     }
 }
 
+// Solution 3: The sieve of Euler
+// 362 ms,击败了10.98% 的Java用户, 44.8 MB,击败了5.27% 的Java用户
+class Solution3 {
+    
+    public int countPrimes(int n) {
+        if (n <= 2) {
+            return 0;
+        }
+        List<Integer> primeList = new ArrayList<>();
+        primeList.add(2);
+        int count = 1;
+        for (int num = 3; num < n; num++) {
+            boolean isPrime = true; // whether num is prime
+            int sqrt = (int) Math.sqrt(num);
+            for (int prime : primeList) {
+                if (prime > sqrt) {
+                    break;
+                }
+                if (num % prime == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) {
+                count++;
+                primeList.add(num);
+            }
+        }
+        return count;
+    }
+    
+}
 }

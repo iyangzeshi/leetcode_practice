@@ -213,7 +213,7 @@ class Solution1 {
 // Solution 2: 按照人类思维匹配
 // 2 ms,击败了100.00% 的Java用户,38.7 MB,击败了99.22% 的Java用户
 /*
- S1: Greedy最原始的做法
+ Greedy最原始的做法
  按照s的字符顺序进行while loop
  如果是s, p指针sIndex, pIndex对应的字符一样，或者p中字符出现 ? ，s, p都往后走一个单位;
  如果p中出现*号，把这是s， p指针的位置记录下来sStar， pStar，假设*不匹配字符；然后把p指针往后挪一个位置；
