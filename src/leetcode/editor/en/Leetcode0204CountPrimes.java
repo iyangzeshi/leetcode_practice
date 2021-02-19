@@ -12,15 +12,14 @@
 
 package leetcode.editor.en;
 
-import java.util.*;
 // 2020-09-10 19:24:26
 // Zeshi Yang
 public class Leetcode0204CountPrimes{
     // Java: count-primes
     public static void main(String[] args) {
         // TO TEST
-        int n = 10000000;
-        testSolution1(n);
+        int n = 5;
+        // testSolution1(n);
         testSolution2(n);
         testSolution3(n);
     }
@@ -60,16 +59,16 @@ public class Leetcode0204CountPrimes{
 class Solution {
     
     public int countPrimes(int n) {
-        if (n <= 2) {
+        /*if (n <= 2) {
             return 0;
         }
-        List<Integer> primeList = new ArrayList<>();
+        List<Integer> primeList = new ArrayList<>(n);
         primeList.add(2);
         int count = 1;
         for (int num = 3; num < n; num++) {
             boolean isPrime = true; // whether num is prime
             int sqrt = (int) Math.sqrt(num);
-            for (Integer prime : primeList) {
+            for (int prime : primeList) {
                 if (prime > sqrt) {
                     break;
                 }
@@ -83,7 +82,23 @@ class Solution {
                 primeList.add(num);
             }
         }
-        return count;
+        return count;*/
+        int cnt = 0;
+        int[] primes = new int[n];//用于存取质数的值
+        boolean[] isPrime = new boolean[n];//判断所存的所有的质数，初始认为都是质数
+        for (int i = 2; i < n; ++i) {
+            if (!isPrime[i]) {
+                primes[cnt++] = i; //依次存取最小的质数
+            }
+            for (int j = 0; j < cnt && primes[j] * i < n; j++) {
+                isPrime[primes[j] * i] = true;
+                //若i可以整除primes[j]的话，那么i*primes[j+1]必定可以被primes[j]乘以某个数筛选掉
+                if ((i % primes[j]) == 0) {
+                    break;
+                }
+            }
+        }
+        return cnt;
     }
     
 }
@@ -157,10 +172,10 @@ class Solution2 {
 class Solution3 {
     
     public int countPrimes(int n) {
-        if (n <= 2) {
+        /*if (n <= 2) {
             return 0;
         }
-        List<Integer> primeList = new ArrayList<>();
+        List<Integer> primeList = new ArrayList<>(n);
         primeList.add(2);
         int count = 1;
         for (int num = 3; num < n; num++) {
@@ -180,7 +195,23 @@ class Solution3 {
                 primeList.add(num);
             }
         }
-        return count;
+        return count;*/
+        int cnt = 0;
+        int[] primes = new int[n];//用于存取质数的值
+        boolean[] isPrime = new boolean[n];//判断所存的所有的质数，初始认为都是质数
+        for (int i = 2; i < n; ++i) {
+            if (!isPrime[i]) {
+                primes[cnt++] = i; //依次存取最小的质数
+            }
+            for (int j = 0; j < cnt && primes[j] * i < n; j++) {
+                isPrime[primes[j] * i] = true;
+                //若i可以整除primes[j]的话，那么i*primes[j+1]必定可以被primes[j]乘以某个数筛选掉
+                if ((i % primes[j]) == 0) {
+                    break;
+                }
+            }
+        }
+        return cnt;
     }
     
 }
