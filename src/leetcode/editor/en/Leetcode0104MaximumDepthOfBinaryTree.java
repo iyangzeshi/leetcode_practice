@@ -141,7 +141,7 @@ class Solution1_2 {
     }
 }
 
-// Solution 2: BFS, T(n) = O(n), S(n) = O(h), lgn <= h <= n
+// Solution 2: BFS, T(n) = O(n), S(n) = O(n)
 // 1 ms,击败了14.50% 的Java用户, 38.8 MB,击败了85.92% 的Java用户
 class Solution2 {
     
