@@ -103,6 +103,9 @@ class Solution1_1 {
 
 // Solution 1_2: DFS using while and stack, T(n) = O(n), S(n) = O(h), lgn <= h <= n
 // 1 ms,击败了14.50% 的Java用户, 39.2 MB,击败了37.42% 的Java用户
+/*
+post order traverse dfs by stack
+ */
 class Solution1_2 {
     public int maxDepth(TreeNode root) {
         if (root == null) {
