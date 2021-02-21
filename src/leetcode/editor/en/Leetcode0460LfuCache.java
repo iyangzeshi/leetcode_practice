@@ -55,8 +55,8 @@ public class Leetcode0460LfuCache{
         int capacity = 3;
         LFUCache2 lfuCache = new Leetcode0460LfuCache().new LFUCache2(capacity);
         // TO TEST
-        lfuCache.put(1,1);
-        lfuCache.put(2,2);
+        lfuCache.put(1, 1);
+        lfuCache.put(2, 2);
         lfuCache.put(3, 3);
         lfuCache.put(4, 4);
         System.out.println(lfuCache.get(4));
@@ -412,6 +412,7 @@ class LFUCache1 {
     }
 }
 
+// Solution 2: 3 HashSet and LinkedHashSet
 class LFUCache2 {
     
     HashMap<Integer, Integer> keyToVal;

@@ -27,9 +27,12 @@
 
 package leetcode.editor.en;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 import leetcode.editor.TreeNode;
-
-import java.util.*;
 
 // 2020-07-26 12:01:45
 // Zeshi Yang
@@ -95,26 +98,22 @@ class Solution {
 // Solution 1: 2个stack
 class Solution1 {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
 
         if (root == null) {
-            return result;
+            return res;
         }
 
         Stack<TreeNode> stackOdd = new Stack<>(); // from left to right
         Stack<TreeNode> stackEven = new Stack<>(); // from right to left
 
-        // boolean flagEven = true;
         stackOdd.push(root); // odd level
         List<Integer> list = new ArrayList<>();
-        // list.add(root.val);
-        // result.add(list);
         TreeNode temp;
-
-
-        while (stackOdd.isEmpty() == false || stackEven.isEmpty() == false) {
-            list = new ArrayList<Integer>();
-            while (stackOdd.isEmpty() == false){
+        
+        while (!stackOdd.isEmpty() || !stackEven.isEmpty()) {
+            list = new ArrayList<>();
+            while (!stackOdd.isEmpty()){
                 temp = stackOdd.pop();
                 list.add(temp.val);
 
@@ -125,13 +124,12 @@ class Solution1 {
                     stackEven.push(temp.right);
                 }
             }
-            if (list.isEmpty()== false) {
-                result.add(list);
+            if (!list.isEmpty()) {
+                res.add(list);
             }
-
-
-            list = new ArrayList<Integer>();
-            while (stackEven.isEmpty() == false){
+            
+            list = new ArrayList<>();
+            while (!stackEven.isEmpty()){
                 temp = stackEven.pop();
                 list.add(temp.val);
 
@@ -142,45 +140,50 @@ class Solution1 {
                     stackOdd.push(temp.left);
                 }
             }
-            if (list.isEmpty()== false) {
-                result.add(list);
+            if (!list.isEmpty()) {
+                res.add(list);
             }
         }
-        return result;
+        return res;
     }
 }
 
 // Solution 2: 设置flag isEven，然tempList.add还是tempList.addFirst
 class Solution2 {
+    
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
-        if(root == null) return res;
-
+        if (root == null) {
+            return res;
+        }
+        
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         boolean isEven = false;
-
-        while(!queue.isEmpty()) {
+        
+        while (!queue.isEmpty()) {
             LinkedList<Integer> tempList = new LinkedList<>();
             int size = queue.size();
-
-            while (size --> 0) {
+            
+            while (size-- > 0) {
                 TreeNode cur = queue.poll();
-
-                if(!isEven){
+                
+                if (!isEven) {
                     tempList.add(cur.val);
-                }else {
+                } else {
                     tempList.addFirst(cur.val);
                 }
-                if (cur.left != null) queue.offer(cur.left);
-                if (cur.right != null) queue.offer(cur.right);
+                if (cur.left != null) {
+                    queue.offer(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.offer(cur.right);
+                }
             }
-
+            
             isEven = !isEven;
             res.add(tempList);
         }
-
-
         return res;
     }
 }

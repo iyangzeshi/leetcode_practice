@@ -56,46 +56,37 @@ public class Leetcode0104MaximumDepthOfBinaryTree{
 class Solution {
     
     public int maxDepth(TreeNode root) {
-        // corner case
+        //corner case
         if (root == null) {
             return 0;
         }
-        // general case
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode prev = null;
-        int max = 0;
-        stack.push(root);
-        max = Math.max(max, stack.size());
-        while (!stack.isEmpty()) {
-            TreeNode cur = stack.peek();
-            if (prev == null || prev.left == cur || prev.right == cur) { // 往下走
-                if (cur.left != null) { // 左边不为空,走左边
-                    stack.push(cur.left);
-                    max = Math.max(max, stack.size());
-                } else if (cur.right != null) { // 左边为空,而且右边不为空,走右边
-                    stack.push(cur.right);
-                    max = Math.max(max, stack.size());
-                } else { // 左边和右边都是空,弹栈 + 更新res
-                    stack.pop();
+        Queue<TreeNode> queue = new LinkedList<>();
+        int depth = 0;
+        
+        queue.offer(root);
+        
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            
+            while (size > 0) {
+                size--;
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    queue.offer(node.left);
                 }
-            } else if (prev == cur.left){ // 往上走,且prev是cur的左子树
-                if (cur.right != null) { // 右边不为空,走右边
-                    stack.push(cur.right);
-                    max = Math.max(max, stack.size());
-                } else { // 右边为空,弹栈 + 更新res
-                    stack.pop();
+                if (node.right != null) {
+                    queue.offer(node.right);
                 }
-            } else { // prev == cur.right // 往上走,且prev是cur的右子树,说明下面走完了,更新res
-                stack.pop();
             }
-            prev = cur;
+            depth++;
         }
-        return max;
+        return depth;
     }
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1_1: DFS recursion
+// Solution 1_1: DFS recursion, T(n) = O(n), S(n) = O(h), lgn <= h <= n
+// 0 ms,击败了100.00% 的Java用户, 39.3 MB,击败了21.72% 的Java用户
 class Solution1_1 {
     
     public int maxDepth(TreeNode root) {
@@ -110,70 +101,48 @@ class Solution1_1 {
     
 }
 
-// Solution 1_2: DFS using while and stack
+// Solution 1_2: DFS using while and stack, T(n) = O(n), S(n) = O(h), lgn <= h <= n
+// 1 ms,击败了14.50% 的Java用户, 39.2 MB,击败了37.42% 的Java用户
 class Solution1_2 {
-    
     public int maxDepth(TreeNode root) {
-        // corner case
         if (root == null) {
             return 0;
         }
-        // general case
         Stack<TreeNode> stack = new Stack<>();
-        TreeNode prev = null;
-        int max = 0;
-        stack.push(root);
-        max = Math.max(max, stack.size());
-        // pre order push into stack, post order pop out from stack
-        while (!stack.isEmpty()) {
-            /*TreeNode cur = stack.peek();
-            if (prev == null || prev.left == cur || prev.right == cur) { // 往下走
-                if (cur.left != null) { // 左边不为空,走左边
-                    stack.push(cur.left);
-                    max = Math.max(max, stack.size());
-                } else if (cur.right != null) { // 左边为空,而且右边不为空,走右边
-                    stack.push(cur.right);
-                    max = Math.max(max, stack.size());
-                } else { // 左边和右边都是空,弹栈 + 更新res
-                    stack.pop();
-                }
-            } else if (prev == cur.left){ // 往上走,且prev是cur的左子树
-                if (cur.right != null) { // 右边不为空,走右边
-                    stack.push(cur.right);
-                    max = Math.max(max, stack.size());
-                } else { // 右边为空,弹栈 + 更新res
-                    stack.pop();
-                }
-            } else { // prev == cur.right // 往上走,且prev是cur的右子树,说明下面走完了,更新res
-                stack.pop();
-            }
-            prev = cur;*/
-            TreeNode top = stack.peek();
-            TreeNode left = top.left;
-            TreeNode right = top.right;
-            if (left != null) { // 有left child,可能也有right child
-                stack.push(left);
-            } else if (right != null) { // 只有right child
-                stack.pop();
-                stack.push(right);
-            } else { // 左右子树都没有
-                // 把路径里面遍历过的没有right child的ancestor给pop()出来
-                TreeNode parent = stack.pop();
-                while (!stack.isEmpty() && parent.right == null) {
-                    parent = stack.pop();
-                }
-                if (parent.right != null) {
-                    stack.push(parent.right);
-                }
-            }
+        TreeNode cur = root;
+        int max = 1;
+        // pre-processing
+        while (cur != null) { // 一直往下走,优先走左边
+            stack.push(cur);
             max = Math.max(max, stack.size());
+            if (cur.left != null) {
+                cur = cur.left;
+            } else {
+                cur = cur.right;
+            }
+        }
+        
+        while (!stack.isEmpty()) {
+            cur = stack.pop();
+            if (!stack.isEmpty() && cur != stack.peek().right) {
+                cur = stack.peek().right;
+                while (cur != null) { // 一直往下走,优先走左边
+                    stack.push(cur);
+                    max = Math.max(max, stack.size());
+                    if (cur.left != null) {
+                        cur = cur.left;
+                    } else {
+                        cur = cur.right;
+                    }
+                }
+            }
         }
         return max;
     }
-    
 }
 
-// Solution 2: BFS
+// Solution 2: BFS, T(n) = O(n), S(n) = O(h), lgn <= h <= n
+// 1 ms,击败了14.50% 的Java用户, 38.8 MB,击败了85.92% 的Java用户
 class Solution2 {
     
     public int maxDepth(TreeNode root) {

@@ -58,7 +58,8 @@
 
 package leetcode.editor.en;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 // 2020-12-12 20:09:24
 // Zeshi Yang
 public class Leetcode0225ImplementStackUsingQueues{
@@ -71,39 +72,47 @@ public class Leetcode0225ImplementStackUsingQueues{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class MyStack {
-    Queue<Integer> queue;
     
-    /** Initialize your data structure here. */
+    private Queue<Integer> q1 = new LinkedList<>();
+    private Queue<Integer> q2 = new LinkedList<>();
+    private Integer top;
+    
+    /** Initialize your data structure here.*/
     public MyStack() {
-        queue = new LinkedList<>();
+        q1 = new LinkedList<>();
+        q2 = new LinkedList<>();
     }
     
-    /** Push element x onto stack. */
+    /** Push element x onto stack.*/
     public void push(int x) {
-        int size = queue.size();
-        queue.offer(x);
-        
-        while (size -- > 0) {
-            queue.offer(queue.poll());
-        }
+        q1.add(x);
+        top = x;
     }
     
-    /** Removes the element on top of the stack and returns that element. */
+    /** Removes the element on top of the stack and returns that element.*/
     public int pop() {
-        return queue.poll();
+        while (q1.size() > 1) {
+            top = q1.remove();
+            q2.add(top);
+        }
+        int res = q1.poll();
+        Queue<Integer> temp = q1;
+        q1 = q2;
+        q2 = temp;
+        return res;
     }
     
-    /** Get the top element. */
+    /** Get the top element.*/
     public int top() {
-        return queue.peek();
+        return top;
     }
     
-    /** Returns whether the stack is empty. */
+    /** Returns whether the stack is empty.*/
     public boolean empty() {
-        return queue.isEmpty();
+        return q1.isEmpty();
     }
+    
 }
-
 /**
  * Your MyStack object will be instantiated and called as such:
  * MyStack obj = new MyStack();
@@ -113,5 +122,103 @@ class MyStack {
  * boolean param_4 = obj.empty();
  */
 //leetcode submit region end(Prohibit modification and deletion)
+// Solution 1: push: T(n) = O(n); peek: T(n) = O(1), pop: T(n) = O(1)
+// 0 ms,击败了100.00% 的Java用户, 36.1 MB,击败了98.97% 的Java用户
+/**
+ * 用queue实现stack，
+ * queue是FIFO, stack是FILO有两种方法
+ * 第1种方法：
+ *      设置一个queue
+ *      实现stack的push, 把queue里面原先所有的element一次poll出来在offer到queue的末尾, O(n)
+ *      实现stack的peek, 把queue里面的第一个元素peek出来, O(1)
+ *      实现stack的pop, 把queue里面的第一个元素poll出来, O(1)
+ */
+class MyStack1 {
+    
+    Queue<Integer> queue;
+    
+    /** Initialize your data structure here.*/
+    public MyStack1() {
+        queue = new LinkedList<>();
+    }
+    
+    /** Push element x onto stack.*/
+    public void push(int x) {
+        int size = queue.size();
+        queue.offer(x);
+        
+        while (size-- > 0) {
+            queue.offer(queue.poll());
+        }
+    }
+    
+    /** Removes the element on top of the stack and returns that element.*/
+    public int pop() {
+        return queue.poll();
+    }
+    
+    /** Get the top element.*/
+    public int top() {
+        return queue.peek();
+    }
+    
+    /** Returns whether the stack is empty.*/
+    public boolean empty() {
+        return queue.isEmpty();
+    }
+    
+}
 
+// Solution 2: push: T(n) = O(1); peek: T(n) = O(1), pop: T(n) = O(n)
+// 0 ms,击败了100.00% 的Java用户, 36.8 MB,击败了69.07% 的Java用户
+/**
+ * 第2种方法：
+ *      设置两个queue
+ *      实现stack的push, 直接把新的元素放到offer到queue里面
+ *      实现stack的peek, 把queue1里面所有元素，都依次offer另外一个queue2里面，return queue1里面的最后一个元素
+ *      实现stack里面的pop，把queue1里面除了最后一个元素以外的其他元素，都依次offer到queue2里面，queue1里面的最后一个元素poll出来
+ *
+ */
+class MyStack2 {
+    
+    private Queue<Integer> q1 = new LinkedList<>();
+    private Queue<Integer> q2 = new LinkedList<>();
+    private Integer top;
+    
+    /** Initialize your data structure here.*/
+    public MyStack2() {
+        q1 = new LinkedList<>();
+        q2 = new LinkedList<>();
+    }
+    
+    /** Push element x onto stack.*/
+    public void push(int x) {
+        q1.add(x);
+        top = x;
+    }
+    
+    /** Removes the element on top of the stack and returns that element.*/
+    public int pop() {
+        while (q1.size() > 1) {
+            top = q1.remove();
+            q2.add(top);
+        }
+        int res = q1.poll();
+        Queue<Integer> temp = q1;
+        q1 = q2;
+        q2 = temp;
+        return res;
+    }
+    
+    /** Get the top element.*/
+    public int top() {
+        return top;
+    }
+    
+    /** Returns whether the stack is empty.*/
+    public boolean empty() {
+        return q1.isEmpty();
+    }
+    
+}
 }
