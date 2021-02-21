@@ -1979,6 +1979,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0425WordSquares.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0425WordSquares.java" />
+              <option name="questionId" value="425" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0426ConvertBinarySearchTreeToSortedDoublyLinkedList.java">
           <value>
             <LeetcodeEditor>

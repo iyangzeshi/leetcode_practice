@@ -105,6 +105,13 @@ class Solution1_1 {
 // 1 ms,击败了14.50% 的Java用户, 39.2 MB,击败了37.42% 的Java用户
 /*
 post order traverse dfs by stack
+stack是一条从root开始到下面的path，post order遍历就行了
+preprocessing，先往下走（尽量沿着左边走）
+
+当stack不为空的时候：
+    然后每次pop一个点cur出来，令parent = stack.peek()
+    如果cur是parent的left child，就走parent的右子树，尽量往下走，走到底
+    如果cur是parent的right child，就说明这个parent的所有subtree走完了（下次就会把parent给pop出来了）
  */
 class Solution1_2 {
     public int maxDepth(TreeNode root) {
@@ -131,13 +138,13 @@ class Solution1_2 {
                 cur = stack.peek().right;
                 while (cur != null) { // 一直往下走,优先走左边
                     stack.push(cur);
-                    max = Math.max(max, stack.size());
                     if (cur.left != null) {
                         cur = cur.left;
                     } else {
                         cur = cur.right;
                     }
                 }
+                max = Math.max(max, stack.size());
             }
         }
         return max;
