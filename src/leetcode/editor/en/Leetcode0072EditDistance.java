@@ -47,7 +47,6 @@ public class Leetcode0072EditDistance {
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// Solution2: DP
 class Solution {
     // DP
     public int minDistance(String word1, String word2) {
@@ -58,12 +57,12 @@ class Solution {
         if (word1 == null || word2 == null) {
             return word1 == null ? word2.length() : word1.length();
         }
-
+        
         //general case
         int len1 = word1.length();
         int len2 = word2.length();
         int[][] dp = new int[len1 + 1][len2 + 1];
-
+        
         //initialize the 2 edges
         for (int i = 0; i <= len1; i++) {
             dp[i][0] = i;
@@ -71,8 +70,8 @@ class Solution {
         for (int j = 0; j <= len2; j++) {
             dp[0][j] = j;
         }
-
-
+        
+        
         for(int i = 1; i <= len1; i++) {
             for (int j = 1; j <= len2; j++) {
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
@@ -88,7 +87,13 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1_1: DFS
+/*下面所有的Solution的思路都是这个
+思路：
+设置dp[i][j]为word1[0 ~ i] 和 word2[0 ~ j]匹配的最小cost
+如果word[i] == word[j]， 那dp[i][j] = dp[i - 1][j - 1]
+否则dp[i][j] = min{dp[i- 1][j - 1], d[i - 1][j], dp[i][j - 1]};
+ */
+// Solution 1_1: DFS, T(m,n) = O(2^m * 2^n), S(m,n) = O(m * n)
 class Solution1_1 {
     // DFS
     public int minDistance(String word1, String word2) {
@@ -134,7 +139,9 @@ class Solution1_1 {
         return res;
     }
 }
-// Solution 1_2: DFS with pruning
+
+// Solution 1_2: DFS with pruning, T(m, n) = O(m * n), S(m, n) = O(m * n)
+// 4 ms,击败了91.82% 的Java用户, 39.1 MB,击败了65.14% 的Java用户
 class Solution1_2 {
     // DFS with pruning
     public int minDistance(String word1, String word2) {
@@ -187,7 +194,9 @@ class Solution1_2 {
         return res;
     }
 }
-// Solution2: DP
+
+// Solution2: DP, T(m, n) = O(m * n), S(m,n) = O(m * n)
+// 11 ms,击败了13.21% 的Java用户, 41.4 MB,击败了15.39% 的Java用户
 class Solution2 {
     // DP
     public int minDistance(String word1, String word2) {
