@@ -1995,6 +1995,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0428SerializeAndDeserializeNAryTree.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0428SerializeAndDeserializeNAryTree.java" />
+              <option name="questionId" value="765" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0429NAryTreeLevelOrderTraversal.java">
           <value>
             <LeetcodeEditor>

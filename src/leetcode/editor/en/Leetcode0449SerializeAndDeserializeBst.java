@@ -31,7 +31,7 @@ public class Leetcode0449SerializeAndDeserializeBst{
         TreeNode root = new Leetcode0449SerializeAndDeserializeBst().new Codec().deserialize(data);
         System.out.println(new Leetcode0449SerializeAndDeserializeBst().new Codec().serialize(root));
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
+//leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -42,7 +42,70 @@ public class Leetcode0449SerializeAndDeserializeBst{
  * }
  */
 public class Codec {
+    
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder sb = postorder(root, new StringBuilder());
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
+    }
+    
+    private StringBuilder postorder(TreeNode root, StringBuilder sb) {
+        // base case
+        if (root == null) {
+            return sb;
+        }
+        
+        postorder(root.left, sb);
+        postorder(root.right, sb);
+        sb.append(root.val);
+        sb.append(' ');
+        return sb;
+    }
+    
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        if (data.isEmpty()) {
+            return null;
+        }
+        LinkedList<Integer> nums = new LinkedList<>();
+        for (String s : data.split("\\s+")) {
+            nums.add(Integer.parseInt(s));
+        }
+        return helper(Integer.MIN_VALUE, Integer.MAX_VALUE, nums);
+    }
+    
+    private TreeNode helper(int lower, int upper, LinkedList<Integer> nums) {
+        if (nums.isEmpty()) {
+            return null;
+        }
+        int val = nums.getLast();
+        if (val < lower || val > upper) {
+            return null;
+        }
+        
+        nums.removeLast();
+        TreeNode root = new TreeNode(val);
+        root.right = helper(val, upper, nums);
+        root.left = helper(lower, val, nums);
+        return root;
+    }
+    
+}
 
+// Your Codec object will be instantiated and called as such:
+// Codec codec = new Codec();
+// codec.deserialize(codec.serialize(root));
+//leetcode submit region end(Prohibit modification and deletion)
+
+/**面试的时候，用Solution 1: BFS*/
+
+// Solution 1: BFS, T(n) = O(n), S(n) = O(n)
+// 28 ms,击败了8.64% 的Java用户, 41.8 MB,击败了15.09% 的Java用户
+public class Codec1 {
+    
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         if (root == null) {
@@ -51,7 +114,7 @@ public class Codec {
         StringBuilder sb = new StringBuilder();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-
+        
         while (!queue.isEmpty()) {
             TreeNode cur = queue.poll();
             if (cur == null) {
@@ -65,7 +128,7 @@ public class Codec {
         sb.setLength(sb.length() - 2);
         return sb.toString();
     }
-
+    
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
         String str = data.replaceAll("\\s*", "");
@@ -87,10 +150,10 @@ public class Codec {
                             null : new TreeNode(Integer.parseInt(strArr[i]));
             TreeNode right =
                     (++i >= strArr.length || strArr[i].equals("null")|| strArr[i].equals(" null")) ?
-                    null : new TreeNode(Integer.parseInt(strArr[i]));
+                            null : new TreeNode(Integer.parseInt(strArr[i]));
             cur.left = left;
             cur.right = right;
-
+            
             if (left != null) {
                 queue.offer(left);
             }
@@ -103,9 +166,60 @@ public class Codec {
     }
 }
 
-// Your Codec object will be instantiated and called as such:
-// Codec codec = new Codec();
-// codec.deserialize(codec.serialize(root));
-//leetcode submit region end(Prohibit modification and deletion)
+// Solution 2: post order, DFS
+// 11 ms,击败了41.38% 的Java用户, 40.4 MB,击败了31.10% 的Java用户
+public class Codec2 {
+    
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder sb = postorder(root, new StringBuilder());
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
+    }
+    
+    private StringBuilder postorder(TreeNode root, StringBuilder sb) {
+        // base case
+        if (root == null) {
+            return sb;
+        }
+        
+        postorder(root.left, sb);
+        postorder(root.right, sb);
+        sb.append(root.val);
+        sb.append(' ');
+        return sb;
+    }
+    
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        if (data.isEmpty()) {
+            return null;
+        }
+        LinkedList<Integer> nums = new LinkedList<>();
+        for (String s : data.split("\\s+")) {
+            nums.add(Integer.parseInt(s));
+        }
+        return helper(Integer.MIN_VALUE, Integer.MAX_VALUE, nums);
+    }
+    
+    private TreeNode helper(int lower, int upper, LinkedList<Integer> nums) {
+        if (nums.isEmpty()) {
+            return null;
+        }
+        int val = nums.getLast();
+        if (val < lower || val > upper) {
+            return null;
+        }
+        
+        nums.removeLast();
+        TreeNode root = new TreeNode(val);
+        root.right = helper(val, upper, nums);
+        root.left = helper(lower, val, nums);
+        return root;
+    }
+    
+}
 
 }

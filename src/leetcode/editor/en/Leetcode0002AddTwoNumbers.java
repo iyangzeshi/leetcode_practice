@@ -41,6 +41,7 @@ public class Leetcode0002AddTwoNumbers{
  * }
  */
 class Solution {
+    
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode p1 = l1;
         ListNode p2 = l2;
@@ -65,6 +66,7 @@ class Solution {
         dummy.next = null;
         return head;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
