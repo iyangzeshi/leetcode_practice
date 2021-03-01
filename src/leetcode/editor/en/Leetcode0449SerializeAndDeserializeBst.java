@@ -45,56 +45,67 @@ public class Codec {
     
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
-        StringBuilder sb = postorder(root, new StringBuilder());
-        if (sb.length() > 0) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
-        return sb.toString();
-    }
-    
-    private StringBuilder postorder(TreeNode root, StringBuilder sb) {
-        // base case
         if (root == null) {
-            return sb;
+            return "null";
         }
+        StringBuilder sb = new StringBuilder();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
         
-        postorder(root.left, sb);
-        postorder(root.right, sb);
-        sb.append(root.val);
-        sb.append(' ');
-        return sb;
+        while (!queue.isEmpty()) {
+            TreeNode cur = queue.poll();
+            if (cur == null) {
+                sb.append("null, ");
+            } else {
+                sb.append(cur.val).append(", ");
+                queue.offer(cur.left);
+                queue.offer(cur.right);
+            }
+        }
+        sb.setLength(sb.length() - 2);
+        return sb.toString();
     }
     
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        if (data.isEmpty()) {
+        String str = data.replaceAll("\\s*", "");
+        String[] strArr = str.split(",");
+        if (strArr.length == 0) {
+            throw new IllegalArgumentException("Not valid Tree");
+        }
+        if (strArr.length == 1 && (strArr[0].equals("null") || strArr[0].equals(" null"))) {
             return null;
         }
-        LinkedList<Integer> nums = new LinkedList<>();
-        for (String s : data.split("\\s+")) {
-            nums.add(Integer.parseInt(s));
+        TreeNode root = new TreeNode(Integer.parseInt(strArr[0]));
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int i = 1;
+        while (i < strArr.length) {
+            TreeNode cur = queue.poll();
+            addChild(strArr, queue, i, cur, true);
+            i++;
+            addChild(strArr, queue, i, cur, false);
+            i++;
         }
-        return helper(Integer.MIN_VALUE, Integer.MAX_VALUE, nums);
-    }
-    
-    private TreeNode helper(int lower, int upper, LinkedList<Integer> nums) {
-        if (nums.isEmpty()) {
-            return null;
-        }
-        int val = nums.getLast();
-        if (val < lower || val > upper) {
-            return null;
-        }
-        
-        nums.removeLast();
-        TreeNode root = new TreeNode(val);
-        root.right = helper(val, upper, nums);
-        root.left = helper(lower, val, nums);
         return root;
     }
     
+    private void addChild(String[] strArr, Queue<TreeNode> queue, int i, TreeNode cur,
+            boolean addLeftChild) {
+        TreeNode child =
+                strArr[i].equals("null") || strArr[i].equals(" null") ?
+                        null : new TreeNode(Integer.parseInt(strArr[i]));
+        if (addLeftChild) {
+            cur.left = child;
+        } else {
+            cur.right = child;
+        }
+        if (child != null) {
+            queue.offer(child);
+        }
+    }
+    
 }
-
 // Your Codec object will be instantiated and called as such:
 // Codec codec = new Codec();
 // codec.deserialize(codec.serialize(root));
@@ -145,25 +156,29 @@ public class Codec1 {
         int i = 1;
         while (i < strArr.length) {
             TreeNode cur = queue.poll();
-            TreeNode left =
-                    strArr[i].equals("null") || strArr[i].equals(" null") ?
-                            null : new TreeNode(Integer.parseInt(strArr[i]));
-            TreeNode right =
-                    (++i >= strArr.length || strArr[i].equals("null")|| strArr[i].equals(" null")) ?
-                            null : new TreeNode(Integer.parseInt(strArr[i]));
-            cur.left = left;
-            cur.right = right;
-            
-            if (left != null) {
-                queue.offer(left);
-            }
-            if (right != null) {
-                queue.offer(right);
-            }
+            addChild(strArr, queue, i, cur, true);
+            i++;
+            addChild(strArr, queue, i, cur, false);
             i++;
         }
         return root;
     }
+    
+    private void addChild(String[] strArr, Queue<TreeNode> queue, int i, TreeNode cur,
+            boolean addLeftChild) {
+        TreeNode child =
+                strArr[i].equals("null") || strArr[i].equals(" null") ?
+                        null : new TreeNode(Integer.parseInt(strArr[i]));
+        if (addLeftChild) {
+            cur.left = child;
+        } else {
+            cur.right = child;
+        }
+        if (child != null) {
+            queue.offer(child);
+        }
+    }
+    
 }
 
 // Solution 2: post order, DFS

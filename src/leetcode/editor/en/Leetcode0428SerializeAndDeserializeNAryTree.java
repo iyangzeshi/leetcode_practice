@@ -55,11 +55,14 @@ public class Leetcode0428SerializeAndDeserializeNAryTree{
         
         System.out.println();
     }
+    
 class Node {
+    
     public int val;
     public List<Node> children;
     
-    public Node() {}
+    public Node() {
+    }
     
     public Node(int _val) {
         val = _val;
@@ -69,6 +72,7 @@ class Node {
         val = _val;
         children = _children;
     }
+    
 }
 //leetcode submit region begin(Prohibit modification and deletion)
 /*
