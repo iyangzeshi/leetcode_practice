@@ -71,64 +71,58 @@ public class Leetcode0140WordBreakIi {
         System.out.println(result);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// Solution 2: dynamic Programming
 class Solution {
-    // dynamic programming
-    /*
-    建立一个HashMap, 从后往前搜索分叉，当index i 之后可以分叉到index j的时候（j < i)，
-    我们在HashMap里面存<j, i>，第一个DFS函数用来建立图，第二个private函数用来建立路径
-     */
-    public List<String> wordBreak(String s, List<String> wordDict) {
-        List<String> result = new ArrayList<>();
-        
-        //corner case
-        if (s == null || s.length() == 0) {
-            return result;
-        }
-        int length = s.length();
-        boolean[] mem = new boolean[length + 1];
-        mem[length] = true;
-        Set<String> set = new HashSet<>(wordDict);
-        Map<Integer, List<Integer>> graph = new HashMap<>();
-        
-        // dynamic programming
-        for (int i = length - 1; i >= 0; i--) {
-            for (int j = i + 1; j <= length; j++) {
-                String str = s.substring(i, j);
-                if (set.contains(str) && mem[j]) {
-                    if (!graph.containsKey(i)) {
-                        mem[i] = true;
-                        graph.put(i, new ArrayList<>());
-                    }
-                    graph.get(i).add(j);
-                }
-            }
-        }
-        
-        dfsBuildPaths(0, s, new StringBuilder(), graph, result);
-        
-        return result;
-    }
-    
-    private void dfsBuildPaths(int index, String s, StringBuilder sb,
-            Map<Integer, List<Integer>> graph, List<String> result) {
-        int len = sb.length();
-        // base case
-        if (index == s.length()) {
-            sb.setLength(len - 1);
-            result.add(sb.toString());
-            return;
-        }
-        
-        if (graph.containsKey(index)) {
-            for (int i: graph.get(index)) {
-                sb.append(s.substring(index, i)).append(" ");
-                dfsBuildPaths(i, s, sb, graph, result);
-                sb.setLength(len);
-            }
-        }
-    }
+	
+	public List<String> wordBreak(String s, List<String> wordDict) {
+		List<String> result = new ArrayList<>();
+		
+		//corner case
+		if (s == null || s.length() == 0) {
+			return result;
+		}
+		int length = s.length();
+		boolean[] memo = new boolean[length + 1];
+		memo[length] = true;
+		Set<String> set = new HashSet<>(wordDict);
+		Map<Integer, List<Integer>> graph = new HashMap<>();
+		
+		// dynamic programming
+		for (int i = length - 1; i >= 0; i--) {
+			for (int j = i + 1; j <= length; j++) {
+				String str = s.substring(i, j);
+				if (set.contains(str) && memo[j]) {
+					if (!graph.containsKey(i)) {
+						memo[i] = true;
+						graph.put(i, new ArrayList<>());
+					}
+					graph.get(i).add(j);
+				}
+			}
+		}
+		dfsBuildPaths(0, s, new StringBuilder(), graph, result);
+		return result;
+	}
+	
+	private void dfsBuildPaths(int index, String s, StringBuilder sb,
+		Map<Integer, List<Integer>> graph, List<String> result) {
+		int len = sb.length();
+		// base case
+		if (index == s.length()) {
+			sb.setLength(len - 1);
+			result.add(sb.toString());
+			return;
+		}
+		
+		if (graph.containsKey(index)) {
+			for (int i: graph.get(index)) {
+				sb.append(s, index, i).append(" ");
+				dfsBuildPaths(i, s, sb, graph, result);
+				sb.setLength(len);
+			}
+		}
+	}
 }
+
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: DFS
 // Solution 1_1: DFS without pruning, time limit exceed
@@ -169,8 +163,8 @@ class Solution1_1 {
     }
 }
 
-// Solution 1_2: DFS with pruning by memo[], 4ms
-// DFS with pruning
+// Solution 1_2: DFS with pruning by Boolean[] memo, 4ms
+// 7 ms,击败了74.70% 的Java用户, 42.8 MB,击败了8.19% 的Java用户
 /** 设置一个Boolean memo[]数组，初始值都是Null，
  memo[i] 表示[i, length)的String是不是可以被wordBreak
  
@@ -186,9 +180,9 @@ class Solution1_2 {
             return result;
         }
         
-        int length = s.length(); // 比Solution 1_1多的部分
+        int len = s.length(); // 比Solution 1_1多的部分
         Set<String> set = new HashSet<>(wordDict);
-        Boolean[] memo = new Boolean[length + 1];// 比Solution 1_1多的部分
+        Boolean[] memo = new Boolean[len + 1];// 比Solution 1_1多的部分
         StringBuilder sb = new StringBuilder();
         wordBreak(0, s, set, sb, memo, result);
         return result;
@@ -225,14 +219,15 @@ class Solution1_2 {
 				sb.setLength(sbLen); // 比Solution 1_1多的部分
 			}
 		}
-		if (result.size() == size) {// 比Solution 1_1多的部分
+		if (memo[index] == null) {// 比Solution 1_1多的部分
 			memo[index] = false;
 		}
 		return memo[index]; // 比Solution 1_1多的部分
 	}
 }
 
-// Solution 1_3: DFS with pruning by HashMap, 3ms
+// Solution 1_3: DFS with pruning by Boolean[] memo + HashMap存路径, 3ms
+// 4 ms,击败了94.11% 的Java用户,39.5 MB,击败了56.69% 的Java用户
 /*
 第1个DFS函数用来建立分叉搜索图，建立一个HashMap, 从后往前搜索分叉，
 当index之后可以分叉到index i的时候（i < index)，我们在HashMap里面存<i, index>，
@@ -247,11 +242,11 @@ class Solution1_3 {
             return result;
         }
         
-        int length = s.length();
+        int len = s.length();
         Set<String> set = new HashSet<>(wordDict);
-        Boolean[] memo = new Boolean[length + 1]; // 表示能不能从起点走到s[i]
+        Boolean[] memo = new Boolean[len + 1]; // 表示能不能从起点走到s[i]
         Map<Integer, Set<Integer>> graph = new HashMap<>();
-        wordBreak(length, s, set, graph, memo);
+        wordBreak(len, s, set, graph, memo);
         dfsBuildPaths(0, s, new StringBuilder(), graph, result);
         return result;
     }
@@ -280,8 +275,8 @@ class Solution1_3 {
             if (set.contains(word)) {
                 if (wordBreak(i, s, set, graph, memo)) {
                     memo[index] = true;
+	                graph.computeIfAbsent(i, k-> new HashSet<>()).add(index);
                 }
-	            graph.computeIfAbsent(i, k-> new HashSet<>()).add(index);
             }
         }
         if (memo[index] == null) {
@@ -313,7 +308,8 @@ class Solution1_3 {
     }
 }
 
-// Solution 2: dynamic Programming, 8ms
+// Solution 2: dynamic Programming
+// 21 ms,击败了12.59% 的Java用户, 45 MB,击败了5.58% 的Java用户
 /*
 第1个DP用来建立分叉搜索图，建立一个HashMap, 从后往前搜索分叉，
 当index之后可以分叉到index i的时候（i < index)，我们在HashMap里面存<i, index>，
