@@ -164,7 +164,7 @@ class Solution1_1 {
     }
 }
 
-// Solution 1_2: DFS with pruning by Boolean[] memo, 4ms
+// Solution 1_2: DFS with pruning by Boolean[] memo
 // 7 ms,击败了74.70% 的Java用户, 42.8 MB,击败了8.19% 的Java用户
 /** 设置一个Boolean memo[]数组，初始值都是Null，
  memo[i] 表示[i, length)的String是不是可以被wordBreak
@@ -207,8 +207,6 @@ class Solution1_2 {
 			return false;
 		}
 		
-		int size = result.size();// 比Solution 1_1多的部分
-		
 		for (int i = index + 1; i <= len; i++) {
 			String word = s.substring(index, i);
 			if (set.contains(word)) {
@@ -227,7 +225,7 @@ class Solution1_2 {
 	}
 }
 
-// Solution 1_3: DFS with pruning by Boolean[] memo + HashMap存路径, 3ms
+// Solution 1_3: DFS with pruning by Boolean[] memo + HashMap存路径
 // 4 ms,击败了94.11% 的Java用户,39.5 MB,击败了56.69% 的Java用户
 /*
 第1个DFS函数用来建立分叉搜索图，建立一个HashMap, 从后往前搜索分叉，
