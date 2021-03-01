@@ -122,8 +122,9 @@ class Solution {
 		}
 	}
 }
-
 //leetcode submit region end(Prohibit modification and deletion)
+/**面试的时候，用Solution 1_2 */
+
 // Solution 1: DFS
 // Solution 1_1: DFS without pruning, time limit exceed
 class Solution1_1 {
