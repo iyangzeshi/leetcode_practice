@@ -318,7 +318,6 @@ class Solution2 {
     
     public List<String> wordBreak(String s, List<String> wordDict) {
         List<String> result = new ArrayList<>();
-        
         //corner case
         if (s == null || s.length() == 0) {
             return result;

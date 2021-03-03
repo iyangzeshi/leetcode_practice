@@ -57,38 +57,104 @@ public class Leetcode0315CountOfSmallerNumbersAfterSelf{
     public static void main(String[] args) {
         Solution sol = new Leetcode0315CountOfSmallerNumbersAfterSelf().new Solution();
         // TO TEST
-        
-        System.out.println();
+        int[] nums = {-1};
+        List<Integer> res = sol.countSmaller(nums);
+        System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    
-    private int lowbit(int x) {
-        return x & (-x);
+    class Node {
+        int val;
+        int count;
+        int left_count;
+        Node left;
+        Node right;
+        public Node(int val) { this.val = val; this.count = 1; }
+        public int less_or_equal() { return count + left_count; }
     }
     
-    class FenwickTree {
+    public List<Integer> countSmaller(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        if (nums.length == 0) return ans;
+        int n = nums.length;
+        Node root = new Node(nums[n - 1]);
+        ans.add(0);
+        for (int i = n - 2; i >= 0; --i)
+            ans.add(insert(root, nums[i]));
+        Collections.reverse(ans);
+        return ans;
+    }
+    
+    private int insert(Node root, int val) {
+        if (root.val == val) {
+            ++root.count;
+            return root.left_count;
+        } else if (val < root.val) {
+            ++root.left_count;
+            if (root.left == null) {
+                root.left = new Node(val);
+                return 0;
+            }
+            return insert(root.left, val);
+        } else  {
+            if (root.right == null) {
+                root.right = new Node(val);
+                return root.less_or_equal();
+            }
+            return root.less_or_equal() + insert(root.right, val);
+        }
+    }
+}
+//leetcode submit region end(Prohibit modification and deletion)
+// Solution 1: binary index tree (Fenwick tree) T(n) = O(nlog(n)), S(n) = O(k)
+// k is the number of different numbers in the nums
+// 56 ms,击败了33.39% 的Java用户, 54.9 MB,击败了20.98% 的Java用户
+/*
+binary index tree
+先排序，得到数组sortedArray,
+
+用HashMap<Integer, Integer> key: rank, value: count来记录每个数字是第几大rank
+
+FenwickTree里面设置数组，记录rank和这个rank对应的数字，到当前位置出现的次数
+
+对于nums中的每个数字，找到这个数字的rank，把这个rank的count++，然后找到0 ~ rank - 1出现次数求和
+ */
+class Solution1 {
+    
+    public class FenwickTree {
         
-        private int[] sums;
+        private final int bit[];
         
         public FenwickTree(int n) {
-            sums = new int[n + 1];
+            bit = new int[n + 1];
         }
         
-        public void update(int i, int delta) {
-            while (i < sums.length) {
-                sums[i] += delta;
-                i += lowbit(i);
+        /*
+        return sum from array[1] to array[index], T(n) = O(lg(n))
+         */
+        public int query(int index) {
+            int res = 0;
+            for (int i = index; i > 0 ; i -= lowbit(i)) { // 边界是 i > 0
+                res += bit[i];
+            }
+            return res;
+        }
+        
+        /*
+        add delta to array[index], T(n) = O(lg(n))
+         */
+        public void update(int index, int delta) {
+            int len = bit.length;
+            for (int i = index; i < len; i+=lowbit(i)) { // 与查询相反, 边界是 i < len
+                bit[i] += delta;
             }
         }
         
-        public int query(int i) {
-            int sum = 0;
-            while (i > 0) {
-                sum += sums[i];
-                i -= lowbit(i);
-            }
-            return sum;
+        /*
+        return the lowest 1, T(n) = O(1)
+         */
+        private int lowbit(int index) {
+            return index & -index;
         }
         
     }
@@ -98,25 +164,27 @@ class Solution {
         Arrays.sort(sorted);
         Map<Integer, Integer> ranks = new HashMap<>();
         int rank = 0;
-        for (int i = 0; i < sorted.length; ++i) {
+        // write the number and its rank into hashMap
+        for (int i = 0; i < sorted.length; i++) {
             if (i == 0 || sorted[i] != sorted[i - 1]) {
                 ranks.put(sorted[i], ++rank);
             }
         }
         
         FenwickTree tree = new FenwickTree(ranks.size());
-        List<Integer> ans = new ArrayList<Integer>();
-        for (int i = nums.length - 1; i >= 0; --i) {
-            int sum = tree.query(ranks.get(nums[i]) - 1);
-            ans.add(tree.query(ranks.get(nums[i]) - 1));
-            tree.update(ranks.get(nums[i]), 1);
+        // amount of number smaller than num for every num in nums
+        List<Integer> res = new ArrayList<>();
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int num = nums[i];
+            rank = ranks.get(num);
+            int count = tree.query(rank - 1);
+            res.add(count);
+            tree.update(rank, 1);
         }
         
-        Collections.reverse(ans);
-        return ans;
+        Collections.reverse(res);
+        return res;
     }
     
 }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }
