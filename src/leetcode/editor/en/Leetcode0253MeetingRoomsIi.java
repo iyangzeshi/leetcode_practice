@@ -70,7 +70,7 @@ class Solution {
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-/*面试的时候，用Sotluion 1_2 */
+/*面试的时候，用Solution 1_2 */
 
 
 // Solution 1_1: interval打散成point进行排序
@@ -136,7 +136,7 @@ class Solution1_2 {
                 intervals[0] == null || intervals[0].length == 0) {
             return 0;
         }
-        Map<Integer, Integer> map = new TreeMap<>();
+        Map<Integer, Integer> map = new TreeMap<>(); // key - time, value - interval delta number
         for (int[] interval : intervals) {
             int start = interval[0];
             int end = interval[1];

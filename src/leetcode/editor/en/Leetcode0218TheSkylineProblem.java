@@ -140,10 +140,7 @@ class Solution {
         return res;
     }
 }
-
 //leetcode submit region end(Prohibit modification and deletion)
-
-
 // Solution 0: brute force traverse all points.
 // O(n * m), m is the farthest border of the building
 // O(n * m), m is the farthest border of the building， array's length out of bounds
@@ -263,7 +260,7 @@ class Solution1 {
 
 // Solution 2_1: TreeSet O(nlog(n))
 class Solution2_1 {
-    // Solution 2: TreeSet O(nlog(n))
+
     class IntegerComparator implements Comparator<Integer> {
 
         List<Node> list;
@@ -360,7 +357,7 @@ class Solution2_1 {
 
 // Solution 2_2: TreeMap O(nlog(n))
 class Solution2_2 {
-    // Solution 2_2: maxMap O(nlog(n))
+
     private class Node implements Comparable<Node> {
 
         int col;

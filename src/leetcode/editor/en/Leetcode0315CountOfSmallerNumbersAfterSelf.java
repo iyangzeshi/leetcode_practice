@@ -123,10 +123,10 @@ class Solution1 {
     
     public class FenwickTree {
         
-        private final int bit[];
+        private final int preSum[];
         
         public FenwickTree(int n) {
-            bit = new int[n + 1];
+            preSum = new int[n + 1];
         }
         
         /*
@@ -135,7 +135,7 @@ class Solution1 {
         public int query(int index) {
             int res = 0;
             for (int i = index; i > 0 ; i -= lowbit(i)) { // 边界是 i > 0
-                res += bit[i];
+                res += preSum[i];
             }
             return res;
         }
@@ -144,9 +144,9 @@ class Solution1 {
         add delta to array[index], T(n) = O(lg(n))
          */
         public void update(int index, int delta) {
-            int len = bit.length;
+            int len = preSum.length;
             for (int i = index; i < len; i+=lowbit(i)) { // 与查询相反, 边界是 i < len
-                bit[i] += delta;
+                preSum[i] += delta;
             }
         }
         

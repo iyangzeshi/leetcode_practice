@@ -1667,6 +1667,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0307RangeSumQueryMutable.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0307RangeSumQueryMutable.java" />
+              <option name="questionId" value="307" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0310MinimumHeightTrees.java">
           <value>
             <LeetcodeEditor>
@@ -1816,6 +1824,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0360SortTransformedArray.java" />
               <option name="questionId" value="360" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0364NestedListWeightSumIi.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0364NestedListWeightSumIi.java" />
+              <option name="questionId" value="364" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -2784,6 +2800,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1650LowestCommonAncestorOfABinaryTreeIii.java" />
               <option name="questionId" value="1790" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1669MergeInBetweenLinkedLists.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1669MergeInBetweenLinkedLists.java" />
+              <option name="questionId" value="1765" />
             </LeetcodeEditor>
           </value>
         </entry>

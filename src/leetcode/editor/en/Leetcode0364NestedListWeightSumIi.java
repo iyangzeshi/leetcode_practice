@@ -102,10 +102,9 @@ class Solution {
 		return sum;
 	}
 }
-
 //leetcode submit region end(Prohibit modification and deletion)
+// Solution 1: DFS, 每增加一级，都加上原来所有数字的总和
 class Solution1 {
-	// DFS, 每增加一级，都加上原来所有数字的总和
 	public int depthSumInverse(List<NestedInteger> nestedList) {
 		
 		Queue<NestedInteger> queue = new LinkedList<>();
@@ -131,12 +130,14 @@ class Solution1 {
 		return sum;
 	}
 }
+// Solution 2:
+/*
+ DFS, 按照LC339的思路算出339的答案weightedSum，
+ 然后所有数字加起来*层数 = sum * level
+ sum * level - 按照LC339的思路算出339的答案weightedSum
+ */
 class Solution2 {
-	/*
-	 DFS, 按照LC339的思路算出339的答案weightedSum，
-	 然后所有数字加起来*层数 = sum * level
-	 sum * level - 按照LC339的思路算出339的答案weightedSum
-	 */
+	
 	public int depthSumInverse(List<NestedInteger> nestedList) {
 		
 		Queue<NestedInteger> queue = new LinkedList<>();
@@ -167,29 +168,30 @@ class Solution2 {
 		return sum * level - weightedSum;
 	}
 }
-	abstract class NestedInteger {
-		
-		// Constructor initializes an empty nested list.
-		public NestedInteger() { };
-		
-		// Constructor initializes a single integer.
-		public NestedInteger(int value) { };
-		
-		// @return true if this NestedInteger holds a single integer, rather than a nested list.
-		public abstract boolean isInteger();
-		
-		// @return the single integer that this NestedInteger holds, if it holds a single integer
-		// Return null if this NestedInteger holds a nested list
-		public abstract Integer getInteger();
-		
-		// Set this NestedInteger to hold a single integer.
-		public abstract void setInteger(int value);
-		
-		// Set this NestedInteger to hold a nested list and adds a nested integer to it.
-		public abstract void add(NestedInteger ni);
-		
-		// @return the nested list that this NestedInteger holds, if it holds a nested list
-		// Return null if this NestedInteger holds a single integer
-		public abstract List<NestedInteger> getList();
-	}
+
+abstract class NestedInteger {
+	
+	// Constructor initializes an empty nested list.
+	public NestedInteger() { };
+	
+	// Constructor initializes a single integer.
+	public NestedInteger(int value) { };
+	
+	// @return true if this NestedInteger holds a single integer, rather than a nested list.
+	public abstract boolean isInteger();
+	
+	// @return the single integer that this NestedInteger holds, if it holds a single integer
+	// Return null if this NestedInteger holds a nested list
+	public abstract Integer getInteger();
+	
+	// Set this NestedInteger to hold a single integer.
+	public abstract void setInteger(int value);
+	
+	// Set this NestedInteger to hold a nested list and adds a nested integer to it.
+	public abstract void add(NestedInteger ni);
+	
+	// @return the nested list that this NestedInteger holds, if it holds a nested list
+	// Return null if this NestedInteger holds a single integer
+	public abstract List<NestedInteger> getList();
+}
 }
