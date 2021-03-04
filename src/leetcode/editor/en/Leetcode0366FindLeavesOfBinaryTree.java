@@ -96,7 +96,9 @@ class Solution {
             return -1;
         }
         // 取左右subtree的 max作为current的 h
-        int height = 1 + Math.max(dfs(node.left, res), dfs(node.right, res));
+        int leftHeight = dfs(node.left, res);
+        int rightHeight = dfs(node.right, res);
+        int height = 1 + Math.max(leftHeight, rightHeight);
         /*
          因为每一层都要有一个list，所以当不够就新增
          create a new list to store this level node’s val
