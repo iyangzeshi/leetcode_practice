@@ -45,7 +45,9 @@
 // Related Topics Depth-first Search Breadth-first Search
 
 package leetcode.editor.en;
-import java.util.*;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Leetcode0542Zero1Matrix {
     // Java: 01-matrix
@@ -55,45 +57,53 @@ public class Leetcode0542Zero1Matrix {
         
         System.out.println();
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-        private final int[][] DIRECTIONS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
     
-        public int[][] updateMatrix(int[][] matrix) {
-            int rows = matrix.length;
-            int cols = matrix[0].length;
-            int[][] res = new int[rows][cols];
-        
-            Queue<Integer> queue = new LinkedList<>();
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    if (matrix[i][j] == 0) {
-                        queue.offer(i * cols + j);
-                    }
-                }
-            }
-        
-            int minLen = 1;
-            while (!queue.isEmpty()) {
-                int size = queue.size();
-                while(size-- > 0) {
-                    int cur = queue.poll();
-                    int row = cur / cols;
-                    int col = cur % cols;
-                    for (int[] dir: DIRECTIONS) {
-                        int r = row + dir[0];
-                        int c = col + dir[1];
-                        if (r >= 0 && r < rows && c >= 0 && c < cols && matrix[r][c] == 1 && res[r][c] == 0) {
-                            queue.offer(r * cols + c);
-                            res[r][c] = minLen;
-                        }
-                    }
-                }
-                minLen++;
-            }
-            return res;
+    private final int[][] DIRECTIONS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    
+    public int[][] updateMatrix(int[][] matrix) {
+        // corner case
+        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) {
+            return null;
         }
+        
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int[][] res = new int[rows][cols];
+        
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == 0) {
+                    queue.offer(i * cols + j);
+                }
+            }
+        }
+        
+        int minLen = 1;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            while (size-- > 0) {
+                int cur = queue.poll();
+                int row = cur / cols;
+                int col = cur % cols;
+                for (int[] dir : DIRECTIONS) {
+                    int r = row + dir[0];
+                    int c = col + dir[1];
+                    if (r >= 0 && r < rows && c >= 0 && c < cols && matrix[r][c] == 1
+                            && res[r][c] == 0) {
+                        queue.offer(r * cols + c);
+                        res[r][c] = minLen;
+                    }
+                }
+            }
+            minLen++;
+        }
+        return res;
     }
+    
+}
 
 //leetcode submit region end(Prohibit modification and deletion)
 
