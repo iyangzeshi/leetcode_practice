@@ -68,7 +68,7 @@ class Solution {
         int len1 = nums1.length;
         int len2 = nums2.length;
         PriorityQueue<Cell> minHeap = new PriorityQueue<>(
-                (c1, c2) -> nums1[c1.i] + nums2[c1.j] - (nums1[c2.i] + nums2[c2.j]));
+                Comparator.comparingInt(c -> nums1[c.i] + nums2[c.j]));
         HashSet<Cell> visited = new HashSet<>();
         minHeap.offer(new Cell(0, 0));
         
@@ -228,7 +228,7 @@ class Solution2 {
         int len1 = nums1.length;
         int len2 = nums2.length;
         PriorityQueue<Cell> minHeap = new PriorityQueue<>(
-                (c1, c2) -> nums1[c1.i] + nums2[c1.j] - (nums1[c2.i] + nums2[c2.j]));
+                Comparator.comparingInt(c -> nums1[c.i] + nums2[c.j]));
         HashSet<Cell> visited = new HashSet<>();
         minHeap.offer(new Cell(0, 0));
         

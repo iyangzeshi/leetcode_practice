@@ -87,10 +87,9 @@ class Solution {
 		}
 		Stack<TreeNode> lStack = new Stack<>(); // left stack
 		Stack<TreeNode> rStack = new Stack<>(); // right stack
-		TreeNode cur = root;
 		// initialize left stack
-		initializeLeftStack(lStack, cur);
-		initializeRightStack(rStack, cur);
+		initializeLeftStack(lStack, root);
+		initializeRightStack(rStack, root);
 
 		while (!lStack.isEmpty() && !rStack.isEmpty()) {
 			TreeNode left = lStack.peek();
@@ -151,7 +150,7 @@ class Solution {
 class Solution1 {
 
 	public boolean findTarget(TreeNode root, int k) {
-		Set<Integer> set = new HashSet();
+		Set<Integer> set = new HashSet<>();
 		return find(root, k, set);
 	}
 
@@ -175,7 +174,7 @@ class Solution1 {
 class Solution2 {
 	
 	public boolean findTarget(TreeNode root, int k) {
-		List<Integer> list = new ArrayList();
+		List<Integer> list = new ArrayList<>();
 		inorder(root, list);
 		int l = 0, r = list.size() - 1;
 		while (l < r) {
@@ -210,10 +209,9 @@ class Solution3 {
 		}
 		Stack<TreeNode> lStack = new Stack<>(); // left stack
 		Stack<TreeNode> rStack = new Stack<>(); // right stack
-		TreeNode cur = root;
 		// initialize left stack
-		initializeLeftStack(lStack, cur);
-		initializeRightStack(rStack, cur);
+		initializeLeftStack(lStack, root);
+		initializeRightStack(rStack, root);
 
 		while (!lStack.isEmpty() && !rStack.isEmpty()) {
 			TreeNode left = lStack.peek();

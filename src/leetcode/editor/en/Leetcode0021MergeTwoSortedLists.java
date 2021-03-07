@@ -59,8 +59,7 @@ class Solution {
             cur = cur.next;
         }
         cur.next = l1 == null ? l2: l1;
-        ListNode result = dummy.next;
-        return result;
+        return dummy.next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

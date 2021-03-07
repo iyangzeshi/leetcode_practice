@@ -79,7 +79,7 @@ class Solution {
         }
         HashMap<Integer, Boolean>[] mem = new HashMap[stones.length];
         for (int i = 0; i < stones.length; i++) {
-            mem[i] = new HashMap<Integer, Boolean>();
+            mem[i] = new HashMap<>();
         }
         
         return dfs(stones, 1, 1, mem);
@@ -185,7 +185,7 @@ class Solution1_2 {
         }
         HashMap<Integer, Boolean>[] mem = new HashMap[stones.length];
         for (int i = 0; i < stones.length; i++) {
-            mem[i] = new HashMap<Integer, Boolean>();
+            mem[i] = new HashMap<>();
         }
         
         return dfs(stones, 1, 1, mem);

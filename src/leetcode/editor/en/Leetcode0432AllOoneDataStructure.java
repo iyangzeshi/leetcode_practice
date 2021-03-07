@@ -51,27 +51,27 @@ public class Leetcode0432AllOoneDataStructure{
 //leetcode submit region begin(Prohibit modification and deletion)
 /*class AllOne {
 
-    *//** Initialize your data structure here. *//*
+    *//* Initialize your data structure here. *//*
     public AllOne() {
         
     }
     
-    *//** Inserts a new key <Key> with value 1. Or increments an existing key by 1. *//*
+    *//* Inserts a new key <Key> with value 1. Or increments an existing key by 1. *//*
     public void inc(String key) {
         
     }
     
-    *//** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. *//*
+    *//* Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. *//*
     public void dec(String key) {
         
     }
     
-    *//** Returns one of the keys with maximal value. *//*
+    *//* Returns one of the keys with maximal value. *//*
     public String getMaxKey() {
         return null;
     }
     
-    *//** Returns one of the keys with Minimal value. *//*
+    *//* Returns one of the keys with Minimal value. *//*
     public String getMinKey() {
         return null;
     }

@@ -65,7 +65,7 @@ class Solution {
         }
         path.append(word.charAt(index));
         dfs(index + 1, 0, path, word, res);
-        path.setLength(len);;
+        path.setLength(len);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

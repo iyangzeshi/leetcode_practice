@@ -46,6 +46,7 @@ public class Leetcode0360SortTransformedArray{
 //leetcode submit region begin(Prohibit modification and deletion)
 // T(n) = O(n), S(n) = O(n)
 class Solution {
+    
     public int[] sortTransformedArray(int[] nums, int a, int b, int c) {
         int[] res = new int[nums.length];
         // corner case,实际上是线性函数
@@ -62,8 +63,7 @@ class Solution {
             return b >= 0 ? res : reverse(res);
         }
         
-        
-        float axis = axis = (float) -b / (2 * a);
+        float axis = (float) -b / (2 * a);
         int start = 0;
         int end = len - 1;
         int index = len - 1;
@@ -96,6 +96,7 @@ class Solution {
     private int calulate(int num, int a, int b, int c) {
         return a * num * num + b * num + c;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

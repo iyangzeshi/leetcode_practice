@@ -55,8 +55,6 @@ public class Solution extends VersionControl {
             else left = pivot;
         }
         return isBadVersion(left) ? left: right;
-
-
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

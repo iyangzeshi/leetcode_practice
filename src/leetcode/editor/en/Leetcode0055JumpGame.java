@@ -125,8 +125,7 @@ class Solution2 {
     
     public boolean canJump(int[] nums) {
         int index = 0;
-        boolean result = canJump(nums, index);
-        return result;
+        return canJump(nums, index);
     }
     
     public boolean canJump(int[] nums, int index) {

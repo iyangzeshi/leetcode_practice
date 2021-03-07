@@ -44,14 +44,14 @@ public class Leetcode0007ReverseInteger{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int reverse(int x) {
-        long res = 0;
+        long res;
         // corner case
         if (x == 0) {
             return 0;
         } else if (x < 0) {
-            res = -reverseLong((long) -x);
+            res = -reverseLong(-x);
         } else {
-            res = reverseLong((long) x);
+            res = reverseLong(x);
         }
         if (res < Integer.MIN_VALUE || res > Integer.MAX_VALUE) {
             return 0;
@@ -96,7 +96,7 @@ class Solution1 {
             }
             res += num;
         }
-        return (int) res;
+        return res;
     }
 }
 
@@ -104,14 +104,14 @@ class Solution1 {
 // 1 ms,击败了100.00% 的Java用户, 36.4 MB,击败了33.46% 的Java用户
 class Solution2 {
     public int reverse(int x) {
-        long res = 0;
+        long res;
         // corner case
         if (x == 0) {
             return 0;
         } else if (x < 0) {
-            res = -reverseLong((long) -x);
+            res = -reverseLong(-x);
         } else {
-            res = reverseLong((long) x);
+            res = reverseLong(x);
         }
         if (res < Integer.MIN_VALUE || res > Integer.MAX_VALUE) {
             return 0;

@@ -108,11 +108,11 @@ class Solution1 {
         Stack<TreeNode> stackEven = new Stack<>(); // from right to left
 
         stackOdd.push(root); // odd level
-        List<Integer> list = new ArrayList<>();
+        // List<Integer> list = new ArrayList<>();
         TreeNode temp;
         
         while (!stackOdd.isEmpty() || !stackEven.isEmpty()) {
-            list = new ArrayList<>();
+            List<Integer> list = new ArrayList<>();
             while (!stackOdd.isEmpty()){
                 temp = stackOdd.pop();
                 list.add(temp.val);

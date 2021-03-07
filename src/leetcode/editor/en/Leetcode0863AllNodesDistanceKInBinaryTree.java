@@ -101,7 +101,7 @@ class Solution {
         buildGraph(null, root, childToParent);
         // BFS
         Queue<TreeNode> queue = new LinkedList<>();
-        Set<TreeNode> visited = new HashSet();
+        Set<TreeNode> visited = new HashSet<>();
         queue.offer(target);
         visited.add(target);
         int minLen = 0;

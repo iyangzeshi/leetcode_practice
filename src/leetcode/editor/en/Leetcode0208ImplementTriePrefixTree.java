@@ -96,12 +96,12 @@ class Trie {
 }
 
 
-/**
- * Your Trie object will be instantiated and called as such:
- * Trie obj = new Trie();
- * obj.insert(word);
- * boolean param_2 = obj.search(word);
- * boolean param_3 = obj.startsWith(prefix);
+/*
+  Your Trie object will be instantiated and called as such:
+  Trie obj = new Trie();
+  obj.insert(word);
+  boolean param_2 = obj.search(word);
+  boolean param_3 = obj.startsWith(prefix);
  */
 //leetcode submit region end(Prohibit modification and deletion)
 

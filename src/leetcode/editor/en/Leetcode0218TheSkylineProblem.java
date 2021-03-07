@@ -61,7 +61,7 @@ public class Leetcode0218TheSkylineProblem{
 //leetcode submit region begin(Prohibit modification and deletion)
 private enum Directions {
     left,
-    right;
+    right
 }
 class Solution {
     // Solution 2_2: maxMap O(nlog(n))

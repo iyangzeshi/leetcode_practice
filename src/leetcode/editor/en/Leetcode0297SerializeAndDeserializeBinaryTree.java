@@ -71,7 +71,7 @@ public class Codec {
         while(!queue.isEmpty()) {
             TreeNode temp = queue.poll();
             if (temp !=null) {
-                sb.append(temp.val + ",");
+                sb.append(temp.val).append(",");
                 queue.offer(temp.left);
                 queue.offer(temp.right);
             }

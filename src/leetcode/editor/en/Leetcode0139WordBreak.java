@@ -69,7 +69,7 @@ class Solution {
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[s.length()];
         queue.offer(0);
-        /**
+        /*
          时间复杂度降低到O(n^2)的关键
          visited[i] == true，表示substring(i, length)被检测过但是不能wordBreak
          如果已经被就检查过，就不需要再被检查了，后面更新的结果应该已经在queue里面了
@@ -102,18 +102,13 @@ class Solution1_1 {
 
         Set<String> dict = new HashSet<>(wordDict);
         Boolean[] memo = new Boolean[s.length()];
-        boolean res = dfs(s, 0, 0, dict);
-        return res;
+        return dfs(s, 0, 0, dict);
     }
 
     private boolean dfs(String s, int start, int end, Set<String> dict) {
         // base case, success case
         if (end == s.length()) {
-            if (start == end) { // success case
-                return true;
-            } else { // failure case
-                return false;
-            }
+            return start == end;
         }
         // general case
         boolean res1 = false;
@@ -133,18 +128,13 @@ class Solution1_2 {
 
         Set<String> dict = new HashSet<>(wordDict);
         Boolean[] memo = new Boolean[s.length()];
-        boolean res = dfs(s, 0, 0, dict, memo);
-        return res;
+        return dfs(s, 0, 0, dict, memo);
     }
 
     private boolean dfs(String s, int start, int end, Set<String> dict, Boolean[] memo) {
         // base case, success case
         if (end == s.length()) {
-            if (start == end) { // success case
-                return true;
-            } else { // failure case
-                return false;
-            }
+            return start == end;
         }
         if (memo[start] != null) { // 查表
             return memo[start];
@@ -254,7 +244,7 @@ class Solution3_2 {
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[s.length()];
         queue.offer(0);
-        /**
+        /*
          时间复杂度降低到O(n^2)的关键
          visited[i] == true，表示substring(i, length)被检测过但是不能wordBreak
          如果已经被就检查过，就不需要再被检查了，后面更新的结果应该已经在queue里面了

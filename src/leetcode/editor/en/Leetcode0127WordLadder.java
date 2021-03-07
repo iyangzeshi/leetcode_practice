@@ -61,7 +61,7 @@ public class Leetcode0127WordLadder {
 		String beginWord = "hit";
 		String endWord = "cog";
 		String[] words = {"hot", "dot", "dog", "lot", "log", "cog"};
-		List<String> wordList = new ArrayList<String>(Arrays.asList(words));
+		List<String> wordList = new ArrayList<>(Arrays.asList(words));
 		int result = sol.ladderLength(beginWord, endWord, wordList);
 		System.out.println(result);
 	}
@@ -151,7 +151,7 @@ class Solution1 {
 			return 0;
 		}
 		
-		Queue<String> queue = new LinkedList<String>();
+		Queue<String> queue = new LinkedList<>();
 		queue.offer(beginWord);
 		int minDis = 1; // the distance from begin to element polled
 		while(!queue.isEmpty()) {

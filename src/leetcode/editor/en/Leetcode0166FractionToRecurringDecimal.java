@@ -53,10 +53,10 @@ class Solution {
             fraction.append("-");
         }
         // Convert to Long or else abs(-2147483648) -2^31 overflows
-        Long dividend = Math.abs(Long.valueOf(numerator));
-        Long divisor = Math.abs(Long.valueOf(denominator));
-        fraction.append(String.valueOf(dividend / divisor));
-        Long remainder = dividend % divisor;
+        long dividend = Math.abs((long)(numerator));
+        long divisor = Math.abs((long)(denominator));
+        fraction.append(dividend / divisor);
+        long remainder = dividend % divisor;
         if (remainder == 0) {
             return fraction.toString();
         }
@@ -70,7 +70,7 @@ class Solution {
             }
             map.put(remainder, fraction.length());
             remainder *= 10;
-            fraction.append(String.valueOf(remainder / divisor));
+            fraction.append(remainder / divisor);
             remainder %= divisor;
         }
         return fraction.toString();

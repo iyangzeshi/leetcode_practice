@@ -51,7 +51,7 @@ class Solution {
         if (nums == null) {
             return result;
         }
-        getResult(nums, 0, new ArrayList<Integer>(), result);
+        getResult(nums, 0, new ArrayList<>(), result);
         
         return result;
         
@@ -106,7 +106,7 @@ class Solution1 {
         ArrayList<Integer> temp = new ArrayList<>();
         int size;
         numberQueue.offer(new ArrayList<>(temp));
-        indexQueue.offer(new ArrayList<Integer>() {{
+        indexQueue.offer(new ArrayList<>() {{
                              add(-1);
                          }}
         );
@@ -118,15 +118,15 @@ class Solution1 {
                 ArrayList<Integer> indexList = indexQueue.poll();
                 int index = indexList.get(indexList.size() - 1);
                 temp = numberQueue.poll();
-                result.add(new ArrayList(temp));
+                result.add(new ArrayList<>(temp));
                 //找到poll出来的结果里面最后一个数字的index，下面的从index + 1的数字开始加
                 for (int i = index + 1; i < length; i++) {
                     temp.add(nums[i]);
-                    numberQueue.offer(new ArrayList(temp));
+                    numberQueue.offer(new ArrayList<>(temp));
                     temp.remove(temp.size() - 1);
 
                     indexList.add(i);
-                    indexQueue.offer(new ArrayList(indexList));
+                    indexQueue.offer(new ArrayList<>(indexList));
                     indexQueue.remove(indexQueue.size() - 1);
                 }
                 size--;
@@ -172,7 +172,7 @@ class Solution2 {
 
         int level = 0;
 
-        queue.offer(new ArrayList(temp));
+        queue.offer(new ArrayList<>(temp));
         // 或者用 (ArrayList) temp.clone()， temp.clone()是shallow copy,返回成Object，再强制转换成ArrayList
         int size = 1;
 
@@ -182,15 +182,14 @@ class Solution2 {
 
             while (size > 0) {
                 temp = queue.poll();
-                queue.offer(new ArrayList(temp));
+                queue.offer(new ArrayList<>(temp));
                 temp.add(nums[level]);
-                queue.offer(new ArrayList(temp));
+                queue.offer(new ArrayList<>(temp));
                 size--;
             }
             level++;
         }
-        res = (List) queue;
-        return res;
+        return (List) queue;
     }
 }
 
@@ -214,7 +213,7 @@ class Solution3 {
             return result;
         }
         result.add(new ArrayList<>());
-        dfs(0, new ArrayList<Integer>(), nums, result);
+        dfs(0, new ArrayList<>(), nums, result);
         return result;
     }
 
@@ -230,7 +229,6 @@ class Solution3 {
             // wall
             list.remove(list.size() - 1);
         }
-        return;
     }
 }
 
@@ -253,7 +251,7 @@ class Solution4_1 {
         if (nums == null) {
             return result;
         }
-        dfs(0, nums, new ArrayList<Integer>(), result);
+        dfs(0, nums, new ArrayList<>(), result);
 
         return result;
     }
@@ -300,7 +298,7 @@ class Solution4_2 {
         if (nums == null) {
             return result;
         }
-        getResult(nums, 0, new ArrayList<Integer>(), result);
+        getResult(nums, 0, new ArrayList<>(), result);
 
         return result;
 

@@ -57,7 +57,7 @@ public class Leetcode0516LongestPalindromicSubsequence{
 class Solution {
     public int longestPalindromeSubseq(String s) {
         int len = s.length();
-        int palLen[][] = new int[len][len]; // longest palindromic subsequence’s length in s[i ~ j]
+        int[][] palLen = new int[len][len]; // longest palindromic subsequence’s length in s[i ~ j]
         // initialization
         for (int i = 0; i < len; i++) {
             palLen[i][i] = 1;

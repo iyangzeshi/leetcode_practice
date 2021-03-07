@@ -68,7 +68,7 @@ class Solution {
 
 		public MyQueue(int k) {
 			this.k = k;
-			map = new HashMap<Character, Node>();
+			map = new HashMap<>();
 			head = new Node('\0', 0);
 			tail = new Node('\0', 0);
 			head.next = tail;
@@ -197,7 +197,7 @@ class Solution2_1 {
 
 		public MyQueue(int k) {
 			this.k = k;
-			map = new HashMap<Character, Node>();
+			map = new HashMap<>();
 			head = new Node('\0', 0);
 			tail = new Node('\0', 0);
 			head.next = tail;

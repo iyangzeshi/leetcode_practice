@@ -56,24 +56,6 @@ class Solution {
         int peakIndex = 0;
         int peakValue = 1;
         for (int i = 1; i < len; i++) {
-            /*if (ratings[i] > ratings[i - 1]) {
-                curCandy++;
-                sum += curCandy;
-                peakIndex = i;
-                peakValue = curCandy;
-            } else if (ratings[i] == ratings[i - 1]) {
-                curCandy = 1;
-                sum += curCandy;
-                peakIndex = i;
-                peakValue = curCandy;
-            } else {
-                curCandy = 1;
-                if (peakValue <= i - peakIndex) {
-                    sum = sum + curCandy + (i - peakIndex);
-                } else {
-                    sum = sum + curCandy + (i - peakIndex - 1);
-                }
-            }*/
             if (ratings[i] >= ratings[i - 1]) {
                 if (ratings[i] > ratings[i - 1]) {
                     curCandy++;

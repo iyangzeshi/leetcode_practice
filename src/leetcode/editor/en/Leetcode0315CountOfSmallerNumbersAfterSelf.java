@@ -123,7 +123,7 @@ class Solution1 {
     
     public class FenwickTree {
         
-        private final int sums[];
+        private final int[] sums;
         
         public FenwickTree(int n) {
             sums = new int[n + 1];

@@ -73,21 +73,17 @@ class Solution {
 
         return fromCurrent + fromLeft + fromRight;
     }
-
-    /**
-     * @param root:
-     * @param sum
-     * @return
-     */
+    
     private int pathSumFrom(TreeNode root, int sum) {
         //base case
         if (root == null) {
             return 0;
         }
         //general case
-        /**
+        /*
          if (root.val == sum) {
-         return 1 + pathSumFrom(root.left, sum - root.val) + pathSumFrom(root.right, sum - root.val);
+         return 1 + pathSumFrom(root.left, sum - root.val) + pathSumFrom(root.right, sum - root
+         .val);
          }
          else {
          return pathSumFrom(root.left, sum - root.val) + pathSumFrom(root.right, sum - root.val);

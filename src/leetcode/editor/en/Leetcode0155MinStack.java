@@ -77,7 +77,6 @@ class MinStack {
 
     public void pop() {
         if (stack.isEmpty()) {
-            return;
         }
         else {
             minStack.pop();
@@ -99,22 +98,22 @@ class MinStack {
     }
 }
 
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(x);
- * obj.pop();
- * int param_3 = obj.top();
- * int param_4 = obj.getMin();
+/*
+  Your MinStack object will be instantiated and called as such:
+  MinStack obj = new MinStack();
+  obj.push(x);
+  obj.pop();
+  int param_3 = obj.top();
+  int param_4 = obj.getMin();
  */
 
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(x);
- * obj.pop();
- * int param_3 = obj.top();
- * int param_4 = obj.getMin();
+/*
+  Your MinStack object will be instantiated and called as such:
+  MinStack obj = new MinStack();
+  obj.push(x);
+  obj.pop();
+  int param_3 = obj.top();
+  int param_4 = obj.getMin();
  */
 //leetcode submit region end(Prohibit modification and deletion)
 

@@ -45,7 +45,7 @@ class Solution {
         Set<Integer> set = new HashSet<>();
 
         for (int n: nums) {
-            if (set.add(n) == false) {
+            if (!set.add(n)) {
                 return true;
             }
         }

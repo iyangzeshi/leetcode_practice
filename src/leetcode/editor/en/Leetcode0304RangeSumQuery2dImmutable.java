@@ -64,10 +64,10 @@ class NumMatrix {
     }
 }
 
-/**
- * Your NumMatrix object will be instantiated and called as such:
- * NumMatrix obj = new NumMatrix(matrix);
- * int param_1 = obj.sumRegion(row1,col1,row2,col2);
+/*
+  Your NumMatrix object will be instantiated and called as such:
+  NumMatrix obj = new NumMatrix(matrix);
+  int param_1 = obj.sumRegion(row1,col1,row2,col2);
  */
 //leetcode submit region end(Prohibit modification and deletion)
 

@@ -30,7 +30,13 @@
 
 package leetcode.editor.en;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 // 2020-07-26 11:59:33
 // Zeshi Yang
 public class Leetcode0347TopKFrequentElements{
@@ -43,51 +49,50 @@ public class Leetcode0347TopKFrequentElements{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    
     public List<Integer> topKFrequent(int[] nums, int k) {
         List<Integer> result = new ArrayList<>();
         // corner cases
-        if (nums == null || nums.length == 0 || k <=0) {
+        if (nums == null || nums.length == 0 || k <= 0) {
             return result;
         }
-
-
+        
         Map<Integer, Integer> count = new HashMap<>();
-        for (int i: nums) {
-            if (count.containsKey(i) == false) {
+        for (int i : nums) {
+            if (!count.containsKey(i)) {
                 count.put(i, 1);
-            }
-            else {
+            } else {
                 count.put(i, count.get(i) + 1);
             }
         }
-
-        PriorityQueue<Integer> heap = new PriorityQueue<>((n1, n2) -> (count.get(n1) - count.get(n2))); // min heap
-
-        for (int i: count.keySet()) {
+        
+        PriorityQueue<Integer> heap = new PriorityQueue<>(
+                Comparator.comparingInt(count::get)); // min heap
+        
+        for (int i : count.keySet()) {
             if (heap.size() < k) {
                 heap.add(i);
-            }
-            else if (count.get(i) > count.get(heap.peek())) {
+            } else if (count.get(i) > count.get(heap.peek())) {
                 heap.poll();
                 heap.add(i);
-            }
-            else {
+            } else {
                 continue;
             }
         }
-
-        while (heap.isEmpty() == false) {
+        
+        while (!heap.isEmpty()) {
             result.add(heap.poll());
         }
         Collections.reverse(result);
 
-        /**
+        /*
          while (heap.isEmpty() == false) {
          result.add(0, heap.poll());新来的数字加在头上也可以
          }
          */
         return result;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

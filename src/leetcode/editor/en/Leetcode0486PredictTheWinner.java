@@ -75,9 +75,9 @@ class Solution {
             }
         }
         int sum = 0;
-	    for (int i = 0; i < len; i++) {
-		    sum += nums[i];
-	    }
+        for (int num : nums) {
+            sum += num;
+        }
 	    return 2 * dp[0][len - 1] >= sum;
     }
 }

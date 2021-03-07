@@ -48,6 +48,7 @@
 package leetcode.editor.en;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 // 2020-09-08 18:49:29
@@ -67,7 +68,7 @@ class Solution {
     public int[][] kClosest(int[][] points, int K) {
         int[][] res = new int[K][2];
         PriorityQueue<int[]> minHeap =
-                new PriorityQueue<>((o1, o2) -> squareDistance(o1) - squareDistance(o2));
+                new PriorityQueue<>(Comparator.comparingInt(this::squareDistance));
         minHeap.addAll(Arrays.asList(points));
         for (int i = 0; i < K; i++) {
             res[i] = minHeap.poll();
@@ -88,7 +89,7 @@ class Solution1 {
     public int[][] kClosest(int[][] points, int K) {
         int[][] res = new int[K][2];
         PriorityQueue<int[]> minHeap =
-                new PriorityQueue<>((o1, o2) -> squareDistance(o1) - squareDistance(o2));
+                new PriorityQueue<>(Comparator.comparingInt(this::squareDistance));
         minHeap.addAll(Arrays.asList(points));
         for (int i = 0; i < K; i++) {
             res[i] = minHeap.poll();

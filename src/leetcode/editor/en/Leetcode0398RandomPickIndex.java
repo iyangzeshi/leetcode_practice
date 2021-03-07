@@ -69,10 +69,10 @@ class Solution {
 	}
 }
 
-/**
- * Your Solution object will be instantiated and called as such:
- * Solution obj = new Solution(nums);
- * int param_1 = obj.pick(target);
+/*
+  Your Solution object will be instantiated and called as such:
+  Solution obj = new Solution(nums);
+  int param_1 = obj.pick(target);
  */
 //leetcode submit region end(Prohibit modification and deletion)
 

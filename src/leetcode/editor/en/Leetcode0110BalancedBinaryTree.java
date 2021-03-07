@@ -76,11 +76,8 @@ class Solution {
             return true;
         }
         int result =  getHeight(root);
-        if (result == -1) {
-            return false;
-        }
-        return true;
-
+        return result != -1;
+    
     }
     private int getHeight(TreeNode root) {
         if (root == null) {
@@ -153,11 +150,8 @@ class Solution2 {
             return true;
         }
         int result =  getHeight(root);
-        if (result == -1) {
-            return false;
-        }
-        return true;
-
+        return result != -1;
+    
     }
     private int getHeight(TreeNode root) {
         if (root == null) {

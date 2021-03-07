@@ -39,8 +39,7 @@ class Solution {
             n >>= 1;
             cnt++;
         }
-        int res = m << cnt;
-        return res;
+        return m << cnt;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

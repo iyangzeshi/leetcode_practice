@@ -71,8 +71,7 @@ class Solution {
         for (int i = 0; i < length; i++) {
             map.put(post[i], i);
         }
-        TreeNode root = buildTree(pre, 0, length - 1, post, 0, length - 1, map);
-        return root;
+        return buildTree(pre, 0, length - 1, post, 0, length - 1, map);
     }
 
     private TreeNode buildTree(int[] pre, int preStart, int preEnd,
@@ -114,8 +113,7 @@ class Solution1 {
         for (int i = 0; i < length; i++) {
             map.put(post[i], i);
         }
-        TreeNode root = buildTree(pre, 0, length - 1, post, 0, length - 1, map);
-        return root;
+        return buildTree(pre, 0, length - 1, post, 0, length - 1, map);
     }
 
     private TreeNode buildTree(int[] pre, int preStart, int preEnd,

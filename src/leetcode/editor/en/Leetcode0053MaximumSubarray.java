@@ -42,7 +42,7 @@ class Solution {
         int max = nums[0];
 
         for (int i = 1; i < length; i++) {
-            result[i] = nums[i] + (result[i - 1] < 0 ? 0: result[i - 1]);
+            result[i] = nums[i] + (Math.max(result[i - 1], 0));
             max = Math.max(max, result[i]);
         }
 

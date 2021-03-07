@@ -126,7 +126,7 @@ class Solution {
                 if (cur.left == null && cur.right == null) {
                     return cur.val;
                 }
-                List<TreeNode> neighbors = new ArrayList<TreeNode>();
+                List<TreeNode> neighbors = new ArrayList<>();
                 if (cur.left != null && !visited.contains(cur.left)) {
                     neighbors.add(cur.left);
                 }
@@ -158,7 +158,7 @@ class Solution {
             parentMap.put(left, root);
             if (getParentTilTarget(left, k, parentMap, target)) {
                 return true;
-            };
+            }
         }
         if (root.right != null) {
             TreeNode right = root.right;
@@ -260,7 +260,7 @@ class Solution2 {
                 if (cur.left == null && cur.right == null) {
                     return cur.val;
                 }
-                List<TreeNode> neighbors = new ArrayList<TreeNode>();
+                List<TreeNode> neighbors = new ArrayList<>();
                 if (cur.left != null && !visited.contains(cur.left)) {
                     neighbors.add(cur.left);
                 }
@@ -292,7 +292,7 @@ class Solution2 {
             parentMap.put(left, root);
             if (getParentTilTarget(left, k, parentMap, target)) {
                 return true;
-            };
+            }
         }
         if (root.right != null) {
             TreeNode right = root.right;

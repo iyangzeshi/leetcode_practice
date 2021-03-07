@@ -95,16 +95,16 @@ class MyCalendarThree {
             if (cur == null) {
                 return;
             }
-            /**
-             * If current node's range lies completely in update query range.
+            /*
+              If current node's range lies completely in update query range.
              */
             if (cur.inside(event)) {
                 cur.booked += val;
                 cur.savedRes += val;
             }
-            /**
-             * If current node's range overlaps with update range, follow the same approach as
-             * above simple update.
+            /*
+              If current node's range overlaps with update range, follow the same approach as
+              above simple update.
              */
             if (cur.intersect(event)) {
                 // Recur for left and right children.
@@ -131,7 +131,7 @@ class MyCalendarThree {
          * it.
          */
         public int get(int start, int right) {
-            return 0;
+            return 0; // TODO
         }
     
     }
@@ -184,7 +184,7 @@ class MyCalendarThree1 {
     TreeMap<Integer, Integer> delta;
     
     public MyCalendarThree1() {
-        delta = new TreeMap();
+        delta = new TreeMap<>();
     }
     
     public int book(int start, int end) {

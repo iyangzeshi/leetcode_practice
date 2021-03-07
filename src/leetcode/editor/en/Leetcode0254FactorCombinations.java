@@ -112,7 +112,7 @@ class Solution1 {
     private void dfs(int n, int start, List<List<Integer>> result, List<Integer> buffer) {
         if (n <= 1) {
             if (buffer.size() > 1) {
-                result.add(new ArrayList<Integer>(buffer));
+                result.add(new ArrayList<>(buffer));
             }
             return;
         }
@@ -146,15 +146,13 @@ class Solution2 {
 
     /**
      *
-     * @param n
+     * @param n number
      * @param start: important, 否则可能会出现重复
-     * @param result
-     * @param buffer
      */
     private void dfs(int n, int start, List<List<Integer>> result, List<Integer> buffer) {
         if (n <= 1) {
             if (buffer.size() > 1) {
-                result.add(new ArrayList<Integer>(buffer));
+                result.add(new ArrayList<>(buffer));
             }
             return;
         }

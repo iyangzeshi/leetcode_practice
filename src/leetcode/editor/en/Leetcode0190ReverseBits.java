@@ -89,10 +89,9 @@ public class Solution1 {
         }
 
         int result = 0;
-        int mask = 0;
 
         for (int i = 0; i < 32; i++) {
-            mask = (n >>> i) & 1;
+            int mask = (n >>> i) & 1;
             if (mask == 1) {
                 result |= (mask << 31 - i);
             }

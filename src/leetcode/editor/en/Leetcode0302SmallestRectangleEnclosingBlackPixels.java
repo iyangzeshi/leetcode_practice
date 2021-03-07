@@ -119,8 +119,8 @@ class Solution {
     private boolean hasOne(char[][] image, int x, int y) {
         if (x == -1) {
             int len = image.length;
-            for (int i = 0; i < len; i++) {
-                if (image[i][y] == '1') {
+            for (char[] chars : image) {
+                if (chars[y] == '1') {
                     return true;
                 }
             }

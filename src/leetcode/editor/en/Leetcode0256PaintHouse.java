@@ -61,7 +61,7 @@ public class Leetcode0256PaintHouse{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 // DP, with 2D array, T(n) = O(3n) = O(n), S(n) = O(3n) = O(n),
-// TODO: S(n) can be optimized to O(1)
+// S(n) can be optimized to O(1)
 class Solution {
     public int minCost(int[][] costs) {
         // corner case

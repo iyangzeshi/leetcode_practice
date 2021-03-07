@@ -213,8 +213,8 @@ class Solution2 {
     
     public List<Integer> closestKValues(TreeNode root, double target, int k) {
         List<Integer> res = new ArrayList<>();
-        Stack<TreeNode> left = new Stack<TreeNode>();
-        Stack<TreeNode> right = new Stack<TreeNode>();
+        Stack<TreeNode> left = new Stack<>();
+        Stack<TreeNode> right = new Stack<>();
         initialize2Stacks(root, left, right, target);
         while (k-- > 0) {
             if (!left.isEmpty() && !right.isEmpty()) {

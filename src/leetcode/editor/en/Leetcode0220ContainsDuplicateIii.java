@@ -54,17 +54,17 @@ class Solution {
 
         for (int i = 0; i < nums.length; i++) {
             if (i > k) {
-                set.remove(Long.valueOf(nums[i - k - 1]));
+                set.remove((long) nums[i - k - 1]);
             }
-            Long upper = (long) nums[i] + t;
-            Long lower = (long) nums[i] - t;
+            long upper = (long) nums[i] + t;
+            long lower = (long) nums[i] - t;
 
             Long temp = set.floor(upper);
 
             if (temp != null && temp >= lower) {
                 return true;
             }
-            set.add(Long.valueOf(nums[i]));
+            set.add((long) nums[i]);
         }
         return false;
     }

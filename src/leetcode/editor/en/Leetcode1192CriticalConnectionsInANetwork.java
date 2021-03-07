@@ -60,7 +60,7 @@ class Solution {
         int[] lowKey = new int[n];
         List<List<Integer>> ans = new ArrayList<>();
         for(int i: map.keySet()) {
-            if(visited[i] == false) {
+            if(!visited[i]) {
                 dfs(map, lowKey, visited, i, -1, ans);
             }
         }
@@ -70,8 +70,8 @@ class Solution {
     public HashMap<Integer, List<Integer>> buildPath(List<List<Integer>> connections) {
         HashMap<Integer, List<Integer>> map = new HashMap<>();
         for(List<Integer> list: connections) {
-            map.putIfAbsent(list.get(0), new ArrayList<Integer>());
-            map.putIfAbsent(list.get(1), new ArrayList<Integer>());
+            map.putIfAbsent(list.get(0), new ArrayList<>());
+            map.putIfAbsent(list.get(1), new ArrayList<>());
             
             map.get(list.get(0)).add(list.get(1));
             map.get(list.get(1)).add(list.get(0));

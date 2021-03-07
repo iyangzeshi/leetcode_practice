@@ -92,10 +92,10 @@ public class ZigzagIterator {
 	}
 }
 
-/**
- * Your ZigzagIterator object will be instantiated and called as such:
- * ZigzagIterator i = new ZigzagIterator(v1, v2);
- * while (i.hasNext()) v[f()] = i.next();
+/*
+  Your ZigzagIterator object will be instantiated and called as such:
+  ZigzagIterator i = new ZigzagIterator(v1, v2);
+  while (i.hasNext()) v[f()] = i.next();
  */
 //leetcode submit region end(Prohibit modification and deletion)
 

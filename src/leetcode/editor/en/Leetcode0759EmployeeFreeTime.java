@@ -74,7 +74,7 @@ enum Terminal {
     END
 }
 
-class Point implements Comparable {
+class Point implements Comparable<Point> {
 
     public int time;
     Terminal terminal;
@@ -85,15 +85,14 @@ class Point implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        if (!(o instanceof Point)) {
+    public int compareTo(Point point) {
+        if (point == null) {
             return -1;
         } else {
-            Point that = (Point) o;
-            if (this.time != that.time) {
-                return Integer.compare(this.time, that.time);
+            if (this.time != point.time) {
+                return Integer.compare(this.time, point.time);
             } else {
-                return this.terminal.compareTo(that.terminal);
+                return this.terminal.compareTo(point.terminal);
             }
         }
     }

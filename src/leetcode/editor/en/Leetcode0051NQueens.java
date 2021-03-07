@@ -87,7 +87,7 @@ class Solution {
     }
 
     private boolean isValid(boolean[][] projection, int x, int y, int n) {
-        /**
+        /*
          检测(x, y)的元素有没有和前面的冲突，DFS按照列走，只需要第[0~y)列已赋值
          分3行：
          第1行表示投影在列上【0-7】
@@ -95,10 +95,12 @@ class Solution {
          第3行表示投影在次对角线上
          设左下角是[0, 0]
          */
-        if (projection[0][x] == true || projection[1][y - x + (n - 1)] == true || projection[2][x + y] == true) {
+        /*
+        if (projection[0][x] || projection[1][y - x + (n - 1)] || projection[2][x + y]) {
             return false;
         }
-        return true;
+        return true;*/
+        return !projection[0][x] && !projection[1][y - x + (n - 1)] && !projection[2][x + y];
     }
 
     private void addValid(boolean[][] projection, int x, int y, int n) {
@@ -169,7 +171,7 @@ class Solution1 {
     private boolean isValid(char[][] board, int x, int y) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < y; j++) {
-                /**
+                /*
                  x == i表示同一行
                  Math.abs(x - i) == Math.abs(y - j)) && board[i][j] == 'Q'表示斜对角线上重合
                  */
@@ -235,7 +237,7 @@ class Solution2 {
     }
 
     private boolean isValid(boolean[][] projection, int x, int y, int n) {
-        /**
+        /*
          检测(x, y)的元素有没有和前面的冲突，DFS按照列走，只需要第[0~y)列已赋值
          分3行：
          第1行表示投影在列上【0-7】
@@ -243,10 +245,13 @@ class Solution2 {
          第3行表示投影在次对角线上
          设左下角是[0, 0]
          */
-        if (projection[0][x] == true || projection[1][y - x + (n - 1)] == true || projection[2][x + y] == true) {
+        /*
+        if (projection[0][x] || projection[1][y - x + (n - 1)] || projection[2][x + y]) {
             return false;
         }
         return true;
+         */
+        return !projection[0][x] && !projection[1][y - x + (n - 1)] && !projection[2][x + y];
     }
 
     private void addValid(boolean[][] projection, int x, int y, int n) {

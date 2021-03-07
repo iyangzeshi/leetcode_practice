@@ -73,8 +73,8 @@ public class Leetcode0225ImplementStackUsingQueues{
 //leetcode submit region begin(Prohibit modification and deletion)
 class MyStack {
     
-    private Queue<Integer> q1 = new LinkedList<>();
-    private Queue<Integer> q2 = new LinkedList<>();
+    private Queue<Integer> q1;
+    private Queue<Integer> q2;
     private Integer top;
     
     /** Initialize your data structure here.*/
@@ -113,13 +113,13 @@ class MyStack {
     }
     
 }
-/**
- * Your MyStack object will be instantiated and called as such:
- * MyStack obj = new MyStack();
- * obj.push(x);
- * int param_2 = obj.pop();
- * int param_3 = obj.top();
- * boolean param_4 = obj.empty();
+/*
+  Your MyStack object will be instantiated and called as such:
+  MyStack obj = new MyStack();
+  obj.push(x);
+  int param_2 = obj.pop();
+  int param_3 = obj.top();
+  boolean param_4 = obj.empty();
  */
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: push: T(n) = O(n); peek: T(n) = O(1), pop: T(n) = O(1)
@@ -181,8 +181,8 @@ class MyStack1 {
  */
 class MyStack2 {
     
-    private Queue<Integer> q1 = new LinkedList<>();
-    private Queue<Integer> q2 = new LinkedList<>();
+    private Queue<Integer> q1;
+    private Queue<Integer> q2;
     private Integer top;
     
     /** Initialize your data structure here.*/

@@ -261,7 +261,7 @@ class Solution2 {
         
         long sum = 0;
         for (int i = 0; i < arr.length; i++) {
-            long partialSum = ((long)arr[i] * (leftCount[i] * rightCount[i])) % MOD;
+            long partialSum = ((long)arr[i] * ((long) leftCount[i] * rightCount[i])) % MOD;
             sum += partialSum;
             sum = sum % MOD;
         }

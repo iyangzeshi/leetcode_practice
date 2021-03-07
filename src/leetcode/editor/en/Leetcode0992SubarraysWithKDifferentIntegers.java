@@ -83,7 +83,6 @@ class Solution {
         int end1 = 0;
         int end2 = 0;
         Map<Integer, Integer> window1 = new HashMap<>(); // k - 1 different integer to count
-        Map<Integer, Integer> window2 = new HashMap<>(); // k different integer count
         // initialize
         // [start, end1)
         while (end1 < len && (window1.size() < K - 1 || window1.containsKey(A[end1]))) { //
@@ -95,7 +94,8 @@ class Solution {
             return 0;
         }
         // [start, end2]
-        window2.putAll(window1);
+        // k different integer count
+        Map<Integer, Integer> window2 = new HashMap<>(window1);
         end2 = end1;
         while (end2 < len && (window2.size() < K || window2.containsKey(A[end2]))) {
             int num = A[end2];
@@ -183,7 +183,6 @@ class Solution1 {
         int end1 = 0;
         int end2 = 0;
         Map<Integer, Integer> window1 = new HashMap<>(); // k - 1 different integer to count
-        Map<Integer, Integer> window2 = new HashMap<>(); // k different integer count
         // initialize
         // [start, end1)
         while (end1 < len && (window1.size() < K - 1 || window1.containsKey(A[end1]))) { //
@@ -195,7 +194,8 @@ class Solution1 {
             return 0;
         }
         // [start, end2]
-        window2.putAll(window1);
+        // k different integer count
+        Map<Integer, Integer> window2 = new HashMap<>(window1);
         end2 = end1;
         while (end2 < len && (window2.size() < K || window2.containsKey(A[end2]))) {
             int num = A[end2];

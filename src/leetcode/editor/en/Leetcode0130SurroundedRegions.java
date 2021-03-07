@@ -126,7 +126,7 @@ class Solution1 {
         int rows = board.length;
         int cols = board[0].length;
         
-        Queue<Integer> queue = new LinkedList<Integer>();
+        Queue<Integer> queue = new LinkedList<>();
         
         // do BFS for the first and last row
         for (int j = 0; j < cols; j++) {

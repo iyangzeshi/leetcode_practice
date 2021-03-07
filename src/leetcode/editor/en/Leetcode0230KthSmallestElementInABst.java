@@ -102,7 +102,7 @@ class Solution {
 class Solution1 {
     // Solution 1: in-Order traverse
     public int kthSmallest(TreeNode root, int k) {
-        ArrayList<Integer> nums = inOrder(root, k, new ArrayList<Integer>());
+        ArrayList<Integer> nums = inOrder(root, k, new ArrayList<>());
         return nums.get(k - 1);
     }
 

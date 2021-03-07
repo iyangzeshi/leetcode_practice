@@ -23,9 +23,6 @@
 
 package leetcode.editor.en;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 // 2020-07-29 21:02:21
 // Zeshi Yang
 public class Leetcode0137SingleNumberIi {
@@ -56,7 +53,6 @@ class Solution {
             }
         }
 		String[] arrays = new String[]{"aa","bb","cc"};
-		ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(arrays));
 		int res = 0;
         for (int i = 0; i < 32; i++) {
             if (count[i] % 3 != 0) {

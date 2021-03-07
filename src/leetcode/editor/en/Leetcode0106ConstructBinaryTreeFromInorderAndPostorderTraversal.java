@@ -56,7 +56,7 @@ class Solution {
     int post_idx;
     int[] postorder;
     int[] inorder;
-    HashMap<Integer, Integer> idx_map = new HashMap<Integer, Integer>();
+    HashMap<Integer, Integer> idx_map = new HashMap<>();
 
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         this.postorder = postorder;

@@ -52,7 +52,7 @@ public class Leetcode0692TopKFrequentWords{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<String> topKFrequent(String[] words, int k) {
-        Map<String, Integer> count = new HashMap();
+        Map<String, Integer> count = new HashMap<>();
 
         for (String word: words) {
             if (count.containsKey(word)) {
@@ -62,9 +62,9 @@ class Solution {
                 count.put(word, 1);
             }
         }
-        PriorityQueue<String> heap = new PriorityQueue<String> (
+        PriorityQueue<String> heap = new PriorityQueue<>(
                 (w1, w2) -> count.get(w1).equals(count.get(w2)) ?
-                        w2.compareTo(w1) : count.get(w1) - count.get(w2) ); // min heap
+                        w2.compareTo(w1) : count.get(w1) - count.get(w2)); // min heap
 
         for (String word: count.keySet()) { // keySet的返回类型是Set啊，为什么这里可以用String
             heap.offer(word);
@@ -73,7 +73,7 @@ class Solution {
             }
         }
 
-        List<String> result = new ArrayList();
+        List<String> result = new ArrayList<>();
         while(!heap.isEmpty()) {
             result.add(heap.poll());
         }

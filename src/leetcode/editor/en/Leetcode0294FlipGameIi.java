@@ -43,8 +43,7 @@ class Solution {
     public boolean canWin(String s) {
         // corner case
         Map<String, Boolean> mem = new HashMap<>();
-        boolean res = dfs(s.toCharArray(), mem);
-        return res;
+        return dfs(s.toCharArray(), mem);
     }
     
     /**

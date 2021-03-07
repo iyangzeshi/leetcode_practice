@@ -56,7 +56,7 @@ class Solution {
                            List<Integer> list, List<List<Integer>> result) {
         // base case
         if (list.size() == nums.length) { // 或者用index == nums.length
-            result.add(new ArrayList(list));
+            result.add(new ArrayList<>(list));
             return;
         }
 
@@ -70,7 +70,6 @@ class Solution {
             list.remove(list.size() - 1);
             set.remove(nums[i]);
         }
-        return;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -100,8 +99,8 @@ class Solution1_1 {
         // base case
         if (index == nums.length - 1) {
             List<Integer> temp = new ArrayList<>();
-            for (int j = 0; j < nums.length; j++){
-                temp.add(nums[j]);
+            for (int num : nums) {
+                temp.add(num);
             }
             result.add(temp);
             return;
@@ -112,7 +111,6 @@ class Solution1_1 {
             getResult(index + 1, nums, result);
             swap(nums, index, i);
         }
-        return;
     }
 
     private void swap(int[] nums, int i, int j) {
@@ -145,7 +143,7 @@ class Solution1_2 {
             List<List<Integer>> result) {
         // base case
         if (list.size() == nums.length) { // 或者用index == nums.length
-            result.add(new ArrayList(list));
+            result.add(new ArrayList<>(list));
             return;
         }
 
@@ -157,7 +155,6 @@ class Solution1_2 {
             list.remove(list.size() - 1);
             swap(nums, i, index);
         }
-        return;
     }
 
     private void swap(int[] nums, int i, int j) {
@@ -191,7 +188,7 @@ class Solution2 {
             List<Integer> list, List<List<Integer>> result) {
         // base case
         if (list.size() == nums.length) { // 或者用index == nums.length
-            result.add(new ArrayList(list));
+            result.add(new ArrayList<>(list));
             return;
         }
 
@@ -205,7 +202,6 @@ class Solution2 {
             list.remove(list.size() - 1);
             set.remove(nums[i]);
         }
-        return;
     }
 }
 }

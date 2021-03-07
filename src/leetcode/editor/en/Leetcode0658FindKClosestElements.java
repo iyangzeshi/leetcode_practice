@@ -41,11 +41,11 @@ class Solution {
         if (arr == null || arr.length == 0 || k <= 0) {
             return null;
         }
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         int left = 0;
         int right = arr.length - 1;
         int mid = 0;
-        /**
+        /*
          the target is in the (left, right]
          */
 

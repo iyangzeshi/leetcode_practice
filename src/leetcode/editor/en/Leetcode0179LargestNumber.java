@@ -45,12 +45,12 @@ class Solution {
         Integer[] array = new Integer[len];
 
         for (int i = 0; i < nums.length; i++) {
-            array[i] = Integer.valueOf(nums[i]);
+            array[i] = nums[i];
         }
 
         Arrays.sort(array, (o1, o2) ->
-                (String.valueOf(o2) + String.valueOf(o1)).compareTo
-                        (String.valueOf(o1) + String.valueOf(o2)));
+                (o2 + String.valueOf(o1)).compareTo
+                        (o1 + String.valueOf(o2)));
         // edge case
         if(array[0] == 0) {
             return "0";
@@ -58,10 +58,9 @@ class Solution {
 
         StringBuilder sb = new StringBuilder();
         for (Integer i: array) {
-            sb.append(String.valueOf(i));
+            sb.append(i);
         }
-        String result = sb.toString();
-        return result;
+        return sb.toString();
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

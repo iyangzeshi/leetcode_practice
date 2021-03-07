@@ -51,8 +51,7 @@ class Solution {
         char[] chars = input.toCharArray();
         int len = chars.length;
         List[][] mem = new ArrayList[len][len];
-        List<Integer> res = dfs(chars, 0, chars.length - 1, mem);
-        return res;
+        return dfs(chars, 0, chars.length - 1, mem);
     }
 
     private List<Integer> dfs(char[] chars, int i, int j, List[][] mem) {
@@ -118,8 +117,7 @@ class Solution1 {
             return null;
         }
         char[] chars = input.toCharArray();
-        List<Integer> res = dfs(chars, 0, chars.length - 1);
-        return res;
+        return dfs(chars, 0, chars.length - 1);
     }
 
     private List<Integer> dfs(char[] chars, int i, int j) {
@@ -177,8 +175,7 @@ class Solution2 {
         char[] chars = input.toCharArray();
         int len = chars.length;
         List[][] mem = new ArrayList[len][len];
-        List<Integer> res = dfs(chars, 0, chars.length - 1, mem);
-        return res;
+        return dfs(chars, 0, chars.length - 1, mem);
     }
 
     private List<Integer> dfs(char[] chars, int i, int j, List[][] mem) {

@@ -117,7 +117,7 @@ class Solution2 {
         dummy.next = head;
         ListNode pre = dummy; // 从头开始到pre都没有duplicates, pre.next到后面可能会有重复
         ListNode cur = head; // while循环结束一轮的时候，cur都是新的值的开头或者null
-        ListNode following = head.next; // cur.next
+        ListNode following; // cur.next
     
         while (cur != null) {
             following = cur.next;

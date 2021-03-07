@@ -129,14 +129,18 @@ class Solution {
 		}
 		return false;
 	}
-
+	
 	public boolean dfs(boolean[][] adj, int[] visited, StringBuilder sb, int i) {
 		visited[i] = 1;                            // 1 = visiting
 		for (int j = 0; j < N; j++) {
 			if (adj[i][j]) {                        // connected
-				if(visited[j] == 1) return false;  // 1 => 1, cycle
-				if(visited[j] == 0) {              // 0 = unvisited
-					if(!dfs(adj, visited, sb, j)) return false;
+				if (visited[j] == 1) {
+					return false;  // 1 => 1, cycle
+				}
+				if (visited[j] == 0) {              // 0 = unvisited
+					if (!dfs(adj, visited, sb, j)) {
+						return false;
+					}
 				}
 			}
 		}
@@ -295,18 +299,22 @@ class Solution1_2 {
 		}
 		return false;
 	}
-
+	
 	public boolean dfs(boolean[][] adj, int[] visited, StringBuilder sb, int i) {
-		visited[i] = 1;                            // 1 = visiting
+		visited[i] = 1; // 1 = visiting
 		for (int j = 0; j < N; j++) {
-			if (adj[i][j]) {                        // connected
-				if(visited[j] == 1) return false;  // 1 => 1, cycle
-				if(visited[j] == 0) {              // 0 = unvisited
-					if(!dfs(adj, visited, sb, j)) return false;
+			if (adj[i][j]) { // connected
+				if (visited[j] == 1) {
+					return false;  // 1 => 1, cycle
+				}
+				if (visited[j] == 0) { // 0 = unvisited
+					if (!dfs(adj, visited, sb, j)) {
+						return false;
+					}
 				}
 			}
 		}
-		visited[i] = 2;                           // 2 = visited
+		visited[i] = 2;// 2 = visited
 		sb.append((char) (i + 'a'));
 		return true;
 	}

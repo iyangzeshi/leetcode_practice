@@ -82,7 +82,7 @@ class Solution {
         //     listS.add(entry.getKey());
         // }
         charFreq.forEach((k, v) ->listS.add(k)); // 上面的lambda表达式
-        listS.sort(new Comparator<Character>() {
+        listS.sort(new Comparator<>() {
             @Override
             public int compare(Character o1, Character o2) {
                 if (!charFreq.get(o1).equals(charFreq.get(o2))) {
@@ -124,7 +124,7 @@ class Solution1 {
         //     listS.add(entry.getKey());
         // }
         charFreq.forEach((k, v) ->listS.add(k)); // 上面的lambda表达式
-        listS.sort(new Comparator<Character>() {
+        listS.sort(new Comparator<>() {
             @Override
             public int compare(Character o1, Character o2) {
                 if (!charFreq.get(o1).equals(charFreq.get(o2))) {

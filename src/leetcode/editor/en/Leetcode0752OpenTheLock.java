@@ -130,7 +130,7 @@ class Solution {
     private List<char[]> convert(char[] cur, Set<String> deadSet, Set<String> visited) {
         List<char[]> nexts = new ArrayList<>();
         for (int i = 0; i < cur.length; i++) {
-            int temp = (int) (cur[i] - '0');
+            int temp = cur[i] - '0';
             for (int diff: DIRECTIONS) {
                 int neighbor = (temp + diff + 10) % 10;
                 cur[i] = (char) (neighbor + '0');

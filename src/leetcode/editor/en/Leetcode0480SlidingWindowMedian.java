@@ -308,7 +308,7 @@ class Solution2_2 {
         if (k % 2 == 0) {
             val = ((double) nums[left.first()] + (double) nums[right.first()]) / 2;
         } else {
-            val = (double) nums[right.first()]; //奇数时median在minHeap里
+            val = nums[right.first()]; //奇数时median在minHeap里
         }
         return val;
     }

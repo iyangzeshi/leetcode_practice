@@ -55,7 +55,6 @@ public class Leetcode0428SerializeAndDeserializeNAryTree{
         
         System.out.println();
     }
-    
 class Node {
     
     public int val;
@@ -97,12 +96,12 @@ class Node {
 class Codec {
     // Encodes a tree to a single string.
     public String serialize(Node root) {
-        
+        return null; // TODO
     }
 	
     // Decodes your encoded data to tree.
     public Node deserialize(String data) {
-        
+        return null; // TODO
     }
 }
 

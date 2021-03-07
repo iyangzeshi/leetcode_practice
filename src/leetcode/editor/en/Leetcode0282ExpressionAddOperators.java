@@ -81,7 +81,7 @@ class Solution {
 			return res;
 		}
 		// general case
-		dfs(res, new StringBuilder(), num, 0, (long) target, 0, 0);
+		dfs(res, new StringBuilder(), num, 0, target, 0, 0);
 		return res;
 	}
 	
@@ -142,7 +142,7 @@ class Solution1 {
 			return res;
 		}
 		// general case
-		dfs(res, new StringBuilder(), num, 0, (long) target, 0, 0);
+		dfs(res, new StringBuilder(), num, 0, target, 0, 0);
 		return res;
 	}
 	
@@ -200,7 +200,7 @@ class Solution2 {
 			return res;
 		}
 		// general case
-		dfs(res, new StringBuilder(), num, 0, (long) target, 0, 0);
+		dfs(res, new StringBuilder(), num, 0, target, 0, 0);
 		return res;
 	}
 	

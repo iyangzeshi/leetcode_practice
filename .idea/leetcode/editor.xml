@@ -1171,6 +1171,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0166FractionToRecurringDecimal.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0166FractionToRecurringDecimal.java" />
+              <option name="questionId" value="166" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0169MajorityElement.java">
           <value>
             <LeetcodeEditor>
@@ -1856,6 +1864,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0373FindKPairsWithSmallestSums.java" />
               <option name="questionId" value="373" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0374GuessNumberHigherOrLower.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0374GuessNumberHigherOrLower.java" />
+              <option name="questionId" value="374" />
             </LeetcodeEditor>
           </value>
         </entry>

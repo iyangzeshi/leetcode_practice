@@ -24,6 +24,7 @@ package leetcode.editor.en;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 // 2020-07-27 17:10:48
@@ -47,7 +48,7 @@ class Solution {
             return new int[][]{};
         }
         // general case
-        Arrays.sort(intervals, (n1, n2) -> (n1[0] - n2[0]));
+        Arrays.sort(intervals, Comparator.comparingInt(n -> n[0]));
         List<int[]> res = new ArrayList<>();
         int[] prev = intervals[0]; // to record previous interval's right border
         for (int[] interval: intervals) {

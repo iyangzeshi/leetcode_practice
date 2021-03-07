@@ -26,6 +26,7 @@
 
 package leetcode.editor.en;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 // 2020-07-26 12:04:44
@@ -120,7 +121,7 @@ class Solution1 {
         int col;
 
         //BFS
-        PriorityQueue<Cell> minHeap = new PriorityQueue<Cell>((n1, n2) -> n1.value - n2.value);
+        PriorityQueue<Cell> minHeap = new PriorityQueue<>(Comparator.comparingInt(n -> n.value));
 
         boolean[][] visited = new boolean[rows][cols];
 
@@ -131,12 +132,12 @@ class Solution1 {
             row = cur.row;
             col = cur.col;
 
-            if (row + 1 < rows && visited[row + 1][col] == false) {
+            if (row + 1 < rows && !visited[row + 1][col]) {
                 Cell cellDown = new Cell(row + 1, col, matrix[row + 1][col]);
                 visited[row + 1][col] = true;
                 minHeap.offer(cellDown);
             }
-            if (col + 1 < cols && visited[row][col + 1] == false) {
+            if (col + 1 < cols && !visited[row][col + 1]) {
                 Cell cellRight = new Cell(row, col + 1, matrix[row][col + 1]);
                 visited[row][col + 1] = true;
                 minHeap.offer(cellRight);
@@ -174,7 +175,7 @@ class Solution2 {
             return -1;
         }
 
-        PriorityQueue<Node> minHeap = new PriorityQueue<>((n1, n2) -> n1.value - n2.value);
+        PriorityQueue<Node> minHeap = new PriorityQueue<>(Comparator.comparingInt(n -> n.value));
         minHeap.add(new Node(0, 0, matrix[0][0]));
 
         HashSet<Integer> visited = new HashSet<>();
@@ -186,11 +187,11 @@ class Solution2 {
             Node cur = minHeap.poll();
             row = cur.row;
             col = cur.col;
-            if (row + 1 < rows && visited.contains((row + 1) * cols + col) == false) {
+            if (row + 1 < rows && !visited.contains((row + 1) * cols + col)) {
                 visited.add((row + 1) * cols + col);
                 minHeap.offer(new Node(row + 1, col, matrix[row + 1][col]));
             }
-            if (col < cols && visited.contains(row * cols + col + 1) == false) {
+            if (col < cols && !visited.contains(row * cols + col + 1)) {
                 visited.add(row * cols + col + 1);
                 minHeap.offer(new Node(row, col + 1, matrix[row][col + 1]));
             }
@@ -217,7 +218,8 @@ class Solution3 {
         int col;
 
         //BFS
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>((n1, n2) -> matrix[n1 / cols][n1 % cols] - matrix[n2 / cols][n2 % cols]);
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(
+                Comparator.comparingInt(n -> matrix[n / cols][n % cols]));
         minHeap.offer(0);
 
         HashSet<Integer> visited = new HashSet<>();
@@ -230,12 +232,12 @@ class Solution3 {
             col = index % cols;
             temp = matrix[row][col];
 
-            if (col + 1 < cols && visited.contains((row) * cols + (col + 1)) == false) {
+            if (col + 1 < cols && !visited.contains((row) * cols + (col + 1))) {
                 visited.add((row) * cols + (col + 1));
                 minHeap.offer((row) * cols + (col + 1));
             }
 
-            if (row + 1 < rows && visited.contains((row + 1) * cols + (col)) == false) {
+            if (row + 1 < rows && !visited.contains((row + 1) * cols + (col))) {
                 visited.add((row + 1) * cols + (col));
                 minHeap.offer((row + 1) * cols + (col));
             }

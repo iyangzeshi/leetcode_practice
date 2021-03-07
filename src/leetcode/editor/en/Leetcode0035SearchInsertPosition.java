@@ -52,7 +52,9 @@ class Solution {
         if (nums == null || nums.length == 0)
             return 0;
 
-        int left = 0, right = nums.length - 1, mid = 0;
+        int left = 0;
+        int right = nums.length - 1;
+        int mid = 0;
         while(left <= right) {
             mid = left + (right - left) / 2;
             if (nums[mid] == target) return mid;

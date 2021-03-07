@@ -109,7 +109,7 @@ class Solution1_1 {
         return res > amount ? -1 : res;
     }
 
-    private Integer dfs(int index, int leftSum, int[] coins, Integer memo[][], int amount) {
+    private Integer dfs(int index, int leftSum, int[] coins, Integer[][] memo, int amount) {
         int len = coins.length;
         if (memo[index][leftSum] != null) {
             return memo[index][leftSum];
@@ -336,9 +336,9 @@ class Solution2_3 {
         Arrays.fill(dp, amount + 1);
         dp[0] = 0;
         for (int i = 1; i < amount + 1; i++) {
-            for (int k = 0; k < len; k++) {
-                if (coins[k] <= i) {
-                    dp[i] = Math.min(dp[i], dp[i - coins[k]] + 1);
+            for (int coin : coins) {
+                if (coin <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
                 }
             }
         }

@@ -36,7 +36,7 @@ public class Leetcode0252MeetingRooms{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean canAttendMeetings(int[][] intervals) {
-        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
         int len = intervals.length;
         for (int i = 0; i < len - 1; i++) {
             if (intervals[i][1] > intervals[i + 1][0]) {

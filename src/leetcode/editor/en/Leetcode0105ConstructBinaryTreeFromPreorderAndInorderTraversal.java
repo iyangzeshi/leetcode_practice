@@ -65,8 +65,7 @@ class Solution {
         for (int i = 0; i < length; i++) {
             map.put(inorder[i], i);
         }
-        TreeNode root = buildTree(preorder, 0, length - 1, inorder, 0, length - 1, map);
-        return root;
+        return buildTree(preorder, 0, length - 1, inorder, 0, length - 1, map);
     }
     /**
      preStart[preStart, preEnd]表示当前subTree在preOrder的范围，inclusive
@@ -107,8 +106,7 @@ class Solution1_1 {
         for (int i = 0; i < length; i++) {
             map.put(inorder[i], i);
         }
-        TreeNode root = buildTree(preorder, 0, length - 1, inorder, 0, length - 1, map);
-        return root;
+        return buildTree(preorder, 0, length - 1, inorder, 0, length - 1, map);
     }
     /**
      preStart[preStart, preEnd]表示当前subTree在preOrder的范围，inclusive

@@ -65,8 +65,7 @@ class Solution1 {
     public int numTrees(int n) {
         // corner case
         Integer[] dp = new Integer[n + 1];
-        int res = dfs(n, dp);
-        return res;
+        return dfs(n, dp);
     }
     
     private int dfs(int n, Integer[] dp) {

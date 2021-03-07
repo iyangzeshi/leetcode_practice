@@ -63,7 +63,6 @@ class Solution {
             }
             swap(nums, i, level);
         }
-        return;
     }
 
     private void swap(int[] nums, int i, int j) {

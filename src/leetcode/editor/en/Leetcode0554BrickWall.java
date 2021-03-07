@@ -57,32 +57,32 @@ public class Leetcode0554BrickWall{
         Solution sol = new Leetcode0554BrickWall().new Solution();
         // TO TEST
         List<List<Integer>> wall = new ArrayList<>();
-        wall.add(new ArrayList<Integer>() {{
-         add(1);
-         add(2);
-         add(2);
-         add(1);
+        wall.add(new ArrayList<>() {{
+            add(1);
+            add(2);
+            add(2);
+            add(1);
         }});
-        wall.add(new ArrayList<Integer>() {{
+        wall.add(new ArrayList<>() {{
             add(3);
             add(1);
             add(2);
         }});
-        wall.add(new ArrayList<Integer>() {{
+        wall.add(new ArrayList<>() {{
             add(1);
             add(3);
             add(2);
         }});
-        wall.add(new ArrayList<Integer>() {{
+        wall.add(new ArrayList<>() {{
             add(2);
             add(4);
         }});
-        wall.add(new ArrayList<Integer>() {{
+        wall.add(new ArrayList<>() {{
             add(3);
             add(1);
             add(2);
         }});
-        wall.add(new ArrayList<Integer>() {{
+        wall.add(new ArrayList<>() {{
             add(1);
             add(3);
             add(1);

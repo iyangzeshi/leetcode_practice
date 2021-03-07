@@ -75,7 +75,6 @@ class Solution {
 
         dummy.next = head;
         ListNode cur = head;
-        ListNode pre = head;
         ListNode insertNode = null;
 
         while (cur.next != null) {

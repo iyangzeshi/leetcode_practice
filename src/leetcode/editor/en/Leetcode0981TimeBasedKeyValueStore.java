@@ -71,6 +71,7 @@ package leetcode.editor.en;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,7 +102,7 @@ class TimeMap {
     
     public void set(String key, String value, int timestamp) { //放 key
         if (!map.containsKey(key)) {
-            map.put(key, new ArrayList<Pair<Integer, String>>()); //没有 新建
+            map.put(key, new ArrayList<>()); //没有 新建
         }
         
         map.get(key).add(new Pair<>(timestamp, value));// 拿出来塞进去
@@ -113,7 +114,8 @@ class TimeMap {
         }
         
         List<Pair<Integer, String>> A = map.get(key); // 先拿出 list
-        int i = Collections.binarySearch(A, new Pair<>(timestamp, "{"), (a, b) -> Integer.compare(a.getKey(), b.getKey()));
+        int i = Collections.binarySearch(A, new Pair<>(timestamp, "{"),
+                Comparator.comparingInt(Pair::getKey));
         
         if (i >= 0) {// 被找到
             return A.get(i).getValue();
@@ -150,7 +152,7 @@ class TimeMap1 {
     
     public void set(String key, String value, int timestamp) { //放 key
         if (!map.containsKey(key)) {
-            map.put(key, new ArrayList<Pair<Integer, String>>()); //没有 新建
+            map.put(key, new ArrayList<>()); //没有 新建
         }
         
         map.get(key).add(new Pair<>(timestamp, value));// 拿出来塞进去
@@ -163,7 +165,7 @@ class TimeMap1 {
         
         List<Pair<Integer, String>> A = map.get(key); // 先拿出 list
         int i = Collections.binarySearch(A, new Pair<>(timestamp, "{"),
-                (a, b) -> Integer.compare(a.getKey(), b.getKey()));
+                Comparator.comparingInt(Pair::getKey));
         
         if (i >= 0) {// 被找到
             return A.get(i).getValue();

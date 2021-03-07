@@ -88,14 +88,14 @@ class Solution {
         Queue<TreeNode> queue = new LinkedList<>();
         TreeNode node;
         queue.offer(root);
-        while (queue.isEmpty() == false) {
+        while (!queue.isEmpty()) {
             node = queue.poll();
             
             // node.left
             if (node.left == null) {
                 hasNull = true;
             } else {
-                if (hasNull == true) {
+                if (hasNull) {
                     return false;
                 }
                 queue.offer(node.left);
@@ -105,7 +105,7 @@ class Solution {
             if (node.right == null) {
                 hasNull = true;
             } else {
-                if (hasNull == true) {
+                if (hasNull) {
                     return false;
                 }
                 queue.offer(node.right);

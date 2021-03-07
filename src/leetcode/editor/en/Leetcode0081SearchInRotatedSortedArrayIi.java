@@ -55,7 +55,6 @@ class Solution {
         }
         int left = 0;
         int right = nums.length - 1;
-        int mid = 0;
         int maxIndex = findTurningPoint(nums);
         if (target == nums[left]) {
             return true;
@@ -66,7 +65,7 @@ class Solution {
         }
         
         while (left <= right) {
-            mid = left + (right - left) / 2;
+            int mid = left + (right - left) / 2;
             if (nums[mid] == target) {
                 return true;
             } else if (nums[mid] < target) {
@@ -84,9 +83,8 @@ class Solution {
         if (nums[left] < nums[right]) {
             return right;
         }
-        int mid = 0;
         while (left + 1 < right) {
-            mid = left + (right - left) / 2;
+            int mid = left + (right - left) / 2;
             if (nums[mid] == nums[left]) {
                 left++;
             } else if (nums[mid] > nums[left]) {
@@ -110,7 +108,6 @@ class Solution1 {
         }
         int left = 0;
         int right = nums.length - 1;
-        int mid = 0;
         int maxIndex = findTurningPoint(nums);
         if (target == nums[left]) {
             return true;
@@ -121,7 +118,7 @@ class Solution1 {
         }
         
         while (left <= right) {
-            mid = left + (right - left) / 2;
+            int mid = left + (right - left) / 2;
             if (nums[mid] == target) {
                 return true;
             } else if (nums[mid] < target) {
@@ -139,9 +136,8 @@ class Solution1 {
         if (nums[left] < nums[right]) {
             return right;
         }
-        int mid = 0;
         while (left + 1 < right) {
-            mid = left + (right - left) / 2;
+            int mid = left + (right - left) / 2;
             if (nums[mid] == nums[left]) {
                 left++;
             } else if (nums[mid] > nums[left]) {
@@ -164,9 +160,8 @@ class Solution2 {
         }
         int left = 0;
         int right = nums.length - 1;
-        int mid = 0;
         while (left <= right) {
-            mid = (right - left) / 2 + left;
+            int mid = (right - left) / 2 + left;
             if (nums[mid] == target) {
                 return true;
             }
@@ -192,4 +187,3 @@ class Solution2 {
     }
 }
 }
-

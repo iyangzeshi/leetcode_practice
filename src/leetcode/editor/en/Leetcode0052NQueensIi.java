@@ -87,7 +87,7 @@ class Solution {
     }
 
     private boolean isValid(int x, int y, boolean[][] projection, int n) {
-        /**
+        /*
          检测(x, y)的元素有没有和前面的冲突，DFS按照列走，只需要第[0~y)列已赋值
          分3行：
          第1行表示投影在第一列上
@@ -156,7 +156,7 @@ class Solution2_1 {
     }
 
     private boolean isValid(int x, int y, boolean[][] projection, int n) {
-        /**
+        /*
          检测(x, y)的元素有没有和前面的冲突，DFS按照列走，只需要第[0~y)列已赋值
          分3行：
          第1行表示投影在列上【0-7】
@@ -164,10 +164,13 @@ class Solution2_1 {
          第3行表示投影在次对角线上
          设左下角是[0, 0]
          */
+        /*
         if (projection[0][x] || projection[1][y - x + (n - 1)] || projection[2][x + y]) {
             return false;
         }
         return true;
+         */
+        return !projection[0][x] && !projection[1][y - x + (n - 1)] && !projection[2][x + y];
     }
 
     private void addCoordinate(int n, int x, int y, boolean[][] projection) {
@@ -227,7 +230,7 @@ class Solution2_2 {
     }
 
     private boolean isValid(int x, int y, boolean[][] projection, int n) {
-        /**
+        /*
          检测(x, y)的元素有没有和前面的冲突，DFS按照列走，只需要第[0~y)列已赋值
          分3行：
          第1行表示投影在第一列上

@@ -52,6 +52,7 @@
 
 package leetcode.editor.en;
 
+import java.util.Comparator;
 import java.util.TreeSet;
 // 2020-12-22 18:43:51
 // Zeshi Yang
@@ -78,7 +79,7 @@ class Solution {
             return new int[0];
         }
         
-        TreeSet<Point> leftPointsTreeSet = new TreeSet<>((o1, o2) -> o1.val - o2.val); // O(logn)
+        TreeSet<Point> leftPointsTreeSet = new TreeSet<>(Comparator.comparingInt(o -> o.val)); // O(logn)
         int k = 0;
         for (int[] interval : intervals) { // O(n)
             leftPointsTreeSet.add(new Point(interval[0], k++));

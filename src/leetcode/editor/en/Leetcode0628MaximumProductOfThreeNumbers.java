@@ -78,8 +78,7 @@ class Solution {
         int[] smallest = {small.poll(), small.poll()};
         int max1 = largest[0] * largest[1] * largest[2];
         int max2 = smallest[0] * smallest[1] * largest[2];
-        int max = Math.max(max1, max2);
-        return max;
+        return Math.max(max1, max2);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

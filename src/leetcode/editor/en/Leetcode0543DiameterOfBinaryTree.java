@@ -63,9 +63,8 @@ class Solution {
         if (root == null) {
             return 0;
         }
-        TreeNode cur = root;
         int[] max = {0};
-        postOrder(cur, max);
+        postOrder(root, max);
         return max[0];
     }
 

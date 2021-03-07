@@ -48,11 +48,11 @@ class Solution {
 
         int cumsum = 0;
         int count = 0;
-
-        for (int i = 0; i < nums.length; i++) {
-            cumsum = cumsum + nums[i];
+    
+        for (int num : nums) {
+            cumsum = cumsum + num;
             if (map.containsKey(cumsum - k)) {
-                count+=map.get(cumsum - k);
+                count += map.get(cumsum - k);
             }
             map.put(cumsum, map.getOrDefault(cumsum, 0) + 1);
         }
@@ -116,11 +116,11 @@ class Solution2 {
 
         int cumsum = 0;
         int count = 0;
-
-        for (int i = 0; i < nums.length; i++) {
-            cumsum = cumsum + nums[i];
+    
+        for (int num : nums) {
+            cumsum = cumsum + num;
             if (map.containsKey(cumsum - k)) {
-                count+=map.get(cumsum - k);
+                count += map.get(cumsum - k);
             }
             map.put(cumsum, map.getOrDefault(cumsum, 0) + 1);
         }

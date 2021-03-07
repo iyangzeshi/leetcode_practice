@@ -106,7 +106,7 @@ class Solution {
 	private final int[][] DIRECTIONS = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}}; //顺时针，上右下左
 	
 	public void cleanRoom(Robot robot) {
-		dfs(robot, 0, 0, 0, new HashSet<String>());
+		dfs(robot, 0, 0, 0, new HashSet<>());
 	}
 	
 	private void dfs(Robot robot, int row, int col, int dir, Set<String> visited) {
@@ -135,16 +135,16 @@ interface Robot {
     
     // Returns true if the cell in front is open and robot moves into the cell.
     // Returns false if the cell in front is blocked and robot stays in the current cell.
-    public boolean move();
+    boolean move();
     
     // Robot will stay in the same cell after calling turnLeft/turnRight.
     // Each turn will be 90 degrees.
-    public void turnLeft();
+    void turnLeft();
     
-    public void turnRight();
+    void turnRight();
     
     // Clean the current cell.
-    public void clean();
+    void clean();
 }
 
 }

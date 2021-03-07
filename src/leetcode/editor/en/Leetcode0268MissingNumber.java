@@ -37,7 +37,7 @@ public class Leetcode0268MissingNumber{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int missingNumber(int[] nums) {
-        /**
+        /*
          S7: Bit Manipulation: A XOR A will be 0, so let the nums XOR the array
          */
         int target = nums.length;
@@ -51,7 +51,7 @@ class Solution {
 // S1, S2：等比数列性质，是不是等比，或者符合方程y = kx + b
 class Solution1And2 {
     public int missingNumber(int[] nums) {
-        /**
+        /*
          S1: sort → one pass → check array[fast] - array[fast] == 2
          return fast／array[fast] - 1
 
@@ -62,7 +62,7 @@ class Solution1And2 {
         int length = nums.length;
 
         if (nums[nums.length - 1] != nums.length) {
-            /**
+            /*
              如果排序之后，最后一顶的值是num.length - 1（不等于nu.length), 说明前面的顺序都是对的，的数字就是最大值 +1,就是nums.length
              */
             return nums.length;
@@ -116,19 +116,19 @@ class Solution3 {
 // S4, S5:  HashSet && HashMap（没有必要）
 class Solution4And5 {
     public int missingNumber(int[] nums) {
-        /**
+        /*
          S5: HashSet <key = value of element, value = count>
          two pass
          2 pass, build hashmap + check with counter++
          */
-        Set<Integer> numSet = new HashSet<Integer>();
+        Set<Integer> numSet = new HashSet<>();
         for (int num: nums) {
             numSet.add(num);
         }
 
         int expectedNumCount = nums.length + 1;
         for (int i = 0; i < expectedNumCount; i++) {
-            if (numSet.contains(i) == false) {
+            if (!numSet.contains(i)) {
                 return i;
             }
         }
@@ -139,18 +139,18 @@ class Solution4And5 {
 // S6: Math
 class Solution6 {
     public int missingNumber(int[] nums) {
-        /**
+        /*
          S6: HashSet <key = value of element, value = count> two pass
          2 pass, build hashmap + check with counter++
          */
-        Set<Integer> numSet = new HashSet<Integer>();
+        Set<Integer> numSet = new HashSet<>();
         for (int num: nums) {
             numSet.add(num);
         }
 
         int expectedNumCount = nums.length + 1;
         for (int i = 0; i < expectedNumCount; i++) {
-            if (numSet.contains(i) == false) {
+            if (!numSet.contains(i)) {
                 return i;
             }
         }
@@ -161,7 +161,7 @@ class Solution6 {
 // S7: bit operation
 class Solution7 {
     public int missingNumber(int[] nums) {
-        /**
+        /*
          S7: Bit Manipulation: A XOR A will be 0, so let the nums XOR the array
          */
         int target = nums.length;

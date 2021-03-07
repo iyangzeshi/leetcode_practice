@@ -133,10 +133,9 @@ class Solution1 {
             return null;
         }
         HashMap<Node, Node> oldToNew = new HashMap<>(); // old Node to corresponding new node
-        Node cur = node;
         Node curCopy = new Node(node.val);
-        oldToNew.put(cur, curCopy);
-        bfs(cur, oldToNew);
+        oldToNew.put(node, curCopy);
+        bfs(node, oldToNew);
         return curCopy;
     }
     
@@ -198,12 +197,12 @@ private class Node {
 
     public Node() {
         val = 0;
-        neighbors = new ArrayList<Node>();
+        neighbors = new ArrayList<>();
     }
 
     public Node(int _val) {
         val = _val;
-        neighbors = new ArrayList<Node>();
+        neighbors = new ArrayList<>();
     }
 
     public Node(int _val, ArrayList<Node> _neighbors) {

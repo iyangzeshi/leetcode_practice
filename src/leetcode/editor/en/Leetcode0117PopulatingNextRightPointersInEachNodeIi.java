@@ -64,8 +64,8 @@ public class Leetcode0117PopulatingNextRightPointersInEachNodeIi {
 		System.out.println();
 	}
 //leetcode submit region begin(Prohibit modification and deletion)
-/*
 // Definition for a Node.
+/*
 class Node {
     public int val;
     public Node left;
@@ -100,15 +100,15 @@ class Solution {
 			return root;
 		}
 		leftmost[0] = root;
-		Node curr = leftmost[0];
+		Node cur = leftmost[0];
 		while (leftmost[0] != null) {
 			prev[0] = null;
-			curr = leftmost[0];
+			cur = leftmost[0];
 			leftmost[0] = null;
-			while (curr != null) {
-				processChild(curr.left, prev, leftmost);
-				processChild(curr.right, prev, leftmost);
-				curr = curr.next;
+			while (cur != null) {
+				processChild(cur.left, prev, leftmost);
+				processChild(cur.right, prev, leftmost);
+				cur = cur.next;
 			}
 		}
 		return root;
@@ -137,7 +137,7 @@ class Solution1 {
 			return root;
 		}
 
-		Queue<Node> queue = new LinkedList<Node>();
+		Queue<Node> queue = new LinkedList<>();
 		queue.add(root);
 
 		while (!queue.isEmpty()) {

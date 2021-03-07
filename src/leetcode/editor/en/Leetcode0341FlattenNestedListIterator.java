@@ -112,10 +112,10 @@ public class NestedIterator implements Iterator<Integer> {
     }
 }
 
-/**
- * Your NestedIterator object will be instantiated and called as such:
- * NestedIterator i = new NestedIterator(nestedList);
- * while (i.hasNext()) v[f()] = i.next();
+/*
+  Your NestedIterator object will be instantiated and called as such:
+  NestedIterator i = new NestedIterator(nestedList);
+  while (i.hasNext()) v[f()] = i.next();
  */
 //leetcode submit region end(Prohibit modification and deletion)
 

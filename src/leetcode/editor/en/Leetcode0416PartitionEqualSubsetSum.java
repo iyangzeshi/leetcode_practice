@@ -513,8 +513,7 @@ class Solution2_1 {
         }
 
         // general case
-        boolean res = dfs(idx + 1, remainSum, nums) || dfs(idx + 1, remainSum - nums[idx], nums);
-        return res;
+        return dfs(idx + 1, remainSum, nums) || dfs(idx + 1, remainSum - nums[idx], nums);
     }
 
     private void decreasingOrder(int[] nums) {

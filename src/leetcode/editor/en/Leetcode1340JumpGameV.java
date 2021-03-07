@@ -148,10 +148,14 @@ class Solution {
         if (index == 0 && arr[index] <= arr[index + 1] || index == len - 1 && arr[index] <= arr[index - 1]) {
             return true;
         }
+        /*
         if (index - 1 >= 0 && index + 1 <= len - 1 && arr[index - 1] >= arr[index] && arr[index] <= arr[index + 1]) {
             return true;
         }
         return false;
+         */
+        return index - 1 >= 0 && index + 1 <= len - 1 && arr[index - 1] >= arr[index]
+                && arr[index] <= arr[index + 1];
     }
     
 }

@@ -110,8 +110,7 @@ class Solution1_1 {
         char[] chars2 = word2.toCharArray();
         int len1 = chars1.length;
         int len2 = chars2.length;
-        int res = dfs(len1 - 1, len2 - 1, chars1, chars2);
-        return res;
+        return dfs(len1 - 1, len2 - 1, chars1, chars2);
     }
     
     private int dfs(int idx1, int idx2, char[] chars1, char[] chars2) {
@@ -159,8 +158,7 @@ class Solution1_2 {
         int len1 = chars1.length;
         int len2 = chars2.length;
         Integer[][] mem = new Integer[len1][len2];
-        int res = dfs(len1 - 1, len2 - 1, chars1, chars2, mem);
-        return res;
+        return dfs(len1 - 1, len2 - 1, chars1, chars2, mem);
     }
     
     private int dfs(int idx1, int idx2, char[] chars1, char[] chars2, Integer[][] mem) {

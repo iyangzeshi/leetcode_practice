@@ -62,7 +62,7 @@ public class Leetcode0151ReverseWordsInAString{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // S2: reverse each word and then reverse whole string
+    
     public String reverseWords(String s) {
         s = removeMultiSpace(s);
         if(s == null || s.length() <= 0) {
@@ -90,8 +90,7 @@ class Solution {
             left = i;
         }
         reverse(chars, 0, length - 1);
-        String str = new String(chars);
-        return str;
+        return  String.valueOf(chars);
     }
 
     private String removeMultiSpace(String s) {
@@ -133,7 +132,7 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: using library function trim()
 class Solution1 {
-    //S1: trim(), and split(), and then reverse
+    
     public String reverseWords(String s) {
         s = s.trim();
         // 在 Java 中，\\ 表示：我要插入一个正则表达式的反斜线
@@ -146,9 +145,10 @@ class Solution1 {
         return String.join(" ", words);
     }
 }
+
 // Solution 2: write the function by ourselves
 class Solution2 {
-    // S2: reverse each word and then reverse whole string
+
     public String reverseWords(String s) {
         s = removeMultiSpace(s);
         if(s == null || s.length() <= 0) {
@@ -176,8 +176,7 @@ class Solution2 {
             left = i;
         }
         reverse(chars, 0, length - 1);
-        String str = new String(chars);
-        return str;
+        return  String.valueOf(chars);
     }
 
     private String removeMultiSpace(String s) {

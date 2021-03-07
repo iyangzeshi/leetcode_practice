@@ -68,14 +68,13 @@ class Solution {
             return nums.length;
         }
         int slow = 0;
-        int fast = 1;
 
         //S2:
         // [0, s] solution so far
         // (s, f) explored and i don't care / will be update or assign
         // [f, length - 1] unknown to explore
 
-        for(fast = 1; fast < nums.length; fast++) {
+        for(int fast = 1; fast < nums.length; fast++) {
             if (nums[slow] != nums[fast]) {
                 nums[++slow] = nums[fast];
             }
@@ -94,14 +93,13 @@ class Solution1 {
             return nums.length;
         }
         int slow = 1;
-        int fast = 1;
 
         //S1:
         // [0, s) solution so far
         // [s, f) explored and i don't care / will be update or assign
         // [f, length - 1] unknown to explore
 
-        for(fast = 1; fast < nums.length; fast++) {
+        for(int fast = 1; fast < nums.length; fast++) {
             if (nums[slow - 1] != nums[fast]) {
                 nums[slow++] = nums[fast];
             }
@@ -119,14 +117,13 @@ class Solution2 {
             return nums.length;
         }
         int slow = 0;
-        int fast = 1;
 
         //S2:
         // [0, s] solution so far
         // (s, f) explored and i don't care / will be update or assign
         // [f, length - 1] unknown to explore
 
-        for(fast = 1; fast < nums.length; fast++) {
+        for(int fast = 1; fast < nums.length; fast++) {
             if (nums[slow] != nums[fast]) {
                 nums[++slow] = nums[fast];
             }

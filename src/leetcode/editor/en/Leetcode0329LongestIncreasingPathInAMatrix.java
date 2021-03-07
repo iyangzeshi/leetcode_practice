@@ -76,9 +76,9 @@ class Solution {
 	}
 	
 	/**
-	 * @param matrix
-	 * @param i:      row indx
-	 * @param j:      col indx
+	 * @param matrix given matrix
+	 * @param i:      row index
+	 * @param j:      col index
 	 * @param preVal: previous number
 	 * @param mem:    the memory to store the max lengh starting from matrix[i][j]
 	 * @return: find the longest longest Increasing path starting from matrix[i][j]
@@ -184,9 +184,9 @@ class Solution1_2 {
 	}
 	
 	/**
-	 * @param matrix
-	 * @param i:      row indx
-	 * @param j:      col indx
+	 * @param matrix given matrix
+	 * @param i:      row index
+	 * @param j:      col index
 	 * @param preVal: previous number
 	 * @param mem:    the memory to store the max lengh starting from matrix[i][j]
 	 * @return: find the longest longest Increasing path starting from matrix[i][j]

@@ -83,15 +83,13 @@ class Solution {
 		boolean[] pool = new boolean[maxChoosableInteger + 1];
 		Arrays.fill(pool, true);
 		Map<String, Boolean> mem = new HashMap<>();
-		boolean res = dfs(pool, 0, desiredTotal, maxChoosableInteger, mem);
-		return res;
+		return dfs(pool, 0, desiredTotal, maxChoosableInteger, mem);
 	}
 	
 	/**
 	 * @param pool:               if number i is available, the pool[i] is true
 	 * @param curSum:             the current sum
 	 * @param desiredTotal:       desired total number
-	 * @param maxChoosableInteger
 	 * @return: true if win
 	 */
 	private boolean dfs(boolean[] pool, int curSum, int desiredTotal, int maxChoosableInteger,
@@ -155,7 +153,6 @@ class Solution1_1 {
 	 * @param pool:               if number i is available, the pool[i] is true
 	 * @param curSum:             the current sum
 	 * @param desiredTotal:       desired total number
-	 * @param maxChoosableInteger
 	 * @return: true if win
 	 */
 	private boolean dfs(boolean[] pool, int curSum, int desiredTotal,
@@ -208,15 +205,13 @@ class Solution1_2 {
 		boolean[] pool = new boolean[maxChoosableInteger + 1];
 		Arrays.fill(pool, true);
 		Map<String, Boolean> mem = new HashMap<>();
-		boolean res = dfs(pool, 0, desiredTotal, maxChoosableInteger, mem);
-		return res;
+		return dfs(pool, 0, desiredTotal, maxChoosableInteger, mem);
 	}
 	
 	/**
 	 * @param pool:               if number i is available, the pool[i] is true
 	 * @param curSum:             the current sum
 	 * @param desiredTotal:       desired total number
-	 * @param maxChoosableInteger
 	 * @return: true if win
 	 */
 	private boolean dfs(boolean[] pool, int curSum, int desiredTotal, int maxChoosableInteger,
@@ -275,15 +270,13 @@ class Solution1_3 {
 		ArrayList<Boolean> pool = new ArrayList<>(Arrays.asList(available));
 		
 		Map<ArrayList<Boolean>, Boolean> mem = new HashMap<>();
-		boolean res = dfs(pool, 0, desiredTotal, maxChoosableInteger, mem);
-		return res;
+		return dfs(pool, 0, desiredTotal, maxChoosableInteger, mem);
 	}
 	
 	/**
 	 * @param pool:               if number i is available, the pool[i] is true
 	 * @param curSum:             the current sum
 	 * @param desiredTotal:       desired total number
-	 * @param maxChoosableInteger
 	 * @return: true if win
 	 */
 	private boolean dfs(ArrayList<Boolean> pool, int curSum, int desiredTotal,
@@ -306,7 +299,7 @@ class Solution1_3 {
 		for (int i = 1; i <= maxChoosableInteger; i++) {
 			if (pool.get(i)) {
 				pool.set(i, false);
-				boolean res = dfs(new ArrayList<Boolean>(pool), curSum + i, desiredTotal,
+				boolean res = dfs(new ArrayList<>(pool), curSum + i, desiredTotal,
 						maxChoosableInteger, mem);
 				pool.set(i, true);// backtracking
 				if (!res) {
@@ -341,15 +334,13 @@ class Solution1_4 {
 		
 		int pool = (1 << maxChoosableInteger) - 1;
 		Boolean[] mem = new Boolean[pool + 1];
-		boolean res = dfs(pool, 0, desiredTotal, maxChoosableInteger, mem);
-		return res;
+		return dfs(pool, 0, desiredTotal, maxChoosableInteger, mem);
 	}
 	
 	/**
 	 * @param pool:               if number i is available, the pool[i] is true
 	 * @param curSum:             the current sum
 	 * @param desiredTotal:       desired total number
-	 * @param maxChoosableInteger
 	 * @return: true if win
 	 */
 	private boolean dfs(int pool, int curSum, int desiredTotal, int maxChoosableInteger,

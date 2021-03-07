@@ -69,20 +69,20 @@ public class Leetcode0138CopyListWithRandomPointer{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-    /*
-    // Definition for a Node.
-    class Node {
-        int val;
-        Node next;
-        Node random;
+// Definition for a Node.
+/*
+class Node {
+    int val;
+    Node next;
+    Node random;
 
-        public Node(int val) {
-            this.val = val;
-            this.next = null;
-            this.random = null;
-        }
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
     }
-    */
+}
+*/
 class Solution {
     
     public Node copyRandomList(Node head) {
@@ -93,9 +93,8 @@ class Solution {
         
         HashMap<Node, Node> map = new HashMap<>(); // original node to copy node
         Node cur1 = head;
-        
-        Node dummy = new Node(-1);
-        Node prev2 = dummy;
+    
+        Node prev2 = new Node(-1);
         Node cur2;
         
         while(cur1 != null) {
@@ -156,9 +155,8 @@ class Solution2 {
 
         HashMap<Node, Node> map = new HashMap<>(); // original node to copy node
         Node cur1 = head;
-        
-        Node dummy = new Node(-1);
-        Node prev2 = dummy;
+    
+        Node prev2 = new Node(-1);
         Node cur2;
 
         while(cur1 != null) {

@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.TreeMap;
-import org.jetbrains.annotations.NotNull;
 
 // 2020-07-27 17:43:01
 // Zeshi Yang
@@ -125,7 +124,7 @@ class Solution1_1 {
     }
 }
 
-// Solution 1_2: count boundaries, 对point进行排序，放到Map里面，start的话+1， end - 1
+// Solution 1_2: count boundaries, 对point进行排序，放到Map里面，start的话 + 1， end - 1
 // T(n) = O(nlog(n)), S(n) = O(n)
 // 12 ms,击败了13.98% 的Java用户, 40.2 MB,击败了15.62% 的Java用户
 class Solution1_2 {
@@ -155,7 +154,7 @@ class Solution1_2 {
 }
 
 
-// Solution 2: 把interval按照start time的升序排序
+// Solution 2: heap, 把interval按照start time的升序排序
 // T(n) = O(nlog(n)), S(n) = O(n)
 
 // Solution 2_1 消耗资源： 6 ms,击败了74.49% 的Java用户，39 MB,击败了41.59% 的Java用户
@@ -265,7 +264,7 @@ class FollowupSolution1 {
         return roomAndIntervals(roomId, roomToInterval);
     }
     
-    private List<Point> getAndSortPoints( @NotNull int[][] intervals) {
+    private List<Point> getAndSortPoints(int[][] intervals) {
         List<Point> points = new ArrayList<>();
         for (int i = 0; i < intervals.length; i++) {
             int[] interval = intervals[i]; // --> O(n)
@@ -354,7 +353,7 @@ class FollowupSolution2 {
             allocator.offer(room);
         }
         List<Room> rooms = new ArrayList<>(allocator);
-        rooms.sort((o1, o2) -> (o1.id - o2.id));
+        rooms.sort(Comparator.comparingInt(o -> o.id));
         for (Room room : rooms) {
             String roomAndIntervals = room.toString();
             res.add(roomAndIntervals);

@@ -122,6 +122,7 @@ public class Leetcode0642DesignSearchAutocompleteSystem{
 //        System.out.println(autocompleteSystem.input('a'));
 //        System.out.println(autocompleteSystem.input('#'));
     }
+    // TODO
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
 思路:把所有的句子分成字母，组成TrieNode，连在一起。
@@ -281,6 +282,7 @@ class AutocompleteSystem1 {
             } else {
                 countBook.put(insertMe, count + 1);
             }
+            // countBook.put(insertMe, countBook.getOrDefault(insertMe, 0) + 1);
             insert(insertMe, countBook.get(insertMe)); // 将输入后的变化更新到Trie中
             path = new StringBuilder();
             return new ArrayList<>(); // 输入结束，return an empty list
@@ -371,7 +373,7 @@ class AutocompleteSystem2_1 {
         }
         
         public List<String> getTop3() {
-            candidates.sort(new Comparator<String>() {
+            candidates.sort(new Comparator<>() {
                 @Override
                 public int compare(String o1, String o2) {
                     if (!countMap.get(o1).equals(countMap.get(o2))) {
@@ -435,7 +437,7 @@ class AutocompleteSystem2_1 {
         }
         
         public List<String> search(char ch) {
-            if (cur == null) { // TODO to be deleted
+            if (cur == null) {
                 return new ArrayList<>();
             }
             int idx = (ch >= 'a' && ch <= 'z') ? ch - 'a' : 26;
@@ -469,7 +471,7 @@ class AutocompleteSystem2_1 {
     public List<String> input(char c) {
         if (c == '#') {
             String word = path.toString();
-//            path.delete(0, path.length()); // means deleted from [0, path.length())
+            // path.delete(0, path.length()); // means deleted from [0, path.length())
             path.setLength(0);
             this.trie.insert(word);
             return new ArrayList<>();
@@ -503,7 +505,7 @@ class AutocompleteSystem2_2 {
         }
         
         public List<String> getTop3() {
-            candidates.sort(new Comparator<String>() {
+            candidates.sort(new Comparator<>() {
                 @Override
                 public int compare(String o1, String o2) {
                     if (!countMap.get(o1).equals(countMap.get(o2))) {
@@ -625,7 +627,7 @@ class AutocompleteSystem2_3 {
             }
             
             public List<String> getTop3() {
-                candidates.sort(new Comparator<String>() {
+                candidates.sort(new Comparator<>() {
                     @Override
                     public int compare(String o1, String o2) {
                         if (!countMap.get(o1).equals(countMap.get(o2))) {

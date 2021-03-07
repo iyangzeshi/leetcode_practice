@@ -44,7 +44,7 @@ class Solution {
         int len = s.length();
         Boolean[][] isPal = findPal(s); // upper triangular matrix
         Integer[] memo = new Integer[len];
-        dfs(0, isPal, s, new ArrayList<String>(), res);
+        dfs(0, isPal, s, new ArrayList<>(), res);
         return res;
     }
     

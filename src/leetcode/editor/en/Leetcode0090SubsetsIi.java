@@ -34,10 +34,10 @@ public class Leetcode0090SubsetsIi{
     public static void main(String[] args) {
         Solution sol = new Leetcode0090SubsetsIi().new Solution();
         // TO TEST
-//        ArrayList<Integer> prev = new ArrayList<>();
-//        prev.add(1);
-//        ArrayList<Integer> cur = null;
-//        System.out.println(prev.equals(cur));
+/*        ArrayList<Integer> prev = new ArrayList<>();
+        prev.add(1);
+        ArrayList<Integer> cur = null;
+        System.out.println(prev.equals(cur));*/
         int[] nums = {1,2,2};
         List<List<Integer>> res = sol.subsetsWithDup(nums);
         System.out.println(res);
@@ -59,7 +59,7 @@ class Solution {
         ArrayList<Integer> numList = new ArrayList<>();
         int size;
         numberQueue.offer(new ArrayList<>(numList));
-        indexQueue.offer(new ArrayList<Integer>() {{
+        indexQueue.offer(new ArrayList<>() {{
                              add(-1);
                          }}
         );
@@ -120,7 +120,7 @@ class Solution1 {
         ArrayList<Integer> numList = new ArrayList<>();
         int size;
         numberQueue.offer(new ArrayList<>(numList));
-        indexQueue.offer(new ArrayList<Integer>() {{
+        indexQueue.offer(new ArrayList<>() {{
                              add(-1);
                          }}
         );
@@ -230,7 +230,7 @@ class Solution3 {
         if (idx == nums.length) {
             return;
         }
-        Integer prev = idx;
+        int prev = idx;
         for (int i = idx; i < nums.length; i++) {
             if (i != idx && nums[i] == nums[prev]) { // 去重
                 continue;

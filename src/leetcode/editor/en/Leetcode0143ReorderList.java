@@ -62,7 +62,6 @@ class Solution {
         ListNode head1 = head;
         ListNode head2 = reverse(temp);
         ListNode dummy = new ListNode(0);
-        temp = dummy;
         merge(head1, head2);
     }
 

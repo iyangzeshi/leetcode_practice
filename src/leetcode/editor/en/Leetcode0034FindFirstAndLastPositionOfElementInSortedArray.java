@@ -55,29 +55,47 @@ class Solution {
     }
 
     // To find the left index, we need to move left even we find the target
-    private int findLeftIndex(int[] nums, int target){
-        int left =0, right =nums.length - 1, mid = 0;
-        while(left + 1 < right){
+    private int findLeftIndex(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        int mid = 0;
+        while (left + 1 < right) {
             mid = left + (right - left) / 2;
-            if (nums[mid] < target) left = mid;
-            else right = mid;
+            if (nums[mid] < target) {
+                left = mid;
+            } else {
+                right = mid;
+            }
         }
-        if(nums[left] == target) return left;
-        else if(nums[right] == target) return right;
-        else return -1;
+        if (nums[left] == target) {
+            return left;
+        } else if (nums[right] == target) {
+            return right;
+        } else {
+            return -1;
+        }
     }
 
     // To find the right index, we need to move right even we find the target
-    private int findRightIndex(int[] nums, int target){
-        int left =0, right =nums.length - 1, mid = 0;
-        while(left + 1 < right){
+    private int findRightIndex(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        int mid = 0;
+        while (left + 1 < right) {
             mid = left + (right - left) / 2;
-            if (nums[mid] > target) right = mid;
-            else left = mid;
+            if (nums[mid] > target) {
+                right = mid;
+            } else {
+                left = mid;
+            }
         }
-        if(nums[right] == target) return right;
-        else if(nums[left] == target) return left;
-        else return -1;
+        if (nums[right] == target) {
+            return right;
+        } else if (nums[left] == target) {
+            return left;
+        } else {
+            return -1;
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

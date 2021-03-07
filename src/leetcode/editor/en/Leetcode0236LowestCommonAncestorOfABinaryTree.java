@@ -184,7 +184,7 @@ class Solution1 {
         if (left != null && right != null) {
             return root;
         }
-        /**
+        /*
          if (left != null) {
          return left;
          }

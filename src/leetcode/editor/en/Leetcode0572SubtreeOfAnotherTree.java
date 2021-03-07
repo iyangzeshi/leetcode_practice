@@ -90,7 +90,7 @@ class Solution {
         }
         if (isSame(s, t)) {
             return true;
-        };
+        }
         return isSubtree(s.left, t) || isSubtree(s.right, t);
     }
 

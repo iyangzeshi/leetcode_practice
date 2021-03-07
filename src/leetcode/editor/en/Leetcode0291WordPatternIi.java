@@ -198,7 +198,7 @@ class Solution2 {
                 leftLen -= dict.containsKey(c) ? dict.get(c).length() : 1;
             }
         }
-        return (int) (leftLen / count);
+        return leftLen / count;
     }
     
 }

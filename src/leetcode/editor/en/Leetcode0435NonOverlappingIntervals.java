@@ -49,6 +49,8 @@
 package leetcode.editor.en;
 
 import java.util.Arrays;
+import java.util.Comparator;
+
 // 2020-12-22 20:50:08
 // Zeshi Yang
 public class Leetcode0435NonOverlappingIntervals{
@@ -71,7 +73,7 @@ class Solution {
             return 0;
         }
         
-        Arrays.sort(intervals, (o1, o2) -> o1[1] - o2[1]); // O(nlogn)
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[1])); // O(nlogn)
         
         int count = 0;
         int curEnd = intervals[0][1];
@@ -98,7 +100,7 @@ class Solution1 {
             return 0;
         }
         
-        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]); // O(nlogn)
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0])); // O(nlogn)
         
         int count = 0;
         int curEnd = intervals[0][1];
@@ -140,7 +142,7 @@ class Solution2 {
             return 0;
         }
         
-        Arrays.sort(intervals, (o1, o2) -> o1[1] - o2[1]); // O(nlogn)
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[1])); // O(nlogn)
         
         int count = 0;
         int curEnd = intervals[0][1];

@@ -62,8 +62,8 @@ public class Leetcode0116PopulatingNextRightPointersInEachNode{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-/*
 // Definition for a Node.
+/*
 class Node {
     public int val;
     public Node left;
@@ -189,5 +189,6 @@ private class Node {
         right = _right;
         next = _next;
     }
-};
+}
+
 }

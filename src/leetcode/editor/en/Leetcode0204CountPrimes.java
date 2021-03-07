@@ -59,30 +59,6 @@ public class Leetcode0204CountPrimes{
 class Solution {
     
     public int countPrimes(int n) {
-        /*if (n <= 2) {
-            return 0;
-        }
-        List<Integer> primeList = new ArrayList<>(n);
-        primeList.add(2);
-        int count = 1;
-        for (int num = 3; num < n; num++) {
-            boolean isPrime = true; // whether num is prime
-            int sqrt = (int) Math.sqrt(num);
-            for (int prime : primeList) {
-                if (prime > sqrt) {
-                    break;
-                }
-                if (num % prime == 0) {
-                    isPrime = false;
-                    break;
-                }
-            }
-            if (isPrime) {
-                count++;
-                primeList.add(num);
-            }
-        }
-        return count;*/
         int cnt = 0;
         int[] primes = new int[n];//用于存取质数的值
         boolean[] isPrime = new boolean[n];//判断所存的所有的质数，初始认为都是质数

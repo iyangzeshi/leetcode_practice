@@ -179,8 +179,7 @@ class Solution3 {
         if (k == 0 || k == n * (n - 1) / 2) {
             return 1;
         }
-        int res =  (int) (nkInversePairs(n, k, dp) % module);
-        return res;
+        return (int) (nkInversePairs(n, k, dp) % module);
     }
     
     private long nkInversePairs(int n, int k, Long[][] dp) {

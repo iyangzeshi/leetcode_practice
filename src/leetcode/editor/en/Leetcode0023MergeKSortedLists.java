@@ -17,6 +17,7 @@
 
 package leetcode.editor.en;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -123,7 +124,7 @@ class Solution1 {
         ListNode head = null;
         ListNode cur = null;
         PriorityQueue<ListNode> minHeap = new PriorityQueue<>(lists.length,
-                (o1, o2) -> o1.val - o2.val);
+                Comparator.comparingInt(o -> o.val));
         for (ListNode list : lists) {
             if (list != null) {
                 minHeap.offer(list);

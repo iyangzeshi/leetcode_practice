@@ -57,7 +57,7 @@ public class Leetcode0222CountCompleteTreeNodes{
  */
 class Solution {
 
-    private Map<TreeNode, Integer> map = new HashMap<TreeNode, Integer>();
+    private Map<TreeNode, Integer> map = new HashMap<>();
 
     public int countNodes(TreeNode root) {
         if(root == null) return 0;
@@ -138,7 +138,7 @@ class Solution2_1 {
 }
 class Solution2_2 {
     // Solution 2: 在solution 2_1的基础上优化，那些TreeNode的高度，避免重复运算
-    private Map<TreeNode, Integer> map = new HashMap<TreeNode, Integer>();
+    private Map<TreeNode, Integer> map = new HashMap<>();
 
     public int countNodes(TreeNode root) {
         if(root == null) return 0;

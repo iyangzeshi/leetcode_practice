@@ -230,5 +230,6 @@ private class Node {
         left = _left;
         right = _right;
     }
-};
+}
+
 }

@@ -66,7 +66,6 @@ class Solution {
 
         // case 2: not add num at level
         getResult(n, k, level + 1, list, result);
-        return;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -132,7 +131,6 @@ class Solution2 {
 
         // case 2: not add num at level
         getResult(n, k, level + 1, list, result);
-        return;
     }
 }
 }

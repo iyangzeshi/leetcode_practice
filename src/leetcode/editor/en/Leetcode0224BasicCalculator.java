@@ -157,7 +157,7 @@ class Solution1 {
                 operStack.pop(); // pop '('
 
             } else if (ch == ' ') { // 如果是空的话,什么都不做
-
+                continue;
             } else { // 其他符号的画,说明有问题
                 throw new RuntimeException("should never happen");
             }

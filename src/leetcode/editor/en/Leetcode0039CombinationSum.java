@@ -66,59 +66,56 @@ public class Leetcode0039CombinationSum{
 //leetcode submit region begin(Prohibit modification and deletion)
 // Solution 2: BFS 第1类搜索树
 class Solution {
+    
     //Zeshi Yang's code
     // BFS 第1类搜索树
     // if sum == target, size--;答案里加上这个答案
     // if sum > target， size--; continue
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> result = new ArrayList<>();
-
+        
         // corner case
         if (candidates == null) {
             return result;
         }
-
+        
         Queue<ArrayList<Integer>> queue = new LinkedList<>();
         Queue<Integer> sums = new LinkedList<>(); // 用这个来储存list的求和
         ArrayList<Integer> temp = new ArrayList<>();
-
+        
         int size = 0;
         int sum = 0;
         int length = candidates.length;
-
-        queue.offer(new ArrayList(temp));
+        
+        queue.offer(new ArrayList<>(temp));
         sums.add(0);
-        while (queue.isEmpty() == false) {
+        while (!queue.isEmpty()) {
             size = queue.size();
             while (size > 0) {
                 temp = queue.poll();
                 sum = sums.poll();
-
+                
                 if (sum == target) {
                     size--;
-                    result.add(new ArrayList(temp));
-                }
-                else if (sum > target) {
+                    result.add(new ArrayList<>(temp));
+                } else if (sum > target) {
                     size--;
-                    continue;
-                }
-                else {
+                } else {
                     int index = 0;
                     if (temp.size() == 0) {
                         index = 0;
-                    }
-                    else {
+                    } else {
                         int lastNumOfTemp = temp.get(temp.size() - 1);
                         index = indexOf(candidates, lastNumOfTemp);
                     }
-
+                    
                     for (int i = index; i < length; i++) {
                         sum += candidates[i];
-
+                        
                         sums.add(sum);
                         temp.add(candidates[i]);
-                        queue.add(new ArrayList(temp));
-
+                        queue.add(new ArrayList<>(temp));
+                        
                         temp.remove(temp.size() - 1);
                         sum -= candidates[i];
                     }
@@ -126,10 +123,10 @@ class Solution {
                 }
             }
         }
-
+        
         return result;
     }
-
+    
     private int indexOf(int[] array, int num) {
         int length = array.length;
         for (int i = 0; i < length; i++) {
@@ -139,6 +136,7 @@ class Solution {
         }
         return -1;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
@@ -166,9 +164,9 @@ class Solution1 {
         int sum = 0;
         int length = candidates.length;
         
-        queue.offer(new ArrayList(temp));
+        queue.offer(new ArrayList<>(temp));
         sums.add(0);
-        while (queue.isEmpty() == false) {
+        while (!queue.isEmpty()) {
             size = queue.size();
             while (size > 0) {
                 temp = queue.poll();
@@ -176,7 +174,7 @@ class Solution1 {
                 
                 if (sum == target) {
                     size--;
-                    result.add(new ArrayList(temp));
+                    result.add(new ArrayList<>(temp));
                 } else if (sum > target) {
                     size--;
                     continue;
@@ -194,7 +192,7 @@ class Solution1 {
                         
                         sums.add(sum);
                         temp.add(candidates[i]);
-                        queue.add(new ArrayList(temp));
+                        queue.add(new ArrayList<>(temp));
                         
                         temp.remove(temp.size() - 1);
                         sum -= candidates[i];
@@ -247,7 +245,7 @@ class Solution2 {
             return;
         }
         if (sum == target) {
-            result.add(new ArrayList(list));
+            result.add(new ArrayList<>(list));
             return;
         }
         int length = candidates.length;

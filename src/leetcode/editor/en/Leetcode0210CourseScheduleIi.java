@@ -271,7 +271,7 @@ class Solution2 {
             int prev = prerequisite[1];
             int cur = prerequisite[0];
             inDegree[cur]++;
-            map.computeIfAbsent(prev, k -> new LinkedList<Integer>()).add(cur);
+            map.computeIfAbsent(prev, k -> new LinkedList<>()).add(cur);
         }
         return map;
     }

@@ -69,12 +69,12 @@ class Node {
     
     
     public Node() {
-        children = new ArrayList<Node>();
+        children = new ArrayList<>();
     }
     
     public Node(int _val) {
         val = _val;
-        children = new ArrayList<Node>();
+        children = new ArrayList<>();
     }
     
     public Node(int _val,ArrayList<Node> _children) {
@@ -114,10 +114,9 @@ class Solution {
             return null;
         }
         HashMap<Node, Node> oldToNew = new HashMap<>(); // old Node to corresponding new node
-        Node cur = root;
         Node curCopy = new Node(root.val);
-        oldToNew.put(cur, curCopy);
-        bfs(cur, oldToNew);
+        oldToNew.put(root, curCopy);
+        bfs(root, oldToNew);
         return curCopy;
     }
     

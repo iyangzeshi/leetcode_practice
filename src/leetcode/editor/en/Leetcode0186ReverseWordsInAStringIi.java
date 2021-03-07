@@ -49,7 +49,6 @@ public class Leetcode0186ReverseWordsInAStringIi{
             }
 
             reverse(s, 0, length - 1);
-            return;
         }
 
         private void reverse(char[] arr, int start, int end) {

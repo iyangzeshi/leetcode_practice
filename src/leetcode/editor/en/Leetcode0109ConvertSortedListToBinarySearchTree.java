@@ -39,15 +39,15 @@ public class Leetcode0109ConvertSortedListToBinarySearchTree {
 		System.out.println();
 	}
 //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
+/*
+  Definition for singly-linked list.
+  public class ListNode {
+      int val;
+      ListNode next;
+      ListNode() {}
+      ListNode(int val) { this.val = val; }
+      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+  }
  */
 	/**
 	 * Definition for a binary tree node.
@@ -66,33 +66,38 @@ public class Leetcode0109ConvertSortedListToBinarySearchTree {
 	 */
 // Solution 2: recursion 二等分 + HashMap
 class Solution {
-	// Solution 2: HashMap
+	
 	public TreeNode sortedListToBST(ListNode head) {
 		//corner case
-		if(head == null) return null;
-		if(head.next == null) return new TreeNode(head.val);
-		HashMap<Integer, ListNode> map = new HashMap<Integer, ListNode>();
+		if (head == null) {
+			return null;
+		}
+		if (head.next == null) {
+			return new TreeNode(head.val);
+		}
+		HashMap<Integer, ListNode> map = new HashMap<>();
 		int count = 0;
 		ListNode cur = head;
-		while(cur != null){
+		while (cur != null) {
 			map.put(count, cur);
 			count++;
 			cur = cur.next;
 		}
-		TreeNode root = helper(0, count-1, map);
-		return root;
+		return helper(0, count - 1, map);
 	}
-
-	private TreeNode helper(int start, int end, HashMap<Integer, ListNode> map){
+	
+	private TreeNode helper(int start, int end, HashMap<Integer, ListNode> map) {
 		//base case
-		if(start > end) return null;
-		int mid = start + (end - start)/2;
+		if (start > end) {
+			return null;
+		}
+		int mid = start + (end - start) / 2;
 		TreeNode root = new TreeNode(map.get(mid).val);
-		root.left = helper(start, mid-1, map);
-		root.right = helper(mid+1, end, map);
+		root.left = helper(start, mid - 1, map);
+		root.right = helper(mid + 1, end, map);
 		return root;
 	}
-
+	
 }
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: 普通做法，recursion 二等分 T(n) = O(nlog(n))
@@ -157,8 +162,7 @@ class Solution2 {
 			count++;
 			cur = cur.next;
 		}
-		TreeNode root = helper(0, count - 1, map);
-		return root;
+		return helper(0, count - 1, map);
 	}
 
 	private TreeNode helper(int start, int end, HashMap<Integer, ListNode> map) {

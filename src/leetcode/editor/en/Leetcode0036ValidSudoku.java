@@ -127,7 +127,7 @@ class Solution {
                 else {
                     set.add(temp);
                 }
-                /** 或者将上面的if else语句改成如下
+                /* 或者将上面的if else语句改成如下
                  如果set已经有temp的话，set.add()返回false；否则添加temp，返回true
                  if (temp != '.' && !set.add(temp)) {
                  return false;

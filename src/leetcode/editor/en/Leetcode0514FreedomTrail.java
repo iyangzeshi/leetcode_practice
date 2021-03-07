@@ -81,7 +81,7 @@ class Solution {
         int ringLen = ring.length();
         int keyLen = key.length();
         int[][] dp = new int[keyLen][ringLen];
-        int min = Integer.MAX_VALUE;;
+        int min = Integer.MAX_VALUE;
         for (int i = 0; i < keyLen; i++) {
             min = Integer.MAX_VALUE; // 注意这里要重置min，否则下面取min就无法实现count到下一个i的min
             for (int j = 0; j < ringLen; j++) {

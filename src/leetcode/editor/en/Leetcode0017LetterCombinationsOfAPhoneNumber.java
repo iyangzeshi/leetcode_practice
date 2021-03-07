@@ -18,12 +18,7 @@
 // Although the above answer is in lexicographical order, your answer could be i
 //n any order you want. 
 // Related Topics String Backtracking
-/**
- * @ClassName: Leetcode17LetterCombinationsOfAPhoneNumber
- * @Description:
- * @Author: Zeshi(Jesse) Yang
- * @Date: 2020/06/23 周二 13:20
- */
+
 package leetcode.editor.en;
 
 import java.util.HashMap;
@@ -31,6 +26,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * ClassName: Leetcode17LetterCombinationsOfAPhoneNumber
+ * Description:
+ * Author: Zeshi(Jesse) Yang
+ * Date: 2020/06/23 周二 13:20
+ */
 public class Leetcode0017LetterCombinationsOfAPhoneNumber {
 	
 	// Java: letter-combinations-of-a-phone-number
@@ -53,7 +54,7 @@ class Solution {
 			return res;
 		}
 		res.add("");
-		Map<Character, String> phone = new HashMap<Character, String>() {{
+		Map<Character, String> phone = new HashMap<>() {{
 			put('2', "abc");
 			put('3', "def");
 			put('4', "ghi");

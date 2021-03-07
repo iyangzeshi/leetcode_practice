@@ -134,12 +134,12 @@ class Solution {
         queue.offer(root);
         numCol.offer(0);
 
-        while (queue.isEmpty() == false) {
+        while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
             int col = numCol.poll();
 
             // update map
-            if (map.containsKey(col) == false) {
+            if (!map.containsKey(col)) {
                 List<Integer> temp = new ArrayList<>();
                 temp.add(node.val);
                 map.put(col, temp);

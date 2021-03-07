@@ -63,8 +63,8 @@ class Solution {
                 }
                 res.add(interval);
             } else { // has overlap between interval and newInterval
-//                newInterval[0] = Math.min(interval[0], newInterval[0]);
-//                newInterval[1] = Math.max(interval[1], newInterval[1]);
+                // newInterval[0] = Math.min(interval[0], newInterval[0]);
+                // newInterval[1] = Math.max(interval[1], newInterval[1]);
                 newInterval = new int[]{
                         Math.min(interval[0], newInterval[0]),
                         Math.max(interval[1], newInterval[1])
