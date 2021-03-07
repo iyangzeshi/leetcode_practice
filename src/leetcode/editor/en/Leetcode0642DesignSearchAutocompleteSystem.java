@@ -90,7 +90,6 @@
 package leetcode.editor.en;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -122,96 +121,125 @@ public class Leetcode0642DesignSearchAutocompleteSystem{
 //        System.out.println(autocompleteSystem.input('a'));
 //        System.out.println(autocompleteSystem.input('#'));
     }
-    // TODO
 //leetcode submit region begin(Prohibit modification and deletion)
-/**
-思路:把所有的句子分成字母，组成TrieNode，连在一起。
-每个TrieNode上面附上这个TrieNode可以到达的单词，并在适当的时候得到
- */
 class AutocompleteSystem {
-
-    class TrieNode implements Comparable<TrieNode> {
-        TrieNode[] children;
-        String s; // 最后一个字符才有的
-        int times;
-        List<TrieNode> hot;
-
-        public TrieNode() {
-            children = new TrieNode[128];
-            hot = new ArrayList<>();
-        }
-
-        @Override
-        public int compareTo(TrieNode o) {
-            if (this.times != o.times) {
-                return Integer.compare(this.times, o.times);
-            } else {
-                return this.s.compareTo(o.s);
+    
+    class Trie {
+        
+        class TrieNode {
+            
+            public int num;
+            public char ch;
+            public TrieNode[] children;
+            public List<String> candidates;
+            
+            public TrieNode(char val) {
+                num = 3;
+                this.ch = val;
+                this.children = new TrieNode[27];
+                candidates = new ArrayList<>();
             }
-        }
-
-        public void update(TrieNode node) { // 加hot list
-            if(!this.hot.contains(node)) {
-                this.hot.add(node);
+            
+            public List<String> getTop3() {
+                candidates.sort(new Comparator<>() {
+                    @Override
+                    public int compare(String o1, String o2) {
+                        if (!countMap.get(o1).equals(countMap.get(o2))) {
+                            return countMap.get(o2) - countMap.get(o1);
+                        } else {
+                            return o1.compareTo(o2);
+                        }
+                    }
+                });
+                List<String> res = new ArrayList<>(3);
+                for (int i = 0; i < num && i < candidates.size(); i++) {
+                    res.add(candidates.get(i));
+                }
+                return res;
             }
-            Collections.sort(hot);
-            if (hot.size() > 3) {
-                hot.remove(hot.size() - 1);
+            
+            public void addCandidate(String word) {
+                if (!candidates.contains(word)) {
+                    candidates.add(word);
+                }
             }
+            
         }
+        
+        public TrieNode root;
+        public TrieNode cur;
+        public HashMap<String, Integer> countMap;// 可以删除
+        
+        public Trie() {
+            this.root = new TrieNode('\0');
+            this.cur = root;
+            this.countMap = new HashMap<>(); // 可以删除
+        }
+        
+        public void insert(String word, int count) {
+            countMap.put(word, countMap.getOrDefault(word, 0) + count);// 可以删除
+            cur = root; // 每次都是从头开始插入，所以cur = root;
+            for (char ch : word.toCharArray()) {
+                int idx = (ch >= 'a' && ch <= 'z') ? ch - 'a' : 26;
+                if (cur.children[idx] == null) {
+                    cur.children[idx] = new TrieNode(ch);
+                }
+                cur = cur.children[idx];
+                cur.addCandidate(word);
+            }
+            cur = root; // 插入单词之后，之后每次input检索单词之前，需要先把cur置到root
+        }
+        
+        public void insert(String word) {
+//            int count = countMap.getOrDefault(word, 0);// 可以删除
+//            countMap.put(word, ++count);// 可以删除
+            this.insert(word, 1);
+        }
+        
+        public List<String> search(char ch) {
+            if (cur == null) { // to be deleted
+                return new ArrayList<>();
+            }
+            int idx = (ch >= 'a' && ch <= 'z') ? ch - 'a' : 26;
+            TrieNode next = cur.children[idx];
+            cur = next; // 这个要放在判断next == null之前，否则next == null的时候，cur不会变
+            if (next == null) {
+                return new ArrayList<>();
+            }
+            return cur.getTop3();
+        }
+        
     }
-
-    TrieNode root;
-    TrieNode cur;
-    StringBuilder sb;
-
+    
+    private final Trie trie;
+    StringBuilder path;
+    
     public AutocompleteSystem(String[] sentences, int[] times) {
-        root = new TrieNode();
-        cur = root;
-        sb = new StringBuilder();
+        if (sentences == null || times == null || sentences.length != times.length) {
+            throw new IllegalArgumentException("Not valid data");
+        }
+        this.trie = new Trie();
         int len = times.length;
         for (int i = 0; i < len; i++) {
-            add(sentences[i], times[i]);
+            String word = sentences[i];
+            int count = times[i];
+            this.trie.insert(word, count);
         }
+        path = new StringBuilder();
     }
-
-    private void add(String sentence, int time) {
-        TrieNode temp = root;
-        List<TrieNode> list = new ArrayList<>();
-        for (char ch: sentence.toCharArray()) {
-            if (temp.children[ch] == null) {
-                temp.children[ch] = new TrieNode();
-            }
-            temp = temp.children[ch];
-            list.add(temp);
-        }
-        temp.s = sentence;
-        temp.times += time;
-        for (TrieNode node: list) {
-            node.update(temp);
-        }
-    }
-
+    
     public List<String> input(char c) {
-        List<String> res = new ArrayList<>();
         if (c == '#') {
-            add(sb.toString(), 1);
-            sb = new StringBuilder();
-            cur = root;
-            return res;
+            String word = path.toString();
+//            path.delete(0, path.length()); // means deleted from [0, path.length())
+            path.setLength(0);
+            this.trie.insert(word);
+            return new ArrayList<>();
         }
-        sb.append(c);
-        if (cur != null) {
-            cur = cur.children[c];
-        }
-        if (cur == null) {
-            return res;
-        }
-        for (TrieNode node: cur.hot) {
-            res.add(node.s);
-        }
-        return res;
+        path.append(c);
+        return this.trie.search(c);
     }
+    
 }
 /**
  * Your AutocompleteSystem object will be instantiated and called as such:
@@ -222,6 +250,7 @@ class AutocompleteSystem {
 /*面试的时候，用Solution 2_2或者Solution 2_3 */
 
 // Solution 1: by 算法哥 《算法加强doc》，写的不好
+// 123 ms,击败了79.77% 的Java用户, 47.9 MB,击败了90.89% 的Java用户
 class AutocompleteSystem1 {
     
     class TrieNode {
@@ -352,6 +381,7 @@ class AutocompleteSystem1 {
 }
 
 // Solution 2_1: by 算法哥 202002算法加强第22节课，上课代码改正版本
+// 110 ms,击败了88.03% 的Java用户, 49.1 MB,击败了40.66% 的Java用户
 class AutocompleteSystem2_1 {
     
     class TrieNode {
@@ -483,6 +513,7 @@ class AutocompleteSystem2_1 {
 }
 
 // Solution 2_2: by 算法哥 202002算法加强第22节课，上课代码改正之后，优化的版本（删除了不必要的东西）
+// 110 ms,击败了88.03% 的Java用户, 49.3 MB,击败了37.91% 的Java用户
 /*
 每个TrieNode里面都有List和HashMap
  */
@@ -563,7 +594,7 @@ class AutocompleteSystem2_2 {
         }
         
         public List<String> search(char ch) {
-            if (cur == null) { // TODO to be deleted
+            if (cur == null) { // to be deleted
                 return new ArrayList<>();
             }
             int idx = (ch >= 'a' && ch <= 'z') ? ch - 'a' : 26;
@@ -608,6 +639,7 @@ class AutocompleteSystem2_2 {
 }
 
 // Solution 2_3:
+// 103 ms,击败了94.64% 的Java用户, 49.1 MB,击败了43.72% 的Java用户
 class AutocompleteSystem2_3 {
     
     class Trie {
@@ -683,7 +715,7 @@ class AutocompleteSystem2_3 {
         }
         
         public List<String> search(char ch) {
-            if (cur == null) { // TODO to be deleted
+            if (cur == null) { // to be deleted
                 return new ArrayList<>();
             }
             int idx = (ch >= 'a' && ch <= 'z') ? ch - 'a' : 26;
