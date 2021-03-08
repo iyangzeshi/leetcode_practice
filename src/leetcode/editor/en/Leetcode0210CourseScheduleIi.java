@@ -166,16 +166,6 @@ class Solution1 {
         return ListToArray(res);
     }
     
-    private int[] ListToArray(List<Integer> list) {
-        int len = list.size();
-        int[] res = new int[len];
-        ListIterator<Integer> iter = list.listIterator();
-        for (int i = 0; i < len; i++) {
-            res[i] = iter.next();
-        }
-        return res;
-    }
-    
     private Node[] buildGraph(int numCourses, int[][] prerequisites) {
         Node[] courses = new Node[numCourses];
         for (int i = 0; i < numCourses; i++) {
@@ -197,14 +187,31 @@ class Solution1 {
             return true;
         }
         courses[idx].status = Status.PROCESSING;
+        // res.add(idx); // part 1
         for (int next : courses[idx].precourses) {
             if (containCycle(courses, next, res)) {
                 return true;
             }
         }
         courses[idx].status = Status.DONE;
-        res.addFirst(idx);
+        res.addFirst(idx); // part2
+        /*
+        必须用part2，不能用part1
+        因为是一个图，所有的，比如C依赖于A和B，
+        part2可以实现，所有A和B都必须在C之前加入
+        part1不能，只能实现A或者B有一个在C之前，剩下的不能保证放在C之前
+         */
         return false;
+    }
+    
+    private int[] ListToArray(List<Integer> list) {
+        int len = list.size();
+        int[] res = new int[len];
+        ListIterator<Integer> iter = list.listIterator();
+        for (int i = 0; i < len; i++) {
+            res[i] = iter.next();
+        }
+        return res;
     }
     
     class Node {
