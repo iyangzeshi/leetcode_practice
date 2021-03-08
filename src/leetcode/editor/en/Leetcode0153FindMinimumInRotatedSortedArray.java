@@ -39,35 +39,35 @@ public class Leetcode0153FindMinimumInRotatedSortedArray {
 	
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-	
-	public int findMin(int[] nums) {
-		//corner case
+    
+    public int findMin(int[] nums) {
+        //corner case
         if (nums == null || nums.length == 0) {
             return -1;
         }
-		
-		//edge case
-		int left = 0;
+        
+        //edge case
+        int left = 0;
         int right = nums.length - 1;
-        int mid = 0;
         if (nums.length == 1) {
             return nums[0];
         }
         if (nums[left] < nums[right]) {
             return nums[left];
         }
-		
-		//normal case
-		while (left + 1 < right) {
-			mid = left + (right - left) / 2;
+        
+        //normal case
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
             if (nums[mid] < nums[left]) {
                 right = mid;
             } else {
                 left = mid;
             }
-		}
-		return Math.min(nums[right], nums[left]);
-	}
+        }
+        return Math.min(nums[right], nums[left]);
+    }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

@@ -55,21 +55,20 @@ public class Solution extends GuessGame {
         if (n <= 0) {
             return -1;
         }
-        int left = 1, right = n;
-        int pivot;
+        int left = 1;
+        int right = n;
         while (left <= right) {
-            pivot = left + (right - left) / 2;
-            int result = guess(pivot);
+            int mid = left + (right - left) / 2;
+            int result = guess(mid);
             if (result == 0) {
-                return pivot;
+                return mid;
             } else if (result == -1) {
-                right = pivot - 1;
+                right = mid - 1;
             } else {
-                left = pivot + 1;
+                left = mid + 1;
             }
         }
         return -1;
-
     }
 }
 

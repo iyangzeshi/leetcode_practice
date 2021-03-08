@@ -52,17 +52,18 @@ class Solution {
         if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) {
             return false;
         }
-        int row = matrix.length, col = matrix[0].length;
-        int pivot;
-        int left = 0, right = row * col - 1;
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int left = 0;
+        int right = row * col - 1;
         while (left <= right) {
-            pivot = left + (right - left) / 2;
-            if (matrix[pivot / col][pivot % col] == target) {
+            int mid = left + (right - left) / 2;
+            if (matrix[mid / col][mid % col] == target) {
                 return true;
-            } else if (matrix[pivot / col][pivot % col] < target) {
-                left = pivot + 1;
+            } else if (matrix[mid / col][mid % col] < target) {
+                left = mid + 1;
             } else {
-                right = pivot - 1;
+                right = mid - 1;
             }
         }
         return false;

@@ -89,8 +89,7 @@ class Solution {
             if (head1.val <= head2.val) {
                 cur.next = head1;
                 head1 = head1.next;
-            }
-            else {
+            } else {
                 cur.next = head2;
                 head2 = head2.next;
             }
@@ -159,8 +158,7 @@ class Solution1 {
             if (head1.val <= head2.val) {
                 cur.next = head1;
                 head1 = head1.next;
-            }
-            else {
+            } else {
                 cur.next = head2;
                 head2 = head2.next;
             }

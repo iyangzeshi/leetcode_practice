@@ -34,19 +34,19 @@ public class Leetcode0342PowerOfFour{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    
     public boolean isPowerOfFour(int num) {
         if (num <= 0) {
             return false;
-        }
-        else if (num == 1) {
+        } else if (num == 1) {
             return true;
-        }
-        else if (num % 4 != 0) {
+        } else if (num % 4 != 0) {
             return false;
         }
         return isPowerOfFour(num / 4);
-
+        
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

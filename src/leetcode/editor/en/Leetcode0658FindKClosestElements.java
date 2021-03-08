@@ -23,7 +23,8 @@
 
 package leetcode.editor.en;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 // 2020-08-04 12:36:59
 // Zeshi Yang
 public class Leetcode0658FindKClosestElements{
@@ -36,52 +37,49 @@ public class Leetcode0658FindKClosestElements{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
-
+        
         if (arr == null || arr.length == 0 || k <= 0) {
             return null;
         }
         List<Integer> result = new ArrayList<>();
         int left = 0;
         int right = arr.length - 1;
-        int mid = 0;
         /*
          the target is in the (left, right]
          */
-
-        while(left + 1 < right) {
-            mid = left + (right - left) / 2;
+        
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
             if (arr[mid] < x) {
                 left = mid;
-            }
-            else{
+            } else {
                 right = mid;
             }
-
+            
         }
         for (int i = 0; i < k; i++) {
             if (left >= 0 && right <= arr.length - 1) {
-                if (Math.abs(arr[left] - x) <= Math.abs(arr[right] - x)){
+                if (Math.abs(arr[left] - x) <= Math.abs(arr[right] - x)) {
                     left--;
-                }
-                else {
+                } else {
                     right++;
                 }
-            }
-            else if (left < 0) {
+            } else if (left < 0) {
                 right++;
-            }
-            else {
+            } else {
                 left--;
             }
         }
-        int start = left < 0 ? 0: left + 1;
+        int start = left < 0 ? 0 : left + 1;
         for (int i = 0; i < k; i++) {
             result.add(arr[start + i]);
         }
         return result;
-
+        
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

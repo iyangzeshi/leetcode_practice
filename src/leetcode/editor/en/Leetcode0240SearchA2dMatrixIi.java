@@ -44,11 +44,12 @@ public class Leetcode0240SearchA2dMatrixIi {
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    
     public boolean searchMatrix(int[][] matrix, int target) {
         // start our "pointer" in the bottom-left
-        int row = matrix.length-1;
+        int row = matrix.length - 1;
         int col = 0;
-
+        
         while (row >= 0 && col < matrix[0].length) {
             if (matrix[row][col] > target) {
                 row--;
@@ -60,10 +61,11 @@ class Solution {
         }
         return false;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 class Solution1 {
-
+    
     public boolean searchMatrix(int[][] matrix, int target) {
         // corner case
         if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) {
@@ -89,6 +91,7 @@ class Solution1 {
         }
         return false;
     }
+    
     // 找到第一个末尾数字大于等于target的行
     private int chooseTopRow(int[][] matrix, int target) {
         int cols = matrix[0].length;
@@ -106,7 +109,7 @@ class Solution1 {
         }
         return start;
     }
-
+    
     // 找到最后一个元素小于等于target的最大行index
     private int chooseBottomRow(int[][] matrix, int target, int start) {
         int end = matrix.length - 1;
@@ -122,8 +125,7 @@ class Solution1 {
         }
         return end;
     }
-
-
+    
 }
 
 }

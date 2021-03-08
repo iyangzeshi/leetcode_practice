@@ -55,9 +55,8 @@ class Solution {
         // general case
         int left = 0;
         int right = x / 2;
-        int mid;
         while (left <= right) {
-            mid = left + (right - left) / 2;
+            int mid = left + (right - left) / 2;
             if (mid  == x / mid) { // 不要写成是mid * mid == x，因为有可能会溢出。而且不是整除的时候，就会有问题
                 return mid;
             } else if (mid < x / mid) {

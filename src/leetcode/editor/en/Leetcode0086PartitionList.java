@@ -52,8 +52,7 @@ class Solution {
             if (cur.val < x) {
                 cur1.next = cur;
                 cur1 = cur1.next;
-            }
-            else { //cur.val >= x
+            } else { //cur.val >= x
                 cur2.next = cur;
                 cur2= cur2.next;
             }

@@ -63,19 +63,24 @@ public class Leetcode0700SearchInABinarySearchTree{
  * }
  */
 class Solution {
+    
     public TreeNode searchBST(TreeNode root, int val) {
-        if (root == null) return root;
+        if (root == null) {
+            return root;
+        }
         TreeNode res = root;
         while (res != null) {
-            if (res.val ==val) return res;
-            else if (res.val < val){
+            if (res.val == val) {
+                return res;
+            } else if (res.val < val) {
                 res = res.right;
-            }else{
+            } else {
                 res = res.left;
             }
         }
         return null;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

@@ -43,6 +43,7 @@ public class Leetcode0143ReorderList{
  * }
  */
 class Solution {
+    
     public void reorderList(ListNode head) {
         if (head == null || head.next == null || head.next.next == null) {
             return;
@@ -56,7 +57,7 @@ class Solution {
             fast = fast.next.next;
         }
         slow = pre;
-
+        
         ListNode temp = slow.next;
         slow.next = null;
         ListNode head1 = head;
@@ -64,7 +65,7 @@ class Solution {
         ListNode dummy = new ListNode(0);
         merge(head1, head2);
     }
-
+    
     private ListNode reverse(ListNode head) {
         if (head == null || head.next == null) {
             return head;
@@ -80,14 +81,14 @@ class Solution {
         }
         return pre;
     }
-
+    
     private ListNode merge(ListNode head1, ListNode head2) {
         ListNode head = head1;
         ListNode cur = head1;
         head1 = head1.next;
         cur.next = head2;
         cur = cur.next;
-
+        
         head2 = head2.next;
         while (head1 != null && head2 != null) {
             cur.next = head1;
@@ -99,13 +100,13 @@ class Solution {
         }
         if (head1 == null) {
             cur.next = head2;
-        }
-        else {
+        } else {
             cur.next = head1;
         }
         return head;
         // dummy.next = null
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 }

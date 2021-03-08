@@ -57,9 +57,8 @@ class Solution {
         int len = citations.length;
         int left = 0;
         int right = len - 1;
-        int mid;
         while(left <= right) {
-            mid = left + (right - left) / 2;
+            int mid = left + (right - left) / 2;
             if (citations[mid] == len - mid) {
                 return len - mid;
             } else if (citations[mid] < len - mid) {

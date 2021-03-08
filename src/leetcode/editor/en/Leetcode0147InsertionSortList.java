@@ -66,35 +66,36 @@ public class Leetcode0147InsertionSortList{
  * }
  */
 class Solution {
+    
     public ListNode insertionSortList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
-
+        
         ListNode dummy = new ListNode(0);
-
+        
         dummy.next = head;
         ListNode cur = head;
         ListNode insertNode = null;
-
+        
         while (cur.next != null) {
             if (cur.val > cur.next.val) {
                 // insert cur.next to the list
                 insertNode = takeNode(cur, cur.next);
                 insert(dummy, insertNode);
-            }
-            else {
+            } else {
                 cur = cur.next;
             }
         }
         return dummy.next;
     }
-
+    
     private ListNode takeNode(ListNode a, ListNode b) {
         a.next = b.next;
         b.next = null;
         return b;
     }
+    
     private void insert(ListNode dummy, ListNode node) {
         while (dummy.next.val <= node.val) {
             dummy = dummy.next;
@@ -102,6 +103,7 @@ class Solution {
         node.next = dummy.next;
         dummy.next = node;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

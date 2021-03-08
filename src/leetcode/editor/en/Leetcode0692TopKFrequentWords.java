@@ -78,9 +78,7 @@ class Solution {
             result.add(heap.poll());
         }
         Collections.reverse(result);
-
         return result;
-
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

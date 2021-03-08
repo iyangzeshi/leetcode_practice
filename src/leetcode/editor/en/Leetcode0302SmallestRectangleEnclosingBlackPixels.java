@@ -46,8 +46,6 @@ class Solution {
             return 0;
         }
         // general case
-        int rows = image.length;
-        int cols = image[0].length;
         int top = topBorder(image, x);
         int bottom = bottomBorder(image, x);
         int left = leftBorder(image, y);

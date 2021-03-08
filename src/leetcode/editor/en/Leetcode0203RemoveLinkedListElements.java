@@ -35,29 +35,30 @@ public class Leetcode0203RemoveLinkedListElements{
  * }
  */
 class Solution {
+    
     public ListNode removeElements(ListNode head, int val) {
         if (head == null) {
             return null;
         }
-
+        
         ListNode dummy = new ListNode(val + 1);
         dummy.next = head;
         ListNode pre = dummy;
         ListNode cur = head;
-        while(cur != null) {
+        while (cur != null) {
             if (cur.val == val) {
                 pre.next = cur.next;
                 cur.next = null;
                 cur = pre.next;
-            }
-            else {
+            } else {
                 cur = cur.next;
                 pre = pre.next;
             }
         }
         return dummy.next;
-
+        
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

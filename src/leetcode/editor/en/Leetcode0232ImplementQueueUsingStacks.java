@@ -34,7 +34,7 @@
 
 package leetcode.editor.en;
 
-import java.util.*;
+import java.util.Stack;
 // 2020-08-04 11:59:49
 // Zeshi Yang
 public class Leetcode0232ImplementQueueUsingStacks{
@@ -47,27 +47,36 @@ public class Leetcode0232ImplementQueueUsingStacks{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class MyQueue {
+    
     Stack<Integer> input;
     Stack<Integer> output;
-
-    /** Initialize your data structure here. */
+    
+    /**
+     * Initialize your data structure here.
+     */
     public MyQueue() {
         input = new Stack<>();
         output = new Stack<>();
     }
-
-    /** Push element x to the back of queue. */
+    
+    /**
+     * Push element x to the back of queue.
+     */
     public void push(int x) {
         input.push(x);
     }
-
-    /** Removes the element from in front of queue and returns that element. */
+    
+    /**
+     * Removes the element from in front of queue and returns that element.
+     */
     public int pop() {
         peek();
         return output.pop();
     }
-
-    /** Get the front element. */
+    
+    /**
+     * Get the front element.
+     */
     public int peek() {
         if (output.isEmpty()) {
             while (!input.isEmpty()) {
@@ -76,12 +85,15 @@ class MyQueue {
         }
         return output.peek();
     }
-
-    /** Returns whether the queue is empty. */
+    
+    /**
+     * Returns whether the queue is empty.
+     */
     public boolean empty() {
         return input.isEmpty() && output.isEmpty();
-
+        
     }
+    
 }
 
 /*

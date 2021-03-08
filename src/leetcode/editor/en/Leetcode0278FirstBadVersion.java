@@ -39,23 +39,32 @@ public class Leetcode0278FirstBadVersion{
     //leetcode submit region begin(Prohibit modification and deletion)
 /* The isBadVersion API is defined in the parent class VersionControl.
       boolean isBadVersion(int version); */
-
+    
 public class Solution extends VersionControl {
+    
     public int firstBadVersion(int n) {
-        //find the first 1
         //corner case
-        if (n <= 0) return n;
-        if (n ==1) return isBadVersion(n)?1:0;
-
-        int left = 1, right = n;
-        int pivot;
-        while(left + 1 < right){
-            pivot = left + (right - left) / 2;
-            if (isBadVersion(pivot)) right = pivot;
-            else left = pivot;
+        if (n <= 0) {
+            return n;
         }
-        return isBadVersion(left) ? left: right;
+        if (n == 1) {
+            return isBadVersion(n) ? 1 : 0;
+        }
+        
+        int left = 1;
+        int right = n;
+        int pivot;
+        while (left + 1 < right) {
+            pivot = left + (right - left) / 2;
+            if (isBadVersion(pivot)) {
+                right = pivot;
+            } else {
+                left = pivot;
+            }
+        }
+        return isBadVersion(left) ? left : right;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 class VersionControl {

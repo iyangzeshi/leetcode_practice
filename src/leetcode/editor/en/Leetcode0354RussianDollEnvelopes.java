@@ -67,7 +67,6 @@ class Solution {
     
     // LC300: Longest Increasing Subsequence
     private int lengthOfLIS(int[] height) {
-        int len = height.length;
         List<Integer> buffer = new ArrayList<>();
         
         for (int n : height) {
@@ -82,7 +81,8 @@ class Solution {
     }
     
     private int getIndex(List<Integer> buffer, int target) {
-        int start = 0, end = buffer.size() - 1;
+        int start = 0;
+        int end = buffer.size() - 1;
         while (start <= end) {
             int mid = start + (end - start) / 2;
             if (buffer.get(mid) == target) {
