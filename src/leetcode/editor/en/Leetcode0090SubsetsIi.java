@@ -34,7 +34,7 @@ public class Leetcode0090SubsetsIi{
     public static void main(String[] args) {
         Solution sol = new Leetcode0090SubsetsIi().new Solution();
         // TO TEST
-/*        ArrayList<Integer> prev = new ArrayList<>();
+        /* ArrayList<Integer> prev = new ArrayList<>();
         prev.add(1);
         ArrayList<Integer> cur = null;
         System.out.println(prev.equals(cur));*/

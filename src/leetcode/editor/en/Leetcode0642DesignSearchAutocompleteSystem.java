@@ -124,120 +124,123 @@ public class Leetcode0642DesignSearchAutocompleteSystem{
 //leetcode submit region begin(Prohibit modification and deletion)
 class AutocompleteSystem {
     
-    class Trie {
+    class TrieNode {
         
-        class TrieNode {
-            
-            public int num;
-            public char ch;
-            public TrieNode[] children;
-            public List<String> candidates;
-            
-            public TrieNode(char val) {
-                num = 3;
-                this.ch = val;
-                this.children = new TrieNode[27];
-                candidates = new ArrayList<>();
-            }
-            
-            public List<String> getTop3() {
-                candidates.sort(new Comparator<>() {
-                    @Override
-                    public int compare(String o1, String o2) {
-                        if (!countMap.get(o1).equals(countMap.get(o2))) {
-                            return countMap.get(o2) - countMap.get(o1);
-                        } else {
-                            return o1.compareTo(o2);
-                        }
-                    }
-                });
-                List<String> res = new ArrayList<>(3);
-                for (int i = 0; i < num && i < candidates.size(); i++) {
-                    res.add(candidates.get(i));
-                }
-                return res;
-            }
-            
-            public void addCandidate(String word) {
-                if (!candidates.contains(word)) {
-                    candidates.add(word);
-                }
-            }
-            
-        }
+        public char ch;
+        public TrieNode[] children;
+        public HashMap<String, Integer> countMap; // key:word; value: count
+        public boolean isLeaf;
         
-        public TrieNode root;
-        public TrieNode cur;
-        public HashMap<String, Integer> countMap;// 可以删除
-        
-        public Trie() {
-            this.root = new TrieNode('\0');
-            this.cur = root;
-            this.countMap = new HashMap<>(); // 可以删除
-        }
-        
-        public void insert(String word, int count) {
-            countMap.put(word, countMap.getOrDefault(word, 0) + count);// 可以删除
-            cur = root; // 每次都是从头开始插入，所以cur = root;
-            for (char ch : word.toCharArray()) {
-                int idx = (ch >= 'a' && ch <= 'z') ? ch - 'a' : 26;
-                if (cur.children[idx] == null) {
-                    cur.children[idx] = new TrieNode(ch);
-                }
-                cur = cur.children[idx];
-                cur.addCandidate(word);
-            }
-            cur = root; // 插入单词之后，之后每次input检索单词之前，需要先把cur置到root
-        }
-        
-        public void insert(String word) {
-//            int count = countMap.getOrDefault(word, 0);// 可以删除
-//            countMap.put(word, ++count);// 可以删除
-            this.insert(word, 1);
-        }
-        
-        public List<String> search(char ch) {
-            if (cur == null) { // to be deleted
-                return new ArrayList<>();
-            }
-            int idx = (ch >= 'a' && ch <= 'z') ? ch - 'a' : 26;
-            TrieNode next = cur.children[idx];
-            cur = next; // 这个要放在判断next == null之前，否则next == null的时候，cur不会变
-            if (next == null) {
-                return new ArrayList<>();
-            }
-            return cur.getTop3();
+        public TrieNode(char ch) {
+            this.ch = ch;
+            children = new TrieNode[27]; // a - z 和 space
+            this.isLeaf = false;
+            this.countMap = new HashMap<>(3);
         }
         
     }
     
-    private final Trie trie;
-    StringBuilder path;
+    class Pair {
+        
+        public String str;
+        public int count;
+        
+        public Pair(String str, int count) {
+            this.str = str;
+            this.count = count;
+        }
+        
+    }
+    
+    private final TrieNode root;
+    private TrieNode curNode;
+    private StringBuilder path;
+    private final HashMap<String, Integer> countBook; // global HashMap 存所有句子以及对应count
     
     public AutocompleteSystem(String[] sentences, int[] times) {
         if (sentences == null || times == null || sentences.length != times.length) {
             throw new IllegalArgumentException("Not valid data");
         }
-        this.trie = new Trie();
-        int len = times.length;
-        for (int i = 0; i < len; i++) {
-            String word = sentences[i];
-            int count = times[i];
-            this.trie.insert(word, count);
-        }
+        root = new TrieNode('\0');
+        curNode = root;
         path = new StringBuilder();
+        countBook = new HashMap<>();
+        int len = sentences.length;
+        for (int i = 0; i < len; i++) {
+            countBook.put(sentences[i], times[i]);
+            insert(sentences[i], times[i]);
+        }
     }
     
     public List<String> input(char c) {
-        if (c == '#') {
-            String word = path.toString();
-//            path.delete(0, path.length()); // means deleted from [0, path.length())
-            path.setLength(0);
-            this.trie.insert(word);
-            return new ArrayList<>();
+        if (c == '#') { // 如果一个句子输入完毕
+            curNode = root; // 回到起点，以备下一次的autocomplete
+            String insertMe = path.toString();
+            countBook.put(insertMe, countBook.getOrDefault(insertMe, 0) + 1);
+            insert(insertMe, countBook.get(insertMe)); // 将输入后的变化更新到Trie中
+            path = new StringBuilder();
+            return new ArrayList<>(); // 输入结束，return an empty list
         }
         path.append(c);
-        return this.trie.search(c);
+        // 如果上一次的input就没有autocomplete
+        // (上一轮curNode == null; 且返回空list)
+        // 那么这一次输入，也会返回空list
+        if (curNode == null) {
+            return new ArrayList<>();
+        }
+        int index = (c >= 'a' && c <= 'z') ? c - 'a' : 26;
+        curNode = curNode.children[index];
+        if (curNode == null) {
+            return new ArrayList<>();
+        }
+        // return输入到这个char时，top 3 sentences
+        return getTop3String(curNode.countMap);
+    }
+    
+    // 更新Trie
+    private void insert(String sentence, int times) {
+        TrieNode cur = root;
+        for (char ch : sentence.toCharArray()) {
+            int index = (ch >= 'a' && ch <= 'z') ? ch - 'a' : 26;
+            if (cur.children[index] == null) {
+                cur.children[index] = new TrieNode(ch);
+            }
+            TrieNode next = cur.children[index];
+            next.countMap.put(sentence, times);
+            List<Pair> top3 = getTop3Pair(next.countMap);
+            next.countMap.clear();
+            // countMap里put新的sentence-times; 清空countMap; put进新的top3 key-value
+            for (Pair p : top3) {
+                next.countMap.put(p.str, p.count);
+            }
+            cur = next;
+        }
+        cur.isLeaf = true;
+    }
+    
+    // 将top3 pair转成top3 String(sentences)
+    private List<String> getTop3String(HashMap<String, Integer> countMap) {
+        return getTop3Pair(countMap)
+                .stream()
+                .map(p -> p.str)
+                .collect(Collectors.toList());
+        // https://www.geeksforgeeks.org/stream-in-java/
+    }
+    
+    private List<Pair> getTop3Pair(HashMap<String, Integer> countMap) {
+        PriorityQueue<Pair> maxHeap = new PriorityQueue<>(
+                (a, b) ->
+                        (a.count == b.count
+                                ? a.str.compareTo(b.str)
+                                : b.count - a.count));
+        for (Map.Entry<String, Integer> e : countMap.entrySet()) {
+            maxHeap.offer(new Pair(e.getKey(), e.getValue()));
+        }
+        List<Pair> res = new ArrayList<>();
+        for (int i = 0; i < 3 && !maxHeap.isEmpty(); i++) { // maxHeap里可能少于3个
+            res.add(maxHeap.poll());
+        }
+        return res;
     }
     
 }
@@ -305,13 +308,7 @@ class AutocompleteSystem1 {
         if (c == '#') { // 如果一个句子输入完毕
             curNode = root; // 回到起点，以备下一次的autocomplete
             String insertMe = path.toString();
-            Integer count = countBook.get(insertMe);
-            if (count == null) {
-                countBook.put(insertMe, 1);
-            } else {
-                countBook.put(insertMe, count + 1);
-            }
-            // countBook.put(insertMe, countBook.getOrDefault(insertMe, 0) + 1);
+            countBook.put(insertMe, countBook.getOrDefault(insertMe, 0) + 1);
             insert(insertMe, countBook.get(insertMe)); // 将输入后的变化更新到Trie中
             path = new StringBuilder();
             return new ArrayList<>(); // 输入结束，return an empty list
