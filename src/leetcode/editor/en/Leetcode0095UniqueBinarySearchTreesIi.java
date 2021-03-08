@@ -86,13 +86,11 @@ class Solution {
 	}
 
 	private List<TreeNode> dfs(int start, int end) {
-
 		List<TreeNode> res = new ArrayList<>();
 		if (start > end) {
 			res.add(null);
 			return res;
 		}
-
 		for (int i = start; i <= end; i++) {
 			List<TreeNode> left = dfs(start, i - 1);
 			List<TreeNode> right = dfs(i + 1, end);
@@ -106,7 +104,6 @@ class Solution {
 				}
 			}
 		}
-		
 		return res;
 	}
 
@@ -134,7 +131,6 @@ class Followup1 {
 		}
 		dp[diff] = cnt;
 		return cnt;
-		
 	}
 	
 }
