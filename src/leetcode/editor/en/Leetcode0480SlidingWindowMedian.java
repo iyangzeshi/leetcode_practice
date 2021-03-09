@@ -247,7 +247,7 @@ class Solution2_1 {
 
     每次来一个index，不用判断放在left里面还是right里面，直接先放到right里面。
     如果left和right的size不满足要求，再调整就好了
-    删除window前面的那个值，直接在两个里面都删除一遍就好了
+    删除window前面的那个值，直接在两个里面都检查删除一遍就好了
  */
 class Solution2_2 {
     
