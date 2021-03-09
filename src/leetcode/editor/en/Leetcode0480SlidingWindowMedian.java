@@ -65,7 +65,7 @@ class Solution {
         Comparator<Integer> comparator =
                 (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : a - b;
         
-        TreeSet<Integer> left = new TreeSet<>(comparator/*.reversed()*/); // increasing treeMap
+        TreeSet<Integer> left = new TreeSet<>(comparator); // increasing treeMap
         TreeSet<Integer> right = new TreeSet<>(comparator); // decreasing treeMap
         
         for (int i = 0; i < len; i++) {
@@ -270,7 +270,7 @@ class Solution2_2 {
         Comparator<Integer> comparator =
                 (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : a - b;
         
-        TreeSet<Integer> left = new TreeSet<>(comparator/*.reversed()*/); // increasing treeMap
+        TreeSet<Integer> left = new TreeSet<>(comparator); // increasing treeMap
         TreeSet<Integer> right = new TreeSet<>(comparator); // decreasing treeMap
         
         for (int i = 0; i < len; i++) {
