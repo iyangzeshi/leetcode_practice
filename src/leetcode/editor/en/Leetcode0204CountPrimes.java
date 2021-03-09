@@ -172,14 +172,14 @@ class Solution3 {
             }
         }
         return count;*/
-        int cnt = 0;
+        int count = 0;
         int[] primes = new int[n];//用于存取质数的值
         boolean[] isPrime = new boolean[n];//判断所存的所有的质数，初始认为都是质数
         for (int i = 2; i < n; ++i) {
             if (!isPrime[i]) {
-                primes[cnt++] = i; //依次存取最小的质数
+                primes[count++] = i; //依次存取最小的质数
             }
-            for (int j = 0; j < cnt && primes[j] * i < n; j++) {
+            for (int j = 0; j < count && primes[j] * i < n; j++) {
                 isPrime[primes[j] * i] = true;
                 //若i可以整除primes[j]的话，那么i*primes[j+1]必定可以被primes[j]乘以某个数筛选掉
                 if ((i % primes[j]) == 0) {
@@ -187,7 +187,7 @@ class Solution3 {
                 }
             }
         }
-        return cnt;
+        return count;
     }
     
 }
