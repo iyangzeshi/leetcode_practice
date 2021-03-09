@@ -62,16 +62,6 @@ class Solution {
         // 解决duplicate元素存入TreeSet的问题 → 按照index先后顺序来作为大小关系比较
         /* increasing comparator according to the number corresponding to index
          or index order if number is same */
-        /*Comparator<Integer> comparator = new Comparator<Integer>() {
-            @Override
-            public int compare(Integer a, Integer b) {
-                if (nums[a] != nums[b]) {
-                    return Integer.compare(nums[a], nums[b]);
-                }
-                return a - b;
-            }
-        };*/
-        // 上面的Comparator可以讲话写成如下
         Comparator<Integer> comparator =
                 (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : a - b;
         
