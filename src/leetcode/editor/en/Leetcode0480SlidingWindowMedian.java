@@ -245,6 +245,11 @@ class Solution2_1 {
 /*
 上面代码简化版，所有的调整都放在getMedian里面了
 
+    left and right TreeSet is used to store the index of num
+    such that is comparator is according to nums[index]
+    left.size = right.size() or right.size() + 1
+    left and right TreeSet's comparator are both increasing
+    
     每次来一个index，不用判断放在left里面还是right里面，直接先放到right里面。
     如果left和right的size不满足要求，再调整就好了
     删除window前面的那个值，直接在两个里面都检查删除一遍就好了
