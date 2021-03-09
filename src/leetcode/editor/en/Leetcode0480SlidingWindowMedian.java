@@ -48,7 +48,7 @@ public class Leetcode0480SlidingWindowMedian{
     public static void main(String[] args) {
         Solution sol = new Leetcode0480SlidingWindowMedian().new Solution();
         // TO TEST
-        int[] nums = {1,3,-1,-3,5,3,6,7};
+        int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
         int k = 3;
         double[] res = sol.medianSlidingWindow(nums, k);
         System.out.println(Arrays.toString(res));
@@ -60,10 +60,23 @@ class Solution {
         int len = nums.length;
         double[] res = new double[len - k + 1];
         // 解决duplicate元素存入TreeSet的问题 → 按照index先后顺序来作为大小关系比较
+        /* increasing comparator according to the number corresponding to index
+         or index order if number is same */
+        /*Comparator<Integer> comparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer a, Integer b) {
+                if (nums[a] != nums[b]) {
+                    return Integer.compare(nums[a], nums[b]);
+                }
+                return a - b;
+            }
+        };*/
+        // 上面的Comparator可以讲话写成如下
         Comparator<Integer> comparator =
                 (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : a - b;
-        TreeSet<Integer> left = new TreeSet<>(comparator.reversed()); // → maxHeap
-        TreeSet<Integer> right = new TreeSet<>(comparator); // → minHeap
+        
+        TreeSet<Integer> left = new TreeSet<>(comparator/*.reversed()*/); // increasing treeMap
+        TreeSet<Integer> right = new TreeSet<>(comparator); // decreasing treeMap
         
         for (int i = 0; i < len; i++) {
             if (i >= k) {
@@ -82,24 +95,20 @@ class Solution {
     }
     
     private double getMedian(TreeSet<Integer> left, TreeSet<Integer> right, int[] nums, int k) {
-        double val = 0;
-        while (left.size() > right.size()) {
-            right.add(left.pollFirst());
+        while (left.size() >= right.size() + 2) {
+            right.add(left.pollLast());
         }
         
-        if (k % 2 == 0) {
-            val = ((double) nums[left.first()] + (double) nums[right.first()]) / 2;
-        } else {
-            val = nums[right.first()]; //奇数时median在minHeap里
-        }
-        return val;
+        return k % 2 == 1 ? nums[left.last()] :
+                ((double) nums[left.last()] + nums[right.first()]) / 2;
     }
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
 /** 面试的时候，用Solution 2_2 */
 
-// Solution 1: insertion sort, T(n, k) = O((n - k + 1) * k), S(n, k) = O(k), 83 ms, 41 MB
+// Solution 1: insertion sort, T(n, k) = O((n - k + 1) * k), S(n, k) = O(k)
+// 80 ms,击败了38.52% 的Java用户, 40.7 MB,击败了97.95% 的Java用户
 class Solution1 {
     
     public double[] medianSlidingWindow(int[] nums, int k) {
@@ -157,11 +166,16 @@ class Solution1 {
     
 }
 
-// Solution 2_1: 2 TreeSet, T(n, k) = O((n - k + 1) * log(k)), S(n) = O(k), 26 ms, 42 MB
+// Solution 2_1: 2 TreeSet, T(n, k) = O((n - k + 1) * log(k)), S(n) = O(k)
+// 26 ms,击败了83.22% 的Java用户, 42.3 MB,击败了18.21% 的Java用户
 /*
 left and right TreeSet is used to store the index of num
     such that is comparator is according to nums[index]
     left.size = right.size() or right.size() + 1
+    left and right TreeSet's comparator are both increasing
+    
+    每次来一个index，都要先判断需要放在left里面，还是放在right里面
+    删除window前面的那个值，直接在两个里面都删除一遍就好了
  */
 class Solution2_1 {
     
@@ -216,14 +230,15 @@ class Solution2_1 {
     }
     
     private double getMedian(int[] nums, TreeSet<Integer> left, TreeSet<Integer> right) {
-        double median = 0;
+        double median;
         // left.size() == right.size() || left.size() == right.size() + 1 is always true
         if (left.size() > right.size()) {
             median = nums[left.last()];
         } else {
             median = ((double) nums[left.last()] + nums[right.first()]) / 2;
         }
-        return median;
+        return left.size() > right.size() ?  nums[left.last()] :
+                ((double) nums[left.last()] + nums[right.first()]) / 2;
     }
     
     private void remove(int index, TreeSet<Integer> left, TreeSet<Integer> right) {
@@ -235,18 +250,38 @@ class Solution2_1 {
     
 }
 
-// Solution 2_2: T(n, k) = O((n - k + 1) * log(k)), S(n) = O(k)，27 ms, 41.4 MB
-// 上面代码简化版，所有的调整都放在getMedian里面了
+// Solution 2_2: T(n, k) = O((n - k + 1) * log(k)), S(n) = O(k)
+// 23 ms,击败了91.51% 的Java用户, 41 MB,击败了85.11% 的Java用户
+/*
+上面代码简化版，所有的调整都放在getMedian里面了
+
+    每次来一个index，不用判断放在left里面还是right里面，直接先放到right里面。
+    如果left和right的size不满足要求，再调整就好了
+    删除window前面的那个值，直接在两个里面都删除一遍就好了
+ */
 class Solution2_2 {
     
     public double[] medianSlidingWindow(int[] nums, int k) {
         int len = nums.length;
         double[] res = new double[len - k + 1];
         // 解决duplicate元素存入TreeSet的问题 → 按照index先后顺序来作为大小关系比较
+        /* increasing comparator according to the number corresponding to index
+         or index order if number is same */
+        /*Comparator<Integer> comparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer a, Integer b) {
+                if (nums[a] != nums[b]) {
+                    return Integer.compare(nums[a], nums[b]);
+                }
+                return a - b;
+            }
+        };*/
+        // 上面的Comparator可以讲话写成如下
         Comparator<Integer> comparator =
                 (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : a - b;
-        TreeSet<Integer> left = new TreeSet<>(comparator.reversed()); // → maxHeap
-        TreeSet<Integer> right = new TreeSet<>(comparator); // → minHeap
+        
+        TreeSet<Integer> left = new TreeSet<>(comparator/*.reversed()*/); // increasing treeMap
+        TreeSet<Integer> right = new TreeSet<>(comparator); // decreasing treeMap
         
         for (int i = 0; i < len; i++) {
             if (i >= k) {
@@ -265,17 +300,12 @@ class Solution2_2 {
     }
     
     private double getMedian(TreeSet<Integer> left, TreeSet<Integer> right, int[] nums, int k) {
-        double val = 0;
-        while (left.size() > right.size()) {
-            right.add(left.pollFirst());
+        while (left.size() >= right.size() + 2) {
+            right.add(left.pollLast());
         }
         
-        if (k % 2 == 0) {
-            val = ((double) nums[left.first()] + (double) nums[right.first()]) / 2;
-        } else {
-            val = nums[right.first()]; //奇数时median在minHeap里
-        }
-        return val;
+        return k % 2 == 1 ? nums[left.last()] :
+                ((double) nums[left.last()] + nums[right.first()]) / 2;
     }
     
 }
