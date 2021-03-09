@@ -56,28 +56,16 @@ public class Leetcode0480SlidingWindowMedian{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     
-    // T(n, k) = O(nlogk), S(n, k) = O(k)
     public double[] medianSlidingWindow(int[] nums, int k) {
         int len = nums.length;
         double[] res = new double[len - k + 1];
-        /*
-        TreeSet里面存数字num的index，让这些数字num升序排序，如果数字大小一样，按照顺序排序
-         */
+        // 解决duplicate元素存入TreeSet的问题 → 按照index先后顺序来作为大小关系比较
         Comparator<Integer> comparator =
                 (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : a - b;
-        // left.size() == right.size() || left.size() == right.size() + 1 is always true
-        TreeSet<Integer> left = new TreeSet<>(comparator);
-        TreeSet<Integer> right = new TreeSet<>(comparator);
-        // initialize the left and right
-        initializeLeftAndRight(nums, k, left, right);
+        TreeSet<Integer> left = new TreeSet<>(comparator.reversed()); // → maxHeap
+        TreeSet<Integer> right = new TreeSet<>(comparator); // → minHeap
         
-        for (int i = k; i < len; i++) {
-            res[i - k] = getMedian(nums, left, right);
-            remove(i - k, left, right);
-            insert(nums, i, left, right);
-        }
-        res[len - k] = getMedian(nums, left, right);
-        /*for235 (int i = 0; i < len; i++) {
+        for (int i = 0; i < len; i++) {
             if (i >= k) {
                 if (!left.remove(i - k)) {
                     right.remove(i - k);
@@ -85,61 +73,35 @@ class Solution {
             }
             right.add(i);
             left.add(right.pollFirst());
-
+            
             if (i >= k - 1) {
-                res[i - k + 1] = getMedian(nums, k, left, right);
+                res[i - k + 1] = getMedian(left, right, nums, k);
             }
-        }*/
+        }
         return res;
     }
     
-    private void initializeLeftAndRight(int[] nums, int k, TreeSet<Integer> left,
-            TreeSet<Integer> right) {
-        for (int i = 0; i < k; i++) {
-            insert(nums, i, left, right);
+    private double getMedian(TreeSet<Integer> left, TreeSet<Integer> right, int[] nums, int k) {
+        double val = 0;
+        while (left.size() > right.size()) {
+            right.add(left.pollFirst());
         }
-    }
-    
-    private double getMedian(int[] nums, TreeSet<Integer> left, TreeSet<Integer> right) {
-        double median = 0;
-        // left.size() == right.size() || left.size() == right.size() + 1 is always true
-        if (left.size() > right.size()) {
-            median = nums[left.last()];
+        
+        if (k % 2 == 0) {
+            val = ((double) nums[left.first()] + (double) nums[right.first()]) / 2;
         } else {
-            median = ((double) nums[left.last()] + nums[right.first()]) / 2;
+            val = nums[right.first()]; //奇数时median在minHeap里
         }
-        return median;
-    }
-    
-    private void remove(int index, TreeSet<Integer> left, TreeSet<Integer> right) {
-        if (!left.remove(index)) {
-            right.remove(index);
-        }
-        adjustLeftAndRight(left, right);
-    }
-    
-    private void insert(int[] nums, int index, TreeSet<Integer> left, TreeSet<Integer> right) {
-        left.add(index);
-        adjustLeftAndRight(left, right);
-    }
-    /*
-    adjust left and right such that
-        left.size() == right.size() || left.size() == right.size() + 1 is always true
-        and num[index] for every index in left <= right
-     */
-    private void adjustLeftAndRight(TreeSet<Integer> left, TreeSet<Integer> right) {
-        if (left.size() > right.size() + 1 || !left.isEmpty() && !right.isEmpty() && left.last() > right.first()) {
-            right.add(left.pollLast());
-        }
-        if (left.size() < right.size()) {
-            left.add(right.pollFirst());
-        }
+        return val;
     }
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
+/** 面试的时候，用Solution 2_2 */
+
 // Solution 1: insertion sort, T(n, k) = O((n - k + 1) * k), S(n, k) = O(k), 83 ms, 41 MB
 class Solution1 {
+    
     public double[] medianSlidingWindow(int[] nums, int k) {
         int len = nums.length;
         double[] res = new double[len - k + 1];
@@ -192,6 +154,7 @@ class Solution1 {
         }
         window[0] = num;
     }
+    
 }
 
 // Solution 2_1: 2 TreeSet, T(n, k) = O((n - k + 1) * log(k)), S(n) = O(k), 26 ms, 42 MB
@@ -206,7 +169,7 @@ class Solution2_1 {
         int len = nums.length;
         double[] res = new double[len - k + 1];
         /*
-        TreeSet里面存数字num的index，让这些数字num升序排序，如果数字大小一样，按照顺序排序
+        TreeSet里面存数字num的index，让这些数字num升序排序，如果数字大小一样，按照index顺序排序
          */
         Comparator<Integer> comparator =
                 (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : a - b;
@@ -243,7 +206,8 @@ class Solution2_1 {
         and num[index] for every index in left <= right
      */
     private void adjustLeftAndRight(TreeSet<Integer> left, TreeSet<Integer> right) {
-        if (left.size() > right.size() + 1 || !left.isEmpty() && !right.isEmpty() && left.last() > right.first()) {
+        if (left.size() > right.size() + 1 || !left.isEmpty() && !right.isEmpty()
+                && left.last() > right.first()) {
             right.add(left.pollLast());
         }
         if (left.size() < right.size()) {
@@ -268,6 +232,7 @@ class Solution2_1 {
         }
         adjustLeftAndRight(left, right);
     }
+    
 }
 
 // Solution 2_2: T(n, k) = O((n - k + 1) * log(k)), S(n) = O(k)，27 ms, 41.4 MB
