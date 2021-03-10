@@ -64,26 +64,35 @@ public class Leetcode0938RangeSumOfBst{
  * }
  */
 class Solution {
+    
     public int rangeSumBST(TreeNode root, int low, int high) {
-        int sum = 0;
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            if (node != null) {
-                if (low <= node.val && node.val <= high)
-                    sum += node.val;
-                if (node.val > low)
-                    stack.push(node.left);
-                if (node.val < high)
-                    stack.push(node.right);
-            }
-        }
-        return sum;
+        int[] sum = new int[1];
+        dfs(root, low, high, sum);
+        return sum[0];
     }
+    
+    public void dfs(TreeNode cur, int low, int high, int[] sum) {
+        // base case
+        if (cur == null) {
+            return;
+        }
+        
+        if (low <= cur.val && cur.val <= high) {
+            sum[0] += cur.val;
+        }
+        if (cur.val > low) {
+            dfs(cur.left, low, high, sum);
+        }
+        if (cur.val < high) {
+            dfs(cur.right, low, high, sum);
+        }
+    }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: recursion, dfs
+// Solution 1: recursion, pre order dfs
+// T(n) = O(k), S(n) = O(k), k is number of nodes satisfying the requirement
+// 0 ms,击败了100.00% 的Java用户, 47.5 MB,击败了26.96% 的Java用户
 class Solution1 {
     
     public int rangeSumBST(TreeNode root, int low, int high) {
@@ -108,10 +117,14 @@ class Solution1 {
             dfs(cur.right, low, high, sum);
         }
     }
+    
 }
 
-// Solution 2: stack, dfs
+// Solution 2: stack, pre order dfs,
+// T(n) = O(k), S(n) = O(k), k is number of nodes satisfying the requirement
+// 2 ms,击败了20.13% 的Java用户, 47 MB,击败了66.29% 的Java用户
 class Solution2 {
+    
     public int rangeSumBST(TreeNode root, int low, int high) {
         int sum = 0;
         Stack<TreeNode> stack = new Stack<>();
@@ -119,15 +132,19 @@ class Solution2 {
         while (!stack.isEmpty()) {
             TreeNode node = stack.pop();
             if (node != null) {
-                if (low <= node.val && node.val <= high)
+                if (low <= node.val && node.val <= high) {
                     sum += node.val;
-                if (node.val > low)
+                }
+                if (node.val > low) {
                     stack.push(node.left);
-                if (node.val < high)
+                }
+                if (node.val < high) {
                     stack.push(node.right);
+                }
             }
         }
         return sum;
     }
+    
 }
 }

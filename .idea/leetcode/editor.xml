@@ -2643,6 +2643,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0921MinimumAddToMakeParenthesesValid.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0921MinimumAddToMakeParenthesesValid.java" />
+              <option name="questionId" value="957" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0938RangeSumOfBst.java">
           <value>
             <LeetcodeEditor>
@@ -2848,6 +2856,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1490CloneNAryTree.java" />
               <option name="questionId" value="1634" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1541MinimumInsertionsToBalanceAParenthesesString.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode1541MinimumInsertionsToBalanceAParenthesesString.java" />
+              <option name="questionId" value="1648" />
             </LeetcodeEditor>
           </value>
         </entry>
