@@ -108,6 +108,9 @@ class Solution { // 这个答案比较简单，你也方便说
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+/** 面试的时候用Solution 1 */
+
 // Solution 1: compute the difference left and right parentheses, T(n) = O(n), S(n) = O(1)
 // 0 ms,击败了100.00% 的Java用户, 36.9 MB,击败了92.52% 的Java用户
 /*
