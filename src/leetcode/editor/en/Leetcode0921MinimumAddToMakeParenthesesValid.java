@@ -82,7 +82,7 @@ public class Leetcode0921MinimumAddToMakeParenthesesValid{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution { // 这个答案比较简单，你也方便说
+class Solution {
     
     public int minAddToMakeValid(String S) {
         if (S == null || S.length() == 0) {
