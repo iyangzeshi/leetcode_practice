@@ -119,7 +119,7 @@ let the left be the number of the open parentheses, right the closing parenthese
 we need to satisfy
     1. at any point, the left >= right
     2. at the end, the left = right
-so the delta be the difference between left and right, delta = left - right
+so let delta = left - right, define delta as the difference between left and right,
     1. at any point, the delta >= 0
     2. at the end, the delta = 0
 */
