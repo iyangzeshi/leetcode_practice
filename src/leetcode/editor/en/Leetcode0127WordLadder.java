@@ -101,7 +101,7 @@ class Solution {
 			}
 			HashSet<String> nextLevel = new HashSet<>();
 			for (String cur : beginSet) {
-				List<String> neighbors = convert(cur, beginSet, wordSet);
+				List<String> neighbors = getNeighbor(cur, beginSet, wordSet);
 				for (String neighbor: neighbors) {
 					if (endSet.contains(neighbor)) {
 						return minDis + 1;
@@ -109,6 +109,10 @@ class Solution {
 					nextLevel.add(neighbor);
 				}
 			}
+			/*
+			important, can not remove word immediately find neighbor;
+			otherwise, begin set will never reach to end set
+			 */
 			wordSet.removeAll(beginSet);
 			minDis++;
 			beginSet = nextLevel;
@@ -116,7 +120,7 @@ class Solution {
 		return 0;
 	}
 	
-	private List<String> convert(String cur, Set<String> beginSet, Set<String> dict) {
+	private List<String> getNeighbor(String cur, Set<String> beginSet, Set<String> dict) {
 		List<String> res = new ArrayList<>();
 		char[] chars = cur.toCharArray();
 		for (int i = 0; i < cur.length(); i++) {
@@ -135,17 +139,19 @@ class Solution {
 	
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: one directional BFS,
-// 如果HashSet的contains和add时间复杂度是O(1),
-// 则T(n)= O(V + E) = O(min(2^k, k *n), S(n) = O(min(2^k, k * n)
-// 如果HashSet的contains和add时间复杂度是O(k),
-// 则T(n)= O(V + E) = O(min(k * 2^k, k^2 *n), S(n) = O(min(k * 2^k, k^2 * n)
-// n: 字典里单词个数，k:每个单词的长度
-// 126 ms,击败了38.94% 的Java用户, 111.6 MB,击败了5.63% 的Java用户
+// Solution 1: one directional BFS
+// 63 ms,击败了63.93% 的Java用户, 41.2 MB,击败了59.83% 的Java用户
+/*
+ 如果HashSet的contains和add时间复杂度是O(1),
+    则T(n)= O(V + E) = O(min(2^k, k *n), S(n) = O(min(2^k, k * n)
+ 如果HashSet的contains和add时间复杂度是O(k),
+    则T(n)= O(V + E) = O(min(k * 2^k, k^2 *n), S(n) = O(min(k * 2^k, k^2 * n)
+ n: 字典里单词个数，k:每个单词的长度
+*/
 class Solution1 {
 	
 	public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-		HashSet<String> wordSet = new HashSet<>(wordList);
+		Set<String> wordSet = new HashSet<>(wordList);
 		// corner case
 		if (wordList == null || !wordSet.contains(endWord)) {
 			return 0;
@@ -153,26 +159,26 @@ class Solution1 {
 		
 		Queue<String> queue = new LinkedList<>();
 		queue.offer(beginWord);
-		int minDis = 1; // the distance from begin to element polled
+		int minLen = 1; // the distance from begin to element polled
 		while(!queue.isEmpty()) {
 			int size = queue.size();
 			while (size-- > 0) {
 				String cur = queue.poll();
-				List<String> neighbors = convert(cur, wordSet);
+				List<String> neighbors = getNeighbors(cur, wordSet);
 				for (String neighbor: neighbors) {
 					if (neighbor.equals(endWord)) {
-						return minDis + 1;
+						return minLen + 1;
 					}
 					queue.offer(neighbor);
 					wordSet.remove(neighbor);
 				}
 			}
-			minDis++;
+			minLen++;
 		}
 		return 0;
 	}
 	
-	private List<String> convert(String cur, Set<String> dict) {
+	private List<String> getNeighbors(String cur, Set<String> dict) {
 		List<String> res = new ArrayList<>();
 		char[] chars = cur.toCharArray();
 		for (int i = 0; i < cur.length(); i++) {
@@ -190,8 +196,24 @@ class Solution1 {
 	}
 }
 
-// Solution 2: bidirectional BFS, 时间，空间 复杂度分析同上
-// 23 ms,击败了93.09% 的Java用户, 51.4 MB,击败了18.10% 的Java用户
+// Solution 2: bi-directional BFS
+// 10 ms,击败了99.38% 的Java用户, 40.2 MB,击败了85.47% 的Java用户
+/*
+ 如果HashSet的contains和add时间复杂度是O(1),
+    则T(n)= O(V + E) = O(min(2^k, k *n), S(n) = O(min(2^k, k * n)
+ 如果HashSet的contains和add时间复杂度是O(k),
+    则T(n)= O(V + E) = O(min(k * 2^k, k^2 *n), S(n) = O(min(k * 2^k, k^2 * n)
+ n: 字典里单词个数，k:每个单词的长度
+ 126 ms,击败了38.94% 的Java用户, 111.6 MB,击败了5.63% 的Java用户
+ 
+put begin word and end word into the begin set and end set respectively
+which one is smaller, bfs grow that one first, until begin set reaches end end set
+
+be careful:
+	after find neighbor of one word, can not remove it from wordSet at once,
+	it can only be removed after traverse this whole level;
+	otherwise, begin set will never reach end set
+*/
 class Solution2 {
 	
 	public int ladderLength(String beginWord, String endWord, List<String> wordList) {
@@ -215,7 +237,7 @@ class Solution2 {
 	}
 	
 	private int bfs(HashSet<String> wordSet, HashSet<String> beginSet, HashSet<String> endSet) {
-		int minDis = 1;
+		int minLen = 1;
 		// endSet will be in the wordSet
 		while (!beginSet.isEmpty() && !endSet.isEmpty()) {
 			// make beginSet <= endSet
@@ -226,22 +248,26 @@ class Solution2 {
 			}
 			HashSet<String> nextLevel = new HashSet<>();
 			for (String cur : beginSet) {
-				List<String> neighbors = convert(cur, beginSet, wordSet);
+				List<String> neighbors = getNeighbors(cur, beginSet, wordSet);
 				for (String neighbor: neighbors) {
 					if (endSet.contains(neighbor)) {
-						return minDis + 1;
+						return minLen + 1;
 					}
 					nextLevel.add(neighbor);
 				}
 			}
+			/*
+			important, can not remove word immediately find neighbor;
+			otherwise, begin set will never reach to end set
+			 */
 			wordSet.removeAll(beginSet);
-			minDis++;
+			minLen++;
 			beginSet = nextLevel;
 		}
 		return 0;
 	}
 	
-	private List<String> convert(String cur, Set<String> beginSet, Set<String> dict) {
+	private List<String> getNeighbors(String cur, Set<String> beginSet, Set<String> dict) {
 		List<String> res = new ArrayList<>();
 		char[] chars = cur.toCharArray();
 		for (int i = 0; i < cur.length(); i++) {

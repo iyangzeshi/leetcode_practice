@@ -54,6 +54,7 @@ package leetcode.editor.en;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -70,9 +71,9 @@ public class Leetcode0126WordLadderIi {
 		Solution sol = new Leetcode0126WordLadderIi().new Solution();
 		// TO TEST
 		
-		String beginWord = "maria";
-		String endWord = "pearl";
-		String[] words = {"flail","halon","lexus","joint","pears","slabs","lorie","lapse","wroth","yalow","swear","cavil","piety","yogis","dhaka","laxer","tatum","provo","truss","tends","deana","dried","hutch","basho","flyby","miler","fries","floes","lingo","wider","scary","marks","perry","igloo","melts","lanny","satan","foamy","perks","denim","plugs","cloak","cyril","women","issue","rocky","marry","trash","merry","topic","hicks","dicky","prado","casio","lapel","diane","serer","paige","parry","elope","balds","dated","copra","earth","marty","slake","balms","daryl","loves","civet","sweat","daley","touch","maria","dacca","muggy","chore","felix","ogled","acids","terse","cults","darla","snubs","boats","recta","cohan","purse","joist","grosz","sheri","steam","manic","luisa","gluts","spits","boxer","abner","cooke","scowl","kenya","hasps","roger","edwin","black","terns","folks","demur","dingo","party","brian","numbs","forgo","gunny","waled","bucks","titan","ruffs","pizza","ravel","poole","suits","stoic","segre","white","lemur","belts","scums","parks","gusts","ozark","umped","heard","lorna","emile","orbit","onset","cruet","amiss","fumed","gelds","italy","rakes","loxed","kilts","mania","tombs","gaped","merge","molar","smith","tangs","misty","wefts","yawns","smile","scuff","width","paris","coded","sodom","shits","benny","pudgy","mayer","peary","curve","tulsa","ramos","thick","dogie","gourd","strop","ahmad","clove","tract","calyx","maris","wants","lipid","pearl","maybe","banjo","south","blend","diana","lanai","waged","shari","magic","duchy","decca","wried","maine","nutty","turns","satyr","holds","finks","twits","peaks","teems","peace","melon","czars","robby","tabby","shove","minty","marta","dregs","lacks","casts","aruba","stall","nurse","jewry","knuth"};
+		String beginWord = "hot";
+		String endWord = "dog";
+		String[] words = {"hot","dog"};
 		List<String> wordList = new ArrayList<>(Arrays.asList(words));
 		List<List<String>> result = sol.findLadders(beginWord, endWord, wordList);
 		Set<String> set = new HashSet<>();
@@ -86,217 +87,57 @@ public class Leetcode0126WordLadderIi {
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 	
-	private String beginWord;
-	private String endWord;
-	private Set<String> wordSet;
-	private Set<String> set1;
-	private Set<String> set2;
-	private Map<String, List<String>> beginGraph;
-	private Map<String, List<String>> endGraph;
-	private Map<String, List<String>> graph1;
-	private Map<String, List<String>> graph2;
-	
 	public List<List<String>> findLadders(String beginWord, String endWord,
 			List<String> wordList) {
-		
 		List<List<String>> paths = new ArrayList<>();
-		wordSet = new HashSet<>(wordList);
-		
+		Set<String> wordSet = new HashSet<>(wordList);
 		// corner case
 		if (wordList == null || !wordSet.contains(endWord)) {
 			return paths;
 		}
-		
-		initialize(beginWord, endWord);
-		paths = bfs(beginWord, endWord);
-		return paths;
-	}
-	
-	private void initialize(String beginWord, String endWord) {
-		this.beginWord = beginWord;
-		this.endWord = endWord;
-		
-		Set<String> beginSet = new HashSet<>();
-		Set<String> endSet = new HashSet<>();
-		endSet.add(endWord);
-		beginSet.add(beginWord);
-		beginGraph = new HashMap<>();
-		endGraph = new HashMap<>();
-		
-		set1 = beginSet;
-		set2 = endSet;
-		graph1 = beginGraph;
-		graph2 = endGraph;
-	}
-	
-	// 永远是从set1往set2走，make sure set1 <= set2
-	private List<List<String>> bfs(String beginWord, String endWord) {
-		List<List<String>> paths = new ArrayList<>();
-		Set<String> meetingLevel = new HashSet<>();
-		boolean meeted = false;
-		while (!set1.isEmpty() && !set2.isEmpty()) {
-			// make set1 <= set2, may exchange set1, set2; graph1, graph2
-			makeSet1Smaller();
-			Set<String> thisLevel = new HashSet<>();
-			for (String cur : set1) {
-				List<String> neighbors = convert(cur, wordSet);
-				for (String str: neighbors) {
-					if (set2.contains(str)) {
-						meeted = true;
-						meetingLevel.add(str);
-					}
-					thisLevel.add(str);
-					graph1.computeIfAbsent(str, k -> new ArrayList<>()).add(cur);
-				}
-				
-			}
-			wordSet.removeAll(set1);
-			set1 = thisLevel;
-			if (meeted) {
-				return buildPaths(meetingLevel, beginWord, endWord);
-			}
+		Map<String, List<String>> graph = new HashMap<>(); // key - word, value - its neighbors
+		boolean met = buildGraph(beginWord, endWord, wordSet, graph);
+		List<String> list = new ArrayList<>();
+		list.add(endWord);
+		if (met) {
+			dfsBuildPaths(endWord, beginWord, list, paths, graph);
 		}
 		return paths;
 	}
 	
-	/**
-	 * return the list of neighbors of the cur which are in the dict and 1 distance
-	 */
-	private List<String> convert(String cur, Set<String> dict) {
-		List<String> res = new ArrayList<>();
-		char[] chars = cur.toCharArray();
-		for (int i = 0; i < cur.length(); i++) {
-			char temp = chars[i];
-			for (char c = 'a'; c <= 'z'; c++) {
-				chars[i] = c;
-				String str = String.valueOf(chars);
-				if (c != temp && dict.contains(str) && !set1.contains(str)) {
-					res.add(str);
-				}
-			}
-			chars[i] = temp;
-		}
-		return res;
-	}
-	
-	private List<List<String>> buildPaths(Set<String> meetingLevel, String begin, String end) {
-		List<List<String>> result = new ArrayList<>();
-		
-		for (String cur : meetingLevel) {
-			List<List<String>> pathsToCur = dfsBuildPath(cur, beginWord, true,
-					new LinkedList<>(), new ArrayList<>());
-			List<List<String>> pathsFromCur = dfsBuildPath(cur, endWord, false,
-					new LinkedList<>(), new ArrayList<>());
-			
-			for (List<String> path1 : pathsToCur) {
-				for (List<String> path2 : pathsFromCur) {
-					List<String> temp = new ArrayList<>(path1);
-					temp.add(cur);
-					temp.addAll(path2);
-					result.add(temp);
-				}
-			}
-		}
-		return result;
-	}
-	
-	/**
-	 * make set1 <= set2, may exchange set1, set2; graph1, graph2
-	 */
-	private void makeSet1Smaller() {
-		if (set1.size() > set2.size()) {
-			Set<String> tempSet = set1;
-			set1 = set2;
-			set2 = tempSet;
-			
-			Map<String, List<String>> tempGraph = graph1;
-			graph1 = graph2;
-			graph2 = tempGraph;
-		}
-	}
-	
-	private List<List<String>> dfsBuildPath(String cur, String end, boolean beginToEnd,
-			LinkedList<String> list, List<List<String>> result) {
-		// base case
-		if (cur.equals(end)) {
-			List<String> copy = new LinkedList<>(list);
-			result.add(copy);
-			return result;
-		}
-		
-		// general case
-		if (beginToEnd) {
-			List<String> nextLevel = beginGraph.get(cur);
-			for (String str : nextLevel) {
-				list.addFirst(str);
-				dfsBuildPath(str, beginWord, true, list, result);
-				list.removeFirst();
-			}
-		} else {
-			List<String> nextLevel = endGraph.get(cur);
-			for (String str : nextLevel) {
-				list.addLast(str);
-				dfsBuildPath(str, endWord, false, list, result);
-				list.removeLast();
-			}
-		}
-		return result;
-	}
-}
-
-//leetcode submit region end(Prohibit modification and deletion)
-
-// solution 1: one directional BFS
-// 如果HashSet的contains和add时间复杂度是O(1),
-// 则T(n)= O(V + E) = O(min(2^k, k *n), S(n) = O(min(2^k, k * n)
-// 如果HashSet的contains和add时间复杂度是O(k),
-// 则T(n)= O(V + E) = O(min(k * 2^k, k^2 *n), S(n) = O(min(k * 2^k, k^2 * n)
-// n: 字典里单词个数，k:每个单词的长度
-class Solution1 {
-	
-	public List<List<String>> findLadders(String beginWord, String endWord,
-			List<String> wordList) {
-		List<List<String>> paths = new ArrayList<>();
-		HashSet<String> wordSet = new HashSet<>(wordList);
-		// corner case
-		if (wordList == null || !wordSet.contains(endWord)) {
-			return paths;
-		}
-		// elements in this level will be deleted from wordSet after traversing this level
+	private boolean buildGraph(String beginWord, String endWord, Set<String> wordSet,
+			Map<String, List<String>> graph) {
 		Queue<String> queue = new LinkedList<>();
-		HashMap<String, List<String>> graph = new HashMap<>();
 		queue.offer(beginWord);
-		boolean reachEnd = false;
-		// BFS
+		
+		boolean met = false; // whether queue meets end
+		// BFS, elements in next level will be deleted from wordSet after traversing this level
 		while (!queue.isEmpty()) {
-			Set<String> thisLevel = new HashSet<>();
+			Set<String> nextLevel = new HashSet<>();
 			int size = queue.size();
 			while (size-- > 0) {
 				String cur = queue.poll();
-				List<String> neighbors = convert(cur, wordSet);
+				List<String> neighbors = getNeighbors(cur, wordSet);
 				for (String str: neighbors) {
 					if (str.equals(endWord)) {
-						reachEnd = true;
+						met = true;
 					}
 					graph.computeIfAbsent(str, k -> new ArrayList<>()).add(cur);
-					if (!thisLevel.contains(str)) {
+					if (!nextLevel.contains(str)) {
 						queue.offer(str);
-						thisLevel.add(str);
+						nextLevel.add(str);
 					}
 				}
 			}
-			wordSet.removeAll(thisLevel);
-			if (reachEnd) {
-				LinkedList<String> list = new LinkedList<>();
-				list.add(endWord);
-				dfsBuildPaths(list, paths, endWord, beginWord, graph);
-				break;
+			wordSet.removeAll(nextLevel);
+			if (met) {
+				return met;
 			}
 		}
-		return paths;
+		return met;
 	}
 	
-	private List<String> convert(String cur, Set<String> dict) {
+	private List<String> getNeighbors(String cur, Set<String> dict) {
 		List<String> res = new ArrayList<>();
 		char[] chars = cur.toCharArray();
 		for (int i = 0; i < cur.length(); i++) {
@@ -313,11 +154,12 @@ class Solution1 {
 		return res;
 	}
 	
-	private void dfsBuildPaths(LinkedList<String> list, List<List<String>> paths, String cur,
-			String target, HashMap<String, List<String>> graph) {
+	private void dfsBuildPaths(String cur, String target, List<String> list,
+			List<List<String>> paths, Map<String, List<String>> graph) {
 		// base case
 		if (cur.equals(target)) {
-			List<String> copy = new LinkedList<>(list);
+			List<String> copy = new ArrayList<>(list);
+			Collections.reverse(copy);
 			paths.add(copy);
 			return;
 		}
@@ -325,98 +167,194 @@ class Solution1 {
 		List<String> nextLevel = graph.get(cur);
 		
 		for (String str : nextLevel) {
-			list.addFirst(str);
-			dfsBuildPaths(list, paths, str, target, graph);
-			list.removeFirst();
+			list.add(str);
+			dfsBuildPaths(str, target, list, paths, graph);
+			list.remove(list.size() - 1);
+		}
+	}
+}
+//leetcode submit region end(Prohibit modification and deletion)
+// solution 1: one directional BFS
+// 63 ms,击败了81.49% 的Java用户, 43.3 MB,击败了82.27% 的Java用户
+/*
+ 如果HashSet的contains和add时间复杂度是O(1),
+    则T(n)= O(V + E) = O(min(2^k, k *n), S(n) = O(min(2^k, k * n)
+ 如果HashSet的contains和add时间复杂度是O(k),
+    则T(n)= O(V + E) = O(min(k * 2^k, k^2 *n), S(n) = O(min(k * 2^k, k^2 * n)
+ n: 字典里单词个数，k:每个单词的长度
+*/
+class Solution1 {
+	
+	public List<List<String>> findLadders(String beginWord, String endWord,
+			List<String> wordList) {
+		List<List<String>> paths = new ArrayList<>();
+		Set<String> wordSet = new HashSet<>(wordList);
+		// corner case
+		if (wordList == null || !wordSet.contains(endWord)) {
+			return paths;
+		}
+		Map<String, List<String>> graph = new HashMap<>(); // key - word, value - its neighbors
+		boolean met = buildGraph(beginWord, endWord, wordSet, graph);
+		List<String> list = new ArrayList<>();
+		list.add(endWord);
+		if (met) {
+			dfsBuildPaths(endWord, beginWord, list, paths, graph);
+		}
+		return paths;
+	}
+	
+	private boolean buildGraph(String beginWord, String endWord, Set<String> wordSet,
+			Map<String, List<String>> graph) {
+		Queue<String> queue = new LinkedList<>();
+		queue.offer(beginWord);
+		
+		boolean met = false; // whether queue meets end
+		// BFS, elements in next level will be deleted from wordSet after traversing this level
+		while (!queue.isEmpty()) {
+			Set<String> nextLevel = new HashSet<>();
+			int size = queue.size();
+			while (size-- > 0) {
+				String cur = queue.poll();
+				List<String> neighbors = getNeighbors(cur, wordSet);
+				for (String str: neighbors) {
+					if (str.equals(endWord)) {
+						met = true;
+					}
+					graph.computeIfAbsent(str, k -> new ArrayList<>()).add(cur);
+					if (!nextLevel.contains(str)) {
+						queue.offer(str);
+						nextLevel.add(str);
+					}
+				}
+			}
+			wordSet.removeAll(nextLevel);
+			if (met) {
+				return met;
+			}
+		}
+		return met;
+	}
+	
+	private List<String> getNeighbors(String cur, Set<String> dict) {
+		List<String> res = new ArrayList<>();
+		char[] chars = cur.toCharArray();
+		for (int i = 0; i < cur.length(); i++) {
+			char temp = chars[i];
+			for (char c = 'a'; c <= 'z'; c++) {
+				chars[i] = c;
+				String str = String.valueOf(chars);
+				if (c != temp && dict.contains(str)) {
+					res.add(str);
+				}
+			}
+			chars[i] = temp;
+		}
+		return res;
+	}
+	
+	private void dfsBuildPaths(String cur, String target, List<String> list,
+			List<List<String>> paths, Map<String, List<String>> graph) {
+		// base case
+		if (cur.equals(target)) {
+			List<String> copy = new ArrayList<>(list);
+			Collections.reverse(copy);
+			paths.add(copy);
+			return;
+		}
+		
+		List<String> nextLevel = graph.get(cur);
+		
+		for (String str : nextLevel) {
+			list.add(str);
+			dfsBuildPaths(str, target, list, paths, graph);
+			list.remove(list.size() - 1);
 		}
 	}
 }
 
 // solution 2: bidirectional BFS
-// 如果HashSet的contains和add时间复杂度是O(1),
-// 则T(n)= O(V + E) = O(min(2^k, k *n), S(n) = O(min(2^k, k * n)
-// 如果HashSet的contains和add时间复杂度是O(k),
-// 则T(n)= O(V + E) = O(min(k * 2^k, k^2 *n), S(n) = O(min(k * 2^k, k^2 * n)
-// n: 字典里单词个数，k:每个单词的长度
+// 14 ms,击败了97.35% 的Java用户, 41.1 MB,击败了89.41% 的Java用户
+/*
+ 如果HashSet的contains和add时间复杂度是O(1),
+    则T(n)= O(V + E) = O(min(2^k, k *n), S(n) = O(min(2^k, k * n)
+ 如果HashSet的contains和add时间复杂度是O(k),
+    则T(n)= O(V + E) = O(min(k * 2^k, k^2 *n), S(n) = O(min(k * 2^k, k^2 * n)
+ n: 字典里单词个数，k:每个单词的长度
+*/
 class Solution2 {
 	
-	private String beginWord;
-	private String endWord;
-	private Set<String> wordSet;
-	private Set<String> set1;
-	private Set<String> set2;
-	private Map<String, List<String>> beginGraph;
-	private Map<String, List<String>> endGraph;
-	private Map<String, List<String>> graph1;
-	private Map<String, List<String>> graph2;
-	
-	public List<List<String>> findLadders(String beginWord, String endWord,
-			List<String> wordList) {
-		
+	public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
 		List<List<String>> paths = new ArrayList<>();
-		wordSet = new HashSet<>(wordList);
-		
+		Set<String> wordSet = new HashSet<>(wordList);
 		// corner case
 		if (wordList == null || !wordSet.contains(endWord)) {
 			return paths;
 		}
 		
-		initialize(beginWord, endWord);
-		paths = bfs(beginWord, endWord);
-		return paths;
-	}
-	
-	private void initialize(String beginWord, String endWord) {
-		this.beginWord = beginWord;
-		this.endWord = endWord;
-		
 		Set<String> beginSet = new HashSet<>();
 		Set<String> endSet = new HashSet<>();
 		endSet.add(endWord);
 		beginSet.add(beginWord);
-		beginGraph = new HashMap<>();
-		endGraph = new HashMap<>();
+		Map<String, List<String>> beginGraph = new HashMap<>();
+		Map<String, List<String>> endGraph = new HashMap<>();
 		
-		set1 = beginSet;
-		set2 = endSet;
-		graph1 = beginGraph;
-		graph2 = endGraph;
+		Set<String> metLevel = getMetLevel(beginSet, beginGraph, endSet, endGraph, wordSet);
+		
+		for (String cur : metLevel) {
+			List<List<String>> curToBegin = dfsBuildPath(cur, beginWord, new ArrayList<>(),
+					new ArrayList<>(), beginGraph
+			);
+			List<List<String>> curToEnd = dfsBuildPath(cur, endWord, new ArrayList<>(),
+					new ArrayList<>(), endGraph
+			);
+			connectPaths(paths, cur, curToBegin, curToEnd);
+		}
+		return paths;
 	}
 	
-	// 永远是从set1往set2走，make sure set1 <= set2
-	private List<List<String>> bfs(String beginWord, String endWord) {
-		List<List<String>> paths = new ArrayList<>();
-		Set<String> meetingLevel = new HashSet<>();
-		boolean meeted = false;
+	
+	// BFS to get met level, 永远是从set1往set2走，make sure set1 <= set2
+	private Set<String> getMetLevel(Set<String> set1, Map<String, List<String>> graph1,
+			Set<String> set2, Map<String, List<String>> graph2, Set<String> wordSet) {
+		Set<String> metLevel = new HashSet<>();
+		boolean met = false;
+		// elements in this level will be deleted from wordSet after traversing this level
 		while (!set1.isEmpty() && !set2.isEmpty()) {
 			// make set1 <= set2, may exchange set1, set2; graph1, graph2
-			makeSet1Smaller();
-			Set<String> thisLevel = new HashSet<>();
+			if (set1.size() > set2.size()) {
+				Set<String> tempSet = set1;
+				set1 = set2;
+				set2 = tempSet;
+				Map<String, List<String>> tempGraph = graph1;
+				graph1 = graph2;
+				graph2 = tempGraph;
+			}
+			Set<String> nextLevel = new HashSet<>();
 			for (String cur : set1) {
-				List<String> neighbors = convert(cur, wordSet);
-				for (String str: neighbors) {
+				List<String> neighbors = getNeighbors(cur, wordSet, set1);
+				for (String str : neighbors) {
 					if (set2.contains(str)) {
-						meeted = true;
-						meetingLevel.add(str);
+						met = true;
+						metLevel.add(str);
 					}
-					thisLevel.add(str);
+					nextLevel.add(str);
 					graph1.computeIfAbsent(str, k -> new ArrayList<>()).add(cur);
 				}
 				
 			}
 			wordSet.removeAll(set1);
-			set1 = thisLevel;
-			if (meeted) {
-				return buildPaths(meetingLevel, beginWord, endWord);
+			set1 = nextLevel;
+			if (met) {
+				return metLevel;
 			}
 		}
-		return paths;
+		return metLevel;
 	}
 	
 	/**
 	 * return the list of neighbors of the cur which are in the dict and 1 distance
 	 */
-	private List<String> convert(String cur, Set<String> dict) {
+	private List<String> getNeighbors(String cur, Set<String> dict, Set<String> set1) {
 		List<String> res = new ArrayList<>();
 		char[] chars = cur.toCharArray();
 		for (int i = 0; i < cur.length(); i++) {
@@ -433,70 +371,42 @@ class Solution2 {
 		return res;
 	}
 	
-	private List<List<String>> buildPaths(Set<String> meetingLevel, String begin, String end) {
-		List<List<String>> result = new ArrayList<>();
-		
-		for (String cur : meetingLevel) {
-			List<List<String>> pathsToCur = dfsBuildPath(cur, beginWord, true,
-					new LinkedList<>(), new ArrayList<>());
-			List<List<String>> pathsFromCur = dfsBuildPath(cur, endWord, false,
-					new LinkedList<>(), new ArrayList<>());
-			
-			for (List<String> path1 : pathsToCur) {
-				for (List<String> path2 : pathsFromCur) {
-					List<String> temp = new ArrayList<>(path1);
-					temp.add(cur);
-					temp.addAll(path2);
-					result.add(temp);
-				}
-			}
-		}
-		return result;
-	}
-	
 	/**
-	 * make set1 <= set2, may exchange set1, set2; graph1, graph2
+	 * using dfs to find all possible paths from cur to target
+	 * @param paths List<List<String>> paths
 	 */
-	private void makeSet1Smaller() {
-		if (set1.size() > set2.size()) {
-			Set<String> tempSet = set1;
-			set1 = set2;
-			set2 = tempSet;
-			
-			Map<String, List<String>> tempGraph = graph1;
-			graph1 = graph2;
-			graph2 = tempGraph;
+	private List<List<String>> dfsBuildPath(String cur, String target,
+			List<String> list, List<List<String>> paths, Map<String, List<String>> graph) {
+		// base case
+		if (cur.equals(target)) {
+			List<String> copy = new ArrayList<>(list);
+			paths.add(copy);
+			return paths;
+		}
+		
+		List<String> nextLevel = graph.get(cur);
+		for (String str : nextLevel) {
+			list.add(str);
+			dfsBuildPath(str, target, list, paths, graph);
+			list.remove(list.size() - 1);
+		}
+		return paths;
+	}
+	
+	private void connectPaths(List<List<String>> paths, String cur, List<List<String>> curToBegin,
+			List<List<String>> curToEnd) {
+		for (List<String> path1 : curToBegin) {
+			Collections.reverse(path1);
+			for (List<String> path2 : curToEnd) {
+				List<String> temp = new ArrayList<>(path1);
+				temp.add(cur);
+				temp.addAll(path2);
+				paths.add(temp);
+			}
 		}
 	}
 	
-	private List<List<String>> dfsBuildPath(String cur, String end, boolean beginToEnd,
-			LinkedList<String> list, List<List<String>> result) {
-		// base case
-		if (cur.equals(end)) {
-			List<String> copy = new LinkedList<>(list);
-			result.add(copy);
-			return result;
-		}
-		
-		// general case
-		if (beginToEnd) {
-			List<String> nextLevel = beginGraph.get(cur);
-			for (String str : nextLevel) {
-				list.addFirst(str);
-				dfsBuildPath(str, beginWord, true, list, result);
-				list.removeFirst();
-			}
-		} else {
-			List<String> nextLevel = endGraph.get(cur);
-			for (String str : nextLevel) {
-				list.addLast(str);
-				dfsBuildPath(str, endWord, false, list, result);
-				list.removeLast();
-			}
-		}
-		return result;
-	}
+	
 }
-
 
 }
