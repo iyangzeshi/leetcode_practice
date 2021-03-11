@@ -178,7 +178,7 @@ class Solution1 {
 		return 0;
 	}
 	
-	private List<String> getNeighbors(String cur, Set<String> dict) {
+	private List<String> getNeighbors(String cur, Set<String> wordSet) {
 		List<String> res = new ArrayList<>();
 		char[] chars = cur.toCharArray();
 		for (int i = 0; i < cur.length(); i++) {
@@ -186,7 +186,7 @@ class Solution1 {
 			for (char c = 'a'; c <= 'z'; c++) {
 				chars[i] = c;
 				String str = String.valueOf(chars);
-				if (c != temp && dict.contains(str)) {
+				if (c != temp && wordSet.contains(str)) {
 					res.add(str);
 				}
 			}
