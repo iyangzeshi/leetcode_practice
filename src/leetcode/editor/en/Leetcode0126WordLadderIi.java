@@ -174,7 +174,7 @@ class Solution {
 	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// solution 1: one directional BFS
+// Solution 1: one directional BFS
 // 63 ms,击败了81.49% 的Java用户, 43.3 MB,击败了82.27% 的Java用户
 /*
  如果HashSet的contains和add时间复杂度是O(1),
@@ -272,7 +272,7 @@ class Solution1 {
 	}
 }
 
-// solution 2: bidirectional BFS
+// Solution 2: bidirectional BFS
 // 14 ms,击败了97.35% 的Java用户, 41.1 MB,击败了89.41% 的Java用户
 /*
  如果HashSet的contains和add时间复杂度是O(1),

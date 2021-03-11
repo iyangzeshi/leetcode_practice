@@ -81,30 +81,30 @@ class Solution {
 			return 0;
 		}
 		
-		HashSet<String> beginSet = new HashSet<>();
-		HashSet<String> endSet = new HashSet<>();
+		Set<String> beginSet = new HashSet<>();
+		Set<String> endSet = new HashSet<>();
 		beginSet.add(beginWord);
 		endSet.add(endWord);
 		
 		return bfs(wordSet, beginSet, endSet);
 	}
 	
-	private int bfs(HashSet<String> wordSet, HashSet<String> beginSet, HashSet<String> endSet) {
-		int minDis = 1;
-		// endSet will be in the wordSet
-		while (!beginSet.isEmpty() && !endSet.isEmpty()) {
-			// make beginSet <= endSet
-			if (beginSet.size() > endSet.size()) {
-				HashSet<String> tempSet = beginSet;
-				beginSet = endSet;
-				endSet = tempSet;
+	private int bfs(HashSet<String> wordSet, Set<String> set1, Set<String> set2) {
+		int minLen = 1;
+		// set2 will be in the wordSet
+		while (!set1.isEmpty() && !set2.isEmpty()) {
+			// make set1 <= set2
+			if (set1.size() > set2.size()) {
+				Set<String> tempSet = set1;
+				set1 = set2;
+				set2 = tempSet;
 			}
 			HashSet<String> nextLevel = new HashSet<>();
-			for (String cur : beginSet) {
-				List<String> neighbors = getNeighbor(cur, beginSet, wordSet);
+			for (String cur : set1) {
+				List<String> neighbors = getNeighbor(cur, set1, wordSet);
 				for (String neighbor: neighbors) {
-					if (endSet.contains(neighbor)) {
-						return minDis + 1;
+					if (set2.contains(neighbor)) {
+						return minLen + 1;
 					}
 					nextLevel.add(neighbor);
 				}
@@ -113,9 +113,9 @@ class Solution {
 			important, can not remove word immediately find neighbor;
 			otherwise, begin set will never reach to end set
 			 */
-			wordSet.removeAll(beginSet);
-			minDis++;
-			beginSet = nextLevel;
+			wordSet.removeAll(set1);
+			minLen++;
+			set1 = nextLevel;
 		}
 		return 0;
 	}
