@@ -302,11 +302,9 @@ class Solution2 {
 		
 		for (String cur : metLevel) {
 			List<List<String>> curToBegin = dfsBuildPath(cur, beginWord, new ArrayList<>(),
-					new ArrayList<>(), beginGraph
-			);
+					new ArrayList<>(), beginGraph);
 			List<List<String>> curToEnd = dfsBuildPath(cur, endWord, new ArrayList<>(),
-					new ArrayList<>(), endGraph
-			);
+					new ArrayList<>(), endGraph);
 			connectPaths(paths, cur, curToBegin, curToEnd);
 		}
 		return paths;
