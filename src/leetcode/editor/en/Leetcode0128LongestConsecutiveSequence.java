@@ -34,6 +34,9 @@ package leetcode.editor.en;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 // 2020-11-25 20:44:05
 // Zeshi Yang
 public class Leetcode0128LongestConsecutiveSequence{
@@ -41,8 +44,9 @@ public class Leetcode0128LongestConsecutiveSequence{
     public static void main(String[] args) {
         Solution sol = new Leetcode0128LongestConsecutiveSequence().new Solution();
         // TO TEST
-        
-        System.out.println();
+        int[] nums = {1, 4, 6, 2, 3, 8, 9, 11, 13, 14, 15, 5};
+        int res = sol.longestConsecutive(nums);
+        System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
@@ -81,18 +85,22 @@ class Solution {
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1_1:
+// Solution 1_1: T(n) = O(n), S(n) = O(n)
 /**
  * 先把nums里面的所有元素存到HashSet里面，
- * 然后遍历数组，每次找到一个数字，就统计包含这个数字的数字串的长度，并把这些数字串remove出来
+ * 然后遍历数组，每次找到一个数字，就统计包含这个数字的连续数字串的长度，并把这些数字串remove掉
  * 遍历完所有的连续数字串，选出数字串的最大长度
  */
 class Solution1_1 {
+    
     public int longestConsecutive(int[] nums) {
+        // corner case
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
         
-        HashSet<Integer> set = new HashSet<>();
-        
-        for(int num: nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
             set.add(num);
         }
         int max = 0;
@@ -123,7 +131,7 @@ class Solution1_1 {
     
 }
 
-// Solution 1_2:
+// Solution 1_2: T(n) = O(n), S(n) = O(n)
 /**
  * 先把nums里面的所有元素存到HashSet里面，
  * 然后遍历数组，每次找到一个连续数字串的开头（这个连续数字串），就一直往后统计这个连续数字串的长度
@@ -132,9 +140,12 @@ class Solution1_1 {
 class Solution1_2 {
     
     public int longestConsecutive(int[] nums) {
+        // corner case
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
         
-        HashSet<Integer> set = new HashSet<>();
-        
+        Set<Integer> set = new HashSet<>();
         for (int num : nums) {
             set.add(num);
         }
@@ -154,7 +165,7 @@ class Solution1_2 {
     }
     
 }
-// Solution 2:
+// Solution 2: T(n) = O(n), S(n) = O(n)
 /**
  * 假如我们已经了有连续的序列，123 和 56，并且序列的边界保存了当前序列的长度。
  * 1  2  3
@@ -188,28 +199,31 @@ class Solution1_2 {
 class Solution2 {
     
     public int longestConsecutive(int[] nums) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+        // corner case
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        
+        Map<Integer, Integer> map = new HashMap<>();
         int max = 0;
         for (int num : nums) {
-            //已经考虑过的数字就跳过，必须跳过，不然会出错
-            //比如 [1 2 1]
-            //最后的 1 如果不跳过，因为之前的 2 的最长长度已经更新成 2 了，所以会出错
+            /*
+            已经考虑过的数字就跳过，必须跳过，不然会出错
+            比如 [1 2 1]
+            最后的 1 如果不跳过，因为之前的 2 的最长长度已经更新成 2 了，所以会出错
+            */
             if (map.containsKey(num)) {
                 continue;
             }
-            //找到以左边数字结尾的最长序列，默认为 0
-            int left = map.getOrDefault(num - 1, 0);
-            //找到以右边数开头的最长序列，默认为 0
-            int right = map.getOrDefault(num + 1, 0);
+            
+            int left = map.getOrDefault(num - 1, 0); //找到以左边数字结尾的最长序列，默认为 0
+            int right = map.getOrDefault(num + 1, 0); //找到以右边数开头的最长序列，默认为 0
             int sum = left + 1 + right;
             max = Math.max(max, sum);
             
-            //将当前数字放到 map 中，防止重复考虑数字，value 可以随便给一个值
-            map.put(num, -1);
-            //更新左边界长度
-            map.put(num - left, sum);
-            //更新右边界长度
-            map.put(num + right, sum);
+            map.put(num, -1);//将当前数字放到 map 中，防止重复考虑数字，value 可以随便给一个值
+            map.put(num - left, sum); //更新左边界长度
+            map.put(num + right, sum); //更新右边界长度
         }
         return max;
     }

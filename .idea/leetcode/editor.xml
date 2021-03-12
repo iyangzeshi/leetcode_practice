@@ -1371,6 +1371,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0226InvertBinaryTree.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0226InvertBinaryTree.java" />
+              <option name="questionId" value="226" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0227BasicCalculatorIi.java">
           <value>
             <LeetcodeEditor>
@@ -1832,6 +1840,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0342PowerOfFour.java" />
               <option name="questionId" value="342" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0347TopKFrequentElements.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0347TopKFrequentElements.java" />
+              <option name="questionId" value="347" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -2395,6 +2411,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0674LongestContinuousIncreasingSubsequence.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0674LongestContinuousIncreasingSubsequence.java" />
+              <option name="questionId" value="674" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0692TopKFrequentWords.java">
           <value>
             <LeetcodeEditor>
@@ -2416,6 +2440,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0695MaxAreaOfIsland.java" />
               <option name="questionId" value="695" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0698PartitionToKEqualSumSubsets.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0698PartitionToKEqualSumSubsets.java" />
+              <option name="questionId" value="698" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -2552,6 +2584,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0759EmployeeFreeTime.java" />
               <option name="questionId" value="761" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0770BasicCalculatorIv.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0770BasicCalculatorIv.java" />
+              <option name="questionId" value="781" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -2696,6 +2736,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0987VerticalOrderTraversalOfABinaryTree.java" />
               <option name="questionId" value="1029" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0991BrokenCalculator.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/en/Leetcode0991BrokenCalculator.java" />
+              <option name="questionId" value="1033" />
             </LeetcodeEditor>
           </value>
         </entry>

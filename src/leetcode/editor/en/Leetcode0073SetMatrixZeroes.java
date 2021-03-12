@@ -49,17 +49,22 @@ public class Leetcode0073SetMatrixZeroes{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+// 先遍历第一行和第一列，再遍历剩下的点，为0做标记T(n, m) = O(n * m), S(n, m) = O(1)
+// 1 ms,击败了92.24% 的Java用户, 40.8 MB,击败了42.51% 的Java用户
 /*
-思路：
-遍历所有点
-如果这个点在第1行，或者第1列，把这个第1行（列）标记成本来有0
-否则这个0所在的行的第一个数字标成0，也把这个0所在列的第一个数字标成0
-
-然后遍历除了第1行和第1列之外的所有数字，如果它所在的行或者列的头是0的话，就把这个标记成0
-遍历第1行，如果遇到0的话，就把这个0所在的列标成0
-遍历第1列，如果遇到0的话，就把这个0所在的行变成0
-
-最后看第一行和第一列的标记，看要不要第一行或者第一列全部变成0
+step1 :
+    设置两个boolean firstRow 和 firstCol,分别表示第一行和第一列有没有0
+    遍历第一行和第一列，update firstRow 和 firstCol
+    
+step2:
+    遍历剩下来的所有元素，遍历到0的时候，就把这个0最左边和坐上面的地方标记成0
+   
+step3:
+    遍历除了0th row 和col之外的所有元素，如果这个元素的最左边或者最上面的话，就把这个元素设置成0
+        
+step 4:
+     如果firstRow == true，把第一行都变成0
+     如果firstCol == true，把第一列都变成0
  */
 class Solution {
     
@@ -67,41 +72,54 @@ class Solution {
         if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) {
             return;
         }
-        int row = matrix.length;
-        int col = matrix[0].length;
+        int rows = matrix.length;
+        int cols = matrix[0].length;
         
-        boolean firstRow = false; // the first row has 0
-        boolean firstCol = false; // the first column has 0
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
+        boolean row0Has0 = false; // the first rows has 0
+        boolean col0Has0 = false; // the first column has 0
+        
+        // step 1: traverse first row to judge if it exists 0
+        for (int i = 0; i < cols; i++) {
+            if (matrix[0][i] == 0) {
+                row0Has0 = true;
+                break;
+            }
+        }
+        // step 1: traverse first col to judge if it exists 0
+        for (int i = 0; i < rows; i++) {
+            if (matrix[i][0] == 0) {
+                col0Has0 = true;
+                break;
+            }
+        }
+        
+        // step 2: traverse leftover elements, update 0's left head and upper head to 0
+        for (int i = 1; i < rows; i++) {
+            for (int j = 1; j < cols; j++) {
                 if (matrix[i][j] == 0) {
-                    if (i == 0) {
-                        firstRow = true;
-                    }
-                    if (j == 0) {
-                        firstCol = true;
-                    }
                     matrix[0][j] = 0;
                     matrix[i][0] = 0;
                 }
             }
         }
         
-        for (int i = 1; i < row; i++) {
-            for (int j = 1; j < col; j++) {
+        // step 3: update leftover elements to 0 if needed
+        for (int i = 1; i < rows; i++) {
+            for (int j = 1; j < cols; j++) {
                 if (matrix[i][0] == 0 || matrix[0][j] == 0) {
                     matrix[i][j] = 0;
                 }
             }
         }
         
-        if (firstCol) {
-            for (int i = 0; i < row; i++) {
+        // step 4: update first row and column to 0 if need
+        if (col0Has0) {
+            for (int i = 0; i < rows; i++) {
                 matrix[i][0] = 0;
             }
         }
-        if (firstRow) {
-            for (int j = 0; j < col; j++) {
+        if (row0Has0) {
+            for (int j = 0; j < cols; j++) {
                 matrix[0][j] = 0;
             }
             

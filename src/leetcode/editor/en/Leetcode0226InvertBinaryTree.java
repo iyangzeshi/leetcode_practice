@@ -60,20 +60,57 @@ public class Leetcode0226InvertBinaryTree{
  */
 class Solution {
     public TreeNode invertTree(TreeNode root) {
-        // first recursion then do
-
-        // corner cases
+        // corner case
         if (root == null) {
             return root;
         }
+        
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        invertTree(root.left);
+        invertTree(root.right);
+        return root;
+    }
+}
+//leetcode submit region end(Prohibit modification and deletion)
+// Solution 1: bottom up reverse, post order dfs, T(n) = O(n), S(n) = O(lg(h)), h is depth of tree
+// 0 ms,击败了100.00% 的Java用户, 36.2 MB,击败了80.16% 的Java用户
+class Solution1 {
+    
+    public TreeNode invertTree(TreeNode root) {
+        // corner case
+        if (root == null) {
+            return root;
+        }
+        
         TreeNode left = invertTree(root.right);
         TreeNode right = invertTree(root.left);
         root.left = left;
         root.right = right;
         return root;
-
     }
+    
 }
-//leetcode submit region end(Prohibit modification and deletion)
+
+// Solution 2: top down reverse, pre order dfs, T(n) = O(n), S(n) = O(lg(h)), h is depth of tree
+// 0 ms,击败了100.00% 的Java用户, 36.7 MB,击败了21.36% 的Java用户
+class Solution2 {
+    
+    public TreeNode invertTree(TreeNode root) {
+        // corner case
+        if (root == null) {
+            return root;
+        }
+        
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        invertTree(root.left);
+        invertTree(root.right);
+        return root;
+    }
+    
+}
 
 }

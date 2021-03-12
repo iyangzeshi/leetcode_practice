@@ -32,7 +32,6 @@ package leetcode.editor.en;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +56,7 @@ class Solution {
             return result;
         }
         
+        // count the frequency of the number
         Map<Integer, Integer> count = new HashMap<>();
         for (int i : nums) {
             if (!count.containsKey(i)) {
@@ -66,28 +66,28 @@ class Solution {
             }
         }
         
-        PriorityQueue<Integer> heap = new PriorityQueue<>(
-                Comparator.comparingInt(count::get)); // min heap
+        PriorityQueue<Integer> minHeap =
+                new PriorityQueue<>((o1, o2) -> (count.get(o1) - count.get(o2))); // min minHeap
         
         for (int i : count.keySet()) {
-            if (heap.size() < k) {
-                heap.add(i);
-            } else if (count.get(i) > count.get(heap.peek())) {
-                heap.poll();
-                heap.add(i);
+            if (minHeap.size() < k) {
+                minHeap.add(i);
+            } else if (count.get(i) > count.get(minHeap.peek())) {
+                minHeap.poll();
+                minHeap.offer(i);
             } else {
                 continue;
             }
         }
         
-        while (!heap.isEmpty()) {
-            result.add(heap.poll());
+        while (!minHeap.isEmpty()) {
+            result.add(minHeap.poll());
         }
         Collections.reverse(result);
 
         /*
-         while (heap.isEmpty() == false) {
-         result.add(0, heap.poll());新来的数字加在头上也可以
+         while (minHeap.isEmpty() == false) {
+         result.add(0, minHeap.poll());新来的数字加在头上也可以
          }
          */
         return result;

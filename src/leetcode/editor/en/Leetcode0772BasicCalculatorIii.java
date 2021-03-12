@@ -148,10 +148,9 @@ class Solution {
         }
     }
 }
-
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: number of stack, operation of stack
-// time = O(n), space = O(n)
+/* 面试的时候，用Solution 2 */
+// Solution 1: Stack<Integer> number, Stack<Character> operator, T(n) = O(n), S(n) = O(n)
 // 6 ms,击败了50.17% 的Java用户, 39.2 MB,击败了32.28% 的Java用户
 class Solution1 {
     
@@ -160,36 +159,36 @@ class Solution1 {
     Stack<Character> ops;
     
     public int calculate(String s) {
-        if (s == null | s.length() == 0) {
+        if (s == null || s.length() == 0) {
             return 0;
         }
         int num;
         initialize();
         
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (c == ' ') {
+            char ch = s.charAt(i);
+            if (ch == ' ') {
                 continue;
             }
-            if (Character.isDigit(c)) {
-                num = c - '0';
+            if (Character.isDigit(ch)) {
+                num = ch - '0';
                 while (i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
                     num = num * 10 + (s.charAt(i + 1) - '0');
                     i++;
                 }
                 nums.push(num);
-            } else if (isOperand(c)) {
+            } else if (isOperand(ch)) {
                 // - 表示负数的时候，前面补0，比如-1 * (-3)
-                if (c == '-' && (i == 0 || s.charAt(i - 1) == '(')) {
+                if (ch == '-' && (i == 0 || s.charAt(i - 1) == '(')) {
                     nums.push(0);
                 }
-                while (!ops.isEmpty() && calculatePreviousOper(c, ops.peek())) {
+                while (!ops.isEmpty() && calculatePreviousOper(ch, ops.peek())) {
                     nums.push(operate(ops.pop(), nums.pop(), nums.pop()));
                 }
-                ops.push(c);
-            } else if (c == '(') {
-                ops.push(c);
-            } else if (c == ')') {
+                ops.push(ch);
+            } else if (ch == '(') {
+                ops.push(ch);
+            } else if (ch == ')') {
                 while (!ops.isEmpty() && ops.peek() != '(') {
                     nums.push(operate(ops.pop(), nums.pop(), nums.pop()));
                 }
@@ -234,8 +233,8 @@ class Solution1 {
         }
     }
     
-    private int operate(char c, int i1, int i2) {
-        switch (c) {
+    private int operate(char ch, int i1, int i2) {
+        switch (ch) {
             case '+':
                 return i2 + i1;
             case '-':
@@ -250,8 +249,7 @@ class Solution1 {
 }
 
 
-// Solution 2:
-// time = O(n), space = O(n)
+// Solution 2: 2 stacks, integrate the operator operation, T(n) = O(n), S(n) = O(n)
 // 5 ms,击败了65.69% 的Java用户, 38 MB,击败了83.46% 的Java用户
 /*
 1. 计算器3这个题，主要借助1个optrMap来存除括号以外的所有操作运算符极其有限权值(分别用int来表示)，
@@ -267,10 +265,11 @@ class Solution1 {
     因此如果符号栈为空，则完全没有计算的必要，直接只需要将当前的optr压入符号栈即可。
  */
 class Solution2 {
+    
     public int calculate(String s) {
         // corner case
-        if (s == null) {
-            throw new IllegalArgumentException();
+        if (s == null || s.length() == 0) {
+            return 0;
         }
         
         // initialization
@@ -368,6 +367,7 @@ class Solution2 {
                 throw new IllegalArgumentException();
         }
     }
+    
 }
 
 // followup input 是 String[]的写法, 已经测试通过了

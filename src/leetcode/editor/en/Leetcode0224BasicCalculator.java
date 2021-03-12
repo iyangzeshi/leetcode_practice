@@ -32,7 +32,7 @@
 
 package leetcode.editor.en;
 
-import java.util.*;
+import java.util.Stack;
 // 2020-08-04 11:57:15
 // Zeshi Yang
 public class Leetcode0224BasicCalculator{
@@ -54,44 +54,43 @@ public class Leetcode0224BasicCalculator{
 4. numStack和optrStack在初始以及出现左括号的情况下，初始化都是在numStack里加0，而在optrStack里加1，也就是一起初始化成 0 + 的状态，这样可以避免在call stack的pop时出现NullPointerException()，而同时也不会影响最后的结果。
  */
 class Solution {
+    
     public int calculate(String s) {
-        // because there is only + - ( ), when we have not confront (, calculate the result, unless push the result
+        // because there is only + - ( ), when we have not confront (, calculate the result,
+        // unless push the result
         if (s == null | s.length() == 0) {
             return 0;
         }
         Stack<Integer> stack = new Stack<>();
         int result = 0;
         int sign = 1;
-
+        
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-
+            
             if (Character.isDigit(c)) {
                 int num = c - '0';
-                while(i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
-                    num = num *10 + (s.charAt(i + 1) - '0');
+                while (i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
+                    num = num * 10 + (s.charAt(i + 1) - '0');
                     i++;
                 }
                 result += num * sign;
-            }
-            else if (c == '+') {
+            } else if (c == '+') {
                 sign = 1;
-            }
-            else if (c == '-') {
+            } else if (c == '-') {
                 sign = -1;
-            }
-            else if (c == '(') {
+            } else if (c == '(') {
                 stack.push(result);
                 stack.push(sign);
                 result = 0;
                 sign = 1;
-            }
-            else if (c == ')') {
+            } else if (c == ')') {
                 result = result * stack.pop() + stack.pop();
             }
         }
         return result;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1:
@@ -107,6 +106,7 @@ opeStack需要先push '(',最后的时候,需要人为加 )
 遇到空格的时候,什么都不做
  */
 class Solution1 {
+    
     public int calculate(String s) {
         // corner case
         if (s == null || s.length() == 0) {
@@ -135,7 +135,7 @@ class Solution1 {
                 numStack.push(num);
             } else if (ch == '(') { // 如果是'(',符号stack里面push一个'('
                 operStack.push('(');
-            } else if (ch =='+' || ch == '-') {
+            } else if (ch == '+' || ch == '-') {
                 // 如果遇到了 +/- 符号,看前面的是不是 +-,如果是的话,先运行前面符号,运行之后,再加上这个符号
                 char oper = operStack.peek();
                 if (oper == '+' || oper == '-') {
@@ -155,7 +155,7 @@ class Solution1 {
                     numStack.push(num);
                 }
                 operStack.pop(); // pop '('
-
+                
             } else if (ch == ' ') { // 如果是空的话,什么都不做
                 continue;
             } else { // 其他符号的画,说明有问题
@@ -164,7 +164,7 @@ class Solution1 {
         }
         return numStack.pop();
     }
-
+    
     private int operateNum(int num1, char oper, int num2) {
         if (oper == '+') {
             return num1 + num2;
@@ -174,8 +174,8 @@ class Solution1 {
             throw new RuntimeException("should never happen");
         }
     }
+    
 }
-
 
 // Solution 2:
 /*
@@ -185,43 +185,42 @@ class Solution1 {
 4. numStack和optrStack在初始以及出现左括号的情况下，初始化都是在numStack里加0，而在optrStack里加1，也就是一起初始化成 0 + 的状态，这样可以避免在call stack的pop时出现NullPointerException()，而同时也不会影响最后的结果。
  */
 class Solution2 {
+    
     public int calculate(String s) {
-        // because there is only + - ( ), when we have not confront (, calculate the result, unless push the result
+        // because there is only + - ( ), when we have not confront (, calculate the result,
+        // unless push the result
         if (s == null | s.length() == 0) {
             return 0;
         }
         Stack<Integer> stack = new Stack<>();
         int result = 0;
         int sign = 1;
-
+        
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-
+            
             if (Character.isDigit(c)) {
                 int num = c - '0';
-                while(i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
-                    num = num *10 + (s.charAt(i + 1) - '0');
+                while (i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
+                    num = num * 10 + (s.charAt(i + 1) - '0');
                     i++;
                 }
                 result += num * sign;
-            }
-            else if (c == '+') {
+            } else if (c == '+') {
                 sign = 1;
-            }
-            else if (c == '-') {
+            } else if (c == '-') {
                 sign = -1;
-            }
-            else if (c == '(') {
+            } else if (c == '(') {
                 stack.push(result);
                 stack.push(sign);
                 result = 0;
                 sign = 1;
-            }
-            else if (c == ')') {
+            } else if (c == ')') {
                 result = result * stack.pop() + stack.pop();
             }
         }
         return result;
     }
+    
 }
 }

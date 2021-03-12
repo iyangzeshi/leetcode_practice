@@ -42,26 +42,26 @@ public class Leetcode0674LongestContinuousIncreasingSubsequence{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    
     public int findLengthOfLIS(int[] nums) {
         // corner case
         if (nums == null || nums.length == 0) {
             return 0;
         }
-
-        // general case
+        
         int cur = 1;
         int maxLen = 1;
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] > nums[i - 1]) {
                 cur++;
-            }
-            else {
+            } else {
                 cur = 1;
             }
             maxLen = Math.max(cur, maxLen);
         }
         return maxLen;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
