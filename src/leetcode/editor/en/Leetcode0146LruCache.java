@@ -51,10 +51,10 @@ public class Leetcode0146LruCache {
         cache.put(1, 1);
         cache.put(4, 1);
         cache.get(2);
-        /*cache.get(1);
+        cache.get(1);
         cache.get(3);
         cache.get(4);
-        cache.put(4, 4);*/
+        cache.put(4, 4);
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -63,15 +63,15 @@ public class Leetcode0146LruCache {
 class LRUCache {
     
     private final int capacity;
-    private final Map<Integer, Leetcode0146LruCache.Node> map;
-    private final Leetcode0146LruCache.Node head; // dummy head
-    private final Leetcode0146LruCache.Node tail; // dummy tail
+    private final Map<Integer, Node> map;
+    private final Node head; // dummy head
+    private final Node tail; // dummy tail
     
     public LRUCache(int capacity) {
         this.capacity = capacity;
         map = new HashMap<>(capacity);
-        head = new Leetcode0146LruCache.Node(0, 0);
-        tail = new Leetcode0146LruCache.Node(0, 0);
+        head = new Node(0, 0);
+        tail = new Node(0, 0);
         head.next = tail;
         tail.prev = head;
     }
@@ -80,32 +80,32 @@ class LRUCache {
         if (!map.containsKey(key)) {
             return -1;
         }
-        Leetcode0146LruCache.Node node = map.get(key);
+        Node node = map.get(key);
         node.disconnectNeighbor();
         AddToHead(node);
         return node.val;
     }
     
     public void put(int key, int value) {
-        Leetcode0146LruCache.Node node;
+        Node node;
         if (map.containsKey(key)) {
             node = map.get(key);
             node.val = value;
             node.disconnectNeighbor();
             AddToHead(node);
         } else {
-            node = new Leetcode0146LruCache.Node(key, value);
+            node = new Node(key, value);
             map.put(key, node);
             AddToHead(node);
             if (map.size() > capacity) { // remove last one to get the place for new node
-                Leetcode0146LruCache.Node lastNode = tail.prev;
+                Node lastNode = tail.prev;
                 lastNode.disconnectNeighbor();
                 map.remove(lastNode.key);
             }
         }
     }
     
-    private void AddToHead(Leetcode0146LruCache.Node node) {
+    private void AddToHead(Node node) {
         // move node to first place
         node.next = head.next;
         head.next = node;
