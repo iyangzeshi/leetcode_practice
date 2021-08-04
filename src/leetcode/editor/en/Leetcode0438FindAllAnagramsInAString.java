@@ -56,8 +56,9 @@ public class Leetcode0438FindAllAnagramsInAString{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// 2 poniters
+// 2 pointers, T(s, p) = O(s + p), S(s, p) = O(1) 因为只有26个英文字母
 class Solution {
+    
     public List<Integer> findAnagrams(String s, String p) {
         List<Integer> res = new ArrayList<>();
         // corner case
@@ -65,19 +66,19 @@ class Solution {
             return res;
         }
         Map<Character, Integer> charToTimes = new HashMap<>(p.length());
-        for (char ch: p.toCharArray()) {
+        for (char ch : p.toCharArray()) {
             charToTimes.put(ch, charToTimes.getOrDefault(ch, 0) + 1);
         }
         matchAnagram(s, charToTimes, res);
         return res;
     }
-
+    
     private void matchAnagram(String s, Map<Character, Integer> charToTimes, List<Integer> res) {
-        int len1 = s.length();
+        int len = s.length();
         char[] sArr = s.toCharArray();
         int start = 0;
         int end = 0;
-        while (end < len1) { // [start, end)
+        while (end < len) { // [start, end)
             char chEnd = sArr[end];
             if (charToTimes.containsKey(chEnd)) {
                 if (charToTimes.get(chEnd) == 1) {
@@ -101,6 +102,7 @@ class Solution {
             }
         }
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
