@@ -29,6 +29,15 @@ public class Leetcode0053MaximumSubarray{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+/*
+greedy, T(n) = O(n), S(n) = O(1)
+设置一个curSum和maxSum
+    curSum表示，走到当前这个点的连续的subarray的最大sum
+    maxSum表示最大的值
+
+每次遇到一个值num，如果本来curSum >= 0 ,则curSum += num, 否则curSum = num;
+    也就是curSum = num + Math.max(0, curSum);
+ */
 class Solution {
     public int maxSubArray(int[] nums) {
         int currSum = 0;

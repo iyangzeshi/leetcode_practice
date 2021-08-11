@@ -72,7 +72,7 @@ class Solution {
 /*面试的时候，用Solution 1_2 */
 
 
-// Solution 1_1: interval打散成point进行排序
+// Solution 1_1: interval打散成point进行排序，对左右的开闭区间没有要求，都可以改
 // T(n) = O(nlog(n)), S(n) = O(n)
 // 7 ms,击败了38.84% 的Java用户, 40.3 MB,击败了8.55% 的Java用户
 /**
@@ -124,7 +124,8 @@ class Solution1_1 {
     }
 }
 
-// Solution 1_2: count boundaries, 对point进行排序，放到Map里面，start的话 + 1， end - 1
+// Solution 1_2: count boundaries, 适用于[ )或者( ]的范围
+// 对point进行排序，放到Map里面，start的话 + 1， end - 1
 // T(n) = O(nlog(n)), S(n) = O(n)
 // 12 ms,击败了13.98% 的Java用户, 40.2 MB,击败了15.62% 的Java用户
 class Solution1_2 {
@@ -157,8 +158,10 @@ class Solution1_2 {
 // Solution 2: heap, 把interval按照start time的升序排序
 // T(n) = O(nlog(n)), S(n) = O(n)
 
-// Solution 2_1 消耗资源： 6 ms,击败了74.49% 的Java用户，39 MB,击败了41.59% 的Java用户
+// Solution 2_1, 对左右的开闭区间没有要求，都可以改
+// 消耗资源： 6 ms,击败了74.49% 的Java用户，39 MB,击败了41.59% 的Java用户
 /**
+ * 设置一个minHeap，里面放Interval，按照start time升序排序，表示我们用到的房间
  * 把interval按照start time的升序排序遍历，
  * 每次遇到新的interval开始的时候，检测当前interval之前最早结束interval分配的房间有没有被空出来
  *      如果空出来一个的话，就放进去
@@ -187,7 +190,8 @@ class Solution2_1 {
 }
 
 
-// Solution 2_2 消耗资源： 7 ms,击败了38.84% 的Java用户, 38.9 MB,击败了50.87% 的Java用户
+// Solution 2_2, 对左右的开闭区间没有要求，都可以改
+// 消耗资源： 7 ms,击败了38.84% 的Java用户, 38.9 MB,击败了50.87% 的Java用户
 /**
  * 把interval按照start time的升序排序遍历，
  * 每次遇到新的interval开始的时候，检测当前interval之前最早结束interval分配的房间的会议是不是已经结束了
