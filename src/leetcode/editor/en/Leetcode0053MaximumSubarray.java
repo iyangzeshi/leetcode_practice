@@ -39,6 +39,7 @@ greedy, T(n) = O(n), S(n) = O(1)
     也就是curSum = num + Math.max(0, curSum);
  */
 class Solution {
+    
     public int maxSubArray(int[] nums) {
         int currSum = 0;
         int maxSum = Integer.MIN_VALUE;
@@ -51,6 +52,7 @@ class Solution {
         }
         return maxSum;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 /**面试的时候，用Solution 2 */
@@ -110,4 +112,5 @@ class Solution2 {
     }
     
 }
+
 }

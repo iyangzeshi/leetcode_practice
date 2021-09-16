@@ -130,7 +130,6 @@ class Solution {
 				int i = row + dir[0];
 				int j = col + dir[1];
 				if (i < 0 || i >= rows || j < 0 || j >= cols || matrix[row][col] > matrix[i][j]) {
-					
 					continue;
 				}
 				
