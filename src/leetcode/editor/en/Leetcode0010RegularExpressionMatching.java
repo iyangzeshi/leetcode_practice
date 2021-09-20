@@ -162,7 +162,7 @@ general case:
     如果走到的char的后面不是*，当前char,
         如果s和p当前能匹配，就往后各走1格
         否则return false
-    颗走到的char的后面没有字符了，就是也就是最后一个字符（当前char不可能是 *, 因为*会被跳过)
+    可走到的char的后面没有字符了，就是也就是最后一个字符（当前char不可能是 *, 因为*会被跳过)
         如果s和p当前能匹配，就往后各走1格
         否则return false
  */
@@ -475,6 +475,7 @@ class Solution2_2 {
         dp[lenS][lenP] = true;
         
         int k = lenP - 2;
+        // base case, char * 可以匹配 empty string ""
         while (k >= 0) {
             if (p.charAt(k + 1) == '*') {
                 dp[lenS][k] = true;
@@ -496,12 +497,11 @@ class Solution2_2 {
                     } else {
                         dp[i][j] = false;
                     }
-                } else { // *情况
-                    int idx = i - 1;
-                    dp[i][j] = false;
-                    while (idx < lenS &&
-                            (idx < i || p.charAt(j) == '.' || p.charAt(j) == s.charAt(idx))) {
-                        if (dp[idx + 1][j + 2]) {
+                } else { // next char p[j + 1] is * case
+                    int idx = i; // 因为dp[i][j]是左闭区间
+                    while (idx <= lenS &&
+                            (idx == i || p.charAt(j) == '.' || s.charAt(idx - 1) == p.charAt(j))) {
+                        if (dp[idx][j + 2]) {
                             dp[i][j] = true;
                             break;
                         }
