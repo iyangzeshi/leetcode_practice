@@ -32,7 +32,7 @@ public class Leetcode0449SerializeAndDeserializeBst{
     // Java: serialize-and-deserialize-bst
     public static void main(String[] args) {
         // TO TEST
-        Codec codec = new Leetcode0449SerializeAndDeserializeBst().new Codec();
+	    Codec codec = new Leetcode0449SerializeAndDeserializeBst().new Codec();
         String data = "2,1,3";
         TreeNode root = TreeGenerator.deserialize(data);
         TreeDrawer.draw(root);
@@ -42,6 +42,7 @@ public class Leetcode0449SerializeAndDeserializeBst{
         TreeDrawer.draw(root);
     
     }
+
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
@@ -51,6 +52,12 @@ public class Leetcode0449SerializeAndDeserializeBst{
  *     TreeNode right;
  *     TreeNode(int x) { val = x; }
  * }
+ */
+// Solution 1_1: BFS, T(n) = O(n), S(n) = O(n)
+// 8 ms,击败了51.12% 的Java用户, 40 MB,击败了53.49% 的Java用户
+/*
+遇到null的child的时候，要在serialize的结果里标记一下，加上null，
+因为同一个serialized的StringString可以对应不同的BST，但是一个BST只能对应一个serialized的String
  */
 public class Codec {
     
@@ -140,7 +147,8 @@ public class Codec {
 // Solution 1_1: BFS, T(n) = O(n), S(n) = O(n)
 // 8 ms,击败了51.12% 的Java用户, 40 MB,击败了53.49% 的Java用户
 /*
-遇到null的child的时候，要在serialize的结果里标记一下，加上null
+遇到null的child的时候，要在serialize的结果里标记一下，加上null，
+因为同一个serialized的StringString可以对应不同的BST，但是一个BST只能对应一个serialized的String
  */
 public class Codec1_1 {
     
@@ -214,7 +222,7 @@ public class Codec1_1 {
 // 10 ms,击败了40.42% 的Java用户, 40.2 MB,击败了36.88% 的Java用户
 /*
 利用BST的性质改进版本
-遇到null的child的时候，不用管，直接跳过，因为是BST，所以这个点的为止肯定是唯一确定的
+遇到null的child的时候，不用管，直接跳过，因为是BST，所以这个点的位置肯定是唯一确定的
 用两个HashMap来标记每个点的child的lower bound和upper bound
  */
 public class Codec1_2 {
@@ -322,17 +330,16 @@ public class Codec2_1 {
     }
     
     // traverse tree by pre order dfs
-    private StringBuilder traverseTree(TreeNode root, StringBuilder sb) {
+    private void traverseTree(TreeNode root, StringBuilder sb) {
         // base case
         if (root == null) {
             sb.append(mark).append(",");
-            return sb;
+            return;
         }
         
         sb.append(root.val).append(",");
         traverseTree(root.left, sb);
         traverseTree(root.right, sb);
-        return sb;
     }
     
     // Decodes your encoded data to tree.

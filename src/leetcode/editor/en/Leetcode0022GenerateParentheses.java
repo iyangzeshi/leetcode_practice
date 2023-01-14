@@ -68,7 +68,14 @@ class Solution1 {
         dfs(res, new StringBuilder(), n, 0);
         return res;
     }
-    
+	
+	/**
+	 *
+	 * @param res result
+	 * @param path current path
+	 * @param n given number n
+	 * @param delta number of ( - number of )
+	 */
     private void dfs(List<String> res, StringBuilder path, int n, int delta) {
         int len = path.length();
         // base case
@@ -114,7 +121,7 @@ class Solution2_1 {
      * @param n:        n pairs of parentheses
      * @param left:     number of left parentheses
      * @param right:    number of left parentheses
-     * @param sb:       temporary answer carrieer
+     * @param sb:       temporary answer carrier
      * @param result:   result
      */
     private void DFS(int n, int left, int right, StringBuilder sb, List<String> result) {

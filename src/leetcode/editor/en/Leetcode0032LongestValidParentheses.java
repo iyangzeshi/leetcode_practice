@@ -81,10 +81,10 @@ class Solution1 {
         for (int i = 0; i < len; i++) {
             if (s.charAt(i) == '(') {
                 stack.push(i);
-            } else {
+            } else { // s.charAt(i) == ')'
                 if (stack.isEmpty()) {
                     start = i;
-                } else {
+                } else { //
                     stack.pop();
                     if (stack.isEmpty()) {
                         res = Math.max(res, i - start);

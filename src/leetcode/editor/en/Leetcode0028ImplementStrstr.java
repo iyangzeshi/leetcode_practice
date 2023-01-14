@@ -48,13 +48,17 @@ public class Leetcode0028ImplementStrstr{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    
     public int strStr(String haystack, String needle) {
         int hLen = haystack.length();
         int nLen = needle.length();
+        
         search:
         for (int i = 0; i <= hLen - nLen; i++) {
             for (int j = 0; j <= nLen; j++) {
-                if (j == nLen) return i;
+                if (j == nLen) {
+                    return i;
+                }
                 if (haystack.charAt(i + j) != needle.charAt(j)) {
                     continue search;
                 }
@@ -62,6 +66,7 @@ class Solution {
         }
         return -1;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
