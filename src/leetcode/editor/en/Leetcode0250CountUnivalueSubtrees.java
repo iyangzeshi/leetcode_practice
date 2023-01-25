@@ -50,6 +50,7 @@ public class Leetcode0250CountUnivalueSubtrees{
  *     }
  * }
  */
+// T(n) = O(n), S(n) = O(n)
 class Solution {
 
     public int countUnivalSubtrees(TreeNode root) {
@@ -61,6 +62,7 @@ class Solution {
         isUnivalue(root, root.val, count);
         return count[0];
     }
+	
     // isUnivalue method is used to record the number of UniTrees whose val is value
     private boolean isUnivalue(TreeNode root, int value, int[] count) {
         if (root == null) {

@@ -391,17 +391,16 @@ public class Codec2_2 {
     }
     
     // traverse tree by pre order dfs
-    private StringBuilder traverseTree(TreeNode root, StringBuilder sb) {
+    private void traverseTree(TreeNode root, StringBuilder sb) {
         // base case
         if (root == null) {
             // sb.append(mark).append(",");
-            return sb;
+            return;
         }
         
         sb.append(root.val).append(",");
         traverseTree(root.left, sb);
         traverseTree(root.right, sb);
-        return sb;
     }
     
     // Decodes your encoded data to tree.

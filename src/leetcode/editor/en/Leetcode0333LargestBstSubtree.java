@@ -61,52 +61,59 @@ public class Leetcode0333LargestBstSubtree {
  * }
  */
 
-class Solution {
-
-	class Cell {
-
-		int min;
-		int max;
-		int size;
-		boolean isBST;
-
-		public Cell(int min, int max, int size, boolean isBST) {
-			this.min = min;
-			this.max = max;
-			this.size = size;
-			this.isBST = isBST;
-		}
+class Cell {
+	int min; // smallest number in this BST
+	int max; // largest number in this BST
+	int size; // size of current BST
+	boolean isBST;
+	
+	public Cell(int min, int max, int size, boolean isBST) {
+		this.min = min;
+		this.max = max;
+		this.size = size;
+		this.isBST = isBST;
 	}
+	
+	public Cell(boolean isBST) {
+		this.isBST = isBST;
+	}
+	
+}
 
+// post order DFS, T(n) = O(n), S(n) = O(n)
+class Solution {
 	public int largestBSTSubtree(TreeNode root) {
 		// corner case
 		if (root == null) {
 			return 0;
 		}
 		int[] count = new int[1];
-		dfs(root, count);
+		calculateCell(root, count);
 		return count[0];
 	}
-
-	private Cell dfs(TreeNode root, int[] count) {
+	
+	// post order dfs
+	// T(n) = O(n), S(n) = O(n)
+	private Cell calculateCell(TreeNode root, int[] count) {
 		// base case
 		if (root == null) {
-			return new Cell(Integer.MAX_VALUE, Integer.MIN_VALUE,0, true);
+			return new Cell(Integer.MAX_VALUE, Integer.MIN_VALUE, 0, true);
 		}
+		
 		// general case
-		Cell left = dfs(root.left, count);
-		Cell right = dfs(root.right, count);
-		if (left == null || right == null) {
-			return null;
+		Cell left = calculateCell(root.left, count);
+		Cell right = calculateCell(root.right, count);
+		if (!left.isBST || !right.isBST) {
+			return new Cell(false);
 		}
-		if (right.isBST && left.isBST && left.max < root.val && root.val < right.min) {
+		if (left.max < root.val && root.val < right.min) {
 			int min = left.size > 0 ? left.min : root.val;
 			int max = right.size > 0 ? right.max : root.val;
 			int size = left.size + right.size + 1;
 			count[0] = Math.max(count[0], size);
 			return new Cell(min, max, size, true);
 		} else {
-			return null;
+			return new Cell(false);
 		}
 	}
 }

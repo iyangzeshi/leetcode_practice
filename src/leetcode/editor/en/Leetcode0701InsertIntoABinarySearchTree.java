@@ -82,6 +82,7 @@ public class Leetcode0701InsertIntoABinarySearchTree{
  *     }
  * }
  */
+// T(n) = O(h), S(n) = O(h), log(n) <= h <= n
 class Solution {
 
     public TreeNode insertIntoBST(TreeNode root, int val) {

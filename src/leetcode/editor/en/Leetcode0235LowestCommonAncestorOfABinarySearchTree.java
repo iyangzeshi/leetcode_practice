@@ -75,16 +75,15 @@ class Solution {
         if(p == q) {
             return p;
         }
-        // make p < q
+        // make p.val < q.val
         if (p.val > q.val) {
             return lowestCommonAncestor(root, q, p);
         }
 
-        while (root != null &&(root.val > q.val || root.val < p.val)) {
+        while (root != null && (root.val > q.val || root.val < p.val)) {
             if (root.val > q. val) {
                 root = root.left;
-            }
-            else if (root.val < p.val) {
+            } else if (root.val < p.val) {
                 root = root.right;
             }
         }

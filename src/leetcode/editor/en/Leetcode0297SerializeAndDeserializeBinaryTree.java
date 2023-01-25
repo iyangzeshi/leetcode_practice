@@ -52,6 +52,8 @@ public class Leetcode0297SerializeAndDeserializeBinaryTree{
         TreeDrawer.draw(root);
         System.out.println(sol.serialize(root));
     }
+	
+/**面试的时候，用Solution 1*/
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for a binary tree node.
@@ -62,62 +64,74 @@ public class Leetcode0297SerializeAndDeserializeBinaryTree{
  *     TreeNode(int x) { val = x; }
  * }
  */
+// Solution 1: BFS, T(n) = O(n), S(n) = O(n)
+// 12 ms,击败了55.81% 的Java用户, 40.4 MB,击败了92.70% 的Java用户
 public class Codec {
-    
-    private String mark = "null";
-    
-    // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
-        // corner case
-        if (root == null) {
-            return "";
-        }
-        
-        StringBuilder path = new StringBuilder();
-        traverseTree(root, path);
-        path.deleteCharAt(path.length() - 1);
-        return path.toString();
-    }
-    
-    // traverse tree by pre order dfs
-    private StringBuilder traverseTree(TreeNode root, StringBuilder sb) {
-        // base case
-        if (root == null) {
-            sb.append(mark).append(",");
-            return sb;
-        }
-        
-        sb.append(root.val).append(",");
-        traverseTree(root.left, sb);
-        traverseTree(root.right, sb);
-        return sb;
-    }
-    
-    // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
-        // corner case
-        if (data == null || data.isEmpty()) {
-            return null;
-        }
-        String[] strArr = data.split(",");
-        LinkedList<String> list = new LinkedList<>(Arrays.asList(strArr));
-        return helper(list);
-    }
-    
-    private TreeNode helper(LinkedList<String> list) {
-        // base case
-        if (list.getFirst().equals(mark)) {
-            list.removeFirst();
-            return null;
-        }
-        
-        int val = Integer.parseInt(list.removeFirst());
-        TreeNode root = new TreeNode(val);
-        root.left = helper(list);
-        root.right = helper(list);
-        return root;
-    }
-    
+	
+	private String mark = "null";
+	
+	// Encodes a tree to a single string.
+	// use level order to encode, and null to make it a complete tree
+	public String serialize(TreeNode root) {
+		// corner case
+		if (root == null) {
+			return null;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		
+		while (!queue.isEmpty()) {
+			TreeNode cur = queue.poll();
+			if (cur != null) {
+				sb.append(cur.val).append(",");
+				queue.offer(cur.left);
+				queue.offer(cur.right);
+			} else {
+				sb.append(mark).append(",");
+			}
+		}
+		sb.deleteCharAt(sb.length() - 1);
+		return sb.toString();
+	}
+	
+	// Decodes your encoded data to tree.
+	public TreeNode deserialize(String data) {
+		// corner case
+		if (data == null) {
+			return null;
+		}
+		
+		String[] values = data.split(",");
+		Queue<TreeNode> queue = new LinkedList<>();
+		int counter = 0;
+		TreeNode root = new TreeNode(Integer.parseInt(values[counter++]));
+		queue.offer(root);
+		
+		while (!queue.isEmpty()) {
+			TreeNode temp = queue.poll();
+			//recover the left node
+			if (counter < values.length) {
+				String left = values[counter++];
+				if (!left.equals(mark)) {
+					temp.left = new TreeNode(Integer.parseInt(left));
+					queue.offer(temp.left);
+				}
+			}
+			
+			//recover the right node
+			if (counter < values.length) {
+				String right = values[counter++];
+				if (!right.equals(mark)) {
+					temp.right = new TreeNode(Integer.parseInt(right));
+					queue.offer(temp.right);
+				}
+			}
+		}
+		return root;
+	}
+	
 }
 
 // Your Codec object will be instantiated and called as such:

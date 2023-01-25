@@ -74,8 +74,9 @@ class Solution {
             Integer num = inorder[i];
             inNumToIdx.put(num, i);
         }
-        TreeNode root = buildTree(0, inorder.length - 1, postorder, 0, postorder.length - 1,
-                inNumToIdx);
+        TreeNode root = buildTree(0, inorder.length - 1, inNumToIdx, 0, postorder.length - 1,
+	        postorder
+        );
         return root;
     }
     
@@ -87,16 +88,18 @@ class Solution {
     怎么分别找左右子树的in order和post order的左右边界
     inLeft, inRight, postLeft, postRight
     
-    inRootIdx = map.get(postRight);
+    rootValue = postOrder[postRight];
+    在post order traversal中，当前subtree的root的index是：
+    inRootIdx = map.get(rootValue);
     
-    那么左子树的
+    那么左子树的border在两个Traversal array中的位置是：
     inLeft = inLeft;
     inRight = inRootIdx - 1
     postLeft = postLeft;
     ∵ left sub tree's size: leftSize = inRootIdx - inLeft
     ∴ postRight = postLeft + (inRootIdx - inLeft) - 1;
     
-    右子树的
+    右子树的border在两个Traversal array中的位置是：
     inLeft = inRootIdx + 1;
     inRight = inRight;
     
@@ -105,8 +108,16 @@ class Solution {
     // postLeft = postLeft + (inRootIdx - inLeft)也可以,左子树post order边界 + 1
     postRight = postRight - 1;
      */
-    private TreeNode buildTree(int inLeft, int inRight,
-            int[] postorder, int postLeft, int postRight, Map<Integer, Integer> map) {
+	
+	/**
+	 *
+	 * the subtree's border:
+	 *      [inLeft, inRight] in in-order traversal
+	 *      [postOrder, postRight] in post-order traversal
+	 * @return: root of this subtree
+	 */
+    private TreeNode buildTree(int inLeft, int inRight, Map<Integer, Integer> map,
+	    int postLeft, int postRight, int[] postorder) {
         // base case - failure case
         if (inLeft > inRight) {
             return null; //要严格大于才行，不然只有一个node 的时候，就return null了
@@ -118,10 +129,10 @@ class Solution {
         int leftSize = inRootIdx - inLeft;
         int rightSize = inRight - inRootIdx;
         
-        root.left = buildTree(inLeft, inRootIdx - 1,
-                postorder, postLeft, postLeft + leftSize - 1, map);
-        root.right = buildTree(inRootIdx + 1, inRight,
-                postorder, postRight - rightSize, postRight - 1, map);
+        root.left = buildTree(inLeft, inRootIdx - 1, map,
+	        postLeft, postLeft + leftSize - 1, postorder);
+        root.right = buildTree(inRootIdx + 1, inRight, map,
+	        postRight - rightSize, postRight - 1, postorder);
         return root;
     }
     

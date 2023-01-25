@@ -59,6 +59,7 @@ public class Leetcode0101SymmetricTree{
  *     }
  * }
  */
+// DFS, T(n) = O(n), S(n) = O(n)
 class Solution {
     public boolean isSymmetric(TreeNode root) {
         return isMirror(root, root);
