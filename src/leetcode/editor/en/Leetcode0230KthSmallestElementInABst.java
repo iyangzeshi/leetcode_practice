@@ -45,7 +45,8 @@
 
 package leetcode.editor.en;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Stack;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 14:12:01
@@ -55,85 +56,106 @@ public class Leetcode0230KthSmallestElementInABst{
     public static void main(String[] args) {
         Solution sol = new Leetcode0230KthSmallestElementInABst().new Solution();
         // TO TEST
-        
         System.out.println();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 /**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
+  Definition for a binary tree node.
+  public class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+  }
  */
+// T(n, k) = O(n, k), S(n, k) = O(n, k)
 class Solution {
-    // Solution 3: iteration, stack
-    public int kthSmallest(TreeNode root, int k) {
-        Stack<TreeNode> stack = new Stack<>();
-
-        // in order traverse by iteration
-        while(root != null || !stack.isEmpty()) {
-            if (root == null) {
-                root = stack.pop();
-                if(--k == 0) {
-                    return root.val;
-                }
-                root = root.right;
-            }
-            else {
-                stack.push(root);
-                root = root.left;
-            }
-        }
-        return -1;
-    }
+	public int kthSmallest(TreeNode root, int k) {
+		int[] kIdxNum = new int[2]; // kIdxNum[0] = idx, kIdxNum[1] = number
+		inOrder(root, k, kIdxNum);
+		return kIdxNum[1];
+	}
+	
+	private void inOrder(TreeNode root, int k, int[] kIdxNum) {
+		// corner & base case
+		if (root == null) {
+			return;
+		}
+		
+		// general case
+		inOrder(root.left, k, kIdxNum);
+		if (kIdxNum[0] < k) {
+			kIdxNum[0]++;
+			if (kIdxNum[0] == k) {
+				kIdxNum[1] = root.val;
+				return;
+			}
+		}
+		inOrder(root.right, k, kIdxNum);
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-// Solution 1: recursion, in-order traverse, get a sorted array
+// Solution 1_1: recursion, in-order traverse, get a sorted array
 class Solution1 {
-    // Solution 1: in-Order traverse
     public int kthSmallest(TreeNode root, int k) {
-        ArrayList<Integer> nums = inOrder(root, k, new ArrayList<>());
+	    ArrayList<Integer> nums = new ArrayList<>();
+		inOrder(root, k, nums);
         return nums.get(k - 1);
     }
 
-    private ArrayList<Integer> inOrder(TreeNode root, int k, ArrayList<Integer> array) {
+    private void inOrder(TreeNode root, int k, ArrayList<Integer> array) {
         // corner & base case
         if (root == null) {
-            return array;
+            return;
         }
 
         // general case
-        if (array.size() < k) {
-            inOrder(root.left, k, array);
-        }
+	    inOrder(root.left, k, array);
         if (array.size() < k) {
             array.add(root.val);
         }
-        if (array.size() < k) {
-            inOrder(root.right, k, array);
-        }
-        return array;
+	    inOrder(root.right, k, array);
     }
 }
 
-// Solution 2: 用heap
-/*    要么是用maxHeap，in order traverse前面k个，然后return heap.poll()
-    或者是用minHeap遍历整个BST，然后pop() k次*/
+// Solution 1_2: recursion, in-order traverse to k-th smallest number, return
+// T(n, k) = O(n, k), S(n, k) = O(n, k)
+class Solution1_2 {
+	public int kthSmallest(TreeNode root, int k) {
+		int[] kIdxNum = new int[2]; // kIdxNum[0] = idx, kIdxNum[1] = number
+		inOrder(root, k, kIdxNum);
+		return kIdxNum[1];
+	}
+	
+	private void inOrder(TreeNode root, int k, int[] kIdxNum) {
+		// corner & base case
+		if (root == null) {
+			return;
+		}
+		
+		// general case
+		inOrder(root.left, k, kIdxNum);
+		if (kIdxNum[0] < k) {
+			kIdxNum[0]++;
+			if (kIdxNum[0] == k) {
+				kIdxNum[1] = root.val;
+				return;
+			}
+		}
+		inOrder(root.right, k, kIdxNum);
+	}
+}
 
-
-// Solution 3: stack
+// Solution 2: stack inorder iterate BST
+// T(n, k) = O(n, k), S(n, k) = O(n, k)
 class Solution3 {
-    // Solution 3: iteration, stack
     public int kthSmallest(TreeNode root, int k) {
         Stack<TreeNode> stack = new Stack<>();
 
@@ -145,8 +167,7 @@ class Solution3 {
                     return root.val;
                 }
                 root = root.right;
-            }
-            else {
+            } else {
                 stack.push(root);
                 root = root.left;
             }
