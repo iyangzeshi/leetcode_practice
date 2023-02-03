@@ -101,7 +101,7 @@ class Solution {
                 }
                 minLen++;
             }
-            // 围死的1需要做检查
+            // check whether some empty rooms can reach to the buildings
             for (int r = 0; r < rows; r++) {
                 for (int c = 0; c < cols; c++) {
                     if (matrix[r][c] == 0 && !visited[r][c]) {

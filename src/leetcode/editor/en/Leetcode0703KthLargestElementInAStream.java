@@ -26,7 +26,6 @@
 
 package leetcode.editor.en;
 
-import java.util.Collections;
 import java.util.PriorityQueue;
 // 2020-09-08 18:23:56
 // Zeshi Yang
@@ -45,41 +44,35 @@ public class Leetcode0703KthLargestElementInAStream{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class KthLargest {
-
-    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-    int k;
-    public KthLargest(int k, int[] nums) {
-        this.k = k;
-        addNum:
-        for (int num: nums) {
-            while (minHeap.size() < k) {
-                minHeap.offer(num);
-                continue addNum;
-            }
-            if (minHeap.peek() < num) {
-                minHeap.offer(num);
-                maxHeap.offer(minHeap.poll());
-            } else {
-                maxHeap.offer(num);
-            }
-        }
-
-    }
-
-    public int add(int val) {
-        if (minHeap.size() < k) {
-            minHeap.offer(val);
-        } else {
-            if (minHeap.peek() < val) {
-                minHeap.offer(val);
-                maxHeap.offer(minHeap.poll());
-            } else {
-                maxHeap.offer(val);
-            }
-        }
-        return minHeap.peek();
-    }
+	
+	PriorityQueue<Integer> minHeap = new PriorityQueue<>(); // store the largest K elements
+	int k;
+	
+	public KthLargest(int k, int[] nums) {
+		this.k = k;
+		for(int num: nums) {
+			if (minHeap.size() < k) {
+				minHeap.offer(num);
+			} else {
+				if (num > minHeap.peek()) {
+					minHeap.poll();
+					minHeap.offer(num);
+				}
+			}
+		}
+	}
+	
+	public int add(int val) {
+		if (minHeap.size() < k) {
+			minHeap.offer(val);
+		} else {
+			if (val > minHeap.peek()) {
+				minHeap.offer(val);
+				minHeap.poll();
+			}
+		}
+		return minHeap.peek();
+	}
 }
 
 /*

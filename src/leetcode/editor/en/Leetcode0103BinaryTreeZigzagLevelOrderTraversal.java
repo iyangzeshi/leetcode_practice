@@ -62,37 +62,43 @@ public class Leetcode0103BinaryTreeZigzagLevelOrderTraversal{
  */
 // Solution 2: 设置flag isEven，然tempList.add还是tempList.addFirst
 class Solution {
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        if(root == null) return res;
-
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        boolean isEven = false;
-
-        while(!queue.isEmpty()) {
-            LinkedList<Integer> tempList = new LinkedList<>();
-            int size = queue.size();
-
-            while (size --> 0) {
-                TreeNode cur = queue.poll();
-
-                if(!isEven){
-                    tempList.add(cur.val);
-                }else {
-                    tempList.addFirst(cur.val);
-                }
-                if (cur.left != null) queue.offer(cur.left);
-                if (cur.right != null) queue.offer(cur.right);
-            }
-
-            isEven = !isEven;
-            res.add(tempList);
-        }
-
-
-        return res;
-    }
+	
+	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+		List<List<Integer>> res = new ArrayList<>();
+		if (root == null) {
+			return res;
+		}
+		
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		boolean isEven = false;
+		
+		while (!queue.isEmpty()) {
+			LinkedList<Integer> tempList = new LinkedList<>();
+			int size = queue.size();
+			
+			while (size-- > 0) {
+				TreeNode cur = queue.poll();
+				
+				if (!isEven) {
+					tempList.add(cur.val);
+				} else {
+					tempList.addFirst(cur.val);
+				}
+				if (cur.left != null) {
+					queue.offer(cur.left);
+				}
+				if (cur.right != null) {
+					queue.offer(cur.right);
+				}
+			}
+			
+			isEven = !isEven;
+			res.add(tempList);
+		}
+		
+		return res;
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: 2个stack
@@ -109,19 +115,19 @@ class Solution1 {
 
         stackOdd.push(root); // odd level
         // List<Integer> list = new ArrayList<>();
-        TreeNode temp;
+        TreeNode cur;
         
         while (!stackOdd.isEmpty() || !stackEven.isEmpty()) {
             List<Integer> list = new ArrayList<>();
             while (!stackOdd.isEmpty()){
-                temp = stackOdd.pop();
-                list.add(temp.val);
+                cur = stackOdd.pop();
+                list.add(cur.val);
 
-                if (temp.left != null) {
-                    stackEven.push(temp.left);
+                if (cur.left != null) {
+                    stackEven.push(cur.left);
                 }
-                if (temp.right != null) {
-                    stackEven.push(temp.right);
+                if (cur.right != null) {
+                    stackEven.push(cur.right);
                 }
             }
             if (!list.isEmpty()) {
@@ -130,14 +136,14 @@ class Solution1 {
             
             list = new ArrayList<>();
             while (!stackEven.isEmpty()){
-                temp = stackEven.pop();
-                list.add(temp.val);
+                cur = stackEven.pop();
+                list.add(cur.val);
 
-                if (temp.right != null) {
-                    stackOdd.push(temp.right);
+                if (cur.right != null) {
+                    stackOdd.push(cur.right);
                 }
-                if (temp.left != null) {
-                    stackOdd.push(temp.left);
+                if (cur.left != null) {
+                    stackOdd.push(cur.left);
                 }
             }
             if (!list.isEmpty()) {
@@ -162,16 +168,16 @@ class Solution2 {
         boolean isEven = false;
         
         while (!queue.isEmpty()) {
-            LinkedList<Integer> tempList = new LinkedList<>();
+            LinkedList<Integer> list = new LinkedList<>();
             int size = queue.size();
             
             while (size-- > 0) {
                 TreeNode cur = queue.poll();
                 
                 if (!isEven) {
-                    tempList.add(cur.val);
+                    list.add(cur.val);
                 } else {
-                    tempList.addFirst(cur.val);
+                    list.addFirst(cur.val);
                 }
                 if (cur.left != null) {
                     queue.offer(cur.left);
@@ -182,7 +188,7 @@ class Solution2 {
             }
             
             isEven = !isEven;
-            res.add(tempList);
+            res.add(list);
         }
         return res;
     }

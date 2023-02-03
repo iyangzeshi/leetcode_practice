@@ -42,40 +42,43 @@ public class Leetcode0078Subsets {
 	}
 
 //leetcode submit region begin(Prohibit modification and deletion)
+// Solution 3: 0ms, DFS 第1类搜索树, T(n) = O(2^n), S(n) = O(2^n)
+// 1 ms,击败了61.94% 的Java用户, 40.8 MB,击败了5.99% 的Java用户
+/*
+ [a,b,c]
+                          {}
+ level0           {a}     {b}     {c}     1st can choose either a b c    i = 0, 1, 2
+ level1       {a,b}{a,c}  {b,c}           2st can choose what's left      i = 1, 2
+ level2   {a,b,c}                         i = 2
+ null
+*/
 class Solution {
-    
-    public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        
-        // corner case
-        if (nums == null) {
-            return result;
-        }
-        getResult(nums, 0, new ArrayList<>(), result);
-        
-        return result;
-        
-    }
-    
-    private void getResult(int[] nums, int level, List<Integer> list,
-            List<List<Integer>> result) {
-        if (level == nums.length) {
-            result.add(new ArrayList<>(list));
-            return;
-        }
-        
-        // case 2: not add num at level
-        getResult(nums, level + 1, list, result);
-        
-        // case 1: add character at index
-        list.add(nums[level]);
-        getResult(nums, level + 1, list, result);
-        
-        // wall
-        // remove the added character when backtracking to the upper level
-        // backtracking，不能用list.remove(level)，因为有可能出现{a, b}，level = 3的情况
-        list.remove(list.size() - 1);
-    }
+	
+	public List<List<Integer>> subsets(int[] nums) {
+		List<List<Integer>> result = new ArrayList<>();
+		// corner case
+		if (nums == null) {
+			return result;
+		}
+		result.add(new ArrayList<>());
+		dfs(0, new ArrayList<>(), nums, result);
+		return result;
+	}
+	
+	private void dfs(int idx, List<Integer> list, int[] nums, List<List<Integer>> result) {
+		// base case
+		if (idx == nums.length) {
+			return;
+		}
+		
+		for (int i = idx; i < nums.length; i++) {
+			list.add(nums[i]);
+			result.add(new ArrayList<>(list));
+			dfs(i + 1, list, nums, result);
+			// wall
+			list.remove(list.size() - 1);
+		}
+	}
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
@@ -99,7 +102,7 @@ class Solution1 {
         if (nums == null) {
             return result;
         }
-
+		
         int length = nums.length;
         Queue<ArrayList<Integer>> numberQueue = new LinkedList<>();
         Queue<ArrayList<Integer>> indexQueue = new LinkedList<>();
@@ -208,6 +211,7 @@ class Solution3 {
     
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
+		// corner case
         if (nums == null) {
             return result;
         }
@@ -216,11 +220,12 @@ class Solution3 {
         return result;
     }
 
-    private void dfs(int idx, List<Integer> list, int[] nums,
-            List<List<Integer>> result) {
-        if (idx == nums.length) {
+    private void dfs(int idx, List<Integer> list, int[] nums, List<List<Integer>> result) {
+        // base case
+		if (idx == nums.length) {
             return;
         }
+		
         for (int i = idx; i < nums.length; i++) {
             list.add(nums[i]);
             result.add(new ArrayList<>(list));
@@ -255,24 +260,19 @@ class Solution4_1 {
         return result;
     }
 
-    private void dfs(int idx, int[] nums, List<Integer> list,
-            List<List<Integer>> result) {
+    private void dfs(int idx, int[] nums, List<Integer> list, List<List<Integer>> result) {
         if (idx == nums.length) {
             result.add(new ArrayList<>(list));
             return;
         }
 
         // case 1: add num at level
-        dfs(idx + 1, nums, list, result);
-
-        // case 2: not add character at index
-        list.add(nums[idx]);
-        dfs(idx + 1, nums, list, result);
-
-        // wall
-        //remove the added character when backtracking to the upper level
-        // backtracking，不能用list.remove(level)，因为有可能出现{a, b}，level = 3的情况
-        list.remove(list.size() - 1);
+	    list.add(nums[idx]);
+	    dfs(idx + 1, nums, list, result);
+	    list.remove(list.size() - 1);
+	
+	    // case 2: not add character at index
+	    dfs(idx + 1, nums, list, result);
     }
 }
 
@@ -297,25 +297,24 @@ class Solution4_2 {
         if (nums == null) {
             return result;
         }
-        getResult(nums, 0, new ArrayList<>(), result);
+        dfs(0, nums, new ArrayList<>(), result);
 
         return result;
 
     }
 
-    private void getResult(int[] nums, int level, List<Integer> list,
-            List<List<Integer>> result) {
+    private void dfs(int level, int[] nums, List<Integer> list, List<List<Integer>> result) {
         if (level == nums.length) {
             result.add(new ArrayList<>(list));
             return;
         }
 
         // case 2: not add num at level
-        getResult(nums, level + 1, list, result);
-
-        // case 1: add character at index
-        list.add(nums[level]);
-        getResult(nums, level + 1, list, result);
+        dfs(level + 1, nums, list, result);
+	    list.add(nums[level]);
+	
+	    // case 1: add character at index
+        dfs(level + 1, nums, list, result);
 
         // wall
         // remove the added character when backtracking to the upper level

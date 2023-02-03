@@ -113,7 +113,7 @@ class Solution {
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: regular
+// Solution 1: BFS, T(n) = O(n), S(n) = O(n)
 class Solution1 {
     public Node connect(Node root) {
         if (root == null) {
@@ -144,7 +144,7 @@ class Solution1 {
     }
 }
 
-// Solution 2: connect nodes while traversing them
+// Solution 2: connect nodes while traversing them, T(n) = O(n), S(n) = O(1)
 class Solution2 {
 
     public Node connect(Node root) {
@@ -153,16 +153,16 @@ class Solution2 {
         }
         Node leftmost = root;
         while (leftmost.left != null) {
-            Node head = leftmost;
-            while (head != null) {
+            Node cur = leftmost;
+            while (cur != null) {
                 // CONNECTION 1
-                head.left.next = head.right;
+                cur.left.next = cur.right;
 
                 // CONNECTION 2
-                if (head.next != null) {
-                    head.right.next = head.next.left;
+                if (cur.next != null) {
+                    cur.right.next = cur.next.left;
                 }
-                head = head.next;
+                cur = cur.next;
             }
             leftmost = leftmost.left;
         }

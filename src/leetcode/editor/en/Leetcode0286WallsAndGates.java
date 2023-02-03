@@ -49,46 +49,45 @@ class Solution {
     private static final int EMPTY = Integer.MAX_VALUE;
     private static final int GATE = 0;
     private final List<int[]> DIRECTIONS = Arrays.asList(
-            new int[] { 1,  0},
-            new int[] {-1,  0},
-            new int[] { 0,  1},
-            new int[] { 0, -1}
+	    new int[]{1, 0},
+	    new int[]{-1, 0},
+	    new int[]{0, 1},
+	    new int[]{0, -1}
     );
 
     public void wallsAndGates(int[][] rooms) {
-    
-        if (rooms == null || rooms.length == 0 || rooms[0] == null || rooms[0].length == 0) {
-            return;
-        }
-        //先找到矩阵中是Gate 0的位置
-        int m = rooms.length;
-        if (m == 0) return;
-        int n = rooms[0].length;
-        Queue<int[]> q = new LinkedList<>();
-        for (int row = 0; row < m; row++) {
-            for (int col = 0; col < n; col++) {
-                if (rooms[row][col] == GATE) {
-                    q.add(new int[] { row, col });
-                }
-            }
-        }
-    
-        //用BFS赋值
-        //因为是BFS，所以每个点可以最多被赋值一次，且只有是Empty的点会被赋值
-        while (!q.isEmpty()) {
-            int[] point = q.poll();
-            int row = point[0];
-            int col = point[1];
-            for (int[] direction : DIRECTIONS) { // 遍历4个方向
-                int r = row + direction[0];
-                int c = col + direction[1];
-                if (r >= 0 && r < m && c >= 0 && c < n && rooms[r][c] == EMPTY) {
-                    rooms[r][c] = rooms[row][col] + 1;
-                    q.add(new int[] { r, c });
-                }
-            
-            }
-        }
+	
+	    if (rooms == null || rooms.length == 0 || rooms[0] == null || rooms[0].length == 0) {
+		    return;
+	    }
+	    //先找到矩阵中是Gate 0的位置
+	    int rows = rooms.length;
+	    int cols = rooms[0].length;
+	    Queue<int[]> queue = new LinkedList<>();
+	    for (int row = 0; row < rows; row++) {
+		    for (int col = 0; col < cols; col++) {
+			    if (rooms[row][col] == GATE) {
+				    queue.add(new int[]{row, col});
+			    }
+		    }
+	    }
+	
+	    //用BFS赋值
+	    //因为是BFS，所以每个点可以最多被赋值一次，且只有是Empty的点会被赋值
+	    while (!queue.isEmpty()) {
+		    int[] point = queue.poll();
+		    int row = point[0];
+		    int col = point[1];
+		    for (int[] dir : DIRECTIONS) { // 遍历4个方向
+			    int r = row + dir[0];
+			    int c = col + dir[1];
+			    if (r >= 0 && r < rows && c >= 0 && c < cols && rooms[r][c] == EMPTY) {
+				    rooms[r][c] = rooms[row][col] + 1;
+				    queue.add(new int[]{r, c});
+			    }
+			
+		    }
+	    }
     }
 }
 

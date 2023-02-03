@@ -56,32 +56,33 @@ public class Leetcode0107BinaryTreeLevelOrderTraversalIi{
  * }
  */
 class Solution {
-    public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        LinkedList<List<Integer>> result = new LinkedList<>();
-        // corner case
-        if (root == null) {
-            return result;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            List<Integer> tempList = new ArrayList<>();
-            while (size != 0) {
-                TreeNode node = queue.poll();
-                tempList.add(node.val);
-                if (node.left != null) {
-                    queue.add(node.left);
-                }
-                if (node.right != null) {
-                    queue.add(node.right);
-                }
-                size--;
-            }
-            result.addFirst(tempList);
-        }
-        return result;
-    }
+	
+	public List<List<Integer>> levelOrderBottom(TreeNode root) {
+		LinkedList<List<Integer>> result = new LinkedList<>();
+		// corner case
+		if (root == null) {
+			return result;
+		}
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+			List<Integer> list = new ArrayList<>();
+			while (size != 0) {
+				TreeNode node = queue.poll();
+				list.add(node.val);
+				if (node.left != null) {
+					queue.add(node.left);
+				}
+				if (node.right != null) {
+					queue.add(node.right);
+				}
+				size--;
+			}
+			result.addFirst(list);
+		}
+		return result;
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

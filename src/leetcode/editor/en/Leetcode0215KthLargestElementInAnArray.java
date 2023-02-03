@@ -156,6 +156,8 @@ class Solution2_2 {
 }
 
 //Solution 3_1: quick Selection / quickSort Partition + Binary Search
+// T(n) = O(n) average, O(n^2) worst case
+// S(n) = O(1)
 // left, right pointer, relative position not stable
 // 1 ms, faster than 97.59%, 39.1 MB, less than 80.25%
 class Solution3_1 {

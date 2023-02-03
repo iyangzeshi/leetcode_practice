@@ -48,66 +48,66 @@ public class Leetcode0130SurroundedRegions{
         System.out.println();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-// Solution 1: BFS
+// Solution 2: DFS
 class Solution {
 
     int[][] directions = new int[][]{{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
 
     public void solve(char[][] board) {
-        // corner case
-        if (board == null || board.length == 0 || board[0] == null || board[0].length == 0) {
-            return;
-        }
-    
-        int rows = board.length;
-        int cols = board[0].length;
-    
-        // do DFS for the first and last row
-        for (int j = 0; j < cols; j++) {
-            doDFSflipY(board, 0, j);
-            doDFSflipY(board, rows - 1, j);
-        }
-    
-        // do DFS for the first and last col
-        for (int i = 1; i < rows - 1; i++) {
-            doDFSflipY(board, i, 0);
-            doDFSflipY(board, i, cols - 1);
-        }
-    
-        //traverse the whole board, change 0 into X, and Y into 0
-        flip(board);
-    
+	    // corner case
+	    if (board == null || board.length == 0 || board[0] == null || board[0].length == 0) {
+		    return;
+	    }
+	
+	    int rows = board.length;
+	    int cols = board[0].length;
+	
+	    // do DFS for the first and last row
+	    for (int j = 0; j < cols; j++) {
+		    doDFSflipY(board, 0, j);
+		    doDFSflipY(board, rows - 1, j);
+	    }
+	
+	    // do DFS for the first and last col
+	    for (int i = 1; i < rows - 1; i++) {
+		    doDFSflipY(board, i, 0);
+		    doDFSflipY(board, i, cols - 1);
+	    }
+	
+	    //traverse the whole board, change 0 into X, and Y into 0
+	    flip(board);
+	
     }
 
     private void flip(char[][] board) {
-        int cols = board[0].length;
-        for (char[] chars : board) {
-            for (int j = 0; j < cols; j++) {
-                if (chars[j] == 'O') {
-                    chars[j] = 'X';
-                }
-                if (chars[j] == 'Y') {
-                    chars[j] = 'O';
-                }
-            }
-        }
+	    int cols = board[0].length;
+	    for (char[] chars : board) {
+		    for (int j = 0; j < cols; j++) {
+			    if (chars[j] == 'O') {
+				    chars[j] = 'X';
+			    }
+			    if (chars[j] == 'Y') {
+				    chars[j] = 'O';
+			    }
+		    }
+	    }
     }
 
     private void doDFSflipY(char[][] board, int row, int col) {
-        //base case
-        if (row < 0 || row >= board.length || col < 0 || col >= board[0].length
-                || board[row][col] == 'X' || board[row][col] == 'Y') {
-            return;
-        }
-    
-        board[row][col] = 'Y';
-    
-        //general case
-        for (int[] direction : directions) {
-            int r = row + direction[0];
-            int c = col + direction[1];
-            doDFSflipY(board, r, c);
-        }
+	    //base case
+	    if (row < 0 || row >= board.length || col < 0 || col >= board[0].length
+		    || board[row][col] == 'X' || board[row][col] == 'Y') {
+		    return;
+	    }
+	
+	    board[row][col] = 'Y';
+	
+	    //general case
+	    for (int[] direction : directions) {
+		    int r = row + direction[0];
+		    int c = col + direction[1];
+		    doDFSflipY(board, r, c);
+	    }
     }
 }
 
@@ -135,9 +135,9 @@ class Solution1 {
         }
         
         // do BFS for the first and last col
-        for (int i1 = 1; i1 < rows - 1; i1++) {
-            flipToYByIndex(board, cols, queue, i1, 0);
-            flipToYByIndex(board, cols, queue, i1, cols - 1);
+        for (int i = 1; i < rows - 1; i++) {
+            flipToYByIndex(board, cols, queue, i, 0);
+            flipToYByIndex(board, cols, queue, i, cols - 1);
         }
         
         //traverse the whole board, change o into X, and Y into 0
