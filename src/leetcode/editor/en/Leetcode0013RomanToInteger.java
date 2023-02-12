@@ -99,18 +99,16 @@ class Solution {
             }
         }
         int result = 0;
-
-        for (int i = 0; i < vals.length; i++) {
-            if (i == vals.length - 1) {
-                result += vals[i];
-            }
-            else if (vals[i] < vals[i + 1]) {
-                result -= vals[i];
-            }
-            else {
-                result += vals[i];
-            }
-        }
+	
+	    for (int i = 0; i < vals.length; i++) {
+		    if (i == vals.length - 1) {
+			    result += vals[i];
+		    } else if (vals[i] < vals[i + 1]) {
+			    result -= vals[i];
+		    } else {
+			    result += vals[i];
+		    }
+	    }
         return result;
     }
 }

@@ -63,6 +63,9 @@ class Solution {
 
 // Solution 1: dp, leftMax, rightMax, T(n) =  O(n), S(n) = O(n), 3 pass, can be reduced to 2 pass.
 // 1 ms,击败了83.33% 的Java用户, 38.5 MB,击败了58.35% 的Java用户
+/*Input =      [0,1,0,2,1,0,1,3,2,1,2,1]
+leftMax =    [0,1,1,2,2,2,2,3,3,3,3,3]
+rightMax =   [3,3,3,3,3,3,3,3,2,2,2,1]*/
 class Solution1 {
     
     public int trap(int[] height) {

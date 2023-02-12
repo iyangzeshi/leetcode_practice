@@ -34,13 +34,21 @@ public class Leetcode0084LargestRectangleInHistogram{
     public static void main(String[] args) {
         Solution sol = new Leetcode0084LargestRectangleInHistogram().new Solution();
         // TO TEST
-        Stack<Integer> stack = new Stack<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        System.out.println(stack.get(1));
+	    int[] heights = {2,1,5,6,2,3};
+        int res = sol.largestRectangleArea(heights);
+        System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+
+/*
+every area = width * height;
+    We need to calculate area by find every different height, so for every height, we need to find the nearest height h1 and h2 around the height h, and calculate its area
+    step 1: using a increasing stack(according to heights[i]) to store i
+        so that in the stack, the lower index is the left first height that smaller than the height.
+    step 2:
+        if the coming height is not smaller than the heights[stack.peek()], push it
+        if the comming height is smaller than the heights[stack.peek()], we find the 1st right border to the height h, so we can do the calculation for this related area.
+ */
 class Solution {
     public int largestRectangleArea(int[] heights) {
         // corner case
@@ -53,11 +61,12 @@ class Solution {
         int maxArea = 0;
         for (int i = 0; i <= len; i++) {
             int height = i < len ? heights[i] : 0; // 最后加一个高度是0的柱形图，强制把所有的柱形图弹出来
-            while (!stack.isEmpty() && heights[stack.peek()] >= height) {
-                int top = stack.pop();
-                int area = heights[top] * (stack.isEmpty() ? i : (i - stack.peek() - 1));
-                maxArea = Math.max(maxArea, area);
-            }
+	        while (!stack.isEmpty() && heights[stack.peek()] > height) {
+		        int topIdx = stack.pop();
+		        int width = stack.isEmpty() ? i : (i - stack.peek() - 1);
+		        int area = heights[topIdx] * width;
+		        maxArea = Math.max(maxArea, area);
+	        }
             stack.push(i);
         }
         return maxArea;
@@ -67,6 +76,8 @@ class Solution {
 // Solution 1: 1 ms, O(n). 对于每个柱形，往左和往右找到第一个比自己高度低的柱子
 // 7 ms,击败了75.56% 的Java用户, 48.4 MB,击败了9.23% 的Java用户
 /*
+area = length × height
+选择了height之后，选择这个height对应的最长的length
 分别求出包含每个柱子的矩形区域的最大面积，然后选最大的。要包含这个柱子，也就是这个柱子是当前矩形区域的高度。
 也就是，这个柱子是当前矩形区域中柱子最高的。如下图中包含橙色柱子的矩形区域的最大面积。
 所以只要想办法分别找到每个柱子左边和右边第一个比它小的左边，
@@ -142,9 +153,10 @@ class Solution2 {
         int maxArea = 0;
         for (int i = 0; i <= len; i++) {
             int height = i < len ? heights[i] : 0; // 最后加一个高度是0的柱形图，强制把所有的柱形图弹出来
-            while (!stack.isEmpty() && heights[stack.peek()] >= height) {
-                int top = stack.pop();
-                int area = heights[top] * (stack.isEmpty() ? i : (i - stack.peek() - 1));
+            while (!stack.isEmpty() && heights[stack.peek()] > height) {
+                int topIdx = stack.pop();
+				int width = stack.isEmpty() ? i : (i - stack.peek() - 1);
+                int area = heights[topIdx] * width;
                 maxArea = Math.max(maxArea, area);
             }
             stack.push(i);

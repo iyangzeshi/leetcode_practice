@@ -144,7 +144,7 @@ class Solution2 {
         return buffer.size();
     }
     
-    // 在buffer中找到>= target的值的索引index
+    // using binary search 在buffer中找到>= target的值的索引index
     private int getIndex(List<Integer> buffer, int target) {
         int len = buffer.size();
         // corner case

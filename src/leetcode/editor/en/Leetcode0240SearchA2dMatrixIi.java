@@ -43,6 +43,8 @@ public class Leetcode0240SearchA2dMatrixIi {
 	}
 
 //leetcode submit region begin(Prohibit modification and deletion)
+// ∵every row and columns are sorted, so go every step (vertical or horizontally)
+// T(m, n) = O(m + n), S(m, n) = O(1)
 class Solution {
     
     public boolean searchMatrix(int[][] matrix, int target) {
@@ -64,6 +66,8 @@ class Solution {
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
+// using binary search to determine the row and column
+// T(m, n) = O(m log(n))
 class Solution1 {
     
     public boolean searchMatrix(int[][] matrix, int target) {
@@ -92,7 +96,7 @@ class Solution1 {
         return false;
     }
     
-    // 找到第一个末尾数字大于等于target的行
+    // 找到第一个末尾数字大于等于target的行 T(m) = T(logm)
     private int chooseTopRow(int[][] matrix, int target) {
         int cols = matrix[0].length;
         int start = 0;
@@ -110,7 +114,7 @@ class Solution1 {
         return start;
     }
     
-    // 找到最后一个元素小于等于target的最大行index
+    // 找到最后一个元素小于等于target的最大行index， T(m) = T(logm)
     private int chooseBottomRow(int[][] matrix, int target, int start) {
         int end = matrix.length - 1;
         while (start <= end) {
@@ -126,6 +130,33 @@ class Solution1 {
         return end;
     }
     
+}
+
+
+// T(m, n) = O(m + n), S(m, n) = O(1)
+/*
+* ∵ every row and columns are sorted, so go every step (vertical or horizontally)
+* 只能从左下角或者从右上角开始
+*/
+class Solution2 {
+	
+	public boolean searchMatrix(int[][] matrix, int target) {
+		// start our "pointer" in the bottom-left
+		int row = matrix.length - 1;
+		int col = 0;
+		
+		while (row >= 0 && col < matrix[0].length) {
+			if (matrix[row][col] > target) {
+				row--;
+			} else if (matrix[row][col] < target) {
+				col++;
+			} else { // found it
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
 
 }

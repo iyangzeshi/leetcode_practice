@@ -74,7 +74,7 @@ class Solution1 {
 	 * @param res result
 	 * @param path current path
 	 * @param n given number n
-	 * @param delta number of ( - number of )
+	 * @param delta number of "(" - number of ")"
 	 */
     private void dfs(List<String> res, StringBuilder path, int n, int delta) {
         int len = path.length();
@@ -113,7 +113,7 @@ class Solution2_1 {
 
         // general case
         StringBuilder sb = new StringBuilder();
-        DFS(n, 0, 0, sb, result);
+        dfs(n, 0, 0, sb, result);
 
         return result;
     }
@@ -124,7 +124,7 @@ class Solution2_1 {
      * @param sb:       temporary answer carrier
      * @param result:   result
      */
-    private void DFS(int n, int left, int right, StringBuilder sb, List<String> result) {
+    private void dfs(int n, int left, int right, StringBuilder sb, List<String> result) {
 
         //corner case
         if (left > n || right > left) {
@@ -138,14 +138,14 @@ class Solution2_1 {
 
         // case 1, try to add left Parentheses
         sb.append('(');
-        DFS(n, left + 1, right, sb, result);
+        dfs(n, left + 1, right, sb, result);
         // sb.deleteCharAt(sb.length() - 1);
         int length = sb.length();
         sb.setLength(length - 1);
 
         //case 2, try to add right Parentheses
         sb.append(')');
-        DFS(n, left, right + 1, sb, result);
+        dfs(n, left, right + 1, sb, result);
         // sb.deleteCharAt(sb.length() - 1);
         length = sb.length();
         sb.setLength(length - 1);
@@ -167,7 +167,7 @@ class Solution2_2 {
 
         // general case
         StringBuilder sb = new StringBuilder();
-        DFS(n, 0, 0, sb, result);
+        dfs(n, 0, 0, sb, result);
 
         return result;
     }
@@ -178,7 +178,7 @@ class Solution2_2 {
      * @param sb:       temporary answer carrier
      * @param result:   result
      */
-    private void DFS(int n, int left, int right, StringBuilder sb, List<String> result) {
+    private void dfs(int n, int left, int right, StringBuilder sb, List<String> result) {
 
         // base case
         if (left + right == 2 * n) {
@@ -188,7 +188,7 @@ class Solution2_2 {
         // case 1, try to add left Parentheses
         if (left < n) {
             sb.append('(');
-            DFS(n, left + 1, right, sb, result);
+            dfs(n, left + 1, right, sb, result);
             // sb.deleteCharAt(sb.length() - 1);
             int length = sb.length();
             sb.setLength(length - 1);
@@ -197,7 +197,7 @@ class Solution2_2 {
         //case 2, try to add right Parentheses
         if (right < left) {
             sb.append(')');
-            DFS(n, left, right + 1, sb, result);
+            dfs(n, left, right + 1, sb, result);
             // sb.deleteCharAt(sb.length() - 1);
             int length = sb.length();
             sb.setLength(length - 1);

@@ -74,7 +74,7 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1:
+// Solution 1: T(n) = O(n), S(n) = O(n)
 /* 创建一个数组arr,假设的index从1开始,设置数组的大小和nums的一样大.
  如果nums里面有i,就在arr里面第i个位置存i,
  在arr里第一个第i个位置存的数字不是i,这个位置就是最小的missing number
@@ -106,7 +106,7 @@ class Solution1 {
     }
 }
 
-// Solution 2:
+// Solution 2: T(n) = O(n), S(n) = O(1)
 /*同样的，我们先考虑如果可以有额外的空间该怎么做。
 还是一样，对于 nums = [ 3 4 -1 1 8] ，我们创建一个等大的数组 a，初始化为 [ false，false，false，false，false ]。然后如果 nums 里有 1 就把，第一个位置 a [ 0 ] 改为 true。如果 nums 里有 m ，就把 a [ m - 1 ] 改为 true。看下具体的例子。
 nums = [ 3 4 -1 1 8]
@@ -146,17 +146,17 @@ class Solution2 {
 
     private int positiveNumber(int[] nums) {
         //解法一 把负数和 0 全部交换到最后
-//        int n = nums.length;
-//        for (int i = 0; i < n; i++) {
-//            while (nums[i] <= 0) {
-//                swap(nums, i, n - 1);
-//                n--;
-//                if (i == n) {
-//                    break;
-//                }
-//            }
-//        }
-//        return n;
+       /*int n = nums.length;
+       for (int i = 0; i < n; i++) {
+           while (nums[i] <= 0) {
+               swap(nums, i, n - 1);
+               n--;
+               if (i == n) {
+                   break;
+               }
+           }
+       }
+       return n;*/
 
         //解法二 用一个指针 p ，保证 p 之前的都是正数。遍历 nums，每遇到一个正数就把它交换到 p 指针的位置，并且 p 指针后移
         int n = nums.length;

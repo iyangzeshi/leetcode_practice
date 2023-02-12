@@ -75,7 +75,7 @@ class Solution {
 			return 0;
 		}
 		
-		HashSet<String> wordSet = new HashSet<>(wordList);
+		Set<String> wordSet = new HashSet<>(wordList);
 		// corner case
 		if (!wordSet.contains(endWord)) {
 			return 0;
@@ -89,7 +89,7 @@ class Solution {
 		return bfs(wordSet, beginSet, endSet);
 	}
 	
-	private int bfs(HashSet<String> wordSet, Set<String> set1, Set<String> set2) {
+	private int bfs(Set<String> wordSet, Set<String> set1, Set<String> set2) {
 		int minLen = 1;
 		// set2 will be in the wordSet
 		while (!set1.isEmpty() && !set2.isEmpty()) {
@@ -99,7 +99,7 @@ class Solution {
 				set1 = set2;
 				set2 = tempSet;
 			}
-			HashSet<String> nextLevel = new HashSet<>();
+			Set<String> nextLevel = new HashSet<>();
 			for (String cur : set1) {
 				List<String> neighbors = getNeighbor(cur, set1, wordSet);
 				for (String neighbor: neighbors) {
@@ -125,10 +125,10 @@ class Solution {
 		char[] chars = cur.toCharArray();
 		for (int i = 0; i < cur.length(); i++) {
 			char temp = chars[i];
-			for (char c = 'a'; c <= 'z'; c++) {
-				chars[i] = c;
+			for (char ch = 'a'; ch <= 'z'; ch++) {
+				chars[i] = ch;
 				String str = String.valueOf(chars);
-				if (c != temp && dict.contains(str) && !beginSet.contains(str)) {
+				if (ch != temp && dict.contains(str) && !beginSet.contains(str)) {
 					res.add(str);
 				}
 			}
@@ -143,7 +143,7 @@ class Solution {
 // 63 ms,击败了63.93% 的Java用户, 41.2 MB,击败了59.83% 的Java用户
 /*
  如果HashSet的contains和add时间复杂度是O(1),
-    则T(n)= O(V + E) = O(min(2^k, k *n), S(n) = O(min(2^k, k * n)
+    则T(n)= O(V + E) = O(k * n), S(n) = O(min(2^k, k * n)
  如果HashSet的contains和add时间复杂度是O(k),
     则T(n)= O(V + E) = O(min(k * 2^k, k^2 *n), S(n) = O(min(k * 2^k, k^2 * n)
  n: 字典里单词个数，k:每个单词的长度
@@ -228,21 +228,21 @@ class Solution2 {
 			return 0;
 		}
 		
-		HashSet<String> beginSet = new HashSet<>();
-		HashSet<String> endSet = new HashSet<>();
+		Set<String> beginSet = new HashSet<>();
+		Set<String> endSet = new HashSet<>();
 		beginSet.add(beginWord);
 		endSet.add(endWord);
 		
 		return bfs(wordSet, beginSet, endSet);
 	}
 	
-	private int bfs(HashSet<String> wordSet, HashSet<String> beginSet, HashSet<String> endSet) {
+	private int bfs(Set<String> wordSet, Set<String> beginSet, Set<String> endSet) {
 		int minLen = 1;
 		// endSet will be in the wordSet
 		while (!beginSet.isEmpty() && !endSet.isEmpty()) {
 			// make beginSet <= endSet
 			if (beginSet.size() > endSet.size()) {
-				HashSet<String> tempSet = beginSet;
+				Set<String> tempSet = beginSet;
 				beginSet = endSet;
 				endSet = tempSet;
 			}
@@ -257,7 +257,7 @@ class Solution2 {
 				}
 			}
 			/*
-			important, can not remove word immediately find neighbor;
+			important, neighbors can not be removed word immediately after we find them;
 			otherwise, begin set will never reach to end set
 			 */
 			wordSet.removeAll(beginSet);

@@ -47,6 +47,8 @@ public class Leetcode0074SearchA2dMatrix{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+// binary search, this matrix caan be considered as a sorted array of length m * n
+// T(m, n) = O(log(m*n)), S(m, n) = O(1)
 class Solution {
     
     public boolean searchMatrix(int[][] matrix, int target) {

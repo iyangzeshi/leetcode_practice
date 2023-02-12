@@ -81,7 +81,7 @@ public class Leetcode0008StringToIntegerAtoi{
     public static void main(String[] args) {
         Solution sol = new Leetcode0008StringToIntegerAtoi().new Solution();
         // TO TEST
-        String str = "4193 with words";
+        String str = "4193-2 with words";
         int res = sol.myAtoi(str);
         System.out.println(res);
     }
@@ -105,8 +105,7 @@ class Solution {
         } else {
             chArr = newStr.toCharArray();
         }
-
-        int len = chArr.length;
+		
         long num = 0;
         for (char ch : chArr) {
             if (Character.isDigit(ch)) {

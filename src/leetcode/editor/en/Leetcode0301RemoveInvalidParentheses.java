@@ -234,15 +234,34 @@ class Solution1 {
 
 // Solution 2: DFS + 第2类搜索树 + 跳层, deduplicate with jump DFS levels
 class Solution2 {
-
+	
     public List<String> removeInvalidParentheses(String s) {
         // corner case
         char[] chars = s.toCharArray();
-        int[] rm = calMRP(chars);
+        int[] rm = calRMP(chars); // Remove Parentheses
         List<String> res = new ArrayList<>();
         dfs(res, new StringBuilder(), chars, 0, rm[0], rm[1], 0);
         return res;
     }
+	
+	// calculate removal parentheses
+	private int[] calRMP(char[] chars) {
+		
+		int rml = 0;
+		int rmr = 0;
+		for (char ch : chars) {
+			if (ch == '(') {
+				rml++;
+			} else if (ch == ')') {
+				if (rml > 0) {
+					rml--;
+				} else {
+					rmr++;
+				}
+			}
+		}
+		return new int[]{rml, rmr};
+	}
     
     /**
      *
@@ -274,7 +293,7 @@ class Solution2 {
             // skip '('
             dfs(res, path, chars, idx + 1, rml - 1, rmr, delta);
             
-            //add '('
+            // add '('
             int skip = 1;
             while (idx + skip < chars.length && chars[idx] == chars[idx + skip]) {
                 skip++;
@@ -300,24 +319,6 @@ class Solution2 {
             dfs(res, path, chars, idx + 1, rml, rmr, delta);
             path.setLength(len); // backtracking一定要做，因为它下面延展出来的的分支需要走回去
         }
-    }
-    
-    private int[] calMRP(char[] chars) {
-        
-        int rml = 0;
-        int rmr = 0;
-        for (char ch : chars) {
-            if (ch == '(') {
-                rml++;
-            } else if (ch == ')') {
-                if (rml > 0) {
-                    rml--;
-                } else {
-                    rmr++;
-                }
-            }
-        }
-        return new int[]{rml, rmr};
     }
     
 }
