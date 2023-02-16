@@ -40,8 +40,9 @@ public class Leetcode1047RemoveAllAdjacentDuplicatesInString {
     public static void main(String[] args) {
         Solution sol = new Leetcode1047RemoveAllAdjacentDuplicatesInString().new Solution();
         // TO TEST
-        
-        System.out.println();
+        String str = "abbaca";
+	    String res = sol.removeDuplicates(str);
+        System.out.println(res);
     }
     
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -54,9 +55,12 @@ class Solution {
         }
         char[] words = str.toCharArray();
         
-        // [0, slow] no adjacent duplicate so far
-        // (slow, fast) explored and will be removed
-        // [fast, len) to be checked
+        /*
+        slow <= fast
+        [0, slow] no adjacent duplicate so far
+        (slow, fast) explored and will be removed
+        [fast, len) to be checked
+        */
         int slow = -1;
         int len = words.length;
         for (int fast = 0; fast < len; fast++) {
@@ -65,7 +69,7 @@ class Solution {
                 words[slow] = words[fast];
             } else if (words[fast] == words[slow]) {
                 slow--;
-            } else {
+            } else { // words[fast] != words[slow]
                 slow++;
                 words[slow] = words[fast];
             }

@@ -49,6 +49,8 @@
 
 package leetcode.editor.en;
 
+import java.util.Arrays;
+
 // 2020-07-26 13:47:47
 // Zeshi Yang
 public class Leetcode0048RotateImage{
@@ -56,8 +58,17 @@ public class Leetcode0048RotateImage{
     public static void main(String[] args) {
         Solution sol = new Leetcode0048RotateImage().new Solution();
         // TO TEST
-        
-        System.out.println();
+	    int[][] matrix = {
+		    {1, 2, 3, 4},
+		    {5, 6, 7, 8},
+		    {9, 10, 11, 12},
+		    {13, 14, 15, 16}
+	    };
+		sol.rotate(matrix);
+		for(int[] nums: matrix) {
+			System.out.println(Arrays.toString(nums));
+		}
+        // System.out.println(matrix.toString());
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {

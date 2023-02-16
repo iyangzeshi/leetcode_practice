@@ -73,6 +73,8 @@
 
 package leetcode.editor.en;
 
+import java.util.Stack;
+
 // 2020-09-12 18:14:28
 // Zeshi Yang
 public class Leetcode0388LongestAbsoluteFilePath{
@@ -80,30 +82,107 @@ public class Leetcode0388LongestAbsoluteFilePath{
     public static void main(String[] args) {
         Solution sol = new Leetcode0388LongestAbsoluteFilePath().new Solution();
         // TO TEST
-//        String s = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext";
-//        int res = sol.lengthLongestPath(s);
-//        System.out.println(res);
-        String str = "ab\t\tc";
-        System.out.println(str.lastIndexOf("\t"));
+       String s = "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext";
+       int res = sol.lengthLongestPath(s);
+       System.out.println(res);
+        // String str = "ab\t\tc";
+        // System.out.println(str.lastIndexOf("\t"));
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+// T(n) = O(n), S(n) = O(n)，用stack 模拟路径的计算和变化
 class Solution {
 
     public int lengthLongestPath(String input) {
-        String[] paths = input.split("\n");
-        int[] stack = new int[paths.length + 1];
-        int maxLen = 0;
-        for (String str : paths) {
-            int lev = str.lastIndexOf("\t") + 1;
-            System.out.println("str: " + str + " index: " + lev);
-            stack[lev + 1] = stack[lev] + str.length() - lev + 1;
-            if (str.contains(".")) {
-                maxLen = Math.max(maxLen, stack[lev + 1] - 1);
-            }
-        }
-        return maxLen;
+	    // corner case
+	    if (input == null || input.length() == 0) {
+		    return 0;
+	    }
+	
+	    // general case
+	    String[] paths = input.split("\n");
+	
+	    Stack<String> stack = new Stack<>(); // to store every level dir/file name
+	    int maxLen = 0;
+	    int len = 0;
+	    for (String str : paths) {
+		    if (stack.isEmpty()) {
+			    stack.push(str);
+			    len += str.length();
+		    } else {
+			    int depth = str.lastIndexOf("\t") + 1;
+			    while (depth != stack.size()) { // depth >= 1, so stack is never empty
+				    String prev = stack.pop();
+				    len -= (prev.length() + 1);
+			    }
+			    String name = str.substring(depth, str.length());
+			    stack.push(name);
+			    len += name.length() + 1;
+		    }
+		
+		    if (stack.peek().contains(".")) {
+			    maxLen = Math.max(maxLen, len);
+		    }
+	    }
+	    return maxLen;
     }
+	
 }
 //leetcode submit region end(Prohibit modification and deletion)
+// T(n) = O(n), S(n) = O(n)，用stack 模拟路径的计算和变化
+class Solution1 {
+	public int lengthLongestPath(String input) {
+		// corner case
+		if (input == null || input.length() == 0) {
+			return 0;
+		}
+		
+		// general case
+		String[] paths = input.split("\n");
+		
+		Stack<String> stack = new Stack<>(); // to store every level dir/file name
+		int maxLen = 0;
+		int len = 0;
+		for (String str : paths) {
+			if (stack.isEmpty()) {
+				stack.push(str);
+				len += str.length();
+			} else {
+				int depth = str.lastIndexOf("\t") + 1;
+				while (depth != stack.size()) { // depth >= 1, so stack is never empty
+					String prev = stack.pop();
+					len -= (prev.length() + 1);
+				}
+				String name = str.substring(depth, str.length());
+				stack.push(name);
+				len += name.length() + 1;
+			}
+			
+			if (stack.peek().contains(".")) {
+				maxLen = Math.max(maxLen, len);
+			}
+		}
+		return maxLen;
+	}
+}
+
+// T(n) = O(n), S(n) = O(n)，solution 1的讲话，直接在
+class Solution2 {
+	public int lengthLongestPath(String input) {
+		String[] paths = input.split("\n");
+		
+		// stack[i]: file path length from root to this file/dir
+		int[] stack = new int[paths.length + 1];
+		int maxLen = 0;
+		for (String str : paths) {
+			int lev = str.lastIndexOf("\t") + 1;
+			int nameLength = str.length() - lev + 1; // the length contains the "\t"
+			stack[lev + 1] = stack[lev] + nameLength;
+			if (str.contains(".")) { // only file path contains "."
+				maxLen = Math.max(maxLen, stack[lev + 1] - 1);
+			}
+		}
+		return maxLen;
+	}
+}
 
 }

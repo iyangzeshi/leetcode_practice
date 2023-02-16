@@ -58,12 +58,23 @@ public class Leetcode0496NextGreaterElementI{
     public static void main(String[] args) {
         Solution sol = new Leetcode0496NextGreaterElementI().new Solution();
         // TO TEST
-        int[] nums1 ={};
-        int[] nums2 ={1,2,3,4,5};
+        int[] nums1 ={2, 4};
+        int[] nums2 ={1,2,3,4};
         int[] res = sol.nextGreaterElement(nums1, nums2);
         System.out.println(Arrays.toString(res));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
+// T(n) = O(n), S(n) = O(n), using non increasing stack to mimic the research process
+/*
+step 1: for every num2 in nums2,
+build a map that the value of map is the next greater element in array nums2
+	keep a non-increasing stack that store the num2 in the arrays nums2
+	for every coming num2,
+		if num2 > stack.peek(), this coming num2 is next greater number of the stack.peek, keep
+		pop until the stack.peek() <= num2 and push num2
+		if num2 <= stack.peek() this coming num2 is not the target number of the stack.peek, push it
+step 2: traverse num1 in array nums1, get the target number and make it a array
+ */
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         // corner case
@@ -73,27 +84,26 @@ class Solution {
 
         Map<Integer, Integer> nums2NextGreaterNum = new HashMap<>();
         int len1 = nums1.length;
-        int len2 = nums2.length;
-        Stack<Integer> decreasingStack= new Stack<>();
-        for (int i = len2 - 1; i >= 0 ; i--) {
-            int num2 = nums2[i];
-            while (!decreasingStack.isEmpty() && decreasingStack.peek() <= num2) {
-                decreasingStack.pop();
-            }
-            if (decreasingStack.isEmpty()) {
-                nums2NextGreaterNum.put(num2, -1);
-            } else {
-                nums2NextGreaterNum.put(num2, decreasingStack.peek());
-            }
-            decreasingStack.push(num2);
-        }
+        Stack<Integer> stack = new Stack<>(); // non-increasing stack
+	    for (int num : nums2) {
+			if (stack.isEmpty()) {
+				stack.push(num);
+			} else if (num > stack.peek()) {
+				while (!stack.isEmpty() && num > stack.peek()) {
+					nums2NextGreaterNum.put(stack.peek(), num);
+					stack.pop();
+				}
+				stack.push(num);
+			} else {
+				stack.push(num);
+			}
+	    }
         int[] res = new int[len1];
         for (int i = 0; i < len1; i++) {
-            res[i] = nums2NextGreaterNum.get(nums1[i]);
+            res[i] = nums2NextGreaterNum.getOrDefault(nums1[i], -1);
         }
         return res;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
 }

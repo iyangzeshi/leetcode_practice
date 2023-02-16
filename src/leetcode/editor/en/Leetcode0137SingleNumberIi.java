@@ -52,7 +52,6 @@ class Solution {
                 num >>= 1;
             }
         }
-		String[] arrays = new String[]{"aa","bb","cc"};
 		int res = 0;
         for (int i = 0; i < 32; i++) {
             if (count[i] % 3 != 0) {
