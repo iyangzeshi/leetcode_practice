@@ -83,7 +83,7 @@ class Solution {
         }
         int len = s.length();
         
-        HashMap<Integer, List<Character>> charToList = new HashMap<>();
+        Map<Integer, List<Character>> charToList = new HashMap<>();
         boolean ascending = false;
         int row = 1;
         for (int i = 0; i < len; i++) {

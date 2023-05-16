@@ -144,7 +144,7 @@ class Solution {
      * every Set is corresponding to one person's all possible 3 website sequence
      */
     private List<Set<List<String>>> getSeqForEveryUser(Map<String, List<String>> userToWebsites) {
-        List<Set<List<String>>> userSeq = new ArrayList<>(); //
+        List<Set<List<String>>> userSeq = new ArrayList<>();
         for (String user : userToWebsites.keySet()) {
             List<String> webList = userToWebsites.get(user);
             Set<List<String>> set = new HashSet<>();

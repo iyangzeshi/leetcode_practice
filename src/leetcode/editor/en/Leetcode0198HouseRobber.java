@@ -51,10 +51,11 @@ public class Leetcode0198HouseRobber{
         System.out.println();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
+// T(n) = O(n), S(n) = O(1)
 class Solution {
     public int rob(int[] nums) {
-        int preMax = 0;
-        int curMax = 0;
+        int preMax = 0; // in the end of loop, the preMax is max value on choosing prev location
+        int curMax = 0; // in the end of loop, the preMax is max value on choosing current location
         for (int num: nums) {
             int temp = curMax;
             curMax = Math.max(curMax, preMax + num);

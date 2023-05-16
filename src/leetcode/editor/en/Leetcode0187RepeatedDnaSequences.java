@@ -55,7 +55,7 @@ class Solution {
         }
         
         // convert string to array of integers
-        Map<Character, Integer> toInt = new HashMap<>() {{
+        Map<Character, Integer> toInt = new HashMap<Character, Integer>() {{
             put('A', 0);
             put('C', 1);
             put('G', 2);
@@ -199,7 +199,7 @@ class Solution3 {
         }
         
         // convert string to array of integers
-        Map<Character, Integer> toInt = new HashMap<>() {{
+        Map<Character, Integer> toInt = new HashMap<Character, Integer>() {{
             put('A', 0);
             put('C', 1);
             put('G', 2);

@@ -150,6 +150,19 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 /* 面试的时候，用Solution 2 */
 // Solution 1: Stack<Integer> number, Stack<Character> operator, T(n) = O(n), S(n) = O(n)
+/*
+1. 计算器3这个题，主要借助1个optrMap来存除括号以外的所有操作运算符极其有限权值(分别用int来表示)，
+    以及2个stack分别来存取数字和非数字的字符(运算符，括号以及空格)。
+2. 为了保证最后一步运算能得以进行，最后还需要把ops里面的符号计算完
+3. 为了处理一上来就是个‘-’的情况，我们手动在这种情况前面添加1个0，这样就可以把-5 → 0 - 5。
+4. 在处理运算方面，我们分为3种情况，分别是空格，左右括号和运算符，以及数字。而对于处理addOptr这个method来说，
+    我们又分为左括号，右括号和其他运算符3种case，而其中左括号下我们又分别处理空格和‘-’的情况。
+5. 我们在符号栈里只需要压入左括号和运算符，右括号是不需要压入的。遇到右括号，我们只需要弹栈，
+       然后拿出2个数字栈里的数字进行计算，直到遇到弹出的是左括号为止。
+6. 遇到运算符时，我们首先看符号栈里是否有运算符，没有的话就没有必要从数字栈里拿数据来计算，
+    因为所有的计算都是靠符号栈里的运算符来进行的，只有当符号栈顶的运算符优先级大于当前的optr才会拿出来能算就算，
+    因此如果符号栈为空，则完全没有计算的必要，直接只需要将当前的optr压入符号栈即可。
+ */
 // 6 ms,击败了50.17% 的Java用户, 39.2 MB,击败了32.28% 的Java用户
 class Solution1 {
     
@@ -232,16 +245,16 @@ class Solution1 {
         }
     }
     
-    private int operate(char ch, int i1, int i2) {
+    private int operate(char ch, int thisNum, int prevNum) {
         switch (ch) {
             case '+':
-                return i2 + i1;
+                return prevNum + thisNum;
             case '-':
-                return i2 - i1;
+                return prevNum - thisNum;
             case '*':
-                return i2 * i1;
+                return prevNum * thisNum;
             case '/':
-                return i2 / i1;
+                return prevNum / thisNum;
         }
         return 0;
     }

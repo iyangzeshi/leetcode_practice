@@ -89,22 +89,22 @@ public class Leetcode0010RegularExpressionMatching {
 //leetcode submit region begin(Prohibit modification and deletion)
 // Solution 2: Dynamic programming
 // T(m, n) = O(m * n), S(m, n) = O(m * n)
-    
-// Solution 2: Dynamic programming
-// T(m, n) = O(m * n), S(m, n) = O(m * n)
 /*
 dp[i][j] means whether s[0, i) matches p[0, j) successfully
 
 initialization：
     boolean[][] dp = new boolean[lenS + 1][lenP + 1]; all is false
     dp[0][0] = true;
-    dp[0][j] = true if j is even and p[j-1] is '*', ∵ ".*" or "[a-z]* can match "" empty string
-
-1.p[j−1] is normal character,ifs[i−1]==p[j−1]，then dp[i][j]=dp[i−1][j−1]，else match unsuccessfully
+    dp[0][j] = true: ∵ "[[a-z]|.]* can match "" empty string; if
+        j is even;
+        p[j-1] is '*';
+        and dp[0][j-2] is true
+        
+1.p[j−1] is normal character,if s[i−1]==p[j−1]，then dp[i][j]=dp[i−1][j−1]，else match unsuccessfully
 2.p[j−1] is '.'，then dp[i][j]=dp[i−1][j−1]
 3.p[j−1] is '*'：
     (1) * match 0 previous character，then dp[i][j]=dp[i][j−2]
-    (2)* match previous character，then dp[i][j]=dp[i−1][j]
+    (2) * match previous character，then dp[i][j]=dp[i−1][j]
  */
 class Solution {
     
@@ -171,6 +171,21 @@ general case:
 // Solution 1_1: DFS without pruning
 // T(m, n) =  O((m + n) * 2^n), S(m, n) = O(m * n)
 // 27 ms,击败了30.98% 的Java用户, 37.7 MB,击败了90.83% 的Java用户
+/*
+base case: 如果p已经走到最后len了， return s有没有走到最后
+general case:
+    如果p走到的char的后面是*, 从当前字符(*前面的)char判断
+        如果当前字符char是 '.'，可以匹配任意字符多个任意字符, s遍历往后走，p往后面走2格
+        如果前面的char是普通字符，
+            如果当前位置都能匹配的话，p和s都往后匹配一个
+            不能匹配的话，就false
+    如果走到的char的后面不是*，当前char,
+        如果s和p当前能匹配，就往后各走1格
+        否则return false
+    可走到的char的后面没有字符了，就是也就是最后一个字符（当前char不可能是 *, 因为*会被跳过)
+        如果s和p当前能匹配，就往后各走1格
+        否则return false
+*/
 class Solution1_1 {
     
     public boolean isMatch(String s, String p) {
@@ -254,6 +269,21 @@ class Solution1_1 {
 // Solution 1_2: DFS without pruning, Solution 1_1合并讲话后的版本
 // T(m, n) =  O((m + n) * 2^n), S(m, n) = O(m * n)
 // 26 ms,击败了31.34% 的Java用户, 37.8 MB,击败了85.83% 的Java用户
+/*
+base case: 如果p已经走到最后len了， return s有没有走到最后
+general case:
+    如果p走到的char的后面是*, 从当前字符(*前面的)char判断
+        如果当前字符char是 '.'，可以匹配任意字符多个任意字符, s遍历往后走，p往后面走2格
+        如果前面的char是普通字符，
+            如果当前位置都能匹配的话，p和s都往后匹配一个
+            不能匹配的话，就false
+    如果走到的char的后面不是*，当前char,
+        如果s和p当前能匹配，就往后各走1格
+        否则return false
+    可走到的char的后面没有字符了，就是也就是最后一个字符（当前char不可能是 *, 因为*会被跳过)
+        如果s和p当前能匹配，就往后各走1格
+        否则return false
+*/
 class Solution1_2 {
     
     public boolean isMatch(String s, String p) {
@@ -325,6 +355,21 @@ class Solution1_2 {
 // Solution 1_3: DFS with pruning
 // T(m, n) = O(m * n), S(m, n) = O(m * n)
 // 1 ms,击败了100.00% 的Java用户, 39.1 MB,击败了49.51% 的Java用户
+/*
+base case: 如果p已经走到最后len了， return s有没有走到最后
+general case:
+    如果p走到的char的后面是*, 从当前字符(*前面的)char判断
+        如果当前字符char是 '.'，可以匹配任意字符多个任意字符, s遍历往后走，p往后面走2格
+        如果前面的char是普通字符，
+            如果当前位置都能匹配的话，p和s都往后匹配一个
+            不能匹配的话，就false
+    如果走到的char的后面不是*，当前char,
+        如果s和p当前能匹配，就往后各走1格
+        否则return false
+    可走到的char的后面没有字符了，就是也就是最后一个字符（当前char不可能是 *, 因为*会被跳过)
+        如果s和p当前能匹配，就往后各走1格
+        否则return false
+*/
 class Solution1_3 {
     
     public boolean isMatch(String s, String p) {
@@ -389,13 +434,16 @@ dp[i][j] means whether s[0, i) matches p[0, j) successfully
 initialization：
     boolean[][] dp = new boolean[lenS + 1][lenP + 1]; all is false
     dp[0][0] = true;
-    dp[0][j] = true if j is even and p[j-1] is '*', ∵ "[[a-z]|.]* can match "" empty string
-
-1.p[j−1] is normal character,ifs[i−1]==p[j−1]，then dp[i][j]=dp[i−1][j−1]，else match unsuccessfully
+    dp[0][j] = true: ∵ "[[a-z]|.]* can match "" empty string; if
+        j is even;
+        p[j-1] is '*';
+        and dp[0][j-2] is true
+        
+1.p[j−1] is normal character,if s[i−1]==p[j−1]，then dp[i][j]=dp[i−1][j−1]，else match unsuccessfully
 2.p[j−1] is '.'，then dp[i][j]=dp[i−1][j−1]
 3.p[j−1] is '*'：
     (1) * match 0 previous character，then dp[i][j]=dp[i][j−2]
-    (2)* match previous character，then dp[i][j]=dp[i−1][j]
+    (2) * match previous character，then dp[i][j]=dp[i−1][j]
  */
 class Solution2_1 {
     
@@ -430,7 +478,7 @@ class Solution2_1 {
                         dp[i][j] |= dp[i][j - 2]; // * match 0 character
                     }
                     if (j > 1 && (sChars[i - 1] == pChars[j - 2] || pChars[j - 2] == '.')) {
-                        // match 1 more character, this will repeat again
+                        // match 1 more character, this will repeat
                         dp[i][j] |= dp[i - 1][j];
                     }
                 }

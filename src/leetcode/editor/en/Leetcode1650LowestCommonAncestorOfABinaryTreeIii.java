@@ -106,36 +106,46 @@ class Node {
 //     public Node right;
 //     public Node parent;
 // };
-    
+//Soluion 1: T(n) = O(n), S(n) = O(1)
+// 20 ms,击败了95.80% 的Java用户, 39.6 MB,击败了85.71% 的Java用户
+/*
+ * 先计算A和B的长度，让长的那个减到和短的那个一样的长度，
+ * 然后同时往前走，重合的时候就是intersection
+ * 如果没有重合点，就return null（其实也是两者都走到null的地方，也是重合的）
+ */
 class Solution {
-    public Node lowestCommonAncestor(Node p, Node q) {
-        Stack<Node> stackP = pushToStackTillRoot(p);
-        Node curP;
-        
-        Stack<Node> stackQ = pushToStackTillRoot(q);
-        Node curQ;
-        
-        Node prev = stackP.peek();
-        while(!stackP.isEmpty() && !stackQ.isEmpty()) {
-            curP = stackP.pop();
-            curQ = stackQ.pop();
-            if(curP != curQ) {
-                return prev;
-            }
-            prev = curQ;
-        }
-        return prev;
-    }
-    
-    private Stack<Node> pushToStackTillRoot(Node p) {
-        Stack<Node> stackP = new Stack<>();
-        Node curP = p;
-        while (curP != null) {
-            stackP.push(curP);
-            curP = curP.parent;
-        }
-        return stackP;
-    }
+	public Node lowestCommonAncestor(Node p, Node q) {
+		int pDepth = getDepth(p);
+		int qDepth = getDepth(q);
+		return getLCA(p, pDepth, q, qDepth);
+	}
+	
+	private int getDepth(Node cur) {
+		int depth = 0;
+		while (cur != null) {
+			depth++;
+			cur = cur.parent;
+		}
+		return depth;
+	}
+	
+	// make sure pDepth >= qDepth
+	private Node getLCA(Node p, int pDepth, Node q, int qDepth) {
+		if (pDepth < qDepth) {
+			return getLCA(q, qDepth, p, pDepth);
+		}
+		
+		while (pDepth > qDepth) {
+			p = p.parent;
+			pDepth--;
+		}
+		
+		while (p != q) {
+			p = p.parent;
+			q = q.parent;
+		}
+		return p;
+	}
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
@@ -186,7 +196,11 @@ class Solution1 {
 
 //Solution 2: T(n) = O(n), S(n) = O(1)
 // 20 ms,击败了95.80% 的Java用户, 40.4 MB,击败了19.83% 的Java用户
-/*走完A，C，B和走完B，C，A的长度是一样的*/
+/*走完
+path1: p -> LCA -> root -> q -> LCA,
+path2: q -> LCA -> root -> p -> LCA
+2条path的长度是一样的
+*/
 class Solution2 {
     
     public Node lowestCommonAncestor(Node p, Node q) {

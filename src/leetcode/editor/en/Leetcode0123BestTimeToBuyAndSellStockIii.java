@@ -115,11 +115,11 @@ class Solution1_1 {
         int[] profit2 = new int[len + 1]; // 当前第一次和第二次卖完的最好收益
         // 在第二次买之前，必须先完成第一次卖，而且不能是同一天，所以for循环里面，是先执行2的部分，在执行1的部分
         for (int i = 0; i < len; i++) {
-            buy1[i + 1] = Math.max(buy1[i], -prices[i]);
-            profit1[i + 1] = Math.max(profit1[i], prices[i] + buy1[i]);
-            
-            buy2[i + 1] = Math.max(buy2[i], profit1[i] - prices[i]);
-            profit2[i + 1] = Math.max(profit2[i], prices[i] + buy2[i]);
+	        profit1[i + 1] = Math.max(profit1[i], prices[i] + buy1[i]);
+	        buy1[i + 1] = Math.max(buy1[i], -prices[i]);
+	
+	        profit2[i + 1] = Math.max(profit2[i], prices[i] + buy2[i]);
+	        buy2[i + 1] = Math.max(buy2[i], profit1[i] - prices[i]);
         }
         return profit2[len];
     }
@@ -144,11 +144,11 @@ class Solution1_2 {
         int profit2 = 0; // 当前第一次和第二次卖的最好收益
         // 在第二次买之前，必须先完成第一次卖，而且不能是同一天，所以for循环里面，是先执行2的部分，在执行1的部分
         for (int price : prices) {
-            buy1 = Math.max(buy1, -price);
-            profit1 = Math.max(profit1, price + buy1);
-            
-            buy2 = Math.max(buy2, profit1 - price);
-            profit2 = Math.max(profit2, price + buy2);
+	        profit1 = Math.max(profit1, price + buy1); // (不卖当前这个股票，卖了当前这个股票）
+	        buy1 = Math.max(buy1, -price); // (不把当前这个股票当作买的第1个股票，买当前这个股票作为第1个买的股票）
+	
+	        profit2 = Math.max(profit2, price + buy2); // 对于第2个股票，（卖了当前这个股票，卖了当前这个股票）
+	        buy2 = Math.max(buy2, profit1 - price); // 对于第2个股票： (不买当前这个股票，买当前这个股票）
         }
         return profit2;
     }

@@ -246,12 +246,12 @@ class Solution1_2 {
         return !((c1 == '*' || c1 == '/') && (c2 == '+' || c2 == '-'));
     }
 
-    private int operate(char c, int i1, int i2) {
+    private int operate(char c, int thisNum, int prevNum) {
         switch (c) {
-            case '+': return i2 + i1;
-            case '-': return i2 - i1;
-            case '*': return i2 * i1;
-            case '/': return i2 / i1;
+            case '+': return prevNum + thisNum;
+            case '-': return prevNum - thisNum;
+            case '*': return prevNum * thisNum;
+            case '/': return prevNum / thisNum;
         }
         return 0;
     }
@@ -260,7 +260,7 @@ class Solution1_2 {
 // Solution 2:
     
 /**
- * 设置1个stack<Integer>来存数字就行了
+ * 设置1个stack<Integer>来存数字就行了,每遇到一个符号，处理前面的符号
  * 如果当前遇到的是+, -:
  *      +:把前面遇到的数字num push进去
  *      -:把前面遇到的数字取相反数变成-num push到stack进去
@@ -270,41 +270,38 @@ class Solution1_2 {
  * 到最后一个数字结束的时候，把stack里面的所有数字求和
  */
 class Solution2_1 {
-
-    public int calculate(String s) {
-        int res = 0;
-        int num = 0;
-        char opt = '+'; //一开始赋值为+ 因为+的那叉和刚开始处理的逻辑一样 - 合并了
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            if (ch == ' ') {
-                continue;
-            }
-            if (Character.isDigit(ch)) {
-                num = num * 10 + ch - '0';//2
-            }
-            //这里最后一次一定要进一次 不然处理不完
-            else if (i == s.length() - 1) { // 是操作符，或者是最后一个数字的时候
-                if (opt == '+') {
-                    stack.push(num);
-                } else if (opt == '-') {
-                    stack.push(-num);
-                } else if (opt == '/') {
-                    stack.push(stack.pop() / num);
-                } else if (opt == '*') {
-                    stack.push(stack.pop() * num);
-                }
-                num = 0;
-                opt = ch;//这里必须是先赋值 后一轮处理这个符号
-            }
-        }
-    
-        while (!stack.isEmpty()) {
-            res += stack.pop();
-        }
-        return res;
-    }
+	
+	public int calculate(String s) {
+		int res = 0;
+		int num = 0;
+		char opt = '+'; //一开始赋值为+ 因为+的那叉和刚开始处理的逻辑一样 - 合并了
+		Stack<Integer> stack = new Stack<>();
+		for (int i = 0; i < s.length(); i++) {
+			char ch = s.charAt(i);
+			if (Character.isDigit(ch)) {
+				num = num * 10 + ch - '0';
+			}
+			//这里最后一次一定要进一次 不然处理不完
+			if ((!Character.isDigit(ch) && ch != ' ') || i == s.length() - 1) { // 是操作符，或者是最后一个数字的时候
+				if (opt == '+') {
+					stack.push(num);
+				} else if (opt == '-') {
+					stack.push(-num);
+				} else if (opt == '/') {
+					stack.push(stack.pop() / num);
+				} else if (opt == '*') {
+					stack.push(stack.pop() * num);
+				}
+				num = 0;
+				opt = ch;//这里必须是先赋值 后一轮处理这个符号
+			}
+		}
+		
+		while (!stack.isEmpty()) {
+			res += stack.pop();
+		}
+		return res;
+	}
 
 }
 
@@ -313,22 +310,22 @@ class Solution2_2 {
     public int calculate(String s) {
         int res = 0;
         int num = 0;
-        char opt = '+'; //一开始赋值为+ 因为+的那叉和刚开始处理的逻辑一样 - 合并了
+        char opt = '+'; //上一个符号，一开始赋值为+ 因为+的那叉和刚开始处理的逻辑一样 - 合并了
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (Character.isDigit(c)) {
-                num = num * 10 + c - '0';//2
+            char ch = s.charAt(i);
+            if (Character.isDigit(ch)) {
+                num = num * 10 + ch - '0';
             }
             //这里最后一次一定要进一次 不然处理不完
-            if ((!Character.isDigit(c) && c != ' ') || i == s.length() - 1) {
+            if ((!Character.isDigit(ch) && ch != ' ') || i == s.length() - 1) {
                 if (opt == '+' || opt == '-') {
                     stack.push(operate(0, opt, num));
-                } else {
+                } else { // opt == '*' || opt == '/'
                     stack.push(operate(stack.pop(), opt, num));
                 }
                 num = 0;
-                opt = c;//这里必须是先赋值 后一轮处理这个符号
+                opt = ch;//这里必须是先赋值 后一轮处理这个符号
             }
         }
         
@@ -338,12 +335,12 @@ class Solution2_2 {
         return res;
     }
     
-    private int operate(int i1, char c, int i2) {
+    private int operate(int prevNum, char c, int thisNum) {
         switch (c) {
-            case '+': return i1 + i2;
-            case '-': return i1 - i2;
-            case '*': return i1 * i2;
-            case '/': return i1 / i2;
+            case '+': return prevNum + thisNum;
+            case '-': return prevNum - thisNum;
+            case '*': return prevNum * thisNum;
+            case '/': return prevNum / thisNum;
         }
         return 0;
     }

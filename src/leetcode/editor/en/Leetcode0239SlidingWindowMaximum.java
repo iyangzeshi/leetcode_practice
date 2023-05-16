@@ -50,62 +50,71 @@ public class Leetcode0239SlidingWindowMaximum{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+// Solution 2: dynamic programming, T(n) = O(n), S(n) = O(n)
+/*
+public int[] maxSlidingWindow(int[] nums, int k)
+将array分割，每k个一组，最后一组可以少于k个。
+建立left数组和right数组
+left[i]表示从i所在的组的头一个位置到当前i位置的最大值，
+right[i]同理
+窗口中的最大值为max(right[i], left[j])
+ */
 class Solution {
-    
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        // corner case
-        int len = nums.length;
-        if (len * k == 0) {
-            return new int[0];
-        }
-        if (k == 1) {
-            return nums;
-        }
-        
-        // general case
-        int[] left = new int[len];
-        left[0] = nums[0];
-        int[] right = new int[len];
-        right[len - 1] = nums[len - 1];
-        for (int i = 1; i < len; i++) {
-            // to get left array
-            if (i % k == 0) {
-                left[i] = nums[i];
-            }
-            else {
-                left[i] = Math.max(left[i - 1], nums[i]);
-            }
-            
-            // to get right array
-            int j = len - 1 - i;
-            if ((j + 1) % k == 0) {
-                right[j] = nums[j];
-            }
-            else {
-                right[j] = Math.max(right[j + 1], nums[j]);
-            }
-        }
-        
-        int[] res = new int[len - k + 1];
-        for (int i = 0; i < len - k + 1; i++) {
-            res[i] = Math.max(left[i + k - 1], right[i]);
-        }
-        return res;
-    }
+	
+	public int[] maxSlidingWindow(int[] nums, int k) {
+		// corner case
+		int len = nums.length;
+		if (len * k == 0) {
+			return new int[0];
+		}
+		if (k == 1) {
+			return nums;
+		}
+		
+		// general case
+		int[] left = new int[len];
+		left[0] = nums[0];
+		int[] right = new int[len];
+		right[len - 1] = nums[len - 1];
+		for (int i = 1; i < len; i++) {
+			// to get left array
+			if (i % k == 0) {
+				left[i] = nums[i];
+			} else {
+				left[i] = Math.max(left[i - 1], nums[i]);
+			}
+			
+			// to get right array
+			int j = len - 1 - i;
+			if ((j + 1) % k == 0) {
+				right[j] = nums[j];
+			} else {
+				right[j] = Math.max(right[j + 1], nums[j]);
+			}
+		}
+		
+		int[] res = new int[len - k + 1];
+		for (int i = 0; i < len - k + 1; i++) {
+			res[i] = Math.max(left[i + k - 1], right[i]);
+		}
+		
+		return res;
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-// Solution 1:  deque里面存非递增序列, T(n) = O(n), S(n) = O(k)
+// Solution 1:  deque里面存non-increasing序列, T(n) = O(n), S(n) = O(k)
 // 29 ms,击败了61.48% 的Java用户, 54 MB,击败了48.61% 的Java用户
 //
 /*
 直觉
-如何优化时间复杂度呢？首先想到的是使用堆，因为在最大堆中 heap[0] 永远是最大的元素。
+如何优化时间复杂度呢？首先想到的是使用BST，因为在最大堆中 heap[0]永远是最大的元素。
 在大小为 k 的堆中插入一个元素消耗 log(k) 时间，因此算法的时间复杂度为 O(n * log(k))。
 能否得到只要 O(size) 的算法？
 我们可以使用双向队列，该数据结构可以从两端以常数时间压入/弹出元素。
 存储双向队列的索引比存储元素更方便，因为两者都能在数组解析中使用。
 算法
+deque中的第1个元素永远是sliding window里面的最大值，deque中的值表示现在及接下来之后的sliding window里面的可能值
 处理前 k 个元素，初始化双向队列。
 遍历整个数组。在每一步 :
 清理双向队列 :
@@ -130,14 +139,9 @@ class Solution1 {
         // general case
         Deque<Integer> deque = new ArrayDeque<>(); // to store the value instead of index
         int[] res = new int [len - k + 1];
-        
+		
         // initialization
         for(int i = 0; i < k; i++) {
-            if (deque.isEmpty()) {
-                deque.offer(nums[i]);
-                continue;
-            }
-
             while (!deque.isEmpty() && deque.peekLast() < nums[i]) {
                 deque.pollLast();
             }
@@ -163,53 +167,51 @@ class Solution1 {
 // 9 ms,击败了98.05% 的Java用户, 53.3 MB,击败了71.71% 的Java用户
 /*
 public int[] maxSlidingWindow(int[] nums, int k)
-将array风格，每k个一组，最后一组可以少于k个。
+将array分割，每k个一组，最后一组可以少于k个。
 建立left数组和right数组
 left[i]表示从i所在的组的头一个位置到当前i位置的最大值，
 right[i]同理
 窗口中的最大值为max(right[i], left[j])
  */
 class Solution2 {
-
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        // corner case
-        int len = nums.length;
-        if (len * k == 0) {
-            return new int[0];
-        }
-        if (k == 1) {
-            return nums;
-        }
-
-        // general case
-        int[] left = new int[len];
-        left[0] = nums[0];
-        int[] right = new int[len];
-        right[len - 1] = nums[len - 1];
-        for (int i = 1; i < len; i++) {
-            // to get left array
-            if (i % k == 0) {
-                left[i] = nums[i];
-            }
-            else {
-                left[i] = Math.max(left[i - 1], nums[i]);
-            }
-
-            // to get right array
-            int j = len - 1 - i;
-            if ((j + 1) % k == 0) {
-                right[j] = nums[j];
-            }
-            else {
-                right[j] = Math.max(right[j + 1], nums[j]);
-            }
-        }
-
-        int[] res = new int[len - k + 1];
-        for (int i = 0; i < len - k + 1; i++) {
-            res[i] = Math.max(left[i + k - 1], right[i]);
-        }
-        return res;
-    }
+	
+	public int[] maxSlidingWindow(int[] nums, int k) {
+		// corner case
+		int len = nums.length;
+		if (len * k == 0) {
+			return new int[0];
+		}
+		if (k == 1) {
+			return nums;
+		}
+		
+		// general case
+		int[] left = new int[len];
+		left[0] = nums[0];
+		int[] right = new int[len];
+		right[len - 1] = nums[len - 1];
+		for (int i = 1; i < len; i++) {
+			// to get left array
+			if (i % k == 0) {
+				left[i] = nums[i];
+			} else {
+				left[i] = Math.max(left[i - 1], nums[i]);
+			}
+			
+			// to get right array
+			int j = len - 1 - i;
+			if ((j + 1) % k == 0) {
+				right[j] = nums[j];
+			} else {
+				right[j] = Math.max(right[j + 1], nums[j]);
+			}
+		}
+		
+		int[] res = new int[len - k + 1];
+		for (int i = 0; i < len - k + 1; i++) {
+			res[i] = Math.max(left[i + k - 1], right[i]);
+		}
+		return res;
+	}
 }
 }

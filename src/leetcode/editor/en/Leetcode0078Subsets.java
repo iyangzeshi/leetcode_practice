@@ -109,7 +109,7 @@ class Solution1 {
         ArrayList<Integer> temp = new ArrayList<>();
         int size;
         numberQueue.offer(new ArrayList<>(temp));
-        indexQueue.offer(new ArrayList<>() {{
+        indexQueue.offer(new ArrayList<Integer>() {{
                              add(-1);
                          }}
         );

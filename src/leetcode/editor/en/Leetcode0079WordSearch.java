@@ -70,7 +70,7 @@ class Solution {
 		boolean[][] visited = new boolean[rows][cols];
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
-				if (dfs(0, i, j, word, board)) {
+				if (dfs(0, i, j, word, board, visited)) {
 					return true;
 				}
 			}
@@ -78,7 +78,8 @@ class Solution {
 		return false;
 	}
 	
-	private boolean dfs(int idx, int row, int col, String word, char[][] matrix) {
+	private boolean dfs(int idx, int row, int col, String word, char[][] matrix,
+		boolean[][] visited) {
 		int rows = matrix.length;
 		int cols = matrix[0].length;
 		int len = word.length();
@@ -87,21 +88,23 @@ class Solution {
 			return true;
 		}
 		// base case - failure case
-		if (row < 0 || row >= rows || col < 0 || col >= cols
-				|| word.charAt(idx) != matrix[row][col]) {
+		if (row < 0 || row >= rows || col < 0 || col >= cols || word.charAt(idx) != matrix[row][col]
+			|| visited[row][col]) {
 			return false;
 		}
-		matrix[row][col] ^= 0x1FF;
+		visited[row][col] = true;
+		
 		boolean res = false;
 		for (int[] dir : DIRECTIONS) {
 			int i = row + dir[0];
 			int j = col + dir[1];
-			res = dfs(idx + 1, i, j, word, matrix);
+			res = dfs(idx + 1, i, j, word, matrix, visited);
 			if (res) {
 				break;
 			}
 		}
-		matrix[row][col] ^= 0x1FF;
+		
+		visited[row][col] = false;
 		return res;
 	}
 	
@@ -167,15 +170,19 @@ class Solution1 {
 // 41 ms,击败了69.64% 的Java用户, 36.8 MB,击败了92.12% 的Java用户
 class Solution2 {
 	
+	private final int[][] DIRECTIONS = new int[][]{{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
+	
 	public boolean exist(char[][] board, String word) {
-		if (board == null || board.length == 0 || board[0].length == 0) {
+		// corner case
+		if (board == null || board.length == 0 || board[0] == null || board[0].length == 0) {
 			return false;
 		}
-		
-		char[] chars = word.toCharArray();
-		for (int x = 0; x < board.length; x++) {
-			for (int y = 0; y < board[x].length; y++) {
-				if (dfs(board, x, y, chars, 0)) {
+		int rows = board.length;
+		int cols = board[0].length;
+		boolean[][] visited = new boolean[rows][cols];
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				if (dfs(0, i, j, word, board)) {
 					return true;
 				}
 			}
@@ -183,24 +190,31 @@ class Solution2 {
 		return false;
 	}
 	
-	private boolean dfs(char[][] board, int x, int y, char[] chars, int i) {
-		if (i == chars.length) {
+	private boolean dfs(int idx, int row, int col, String word, char[][] matrix) {
+		int rows = matrix.length;
+		int cols = matrix[0].length;
+		int len = word.length();
+		// base case - success case
+		if (idx == len) {
 			return true;
 		}
-		if (x < 0 || y < 0 || x == board.length || y == board[x].length) {
+		// base case - failure case
+		if (row < 0 || row >= rows || col < 0 || col >= cols
+			|| word.charAt(idx) != matrix[row][col]) {
 			return false;
 		}
-		if (board[x][y] != chars[i]) {
-			return false;
+		matrix[row][col] ^= 0x1FF; // mark this location no longer accessible
+		boolean res = false;
+		for (int[] dir : DIRECTIONS) {
+			int i = row + dir[0];
+			int j = col + dir[1];
+			res = dfs(idx + 1, i, j, word, matrix);
+			if (res) {
+				break;
+			}
 		}
-		
-		board[x][y] ^= 0b1_0000_0000;// 256;// 1_0000_0000
-		boolean exist = dfs(board, x + 1, y, chars, i + 1) ||
-				dfs(board, x, y + 1, chars, i + 1) ||
-				dfs(board, x - 1, y, chars, i + 1) ||
-				dfs(board, x, y - 1, chars, i + 1);
-		board[x][y] ^= 256;
-		return exist;
+		matrix[row][col] ^= 0x1FF; // restore this location char
+		return res;
 	}
 	
 }

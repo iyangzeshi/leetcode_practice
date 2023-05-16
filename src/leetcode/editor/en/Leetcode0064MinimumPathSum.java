@@ -31,6 +31,7 @@ public class Leetcode0064MinimumPathSum{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+// T(m, n) = O(m, n), S(m,n) = O(m, n)
 class Solution {
     public int minPathSum(int[][] grid) {
         int rows = grid.length;

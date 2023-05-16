@@ -113,8 +113,14 @@ class Solution1 {
             dpRobLast[i] = nums[i] + Math.max(dpRobLast[i + 2], dpRobLast[i + 3]);
             dpNotRobLast[i] = nums[i] + Math.max(dpNotRobLast[i + 2], dpNotRobLast[i + 3]);
         }
-        return Math.max(Math.max(dpNotRobLast[0], dpNotRobLast[1]), Math.max(dpRobLast[1],
-                dpRobLast[2]));
+        return Math.max(
+			Math.max(dpNotRobLast[0],
+				dpNotRobLast[1]
+			),
+	        Math.max(dpRobLast[1],
+		        dpRobLast[2]
+	        )
+        );
     }
 }
 

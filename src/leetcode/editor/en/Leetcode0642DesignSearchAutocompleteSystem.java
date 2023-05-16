@@ -400,7 +400,7 @@ class AutocompleteSystem2_1 {
         }
         
         public List<String> getTop3() {
-            candidates.sort(new Comparator<>() {
+            candidates.sort(new Comparator<String>() {
                 @Override
                 public int compare(String o1, String o2) {
                     if (!countMap.get(o1).equals(countMap.get(o2))) {
@@ -533,7 +533,7 @@ class AutocompleteSystem2_2 {
         }
         
         public List<String> getTop3() {
-            candidates.sort(new Comparator<>() {
+            candidates.sort(new Comparator<String>() {
                 @Override
                 public int compare(String o1, String o2) {
                     if (!countMap.get(o1).equals(countMap.get(o2))) {
@@ -656,7 +656,7 @@ class AutocompleteSystem2_3 {
             }
             
             public List<String> getTop3() {
-                candidates.sort(new Comparator<>() {
+                candidates.sort(new Comparator<String>() {
                     @Override
                     public int compare(String o1, String o2) {
                         if (!countMap.get(o1).equals(countMap.get(o2))) {

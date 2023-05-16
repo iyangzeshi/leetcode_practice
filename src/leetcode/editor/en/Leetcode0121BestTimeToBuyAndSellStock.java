@@ -53,7 +53,6 @@ class Solution {
         }
         
         // general case
-        int len = prices.length;
         int minPrice = prices[0];
         int maxProfit = 0;
         for (int price : prices) {
@@ -107,7 +106,6 @@ class Solution1_2 {
         }
         
         // general case
-        int len = prices.length;
         int buy = prices[0];// buy means the lowest price from start to i(including)
         int profit = 0;
         for (int price : prices) {
@@ -132,7 +130,6 @@ class Solution2 {
         }
         
         // general case
-        int len = prices.length;
         int minPrice = prices[0];
         int maxProfit = 0;
         for (int price : prices) {

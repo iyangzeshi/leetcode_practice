@@ -90,8 +90,8 @@ class Solution {
 /*下面所有的Solution的思路都是这个
 思路：
 设置dp[i][j]为word1[0 ~ i] 和 word2[0 ~ j]匹配的最小cost
-如果word[i] == word[j]， 那dp[i][j] = dp[i - 1][j - 1]
-否则dp[i][j] = min{dp[i- 1][j - 1], d[i - 1][j], dp[i][j - 1]};
+如果word1[i] == word2[j]， 那dp[i][j] = dp[i - 1][j - 1]
+否则dp[i][j] = min{dp[i- 1][j - 1], d[i - 1][j], dp[i][j - 1]} + 1;
  */
 // Solution 1_1: DFS, T(m,n) = O(2^m * 2^n), S(m,n) = O(m * n)
 class Solution1_1 {
@@ -224,10 +224,14 @@ class Solution2 {
             for (int j = 1; j <= len2; j++) {
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1];
-                }
-                else {
-                    dp[i][j] = 1 + Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j],
-                            dp[i][j - 1]));
+                } else {
+                    dp[i][j] = 1 + Math.min(
+						dp[i - 1][j - 1],
+	                    Math.min(
+							dp[i - 1][j],
+		                    dp[i][j - 1]
+	                    )
+                    );
                 }
             }
         }

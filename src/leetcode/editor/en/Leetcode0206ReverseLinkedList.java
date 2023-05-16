@@ -25,8 +25,12 @@ public class Leetcode0206ReverseLinkedList{
     public static void main(String[] args) {
         Solution sol = new Leetcode0206ReverseLinkedList().new Solution();
         // TO TEST
-        
-        System.out.println();
+	    ListNode head = new ListNode(1, new ListNode(2, new ListNode(3)));
+	    ListNode res = sol.reverseList(head);
+		while(res != null) {
+			System.out.println(res.toString());
+		}
+    
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -39,17 +43,19 @@ public class Leetcode0206ReverseLinkedList{
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-// Solution 3: head recursion
+// Solution 2_2: head recursion
 class Solution {
-    public ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode tail = reverseList(head.next);
-        head.next.next = head;
-        head.next = null;
-        return tail;
-    }
+	
+	public ListNode reverseList(ListNode head) {
+		if (head == null || head.next == null) {
+			return head;
+		}
+		ListNode tail = reverseList(head.next);
+		head.next.next = head;
+		head.next = null;
+		return tail;
+	}
+	
 }
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: iteration loop

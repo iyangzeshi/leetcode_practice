@@ -54,7 +54,7 @@ class Solution {
 			return res;
 		}
 		res.add("");
-		Map<Character, String> phone = new HashMap<>() {{
+		Map<Character, String> phone = new HashMap<Character, String>() {{
 			put('2', "abc");
 			put('3', "def");
 			put('4', "ghi");

@@ -120,21 +120,20 @@ class Solution1_1 {
 
     public boolean wordBreak(String s, List<String> wordDict) {
         Set<String> dict = new HashSet<>(wordDict);
-        Boolean[] memo = new Boolean[s.length()];
         return dfs(s, 0, 0, dict);
     }
 
-    private boolean dfs(String s, int start, int end, Set<String> dict) {
+    private boolean dfs(String s, int start, int cur, Set<String> dict) {
         // base case, success case
-        if (end == s.length()) {
-            return start == end;
+        if (cur == s.length()) {
+            return start == cur;
         }
         // general case
         boolean res1 = false;
-        if (dict.contains(s.substring(start, end + 1))) {
-            res1 = dfs(s, end + 1, end + 1, dict);
+        if (dict.contains(s.substring(start, cur + 1))) { // 从start 到当前这个点切
+            res1 = dfs(s, cur + 1, cur + 1, dict);
         }
-        boolean res2 = dfs(s, start, end + 1, dict);
+        boolean res2 = dfs(s, start, cur + 1, dict); // 从start 到当前这个点不要切
         return res1 || res2;
 
     }
@@ -146,7 +145,7 @@ class Solution1_1 {
 // 5 ms,击败了75.27% 的Java用户, 39.4 MB,击败了28.27% 的Java用户
 /*
 每个点有2种可能，切或者不切
-有n个地方可以选择且或者不切，但是memo被pruning了，所以最长branch是n，
+有n个地方可以选择切或者不切，但是memo被pruning了，所以最长branch是n，
 相当于每个string[i, j]都检测了一下能不能被word break, 所以dfs的size是n^2
 每个地方切的时候，本身的复杂度substring()的复杂度是O(n)
 把k个word放到HashSet里面，时间复杂度是O(k)
@@ -170,14 +169,14 @@ class Solution1_2 {
         }
         // general case
         boolean res1 = false;
-        if (dict.contains(s.substring(start, cur + 1))) { // 从start 到当前这个点不切
+        if (dict.contains(s.substring(start, cur + 1))) { // 从start 到当前这个点切
             res1 = dfs(s, cur + 1, cur + 1, dict, memo);
             if (res1) { // 这条分支走得通，就走这条，不用走其他分支了
                 memo[start] = true;
                 return true;
             }
         }
-        boolean res2 = dfs(s, start, cur + 1, dict, memo); // 从start 到当前这个点要切
+        boolean res2 = dfs(s, start, cur + 1, dict, memo); // 从start 到当前这个点不要切
         memo[start] = res2; // 填表
         return memo[start];
     }

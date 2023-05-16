@@ -124,6 +124,15 @@ public class Solution1 {
 
 // Solution 2: slow and fast pointer, T(n) = O(n), S(n) = O(1)
 // 0 ms,击败了100.00% 的Java用户，39 MB,击败了67.12% 的Java用户
+/*
+从起点开始slow每次走一步，fast每次走两步，他们一定会
+设起点到cycle的起点长度为A
+cycle的周长为B
+cycle的起点到相遇点长度为x
+则 2*(A + x) = A + B + x,
+推出 A + x = B
+
+ */
 public class Solution2 {
     
     public ListNode detectCycle(ListNode head) {

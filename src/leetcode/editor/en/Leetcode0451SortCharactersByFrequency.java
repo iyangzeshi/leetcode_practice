@@ -113,7 +113,7 @@ class Solution1 {
             charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
         }
         List<Character> listS = new ArrayList<>(charCount.keySet());
-        listS.sort(new Comparator<>() {
+        listS.sort(new Comparator<Character>() {
             @Override
             public int compare(Character o1, Character o2) {
                 if (!charCount.get(o1).equals(charCount.get(o2))) {
