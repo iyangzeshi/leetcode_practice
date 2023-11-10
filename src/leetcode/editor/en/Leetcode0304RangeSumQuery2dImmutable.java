@@ -47,21 +47,30 @@ public class Leetcode0304RangeSumQuery2dImmutable{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class NumMatrix {
-    private int[][] dp;
-
+    
+    private int[][] sums;
+    
     public NumMatrix(int[][] matrix) {
-        if (matrix.length == 0 || matrix[0].length == 0) return;
-        dp = new int[matrix.length + 1][matrix[0].length + 1];
-        for (int r = 0; r < matrix.length; r++) {
-            for (int c = 0; c < matrix[0].length; c++) {
-                dp[r + 1][c + 1] = dp[r + 1][c] + dp[r][c + 1] + matrix[r][c] - dp[r][c];
+        if (matrix.length == 0 || matrix[0].length == 0) {
+            return;
+        }
+        int rows = matrix.length;;
+        int cols = matrix[0].length; // column
+        
+        // sum[i][j] from matrix[0, 0] to matrix[i - 1][j -  1] inclusively
+        sums = new int[rows + 1][cols + 1];
+        
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                sums[r + 1][c + 1] = sums[r + 1][c] + sums[r][c + 1] + matrix[r][c] - sums[r][c];
             }
         }
     }
-
+    
     public int sumRegion(int row1, int col1, int row2, int col2) {
-        return dp[row2 + 1][col2 + 1] - dp[row1][col2 + 1] - dp[row2 + 1][col1] + dp[row1][col1];
+        return sums[row2 + 1][col2 + 1] - sums[row1][col2 + 1] - sums[row2 + 1][col1] + sums[row1][col1];
     }
+    
 }
 
 /*

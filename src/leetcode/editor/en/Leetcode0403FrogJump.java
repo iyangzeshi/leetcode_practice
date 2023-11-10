@@ -46,6 +46,7 @@
 package leetcode.editor.en;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @ClassName: Leetcode403FrogJump
@@ -60,71 +61,78 @@ public class Leetcode0403FrogJump {
 		
 		Solution sol = new Leetcode0403FrogJump().new Solution();
 		// TO TEST
-		int[] stones = new int[]{0, 1, 3, 4, 5, 7, 9, 10, 12};
+		int[] stones = new int[]{0,1,2,3,4,8,9,11};
 		boolean res = sol.canCross(stones);
 		System.out.println(res);
 	}
 	
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    
-    // DFS with pruning
-    public boolean canCross(int[] stones) {
-        
-        if (stones == null || stones.length <= 1) {
-            return false;
-        }
-        if (stones[1] - stones[0] != 1) {
-            return false;
-        }
-        HashMap<Integer, Boolean>[] mem = new HashMap[stones.length];
-        for (int i = 0; i < stones.length; i++) {
-            mem[i] = new HashMap<>();
-        }
-        
-        return dfs(stones, 1, 1, mem);
-    }
-    
-    private boolean dfs(int[] stones, int idx, int k, HashMap<Integer, Boolean>[] mem) {
-        
-        HashMap<Integer, Boolean> map = mem[idx];
-        // lookup form
-        if (map.containsKey(k)) {
-            return map.get(k);
-        }
-        
-        int len = stones.length;
-        
-        // base case
-        if (idx == len - 1) {
-            return true;
-        }
-        if (idx > len - 1) {
-            return false;
-        }
-        
-        for (int i = idx + 1; i < len; i++) {
-            int dis = stones[i] - stones[idx];
-            if (dis < k - 1) {
-                continue;
-            }
-            if (dis > k + 1) {
-                break;
-            }
-            if (dfs(stones, i, dis, mem)) {
-                map.put(k, true);
-                return true;
-            }
-        }
-        map.put(k, false);
-        return false;
-    }
+	public boolean canCross(int[] stones) {
+		// corner case
+		if (stones == null || stones.length == 0) {
+			return false;
+		}
+		if (stones[1] - stones[0] != 1) {
+			return false;
+		}
+		
+		Map<Integer, Boolean> memo[] = new HashMap[stones.length];
+		for (int i = 0; i < stones.length; i++) {
+			memo[i] = new HashMap<Integer, Boolean>();
+		}
+		
+		return dfs(1, 1, stones, memo);
+	}
+	
+	private boolean dfs(int index, int step, int[] stones, Map<Integer, Boolean>[] memo) {
+		int len = stones.length;
+		if (index >= stones.length) {
+			return false;
+		}
+		Map<Integer, Boolean> map = memo[index];
+		// base case
+		if (map.containsKey(step)) {
+			return map.get(step);
+		}
+		
+		if (index == len - 1) {
+			return true;
+		}
+		
+		/*for (int i = step - 1; (i > 0) && (i <= step + 1); i++) {
+			if (dfs(index + i, i, stones, memo)) {
+				map.put(step, true);
+				return true;
+			}
+		}*/
+		for (int i = index + 1; i < len; i++) {
+			int newStep = stones[i] - stones[index];
+			if (newStep < step - 1) {
+				continue;
+			}
+			if (newStep > step + 1) {
+				break;
+			}
+			if (dfs(i, stones[i] - stones[index], stones, memo)) {
+				map.put(step, true);
+				return true;
+			}
+		}
+		map.put(step, false);
+		return false;
+	}
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
+// DFS, Time Limit Exceeded
+// T(n) = O(2^n), S(n) = O(n)
+/*
+This is a tree problem. Building the search tree from left to right
+Every time frog reaching to a position, he can choose 3 positions for the next step.
+ */
 class Solution1_1 {
-    
-    // DFS, Time Limit Exceeded
+		
     public boolean canCross(int[] stones) {
         
         if (stones == null || stones.length <= 1) {
@@ -172,6 +180,14 @@ class Solution1_1 {
     }
 }
 
+// DFS with pruning, time complexity T(n) = O(nk), S(n) = O(n)
+/*
+This is a tree problem. Building the search tree from left to right
+Using a DFS search tree to solve the problem, every time when frog jump to the position,
+there are 2 status (position, and step).
+Creating a HashMap<Length, Boolean> map [river.length] to record when it can cross the river.
+
+ */
 class Solution1_2 {
     
     // DFS with pruning, time complexity: O(nk)
@@ -190,7 +206,14 @@ class Solution1_2 {
         
         return dfs(stones, 1, 1, mem);
     }
-    
+	
+	/**
+	 * @param stones
+	 * @param idx
+	 * @param k: reaching to stones[idx] with step k
+	 * @param mem: HashMap array, contains stone index and steps reaching to this stone[index]
+	 * @return: true or false
+	 */
     private boolean dfs(int[] stones, int idx, int k, HashMap<Integer, Boolean>[] mem) {
         
         HashMap<Integer, Boolean> map = mem[idx];

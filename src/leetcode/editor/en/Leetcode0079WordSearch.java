@@ -56,6 +56,7 @@ public class Leetcode0079WordSearch {
 	}
 	
 //leetcode submit region begin(Prohibit modification and deletion)
+// DFS, T(m,n) = O(m * n * 3^o), S(m,n) = O(m*n), o is the length of the word
 class Solution {
 	
 	private final int[][] DIRECTIONS = new int[][]{{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
@@ -110,7 +111,7 @@ class Solution {
 	
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: DFS, T(m,n) = O(m * n), S(m,n) = O(m*n)
+// Solution 1: DFS, T(m,n) = O(m * n * 3^o), S(m,n) = O(m*n), o is the length of the word
 // 82 ms,击败了26.81% 的Java用户, 37 MB,击败了88.93% 的Java用户
 class Solution1 {
 	
@@ -166,7 +167,7 @@ class Solution1 {
 	
 }
 
-// Solution 2: DFS, 不用visited的写法, T(m,n) = O(m * n), S(m,n) = O(m*n)
+// Solution 2: DFS, 不用visited的写法, T(m,n) = O(m * n * 3^o), S(m,n) = O(m*n), o is the length of the word
 // 41 ms,击败了69.64% 的Java用户, 36.8 MB,击败了92.12% 的Java用户
 class Solution2 {
 	

@@ -16,3 +16,6 @@ gen
 
 *.json
 *.editorconfig
+
+# leetcode files
+/src/leetcode/editot/en/doc

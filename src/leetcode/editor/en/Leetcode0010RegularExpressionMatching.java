@@ -123,18 +123,18 @@ class Solution {
                 break;
             }
         }
-        for (int i = 1; i <= lenS; i++) { // i start from 0
+        for (int i = 1; i <= lenS; i++) { // i start from 1
             for (int j = 1; j <= lenP; j++) { // j start from 1
                 char ch = pChars[j - 1];
                 if ('a' <= ch && ch <= 'z') { // normal character
                     if (sChars[i - 1] == pChars[j - 1]) {
                         dp[i][j] = dp[i - 1][j - 1];
                     }
-                } else if (pChars[j - 1] == '.') { // is '.'
+                } else if (ch == '.') { // is '.'
                     dp[i][j] = dp[i - 1][j - 1];
                 } else { // ch == '*'
                     if (j > 1) {
-                        dp[i][j] |= dp[i][j - 2];   //不看
+                        dp[i][j] = dp[i][j - 2];   //不看
                     }
                     if (j > 1 && (sChars[i - 1] == pChars[j - 2] || pChars[j - 2] == '.')) {
                         dp[i][j] |= dp[i - 1][j];    //看
@@ -410,8 +410,8 @@ class Solution1_3 {
         } else { // case 2: "*"
             int i = idxS - 1; // the first match try is [empty, *] instead of [s[idx], *]
             // here we match the [], a, aa, aaa, aaa... in the String s
-            while (i < lenS && (i < idxS || p.charAt(idxP) == '.' || s.charAt(i) == p
-                    .charAt(idxP))) {
+            while (i < lenS && (i < idxS || p.charAt(idxP) == '.'
+	            || s.charAt(i) == p.charAt(idxP))) {
                 if (dfs(s, i + 1, p, idxP + 2, memo)) {
                     memo[idxS][idxP] = true; // fill in the form
                     return true;
@@ -475,10 +475,14 @@ class Solution2_1 {
                     dp[i][j] = dp[i - 1][j - 1];
                 } else { // ch == '*'
                     if (j > 1) {
-                        dp[i][j] |= dp[i][j - 2]; // * match 0 character
+                        dp[i][j] = dp[i][j - 2]; // * match 0 character
                     }
+					/*
+					String  s: abcde
+					Pattern p: abc.*
+					 */
                     if (j > 1 && (sChars[i - 1] == pChars[j - 2] || pChars[j - 2] == '.')) {
-                        // match 1 more character, this will repeat
+                        // match 1 more character in string S, this will repeat
                         dp[i][j] |= dp[i - 1][j];
                     }
                 }
