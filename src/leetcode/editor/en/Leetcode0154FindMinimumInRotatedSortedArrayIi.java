@@ -51,24 +51,29 @@ class Solution {
         if (nums == null || nums.length == 0) {
             return -1;
         }
+        if (nums.length == 1) {
+            return nums[0];
+        }
         
+        //edge case
         int left = 0;
         int right = nums.length - 1;
+        if (nums[left] < nums[right]) {
+            return nums[left];
+        }
+        
+        //general case
         while (left + 1 < right) {
             int mid = left + (right - left) / 2;
-            if (nums[left] == nums[mid] && nums[mid] == nums[right]) {
-                left++;
-            } else if (nums[left] <= nums[mid]) {
-                if (nums[mid] <= nums[right]) {
-                    return nums[left];
-                } else {
-                    left = mid;
-                }
-            } else {
+            if (nums[mid] < nums[right]) {
                 right = mid;
+            } else if (nums[mid] > nums[right]) {
+                left = mid;
+            } else {/*(nums[mid] == nums[right])*/
+                right--;
             }
         }
-        return Math.min(nums[left], nums[right]);
+        return Math.min(nums[right], nums[left]);
     }
     
 }
