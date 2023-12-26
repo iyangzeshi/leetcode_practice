@@ -39,6 +39,9 @@ public class Leetcode0215KthLargestElementInAnArray {
 	}
 
 //leetcode submit region begin(Prohibit modification and deletion)
+// T(n) = O(n) average, O(n^2) worst case
+// S(n) = O(1)
+// left, right pointer, relative position not stable
 class Solution {
     
     public int findKthLargest(int[] nums, int k) {

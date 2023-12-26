@@ -42,7 +42,7 @@ public class Leetcode0154FindMinimumInRotatedSortedArrayIi{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// T(n) = O(log(n)), S(n) = O(1)
+// Binary search: T(n) = O(log(n)), S(n) = O(1)
 // 0 ms,击败了100.00% 的Java用户,38.8 MB,击败了68.98% 的Java用户
 class Solution {
     

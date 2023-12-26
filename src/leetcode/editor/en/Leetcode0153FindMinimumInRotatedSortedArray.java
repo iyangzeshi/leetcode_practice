@@ -38,6 +38,12 @@ public class Leetcode0153FindMinimumInRotatedSortedArray {
 	}
 	
 //leetcode submit region begin(Prohibit modification and deletion)
+// binary search, T(n) = O(lgn), S(n) = O(1)
+// 设置数组中的最小值是minNum，在nums数组中找到minNum的位置。
+/*
+ sorted array:  min  increasing  max
+ rotated array: increasing max min increasing
+ */
 class Solution {
     
     public int findMin(int[] nums) {
@@ -59,7 +65,7 @@ class Solution {
         //normal case
         while (left + 1 < right) {
             int mid = left + (right - left) / 2;
-            if (nums[mid] < nums[left]) {
+            if (nums[left] > nums[mid]) {
                 right = mid;
             } else {
                 left = mid;

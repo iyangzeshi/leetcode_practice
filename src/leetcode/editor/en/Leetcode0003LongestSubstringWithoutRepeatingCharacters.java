@@ -67,7 +67,7 @@ public class Leetcode0003LongestSubstringWithoutRepeatingCharacters{
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         // corner case
-        if (s == null || s.length() == 0) {
+        if (s == null || s.isEmpty()) {
             return 0;
         }
         int len = s.length();
@@ -97,7 +97,7 @@ class Solution {
 class Solution1_1 {
     public int lengthOfLongestSubstring(String s) {
         // corner case
-        if (s == null || s.length() == 0) {
+        if (s == null || s.isEmpty()) {
             return 0;
         }
         int len = s.length();
@@ -131,7 +131,7 @@ class Solution1_1 {
 class Solution2 {
     public int lengthOfLongestSubstring(String s) {
         // corner case
-        if (s == null || s.length() == 0) {
+        if (s == null || s.isEmpty()) {
             return 0;
         }
         int len = s.length();
