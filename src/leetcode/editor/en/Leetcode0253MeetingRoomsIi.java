@@ -43,33 +43,47 @@ public class Leetcode0253MeetingRoomsIi {
 		// TO TEST
         int[][] intervals = {{0, 30},{5, 10},{15, 20}};
         List<String> res = sol.minMeetingRoomsAndItsIntervals(intervals);
-        System.out.println(res);
+        for (String str: res) {
+            System.out.println(str);
+        }
 	}
 
 //leetcode submit region begin(Prohibit modification and deletion)
+// Solution 1_3: count boundaries, 适用于[ )或者( ]的范围
+// 对point{time, ±1} 进行排序，放到List里面，start的话，存{time, +1}, end的话，存{time, -1}
+// T(n) = O(nlog(n)), S(n) = O(n)
 class Solution {
     
     public int minMeetingRooms(int[][] intervals) {
         // corner case
-        if (intervals.length == 0) {
+        if (intervals == null || intervals.length == 0 ||
+                intervals[0] == null || intervals[0].length == 0) {
             return 0;
         }
         
-        PriorityQueue<Integer> allocator = new PriorityQueue<>(intervals.length); // min heap
-        
-        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0])); // (a, b) -> a[0] - b[0]
-        for (int[] interval : intervals) {
-            if (!allocator.isEmpty() && interval[0] >= allocator.peek()) {
-                allocator.poll();
-            }
-            allocator.add(interval[1]);
+        List<int[]> list = new ArrayList<>();
+        for (int[] interval: intervals) {
+            int start = interval[0];
+            int end = interval[1];
+            list.add(new int[] {start, 1});
+            list.add(new int[] {end, -1});
         }
-        return allocator.size();
+        
+        list.sort((o1, o2) -> (o1[0] != o2[0] ? o1[0] - o2[0] : o1[1] - o2[1]));
+        
+        int max = 0;
+        int room = 0;
+        for (int[] time: list) {
+            room += time[1];
+            max = Math.max(max, room);
+        }
+        return max;
     }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-/*面试的时候，用Solution 1_2 */
+/*面试的时候，用Solution 1_3 */
 
 
 // Solution 1_1: interval打散成point进行排序，对左右的开闭区间没有要求，都可以改
@@ -125,7 +139,7 @@ class Solution1_1 {
 }
 
 // Solution 1_2: count boundaries, 适用于[ )或者( ]的范围
-// 对point进行排序，放到Map里面，start的话 + 1， end - 1
+// 对point进行排序，放到Map里面，start的话 + 1， end - 1, delta = start的number - end的number
 // T(n) = O(nlog(n)), S(n) = O(n)
 // 12 ms,击败了13.98% 的Java用户, 40.2 MB,击败了15.62% 的Java用户
 class Solution1_2 {
@@ -154,11 +168,43 @@ class Solution1_2 {
     
 }
 
+// Solution 1_3: count boundaries, 适用于[ )或者( ]的范围
+// 对point{time, ±1} 进行排序，放到List里面，start的话，存{time, +1}, end的话，存{time, -1}
+// T(n) = O(nlog(n)), S(n) = O(n)
+class Solution1_3 {
+    
+    public int minMeetingRooms(int[][] intervals) {
+        // corner case
+        if (intervals == null || intervals.length == 0 ||
+                intervals[0] == null || intervals[0].length == 0) {
+            return 0;
+        }
+        
+        List<int[]> list = new ArrayList<>();
+        for (int[] interval: intervals) {
+            int start = interval[0];
+            int end = interval[1];
+            list.add(new int[] {start, 1});
+            list.add(new int[] {end, -1});
+        }
+        
+        list.sort((o1, o2) -> (o1[0] != o2[0] ? o1[0] - o2[0] : o1[1] - o2[1]));
+        
+        int max = 0;
+        int room = 0;
+        for (int[] time: list) {
+            room += time[1];
+            max = Math.max(max, room);
+        }
+        return max;
+    }
+    
+}
 
 // Solution 2: heap, 把interval按照start time的升序排序
 // T(n) = O(nlog(n)), S(n) = O(n)
 
-// Solution 2_1, 对左右的开闭区间没有要求，都可以改
+// Solution 2_1, 对左右的开闭区间没有要求，都可以改 T(n) = O(nlog(n)), S(n) = O(n)
 // 消耗资源： 6 ms,击败了74.49% 的Java用户，39 MB,击败了41.59% 的Java用户
 /**
  * 设置一个minHeap，里面放Interval，按照start time升序排序，表示我们用到的房间
@@ -190,14 +236,14 @@ class Solution2_1 {
 }
 
 
-// Solution 2_2, 对左右的开闭区间没有要求，都可以改
+// Solution 2_2, 对左右的开闭区间没有要求，都可以改 T(n) = O(nlog(n)), S(n) = O(n)
 // 消耗资源： 7 ms,击败了38.84% 的Java用户, 38.9 MB,击败了50.87% 的Java用户
 /**
  * 把interval按照start time的升序排序遍历，
  * 每次遇到新的interval开始的时候，检测当前interval之前最早结束interval分配的房间的会议是不是已经结束了
  *      如果会议已经结束的话，空出这个房间，再继续检测下一个房间的会议是不是结束了,一直往后腾空房间
  *      没有空出来的话，就加个房间。
- *  房间数只会增加，不会减小，所以只要return最后的房间数就行了。
+ *  在这中间统计房间最多需要的数字
  */
 class Solution2_2 {
     
@@ -385,11 +431,12 @@ class FollowupSolution2 {
          */
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(id).append(": ");
+            sb.append("room ").append(id).append(": ");
             for (int[] interval : holdIntervals) {
                 sb.append(Arrays.toString(interval)).append(", ");
             }
             sb.setLength(sb.length() - 2);
+            sb.append(";");
             return sb.toString();
         }
         

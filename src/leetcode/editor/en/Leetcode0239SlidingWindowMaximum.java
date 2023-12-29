@@ -56,8 +56,8 @@ public int[] maxSlidingWindow(int[] nums, int k)
 将array分割，每k个一组，最后一组可以少于k个。
 建立left数组和right数组
 left[i]表示从i所在的组的头一个位置到当前i位置的最大值，
-right[i]同理
-窗口中的最大值为max(right[i], left[j])
+right[i]表示从i所在的组的最后一个位置往左边到当前i位置的最大值
+窗口中的最大值为max(right[i], left[j]) (i为窗口中最左边，j为窗口中最右边)
  */
 class Solution {
 	
@@ -109,7 +109,7 @@ class Solution {
 /*
 直觉
 如何优化时间复杂度呢？首先想到的是使用BST，因为在最大堆中 heap[0]永远是最大的元素。
-在大小为 k 的堆中插入一个元素消耗 log(k) 时间，因此算法的时间复杂度为 O(n * log(k))。
+在大小为 k 的堆中插入/删除一个元素消耗 log(k) 时间，因此算法的时间复杂度为 O(n * log(k))。
 能否得到只要 O(size) 的算法？
 我们可以使用双向队列，该数据结构可以从两端以常数时间压入/弹出元素。
 存储双向队列的索引比存储元素更方便，因为两者都能在数组解析中使用。

@@ -73,6 +73,9 @@ class Solution {
         if (s == null || s.length() == 0) {
             return "";
         }
+		
+		int[] nums = new int[100];
+		
         Stack<Integer> stack = new Stack<>(); // to store the index of parentheses
         Set<Integer> removeCandidates = new HashSet<>();
         for(int i = 0; i < s.length(); i++) {
