@@ -50,7 +50,8 @@ public class Leetcode0523ContinuousSubarraySum{
         boolean res = sol.checkSubarraySum(nums, k);
         System.out.println(res);
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
+//leetcode submit region begin(Prohibit modification and deletion)
+
 class Solution {
     public boolean checkSubarraySum(int[] nums, int k) {
         if (nums == null || nums.length == 0) {
@@ -62,7 +63,8 @@ class Solution {
         int cumSumRemainder = 0;
         Map<Integer, Integer> remainderToIndex = new HashMap<>();
         remainderToIndex.put(0, -1);
-        for (int i = 0, numsLength = nums.length; i < numsLength; i++) {
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
             int num = nums[i];
             cumSumRemainder += num;
             if (k != 0) {

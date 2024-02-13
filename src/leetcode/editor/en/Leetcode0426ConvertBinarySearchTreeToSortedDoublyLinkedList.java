@@ -153,7 +153,10 @@ class Solution2 {
     
     private void inorder(Node root) {
         /*
-         先找出base case，然后顺序是1. inorder left； 3. inorder right， 然后在2里面写东西就好了
+         先找出base case，然后顺序是
+         1. inorder left
+         2. 连接node
+         3. inorder right
          */
         // base case
         if (root == null) {

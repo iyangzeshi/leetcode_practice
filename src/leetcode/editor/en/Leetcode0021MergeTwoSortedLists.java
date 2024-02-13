@@ -24,7 +24,7 @@ public class Leetcode0021MergeTwoSortedLists{
         
         System.out.println();
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
+//leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -35,6 +35,7 @@ public class Leetcode0021MergeTwoSortedLists{
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+// T(n) = O(n), S(n) = O(1), 2 pointers go further next by next
 class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         // S1: iteration

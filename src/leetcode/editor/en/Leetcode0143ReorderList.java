@@ -44,7 +44,7 @@ public class Leetcode0143ReorderList{
  */
 /*
 思路：
-找到原来list的中点，吧前面一半和后面一半断开，后面一半reverse，再和前面一半交替merge就得到结果了
+找到原来list的中点，把前面一半和后面一半断开，后面一半reverse，再和前面一半交替merge就得到结果了
 
 推理思路：
 从       1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null

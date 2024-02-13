@@ -45,6 +45,22 @@ public class Leetcode0772BasicCalculatorIii {
 	}
 
 //leetcode submit region begin(Prohibit modification and deletion)
+// Solution 2: 2 stacks, integrate the operator operation, T(n) = O(n), S(n) = O(n)
+/*
+idea:
+2 stacks: operator + num;
+HashMap for operator priority
+
+steps:
+1. skip all blanks
+2. nums: combine digits to number and do stack push numbers / double linkedlist
+3. ( : push to operator stack
+4. ): push to numbers stack
+5. operator:
+    (1). deal with possible minus sign "-"
+    (2). do the calculation backwards until "("
+6. do calculation backwards until operator stack is empty
+ */
 class Solution {
     public int calculate(String s) {
         // corner case

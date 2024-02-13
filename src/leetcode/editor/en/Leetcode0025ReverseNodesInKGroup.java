@@ -107,7 +107,7 @@ class Solution {
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-// Solution 1: recursion. T(n) = O(n), S(n) = O(max(k, n/k)), 2 pass
+// Solution 1: 2 recursion. T(n) = O(n), S(n) = O(max(k, n/k)), 2 pass
 // 0 ms,击败了100.00% 的Java用户, 39.6 MB,击败了20.14% 的Java用户
 class Solution1 {
     
@@ -130,6 +130,9 @@ class Solution1 {
         return newHead;
     }
     
+    /*
+     using recursion to reverse the ListNode and return the newHead(original head becomes the end)
+     */
     private ListNode reverse(ListNode head) {
         if (head == null || head.next == null) {
             return head;
@@ -142,7 +145,7 @@ class Solution1 {
     
 }
 
-// Solution 2: iteration, T(n) = O(n), S(n) = O(1), 1 pass
+// Solution 2: 2 iteration, T(n) = O(n), S(n) = O(1), 1 pass
 // 0 ms,击败了100.00% 的Java用户, 39.1 MB,击败了68.16% 的Java用户
 // 2 pass
 class Solution2_1 {
@@ -162,10 +165,13 @@ class Solution2_1 {
                     return dummy.next;
                 }
             }
-            ListNode followingHead = tail.next; // next is first node of next k node or NULL
+            ListNode followingHead = tail.next; // next is first node of next k group node or NULL
+            
             tail.next = null; // 断开这段和下一段
             prevTail.next = null; // 断开上一段和这一段
+            
             prevTail.next = reverseList(head); // reverse这一段，并且和上一段连起来
+            
             head.next = followingHead; // 连接这一段和下一段
             prevTail = head; // 更新上一段
             tail = followingHead;// 更新这段的tail
@@ -174,6 +180,7 @@ class Solution2_1 {
         return dummy.next;
     }
     
+    // using iteration reverse the ListNode and return the newHead (original head becomes the end)
     private ListNode reverseList(ListNode head) {
         // corner case
         if (head == null || head.next == null) {
@@ -218,7 +225,7 @@ class Solution2_2 {
     
     /**
      * let prevTail connect to this reversed k group LinkedList,
-     * and return the tail of k group, if the length of left listNode < k, return null
+     * and return the tail of reversed k group, if the length of left listNode < k, return null
      * @param prevTail previous tail before this k group
      * @param head head of this k group
      * @param k the length of LinkedList we need to reverse

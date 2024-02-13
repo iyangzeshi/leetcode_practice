@@ -108,7 +108,7 @@ class Solution {
 }
 //leetcode submit region end(Prohibit modification and deletion)
 /** 面试的时候用Solution 1，如果需要O(1)空间复杂度的时候，再用Solution 2_3*/
-// Solution 1: minheap
+// Solution 1: minheap to find the min among k values
 // T(n, k) = O(n * log(k)), S(n, k) = O(k)
 // k: number of LinkedLists, n: number of nodes in final List
 // 4 ms,击败了78.69% 的Java用户, 41.2 MB,击败了17.04% 的Java用户
@@ -209,7 +209,7 @@ class Solution2_1 {
     
 }
 
-// Solution 2_2: divide and conquer
+// Solution 2_2: divide and conquer to merge every 2 neighbors repeatedly
 // T(n, k) = O(n * log(k)), S(n, k) = O(log(k))
 // k: number of LinkedLists, n: number of nodes in final List
 // 1 ms,击败了100.00% 的Java用户, 41 MB,击败了30.93% 的Java用户
@@ -278,7 +278,7 @@ class Solution2_3 {
             return null;
         }
         int len = lists.length;
-        int delta = 1;
+        int delta = 1; // the difference between every neighbor in merge process
         while (delta < len) {
             for (int i = 0; i + delta < len; i += 2 * delta) {
                 lists[i] = merge2Lists(lists[i], lists[i + delta]);

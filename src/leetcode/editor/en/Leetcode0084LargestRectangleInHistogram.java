@@ -43,11 +43,11 @@ public class Leetcode0084LargestRectangleInHistogram{
 /*
 every area = width * height;
     We need to calculate area by find every different height, so for every height, we need to find the nearest height h1 and h2 around the height h, and calculate its area
-    step 1: using a increasing stack(according to heights[i]) to store i
+    step 1: using an increasing stack(according to heights[i]) to store i
         so that in the stack, the lower index is the left first height that smaller than the height.
     step 2:
         if the coming height is not smaller than the heights[stack.peek()], push it
-        if the comming height is smaller than the heights[stack.peek()], we find the 1st right border to the height h, so we can do the calculation for this related area.
+        if the coming height is smaller than the heights[stack.peek()], we find the 1st right border to the height h, so we can do the calculation for this related area.
  */
 class Solution {
     public int largestRectangleArea(int[] heights) {
@@ -73,7 +73,7 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: 1 ms, O(n). 对于每个柱形，往左和往右找到第一个比自己高度低的柱子
+// Solution 1: 1 ms, O(n). 对于每个高度的柱形，往左和往右找到第一个比自己高度低的柱子
 // 7 ms,击败了75.56% 的Java用户, 48.4 MB,击败了9.23% 的Java用户
 /*
 area = length × height

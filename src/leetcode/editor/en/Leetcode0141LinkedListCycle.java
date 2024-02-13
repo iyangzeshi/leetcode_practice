@@ -82,6 +82,7 @@ public class Leetcode0141LinkedListCycle{
  * }
  */
 // Solution 2: 2 pointers
+// T(n) = O(n), S(n) = O(1)
 public class Solution {
     public boolean hasCycle(ListNode head) {
         if (head == null || head.next == null) {
@@ -100,7 +101,8 @@ public class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: HashSet
+// Solution 1: HashSet to deduplicate
+// T(n) = O(n), S(n) = O(n)
 public class Solution1 {
     public boolean hasCycle(ListNode head) {
         Set<ListNode> nodeSeen = new HashSet<>();
@@ -118,6 +120,7 @@ public class Solution1 {
 }
 
 // Solution 2: 2 pointers
+// T(n) = O(n), S(n) = O(1)
 public class Solution2 {
     public boolean hasCycle(ListNode head) {
         if (head == null || head.next == null) {

@@ -52,7 +52,7 @@ class Solution {
 		}
 		ListNode tail = reverseList(head.next);
 		head.next.next = head;
-		head.next = null;
+		head.next = null; // otherwise there will be a cycle between head and head.next
 		return tail;
 	}
 	
@@ -91,7 +91,7 @@ class Solution2_1 {
         }
         ListNode tail = reverseList(head.next);
         head.next.next = head;
-        head.next = null;
+        head.next = null; // otherwise there will be a cycle between head and head.next
         return tail;
     }
     
