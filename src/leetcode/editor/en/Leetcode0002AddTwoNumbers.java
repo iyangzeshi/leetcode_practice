@@ -40,33 +40,35 @@ public class Leetcode0002AddTwoNumbers{
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+// T(n) = O(n), S(n) = O(1)
+/*
+idea: set a carry to check whether sum >= 10
+do while loop to do the calculation until finishing iterating all the nodes and carry = 0
+ */
 class Solution {
     
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // corner case
         if (l1 == null) {
             return l2;
         }
         if (l2 == null) {
             return l1;
         }
-        ListNode p1 = l1;
-        ListNode p2 = l2;
+        
         int carry = 0;
         ListNode dummy = new ListNode(0);
         ListNode cur = dummy;
-        while (p1 != null || p2 != null) {
-            int num1 = p1 != null ? p1.val : 0;
-            int num2 = p2 != null ? p2.val : 0;
+        while (l1 != null || l2 != null || carry == 1) {
+            int num1 = l1 != null ? l1.val : 0;
+            int num2 = l2 != null ? l2.val : 0;
             int value = (num1 + num2 + carry) % 10;
             cur.next = new ListNode(value);
             carry = (num1 + num2 + carry) / 10;
             cur = cur.next;
             
-            p1 = p1 != null ? p1.next : null;
-            p2 = p2 != null ? p2.next : null;
-        }
-        if (carry == 1) {
-            cur.next = new ListNode(carry);
+            l1 = l1 != null ? l1.next : null;
+            l2 = l2 != null ? l2.next : null;
         }
         ListNode head = dummy.next;
         dummy.next = null;
@@ -75,5 +77,7 @@ class Solution {
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+
 
 }

@@ -115,13 +115,16 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-/** 面试的时候用Solution 1或者Solution 2 **/
+/*
+面试的时候用Solution 1或者Solution 2
+如果面试官要求S(n) = O(1), 则用Solution 3
+*/
 
 // Solution 1: recursion(DFS), T(n) = O(n), S(n) = O(n)
 // 0 ms,击败了100.00% 的Java用户, 39.1 MB,击败了25.91% 的Java用户
 class Solution1 {
 
-    HashMap<Node, Node> map = new HashMap<>();
+    Map<Node, Node> map = new HashMap<>();
     
     public Node copyRandomList(Node head) {
         // corner case
@@ -153,7 +156,7 @@ class Solution2 {
             return null;
         }
 
-        HashMap<Node, Node> map = new HashMap<>(); // original node to copy node
+        HashMap<Node, Node> map = new HashMap<>(); // original node to new copied node
         Node cur1 = head;
     
         Node prev2 = new Node(-1);
@@ -177,7 +180,21 @@ class Solution2 {
     }
 }
 
-// Solution 3: iteration, 3 pass by insert them to original list and separate them
+// Solution 3: T(n) = O(n), S(n) = O(1)
+/*
+iteration, 3 pass by insert them to original list and separate them
+step 1: copy the list1 to create list 2
+    so that the every node cur1 in list 1 points to its corresponding node cur2
+    and cur2 points to the node next to cur1 in list 1
+    
+    1   2   3   4   5
+    ↓↗ ↓ ↗ ↓↗ ↓↗ ↓
+    1   2   3   4   5
+step 2:
+    iterate the both list and copy the random points
+step 3:
+    restore the list 1, and connect the every next point in list 2
+ */
 // 0 ms,击败了100.00% 的Java用户, 38.3 MB,击败了94.80% 的Java用户
 class Solution3 {
 
@@ -188,7 +205,7 @@ class Solution3 {
         }
 
         // general case
-        // 1st pass to copy the nodes and connect them with next pointers
+        // 1st pass to copy the nodes and let cur1 point to cur2 and cur point to original cur1.next
         Node head1 = head;
         Node cur1 = head1;
         Node cur2;
@@ -210,7 +227,7 @@ class Solution3 {
             cur1 = cur1.next.next;
         }
 
-        // 3rd pass to separate copied node and original nodes
+        // 3rd pass to separate copied node and original nodes, restore list1, connect list2
         cur1 = head1;
         cur2 = head2;
         while (cur1 != null) {
