@@ -55,6 +55,7 @@ public class Leetcode0102BinaryTreeLevelOrderTraversal{
  *     }
  * }
  */
+// T(n) = O(n), S(n) = O(n)n is the size of the tree
 class Solution {
 	public List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> res = new ArrayList<>();

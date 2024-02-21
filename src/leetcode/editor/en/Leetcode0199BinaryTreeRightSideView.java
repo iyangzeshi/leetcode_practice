@@ -79,7 +79,8 @@ class Solution {
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-// Solution 1: BFS
+// Solution 1: BFS, T(n) = O(n), S(n) = O(n)
+// BFS traverse from right to left level by level
 class Solution1 {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> rightSideList = new ArrayList<>();
@@ -96,7 +97,7 @@ class Solution1 {
         queue.offer(root);
         while (!queue.isEmpty()) {
             int size = queue.size();
-            boolean isRightBound = true;
+            boolean isRightBound = true; // traverse from right children to left children
             while (size -- > 0) {
                 TreeNode cur = queue.poll();
                 if (isRightBound) {
@@ -116,7 +117,14 @@ class Solution1 {
     }
 }
 
-// Solution 2: DFS
+// Solution 2: DFS, T(n) = O(n), S(n) = O(n)
+/*
+traverse the whole tree as the following patterns: root -> right -> left
+and 1 list to record the result rightSideList
+step 1: traverse the whole tree
+step 2: in the traversal, every time there is the depth > rightSideList.size,
+means new node is in result
+ */
 class Solution2 {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> rightSideList = new ArrayList<>();
@@ -133,6 +141,8 @@ class Solution2 {
         if (cur == null) {
             return;
         }
+        
+        // general case
         if (index == rightSideList.size()) {
             rightSideList.add(cur.val);
         }

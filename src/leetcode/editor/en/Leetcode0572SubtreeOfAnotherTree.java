@@ -80,6 +80,7 @@ public class Leetcode0572SubtreeOfAnotherTree{
  *     }
  * }
  */
+// T(m, n) = O(m * n), S(m,n) = O(m + n), m and n is size of the tree s and t respectively
 class Solution {
     public boolean isSubtree(TreeNode s, TreeNode t) {
         // if (t == null) {
