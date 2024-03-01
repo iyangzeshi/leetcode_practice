@@ -91,7 +91,7 @@ class Solution {
             return null;
         }
         
-        HashMap<Node, Node> map = new HashMap<>(); // original node to copy node
+        Map<Node, Node> map = new HashMap<>(); // original node to copy node
         Node cur1 = head;
     
         Node prev2 = new Node(-1);
@@ -156,7 +156,7 @@ class Solution2 {
             return null;
         }
 
-        HashMap<Node, Node> map = new HashMap<>(); // original node to new copied node
+        Map<Node, Node> map = new HashMap<>(); // original node to new copied node
         Node cur1 = head;
     
         Node prev2 = new Node(-1);

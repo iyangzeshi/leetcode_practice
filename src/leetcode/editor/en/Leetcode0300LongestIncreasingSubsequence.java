@@ -121,8 +121,11 @@ class Solution1 {
     
 }
 
-// Solution 2: T(n) = O(nlog(n)), S(n) = O(n)
+// Solution 2: Greedy: T(n) = O(nlog(n)), S(n) = O(n)
 //4 ms,击败了74.71% 的Java用户, 38.6 MB,击败了35.23% 的Java用户
+/*
+
+ */
 class Solution2 {
     
     public int lengthOfLIS(int[] nums) {

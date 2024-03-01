@@ -83,6 +83,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 // 2020-09-07 15:58:10
 // Zeshi Yang
@@ -91,77 +92,122 @@ public class Leetcode0133CloneGraph{
     public static void main(String[] args) {
         Solution sol = new Leetcode0133CloneGraph().new Solution();
         // TO TEST
+        Node node1 = new Node(1);
+        Node node2 = new Node(2);
+        Node node3 = new Node(3);
+        Node node4 = new Node(4);
+        node1.neighbors.add(node2);
+        node1.neighbors.add(node4);
         
-        System.out.println();
+        node2.neighbors.add(node1);
+        node2.neighbors.add(node3);
+        
+        node3.neighbors.add(node2);
+        node3.neighbors.add(node4);
+        
+        node4.neighbors.add(node1);
+        node4.neighbors.add(node3);
+        Node copyNode = sol.cloneGraph(node1);
+        
+        System.out.println(copyNode.val);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> neighbors;
+    public Node() {
+        val = 0;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val) {
+        val = _val;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val, ArrayList<Node> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+}
+*/
+
 class Solution {
-    
     public Node cloneGraph(Node node) {
         // corner case
         if (node == null) {
             return null;
         }
         
-        HashMap<Node, Node> visited = new HashMap<>();
-        return dfs(node, visited);
-    }
-    
-    private Node dfs(Node cur, HashMap<Node, Node> visited) {
-        if (visited.containsKey(cur)) {
-            return visited.get(cur);
-        }
+        // general case
+        Map<Node, Node> oldToNew = new HashMap<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(node);
         
-        visited.put(cur, new Node(cur.val));
-        
-        for (Node next : cur.neighbors) {
-            Node neighbor = dfs(next, visited);
-            visited.get(cur).neighbors.add(neighbor); // next的clone = dfs(next, visited)
+        while (!queue.isEmpty()) {
+            Node cur = queue.poll();
+            if (!oldToNew.containsKey(cur)) {
+                oldToNew.put(cur, new Node(cur.val));
+            }
+            Node curCopy = oldToNew.get(cur);
+            // Node curCopy = oldToNew.computeIfAbsent(cur, k -> new Node(cur.val));
+            List<Node> neighbors = cur.neighbors;
+            for (Node neighbor: neighbors) {
+                if (!oldToNew.containsKey(neighbor)) {
+                    Node neighborCopy = new Node(neighbor.val);
+                    oldToNew.put(neighbor, neighborCopy);
+                    queue.offer(neighbor);
+                }
+                curCopy.neighbors.add(oldToNew.get(neighbor));
+            }
         }
-        return visited.get(cur);
+        return oldToNew.get(node);
     }
-    
 }
+
 //leetcode submit region end(Prohibit modification and deletion)
 /**面试的时候用Solution 2 **/
 
-// Solution 1: BFS: DFS, T(n) = O(n), S(n) = O(n)
+// Solution 1: BFS, T(n) = O(n), S(n) = O(n)
 // 23 ms,击败了99.96% 的Java用户, 39.3 MB,击败了52.79% 的Java用户
 class Solution1 {
     public Node cloneGraph(Node node) {
+        // corner case
         if (node == null) {
             return null;
         }
-        HashMap<Node, Node> oldToNew = new HashMap<>(); // old Node to corresponding new node
-        Node curCopy = new Node(node.val);
-        oldToNew.put(node, curCopy);
-        bfs(node, oldToNew);
-        return curCopy;
-    }
-    
-    private void bfs(Node cur, HashMap<Node, Node> map) {
+        
+        // general case
+        Map<Node, Node> oldToNew = new HashMap<>();
         Queue<Node> queue = new LinkedList<>();
-        Node curCopy;
-        queue.offer(cur);
-        while(!queue.isEmpty()) {
-            cur = queue.poll();
-            curCopy = map.get(cur);
-            for (Node neighbor: cur.neighbors) {
-                if (map.containsKey(neighbor)) {
-                    curCopy.neighbors.add(map.get(neighbor));
-                } else {
+        queue.offer(node);
+        
+        while (!queue.isEmpty()) {
+            Node cur = queue.poll();
+            if (!oldToNew.containsKey(cur)) {
+                oldToNew.put(cur, new Node(cur.val));
+            }
+            Node curCopy = oldToNew.get(cur);
+            // Node curCopy = oldToNew.computeIfAbsent(cur, k -> new Node(cur.val));
+            List<Node> neighbors = cur.neighbors;
+            for (Node neighbor: neighbors) {
+                if (!oldToNew.containsKey(neighbor)) {
                     Node neighborCopy = new Node(neighbor.val);
-                    map.put(neighbor, neighborCopy);
-                    curCopy.neighbors.add(neighborCopy);
+                    oldToNew.put(neighbor, neighborCopy);
                     queue.offer(neighbor);
                 }
+                curCopy.neighbors.add(oldToNew.get(neighbor));
             }
         }
+        return oldToNew.get(node);
     }
 }
 
 // Solution 2: DFS, T(n) = O(n), S(n) = O(n)
-// 24 ms,击败了98.88% 的Java用户, 39.1 MB,击败了66.66% 的Java用户
+/*
+ create a hashmap to record the relationship between old node and new node,
+ use DFS algorithm to traverse all the node and copy them
+ */
 class Solution2 {
     
     public Node cloneGraph(Node node) {
@@ -170,28 +216,36 @@ class Solution2 {
             return null;
         }
         
-        HashMap<Node, Node> visited = new HashMap<>();
-        return dfs(node, visited);
+        Map<Node, Node> oldToNew = new HashMap<>();
+        return dfs(node, oldToNew);
     }
     
-    private Node dfs(Node cur, HashMap<Node, Node> visited) {
-        if (visited.containsKey(cur)) {
-            return visited.get(cur);
+    /**
+     * given the graph with starting node cur, return the copied graph with starting new node
+     * @param cur: current node in the graph
+     * @param oldToNew: Map, key: old node,; value: new copied node
+     * @return copied new node for the given graph
+     */
+    private Node dfs(Node cur, Map<Node, Node> oldToNew) {
+        // base case
+        if (oldToNew.containsKey(cur)) {
+            return oldToNew.get(cur);
         }
         
-        visited.put(cur, new Node(cur.val));
+        // general case
+        oldToNew.put(cur, new Node(cur.val));
         
         for (Node next : cur.neighbors) {
-            Node neighbor = dfs(next, visited);
-            visited.get(cur).neighbors.add(neighbor); // next的clone = dfs(next, visited)
+            Node neighbor = dfs(next, oldToNew);
+            oldToNew.get(cur).neighbors.add(neighbor); // next的clone = dfs(next, oldToNew)
         }
-        return visited.get(cur);
+        return oldToNew.get(cur);
     }
     
 }
 
 // Definition for a Node.
-private class Node {
+static class Node {
     public int val;
     public List<Node> neighbors;
 

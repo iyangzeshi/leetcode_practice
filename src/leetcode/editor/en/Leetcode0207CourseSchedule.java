@@ -50,6 +50,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 // 2020-09-06 17:50:53
 // Zeshi Yang
@@ -64,107 +65,93 @@ public class Leetcode0207CourseSchedule{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-
-enum Status {
-    INITIAL,
-    PROCESSING,
-    DONE
-}
-
-class Node{
-    int label; // # of course
-    List<Integer> precourses;
-    Status status;
-    public Node(int label){
-        this.label = label;
-        precourses = new ArrayList<>();
-        status = Status.INITIAL;
-    }
-}
+// Solution 2: build graph and in-Degree check: T(v,e) = O(v + e), S(v, e) = O(v + e)
+/**每次都选则没有先修课要求，或者自己已经满足先修课要求的课一次次往更高level的课选课 */
 
 class Solution {
-
+    
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         if (prerequisites == null || prerequisites.length == 0) {
             return true;
         }
-        Node[] coursesToPrerequisites = buildGraph(numCourses, prerequisites);
-
+        
+        // step 1: build in-degree table
+        // map: key: prerequisite, value: next course; and update inDegree
+        int[] inDegree = new int[numCourses];
+        Map<Integer, List<Integer>> graph = buildGraph(prerequisites, inDegree);
+        
+        // step 2: BFS to taking course whose inDegree == 0
+        Queue<Integer> queue = new LinkedList<>();
+        int count = 0;
         for (int i = 0; i < numCourses; i++) {
-            if (containCycle(coursesToPrerequisites, i)) {
-                return false;
+            if (inDegree[i] == 0) { // 没有先修课的课程
+                queue.offer(i);
             }
         }
-        return true;
-    }
-
-    private Node[] buildGraph(int numCourses, int[][] prerequisites) {
-        Node[] courses = new Node[numCourses];
-        for (int i = 0; i < numCourses; i++) {
-            courses[i] = new Node(i);
-        }
-        for (int[] prerequisite : prerequisites) {
-            int prev = prerequisite[1];
-            int cur = prerequisite[0];
-            courses[prev].precourses.add(cur);
-        }
-        return courses;
-    }
-
-    private boolean containCycle(Node[] courses, int idx) {
-        if (courses[idx].status == Status.DONE) {
-            return false;
-        }
-        if (courses[idx].status == Status.PROCESSING) {
-            return true;
-        }
-        courses[idx].status = Status.PROCESSING;
-        for (int next : courses[idx].precourses) {
-            if (containCycle(courses, next)) {
-                return true;
+        
+        while (!queue.isEmpty()) {
+            int cur = queue.poll();
+            count++;
+            if (graph.containsKey(cur)) {
+                for (int next : graph.get(cur)) {
+                    inDegree[next]--;
+                    if (inDegree[next] == 0) {
+                        queue.offer(next);
+                    }
+                }
             }
         }
-        courses[idx].status = Status.DONE;
-        return false;
+        return count == numCourses;
     }
+    
+    private Map<Integer, List<Integer>> buildGraph(int[][] prevs, int[] inDegree) {
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (int[] connection : prevs) {
+            int cur = connection[0];
+            int prev = connection[1];
+            inDegree[cur]++;
+            graph.computeIfAbsent(prev, k -> new LinkedList<>()).add(cur);
+        }
+        
+        return graph;
+    }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-// Solution 1: dfs with map
-class Solution1 {
+// Solution 1_1: dfs build graph(map), topological sort, T(e, v) = O(e + v), S(e ,v) = O(e + v)
+/*
+use dfs with map to build graph(map)
+and use topological sort to check the cycle
+visited[] array to record whether Status
+ */
+class Solution1_1 {
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         //build graph
-        Map<Integer, List<Integer>> courseToPrecourses = buildGraph(prerequisites);
+        Map<Integer, List<Integer>> curToPrev = buildGraph(prerequisites);
         for (int i = 0; i < numCourses; i++) {
-            int[] visited = new int[numCourses];
-            if (containsCycle(courseToPrecourses, visited, i)) {
+            int[] visited = new int[numCourses]; // 0 - not visited, 1 - visiting, 2 visited
+            if (containsCycle(curToPrev, visited, i)) {
                 return false;
             }
         }
         return true;
     }
 
-    private Map<Integer, List<Integer>> buildGraph(int[][] prerequisites) {
+    private Map<Integer, List<Integer>> buildGraph(int[][] prevs) {
         // corner case
         Map<Integer, List<Integer>> graph = new HashMap<>();
-        for (int[] connection: prerequisites) {
-            int course = connection[0];
-            int precourse = connection[1];
-            List<Integer> precourses;
-            if (graph.containsKey(course)) {
-                precourses = graph.get(course);
-            } else {
-                precourses = new LinkedList<>();
-            }
-            precourses.add(precourse);
-            graph.put(course, precourses);
+        for (int[] connection: prevs) {
+            int cur = connection[0];
+            int prev = connection[1];
+            List<Integer> prevCourses = graph.computeIfAbsent(cur, k-> new LinkedList<>());
+            prevCourses.add(prev);
         }
         return graph;
     }
 
-    private boolean containsCycle(Map<Integer, List<Integer>> courseToPrecourses,
-            int[] visited, int i) {
+    private boolean containsCycle(Map<Integer, List<Integer>> curToPrev, int[] visited, int i) {
         if (visited[i] == 1) {
             return true;
         }
@@ -172,9 +159,9 @@ class Solution1 {
             return false;
         }
         visited[i] = 1;
-        if (courseToPrecourses.containsKey(i)) {
-            for (int next: courseToPrecourses.get(i)) {
-                if (containsCycle(courseToPrecourses, visited, next)) {
+        if (curToPrev.containsKey(i)) {
+            for (int next: curToPrev.get(i)) {
+                if (containsCycle(curToPrev, visited, next)) {
                     return true;
                 }
             }
@@ -185,35 +172,39 @@ class Solution1 {
 
 }
 
-// Solution 2: dfs with array
-
-/*enum Status {
+// Solution 1_2: dfs build graph(array), topological sort, T(e, v) = O(e + v), S(e ,v) = O(e + v)
+/*
+use dfs with map to build graph(Node Array)
+and use topological sort to check the cycle
+enum Status to record whether Status
+ */
+enum Status {
     INITIAL,
     PROCESSING,
     DONE
 }
 
-class Node{
-    int label;
-    List<Integer> precourses;
-    Status status;
-    public Node(int label){
-        this.label = label;
-        precourses = new ArrayList<>();
-        status = Status.INITIAL;
+class Solution1_2 {
+    
+    class Node{
+        int label; // # of course
+        List<Integer> preCourses;
+        Status status;
+        public Node(int label){
+            this.label = label;
+            preCourses = new ArrayList<>();
+            status = Status.INITIAL;
+        }
     }
-}*/
-
-class Solution2 {
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         if (prerequisites == null || prerequisites.length == 0) {
             return true;
         }
-        Node[] coursesToPrerequisites = buildGraph(numCourses, prerequisites);
+        Node[] curToPrevs = buildGraph(numCourses, prerequisites);
 
         for (int i = 0; i < numCourses; i++) {
-            if (isCycle(coursesToPrerequisites, i)) {
+            if (isCycle(curToPrevs, i)) {
                 return false;
             }
         }
@@ -225,10 +216,10 @@ class Solution2 {
         for (int i = 0; i < numCourses; i++) {
             courses[i] = new Node(i);
         }
-        for (int[] prerequisite : prerequisites) {
-            int prev = prerequisite[1];
-            int cur = prerequisite[0];
-            courses[prev].precourses.add(cur);
+        for (int[] connect : prerequisites) {
+            int prev = connect[1];
+            int cur = connect[0];
+            courses[prev].preCourses.add(cur);
         }
         return courses;
     }
@@ -241,7 +232,7 @@ class Solution2 {
             return true;
         }
         courses[idx].status = Status.PROCESSING;
-        for (int next : courses[idx].precourses) {
+        for (int next : courses[idx].preCourses) {
             if (isCycle(courses, next)) {
                 return true;
             }
@@ -249,5 +240,58 @@ class Solution2 {
         courses[idx].status = Status.DONE;
         return false;
     }
+}
+
+// Solution 2: build graph and in-Degree check: T(v,e) = O(v + e), S(v, e) = O(v + e)
+/**每次都选则没有先修课要求，或者自己已经满足先修课要求的课一次次往更高level的课选课 */
+class Solution2 {
+    
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        if (prerequisites == null || prerequisites.length == 0 || prerequisites[0] == null
+                || prerequisites[0].length == 0) {
+            return true;
+        }
+        
+        // step 1: build in-degree table
+        // map: key: prerequisite, value: next course; and update inDegree
+        int[] inDegree = new int[numCourses];
+        Map<Integer, List<Integer>> graph = buildGraph(prerequisites, inDegree);
+        
+        // step 2: BFS to taking course whose inDegree == 0
+        Queue<Integer> queue = new LinkedList<>();
+        int count = 0;
+        for (int i = 0; i < numCourses; i++) {
+            if (inDegree[i] == 0) { // 没有先修课的课程
+                queue.offer(i);
+            }
+        }
+        
+        while (!queue.isEmpty()) {
+            int cur = queue.poll();
+            count++;
+            if (graph.containsKey(cur)) {
+                for (int next : graph.get(cur)) {
+                    inDegree[next]--;
+                    if (inDegree[next] == 0) {
+                        queue.offer(next);
+                    }
+                }
+            }
+        }
+        return count == numCourses;
+    }
+    
+    private Map<Integer, List<Integer>> buildGraph(int[][] prevs, int[] inDegree) {
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (int[] connection : prevs) {
+            int cur = connection[0];
+            int prev = connection[1];
+            inDegree[cur]++;
+            graph.computeIfAbsent(prev, k -> new LinkedList<>()).add(cur);
+        }
+        
+        return graph;
+    }
+    
 }
 }

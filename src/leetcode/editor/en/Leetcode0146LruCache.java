@@ -33,7 +33,7 @@
 // 👍 6498 👎 275
 
 package leetcode.editor.en;
-   
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,6 +60,36 @@ public class Leetcode0146LruCache {
 //leetcode submit region begin(Prohibit modification and deletion)
 // Solution: HashMap + customized Double Linked List, 思路更清楚版本
 // T(n) = O(1), S(n) = O(n)
+/*
+using the double LinkedList and HashMap to implement the function
+
+1.
+
+    if   HashMap查询是否存在{
+        // 存在
+        (1)存在则将节点移动到LinkedList头部（因为它最近被用到了）；
+        (2)返回value
+    }
+    
+    返回-1 // 没查到
+2. put method:
+    if   HashMap查询是否存在{
+            // 存在
+            (1) 更新节点值；
+            (2) 并且将节点移动到头部（被用到）；
+    } else{
+            // 不存在
+            (1) if 当前缓存空间是否够用 {
+                    // 不够用 则需要LRU淘汰
+                    (1) 删除链表尾部节点
+                    (2) 删除HashMap中尾部节点Key
+            }
+    
+            // 正常加入即可
+            (1) 链表添加新节点
+            (2) HashMap增加新KV
+    }
+*/
 class LRUCache {
     
     private final int capacity;

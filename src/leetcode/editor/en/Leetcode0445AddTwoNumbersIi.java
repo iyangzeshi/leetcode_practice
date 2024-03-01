@@ -72,6 +72,7 @@ public class Leetcode0445AddTwoNumbersIi{
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+// Solution 2: Stack, T(n) = O(n), S(n) = O(n)
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         Stack<ListNode> stack1 = new Stack<>();
@@ -109,7 +110,7 @@ class Solution {
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: head recursion with new class ListNodeWithCarry
+// Solution 1: head recursion with new class ListNodeWithCarry, T(n) = O(n), S(n) = O(n)
 class Solution1 {
     class ListNodeWithCarry{
         ListNode listNode;
@@ -180,7 +181,7 @@ class Solution1 {
     }
 }
 
-// Solution 2: Stack
+// Solution 2: Stack, T(n) = O(n), S(n) = O(n)
 class Solution2 {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         Stack<ListNode> stack1 = new Stack<>();
@@ -195,7 +196,7 @@ class Solution2 {
             stack2.push(p2);
             p2 = p2.next;
         }
-        ListNode dummy = new ListNode();
+        ListNode dummy = new ListNode(); // the node before the current sum node
         int carry = 0;
         while(!stack1.isEmpty() || !stack2.isEmpty() || carry == 1) {
             int sum = 0;

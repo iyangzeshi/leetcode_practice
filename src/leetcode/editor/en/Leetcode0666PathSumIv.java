@@ -65,6 +65,15 @@ public class Leetcode0666PathSumIv{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+// T(n) = O(n), S(n) = O(n)
+/*
+step 1: build tree
+	parent node[abc], child node [xyz], then
+	a + 1 = x,
+	2*b - 1 = y or 2*b = y
+	build tree by its own index
+step 2: calculate path sum
+ */
 class Solution {
     public int pathSum(int[] nums) {
 		// corner case
@@ -79,59 +88,53 @@ class Solution {
     }
 	
 	private TreeNode buildTree(int[] nums) {
-		// corner case
 		int len = nums.length;
-		int i = 0;
-		int j = 1;
-		TreeNode root = getTreeNodeByNums(nums[0]);
-		Map<Integer, TreeNode> idxToTreeNode = new HashMap<>();
-		idxToTreeNode.put(0, root);
-		while (j < len) {
-			TreeNode nextNode = getTreeNodeByNums(nums[j]);
-			int depth = nums[j] / 100;
-			int pos = (nums[j] / 10) % 10;
-			int parentDepth = depth - 1;
-			int parentPos = (pos + 1) / 2;
-			while (i < j && (nums[i] / 100 != parentDepth || (nums[i] / 10) % 10 != parentPos)) {
-				i++;
-			}
-			TreeNode parent = idxToTreeNode.get(i);
-			if (pos % 2 == 1) {
-				parent.left = nextNode;
-			} else {
-				parent.right = nextNode;
-			}
-			idxToTreeNode.put(j, nextNode);
-			j++;
-		}
+		Map<Integer, TreeNode> idxToTreeNode = new HashMap<>();// key: depth * 10 + position
+		TreeNode root = new TreeNode(nums[0] % 10);
+		idxToTreeNode.put(11, root);
+        
+        for (int i = 1; i < len; i++) {
+            int num = nums[i];
+            int depth = num / 100;
+            int pos = num / 10 % 10;
+            int val = num % 10;
+            TreeNode cur = new TreeNode(val);
+            idxToTreeNode.put(depth * 10 + pos, cur);
+            
+            int parentDep = depth - 1;
+            int parentPos = (pos + 1) / 2;
+            TreeNode parent = idxToTreeNode.get(parentDep * 10 + parentPos);
+            if (pos % 2 == 1) { // left child
+                parent.left = cur;
+            } else { // right child
+                parent.right = cur;
+            }
+        }
 		return root;
 	}
-	private void getPathSum(TreeNode root, int[] pathSum, int path) {
-		// corner case
-		if (root.left == null && root.right == null) {
-			path += root.val;
+	
+	/**
+	 *
+	 * @param cur: current node
+	 * @param pathSum: sum of global path sum from root to the current leave node
+	 * @param path: the sum of the root until the curret node
+	 */
+	private void getPathSum(TreeNode cur, int[] pathSum, int path) {
+		// base case
+		if (cur.left == null && cur.right == null) {
+			path += cur.val;
 			pathSum[0] += path;
 			return;
 		}
-		if (root.left != null && root.right != null) {
-			getPathSum(root.left, pathSum, path + root.val);
-			getPathSum(root.right, pathSum, path + root.val);
-			return;
-		}
 		
-		if (root.left != null) {
-			getPathSum(root.left, pathSum, path + root.val);
+		if (cur.left != null) {
+			getPathSum(cur.left, pathSum, path + cur.val);
 		}
-		if (root.right != null) {
-			getPathSum(root.right, pathSum, path + root.val);
+		if (cur.right != null) {
+			getPathSum(cur.right, pathSum, path + cur.val);
 		}
-		
 	}
 	
-	private TreeNode getTreeNodeByNums(int num) {
-		int val = num % 10;
-		return new TreeNode(val);
-	}
 }
 
 class TreeNode {

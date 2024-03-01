@@ -12,16 +12,19 @@
 
 package leetcode.editor.en;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // 2020-09-10 19:24:26
 // Zeshi Yang
 public class Leetcode0204CountPrimes{
     // Java: count-primes
     public static void main(String[] args) {
         // TO TEST
-        int n = 5;
-        // testSolution1(n);
-        testSolution2(n);
-        testSolution3(n);
+        int n = 10;
+        testSolution1(n);
+        // testSolution2(n);
+        // testSolution3(n);
     }
     
     private static void testSolution1(int n) {
@@ -85,26 +88,61 @@ class Solution {
 // 554 ms,击败了7.35% 的Java用户, 35.7 MB,击败了94.00% 的Java用户
 class Solution1 {
     
+    List<Integer> primeList = new ArrayList<>();
+    
     public int countPrimes(int n) {
-        if (n <= 2) {
+        if (n < 2) {
             return 0;
         }
+        primeList.add(2);
+        
         int count = 0;
         for (int i = 2; i < n; i++) {
-            if (isPrime(i)) {
+            if (isPrime2(i)) {
                 count++;
+                System.out.println(i + " is prime?:" + isPrime(i));
             }
         }
         return count;
     }
     
-    private boolean isPrime(int i) {
-        int sqrt = (int) Math.sqrt(i);
-        for (int j = 2; j <= sqrt; j++) {
-            if (i % j == 0) {
+    private boolean isPrime(int num) {
+        // corner case
+        if (num <= 1) {
+            return false;
+        }
+        if (num == 2) {
+            return true;
+        }
+        
+        int sqrt = (int) Math.sqrt(num);
+        for (int i = 2; i <= sqrt; i++) {
+            if (num % i == 0) {
                 return false;
             }
         }
+        return true;
+    }
+    
+    private boolean isPrime2(int num) {
+        // corner case
+        if (num <= 1) {
+            return false;
+        }
+        if (num == 2) {
+            return true;
+        }
+        
+        int sqrt = (int) Math.sqrt(num);
+        for (int prime: primeList) {
+            if (num % prime == 0) {
+                return false;
+            }
+            if (prime > sqrt) {
+                break;
+            }
+        }
+        primeList.add(num);
         return true;
     }
     

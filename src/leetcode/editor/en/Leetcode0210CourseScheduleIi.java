@@ -93,7 +93,7 @@ class Solution {
         
         // step 1: build in-degree table
         // map: key -> value, prerequisites -> next course, update inDegree
-        Map<Integer, List<Integer>> graph = buildGraph(numCourses, prerequisites, inDegree);
+        Map<Integer, List<Integer>> graph = buildGraph(prerequisites, inDegree);
         
         // step 2: put points of inDegree == 0 into the queue
         Queue<Integer> queue = new LinkedList<>();
@@ -122,7 +122,7 @@ class Solution {
         return count == numCourses ? res : new int[0];
     }
     
-    private Map<Integer, List<Integer>> buildGraph(int numCourses, int[][] prerequisites,
+    private Map<Integer, List<Integer>> buildGraph(int[][] prerequisites,
             int[] inDegree) {
         Map<Integer, List<Integer>> map = new HashMap<>();
         for (int[] prerequisite : prerequisites) {
@@ -144,6 +144,11 @@ enum Status {
     DONE
 }
 
+// Solution 1: build graph, topological sort，检测环并且建图, T(v,e) = O(v + e), S(v, e) = O(v + e)
+/*
+build the graph, and use DFS to traverse all the course
+and check whether there exists the cycle
+ */
 class Solution1 {
     
     public int[] findOrder(int numCourses, int[][] prerequisites) {
@@ -229,8 +234,7 @@ class Solution1 {
     
 }
 
-// Solution 2: in-Degree
-// 5 ms,击败了67.96% 的Java用户, 39.5 MB,击败了96.71% 的Java用户
+// Solution 2: build graph and in-Degree check: T(v,e) = O(v + e), S(v, e) = O(v + e)
 /**每次都选则没有先修课要求，或者自己已经满足先修课要求的课一次次往更高level的课选课 */
 class Solution2 {
     
@@ -239,10 +243,10 @@ class Solution2 {
         int[] inDegree = new int[numCourses];
         
         // step 1: build in-degree table
-        // map: key -> value, prerequisites -> next course, update inDegree
-        Map<Integer, List<Integer>> graph = buildGraph(numCourses, prerequisites, inDegree);
+        // map: key: prerequisite, value: next course; and update inDegree
+        Map<Integer, List<Integer>> graph = buildGraph(prerequisites, inDegree);
         
-        // step 2: put points of inDegree == 0 into the queue
+        // step 2: BFS to taking course whose inDegree = 0
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < numCourses; i++) {
             if (inDegree[i] == 0) { // 没有先修课的课程
@@ -257,10 +261,10 @@ class Solution2 {
             int cur = queue.poll();
             res[count++] = cur;
             if (graph.containsKey(cur)) { // else this course is not prerequisites of any other
-                for (int course : graph.get(cur)) {
-                    inDegree[course]--;
-                    if (inDegree[course] == 0) {
-                        queue.offer(course);
+                for (int next : graph.get(cur)) {
+                    inDegree[next]--;
+                    if (inDegree[next] == 0) {
+                        queue.offer(next);
                     }
                 }
             }
@@ -268,8 +272,7 @@ class Solution2 {
         return count == numCourses ? res : new int[0];
     }
     
-    private Map<Integer, List<Integer>> buildGraph(int numCourses, int[][] prerequisites,
-            int[] inDegree) {
+    private Map<Integer, List<Integer>> buildGraph(int[][] prerequisites, int[] inDegree) {
         Map<Integer, List<Integer>> map = new HashMap<>();
         for (int[] prerequisite : prerequisites) {
             int prev = prerequisite[1];

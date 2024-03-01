@@ -34,11 +34,48 @@ public class Leetcode0049GroupAnagrams{
     public static void main(String[] args) {
         Solution sol = new Leetcode0049GroupAnagrams().new Solution();
         // TO TEST
-        
-        System.out.println();
+        String[] strs = {"eat","tea","tan","ate","nat","bat"};
+        List<List<String>> res = sol.groupAnagrams(strs);
+        System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+/* T(n, k) = O(n*k), S(n,k) = O(n,k),
+assuming n is number of words, k is  length of longest word
+build a hashmap to traverse all the words
+the key is the char count of that anagram, value is the list of anagram of the key
+ */
+ 
 class Solution {
+    
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return new ArrayList<>();
+        }
+        Map<String, List<String>> ans = new HashMap<>();
+        int[] count = new int['z' - 'a' + 1];
+        for (String str : strs) {
+            Arrays.fill(count, 0);
+            for (char ch : str.toCharArray()) {
+                count[ch - 'a']++;
+            }
+            
+            String key = Arrays.toString(count);
+            ans.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
+        }
+        return new ArrayList<>(ans.values());
+    }
+    
+}
+//leetcode submit region end(Prohibit modification and deletion)
+
+/*
+Solution 1: T(n, k) = O(n*k*log(n)), S(n,k) = O(n,k),
+assuming n is number of words, k is  length of longest word
+build a hashmap to traverse all the words and sort that word
+the key is the anagram, value is the list of anagram of the key
+ */
+ 
+class Solution1 {
     
     public List<List<String>> groupAnagrams(String[] strs) {
         if (strs == null || strs.length == 0) {
@@ -61,6 +98,32 @@ class Solution {
     }
     
 }
-//leetcode submit region end(Prohibit modification and deletion)
 
+/*
+Solution 2: T(n, k) = O(n*k), S(n,k) = O(n,k),
+assuming n is number of words, k is  length of longest word
+build a hashmap to traverse all the words
+the key is the anagram, value is the list of anagram of the key
+ */
+class Solution2 {
+    
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return new ArrayList<>();
+        }
+        Map<String, List<String>> ans = new HashMap<>();
+        int[] count = new int['z' - 'a' + 1];
+        for (String str : strs) {
+            Arrays.fill(count, 0);
+            for (char ch : str.toCharArray()) {
+                count[ch - 'a']++;
+            }
+            
+            String key = Arrays.toString(count);
+            ans.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
+        }
+        return new ArrayList<>(ans.values());
+    }
+    
+}
 }
