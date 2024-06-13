@@ -71,7 +71,7 @@ import java.util.List;
 import java.util.Map;
 
 // 2020-07-20 23:31:38
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0305NumberOfIslandsIi {
 
     // Java: number-of-islands-ii

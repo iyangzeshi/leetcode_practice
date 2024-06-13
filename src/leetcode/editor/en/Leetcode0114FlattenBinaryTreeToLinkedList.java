@@ -33,7 +33,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 13:12:32
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0114FlattenBinaryTreeToLinkedList{
     // Java: flatten-binary-tree-to-linked-list
     public static void main(String[] args) {

@@ -59,7 +59,7 @@ import java.util.Comparator;
 import java.util.TreeMap;
 
 // 2021-03-20 23:45:54
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1235MaximumProfitInJobScheduling{
     // Java: maximum-profit-in-job-scheduling
     public static void main(String[] args) {

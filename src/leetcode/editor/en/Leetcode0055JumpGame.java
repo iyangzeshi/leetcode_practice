@@ -40,7 +40,7 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 // 2020-07-26 12:45:53
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0055JumpGame{
     // Java: jump-game
     public static void main(String[] args) {

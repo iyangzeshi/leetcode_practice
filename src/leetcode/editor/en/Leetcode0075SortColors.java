@@ -29,7 +29,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:26:36
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0075SortColors{
     // Java: sort-colors
     public static void main(String[] args) {

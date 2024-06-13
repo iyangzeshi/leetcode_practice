@@ -35,7 +35,7 @@
 package leetcode.editor.en;
 
 // 2020-12-12 20:07:26
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0704BinarySearch{
     // Java: binary-search
     public static void main(String[] args) {

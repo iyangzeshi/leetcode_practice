@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 // 2020-07-27 12:51:43
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0373FindKPairsWithSmallestSums{
     // Java: find-k-pairs-with-smallest-sums
     public static void main(String[] args) {

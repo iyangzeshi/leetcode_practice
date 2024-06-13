@@ -3,7 +3,7 @@ package leetcode.editor;
 //Project: leetcode_practice
 //Package: leetcode.editor
 //ClassName: ListGenerator
-//Author: Zeshi(Jesse) Yang
+//Author: Jesse Yang
 //Date: 2020-11-30 星期一 16:48
 public class ListGenerator {
     

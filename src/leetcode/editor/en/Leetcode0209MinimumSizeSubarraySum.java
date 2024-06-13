@@ -20,7 +20,7 @@
 package leetcode.editor.en;
 
 // 2021-01-19 16:50:36
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0209MinimumSizeSubarraySum{
     // Java: minimum-size-subarray-sum
     public static void main(String[] args) {

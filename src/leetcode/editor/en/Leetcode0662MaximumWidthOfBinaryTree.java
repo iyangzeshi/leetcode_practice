@@ -91,7 +91,7 @@ import javafx.util.Pair;
 import leetcode.editor.TreeNode;
 
 // 2020-12-02 16:02:02
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0662MaximumWidthOfBinaryTree{
     // Java: maximum-width-of-binary-tree
     public static void main(String[] args) {

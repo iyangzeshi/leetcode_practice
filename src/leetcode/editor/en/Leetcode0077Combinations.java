@@ -22,7 +22,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-26 12:16:26
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0077Combinations{
     // Java: combinations
     public static void main(String[] args) {

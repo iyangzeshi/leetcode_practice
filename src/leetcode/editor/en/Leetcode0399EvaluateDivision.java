@@ -40,16 +40,16 @@ import java.util.Queue;
 import java.util.Set;
 
 // 2020-07-21 14:15:19
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0399EvaluateDivision {
     
     // Java: evaluate-division
     public static void main(String[] args) {
         
         // TO TEST
-        String[][] equations = {{"a","b"},{"c","d"}, {"e","f"}, {"g","h"}};
+        String[][] equations = {{"a","b"},{"c","d"}, {"e","f"}, {"graph","h"}};
         double[] values = {4.5,2.3,8.9,0.44};
-        String[][] queries = {{"a","c"},{"d","f"},{"h","e"}, {"b","e"},{"d","h"},{"g","f"}, {"c","g"}};
+        String[][] queries = {{"a","c"},{"d","f"},{"h","e"}, {"b","e"},{"d","h"},{"graph","f"}, {"c","graph"}};
         testData(equations, values, queries);
     }
     

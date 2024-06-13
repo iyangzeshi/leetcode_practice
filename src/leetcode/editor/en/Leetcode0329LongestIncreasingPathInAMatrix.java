@@ -37,7 +37,7 @@ package leetcode.editor.en;
 /**
  * @ClassName: Leetcode329LongestIncreasingPathInAMatrix
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020/06/30 周二 17:53
  */
 public class Leetcode0329LongestIncreasingPathInAMatrix {

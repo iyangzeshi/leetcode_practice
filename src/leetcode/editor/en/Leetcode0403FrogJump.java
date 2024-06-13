@@ -51,7 +51,7 @@ import java.util.Map;
 /**
  * @ClassName: Leetcode403FrogJump
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020/06/30 周二 17:09
  */
 public class Leetcode0403FrogJump {

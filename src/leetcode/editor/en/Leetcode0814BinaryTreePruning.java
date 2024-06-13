@@ -44,7 +44,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2024-02-21 22:37:08
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode0814BinaryTreePruning{
     // Java: binary-tree-pruning
     public static void main(String[] args) {

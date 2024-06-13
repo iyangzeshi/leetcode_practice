@@ -50,7 +50,7 @@ import java.util.List;
 import java.util.Set;
 
 // 2020-08-27 20:48:52
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0694NumberOfDistinctIslands {
 
 	// Java: number-of-distinct-islands

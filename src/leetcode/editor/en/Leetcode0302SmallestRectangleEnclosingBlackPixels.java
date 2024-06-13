@@ -23,7 +23,7 @@
 package leetcode.editor.en;
 
 // 2020-07-25 14:26:27
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0302SmallestRectangleEnclosingBlackPixels {
 
 	// Java: smallest-rectangle-enclosing-black-pixels

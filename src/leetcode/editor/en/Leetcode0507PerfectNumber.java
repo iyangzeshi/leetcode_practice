@@ -21,7 +21,7 @@
 package leetcode.editor.en;
 
 // 2020-09-10 20:59:31
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0507PerfectNumber{
     // Java: perfect-number
     public static void main(String[] args) {

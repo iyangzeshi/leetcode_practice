@@ -43,7 +43,7 @@
 // graph will have length in range [1, 100]. 
 // graph[i] will contain integers in range [0, graph.length - 1]. 
 // graph[i] will not contain i or duplicate values. 
-// The graph is undirected: if any element j is in graph[i], then i will be in g
+// The graph is undirected: if any element j is in graph[i], then i will be in graph
 //raph[j]. 
 // 
 // Related Topics Depth-first Search Breadth-first Search Graph 
@@ -55,7 +55,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 // 2020-07-26 12:04:08
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0785IsGraphBipartite{
     // Java: is-graph-bipartite
     public static void main(String[] args) {

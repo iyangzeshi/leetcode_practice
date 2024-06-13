@@ -52,7 +52,7 @@
 package leetcode.editor.en;
 
 // 2020-12-23 23:42:39
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1254NumberOfClosedIslands{
     // Java: number-of-closed-islands
     public static void main(String[] args) {

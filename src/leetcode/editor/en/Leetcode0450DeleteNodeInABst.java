@@ -47,7 +47,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 14:13:17
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0450DeleteNodeInABst {
 	
 	// Java: delete-node-in-a-bst

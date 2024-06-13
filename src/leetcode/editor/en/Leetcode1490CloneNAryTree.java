@@ -54,7 +54,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 // 2020-12-21 12:29:06
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1490CloneNAryTree{
     // Java: clone-n-ary-tree
     public static void main(String[] args) {

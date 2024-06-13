@@ -45,7 +45,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-12-13 17:18:06
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0876MiddleOfTheLinkedList{
     // Java: middle-of-the-linked-list
     public static void main(String[] args) {

@@ -42,7 +42,7 @@ import java.util.Map;
 import java.util.Set;
 
 // 2020-07-19 23:21:35
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1192CriticalConnectionsInANetwork{
     // Java: critical-connections-in-a-network
     public static void main(String[] args) {

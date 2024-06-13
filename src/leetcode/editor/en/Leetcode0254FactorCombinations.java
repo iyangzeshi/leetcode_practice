@@ -61,7 +61,7 @@ package leetcode.editor.en;
 import java.util.ArrayList;
 import java.util.List;
 // 2020-08-04 22:43:20
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0254FactorCombinations{
     // Java: factor-combinations
     public static void main(String[] args) {

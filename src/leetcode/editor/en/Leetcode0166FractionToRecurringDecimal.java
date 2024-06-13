@@ -32,7 +32,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-08-04 11:44:04
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0166FractionToRecurringDecimal{
     // Java: fraction-to-recurring-decimal
     public static void main(String[] args) {

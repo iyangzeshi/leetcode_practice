@@ -57,7 +57,7 @@ import leetcode.editor.TreeGenerator;
 import leetcode.editor.TreeNode;
 
 // 2020-11-24 21:36:57
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0863AllNodesDistanceKInBinaryTree{
     // Java: all-nodes-distance-k-in-binary-tree
     public static void main(String[] args) {

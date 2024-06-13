@@ -3,7 +3,7 @@
 //
 // Return a deep copy of the tree. 
 //
-// The tree is represented in the same input/output way as normal binary trees w
+// The tree is represented in the same input/output way as normal binary trees weight
 //here each node is represented as a pair of [val, random_index] where: 
 //
 // 
@@ -77,7 +77,7 @@ import java.util.Map;
 import java.util.Queue;
 
 // 2020-12-21 11:23:31
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1485CloneBinaryTreeWithRandomPointer{
     // Java: clone-binary-tree-with-random-pointer
     public static void main(String[] args) {

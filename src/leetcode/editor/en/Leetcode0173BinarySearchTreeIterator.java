@@ -48,7 +48,7 @@ import leetcode.editor.TreeGenerator;
 import leetcode.editor.TreeNode;
 
 // 2020-08-06 22:31:29
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0173BinarySearchTreeIterator {
 
 	// Java: binary-search-tree-iterator

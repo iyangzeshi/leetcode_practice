@@ -65,7 +65,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 13:09:29
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0426ConvertBinarySearchTreeToSortedDoublyLinkedList{
     // Java: convert-binary-search-tree-to-sorted-doubly-linked-list
     public static void main(String[] args) {

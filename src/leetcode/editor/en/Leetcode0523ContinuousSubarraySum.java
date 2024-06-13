@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 2020-09-14 12:18:21
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0523ContinuousSubarraySum{
     // Java: continuous-subarray-sum
     public static void main(String[] args) {

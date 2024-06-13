@@ -25,7 +25,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-08-04 11:33:47
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0111MinimumDepthOfBinaryTree{
     // Java: minimum-depth-of-binary-tree
     public static void main(String[] args) {

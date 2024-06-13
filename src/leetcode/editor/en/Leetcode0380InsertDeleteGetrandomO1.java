@@ -57,7 +57,7 @@ import java.util.Map;
 import java.util.Random;
 
 // 2020-09-12 17:20:45
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0380InsertDeleteGetrandomO1{
     // Java: insert-delete-getrandom-o1
     public static void main(String[] args) {

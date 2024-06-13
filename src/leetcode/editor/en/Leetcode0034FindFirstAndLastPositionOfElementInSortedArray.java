@@ -32,7 +32,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:19:24
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0034FindFirstAndLastPositionOfElementInSortedArray{
     // Java: find-first-and-last-position-of-element-in-sorted-array
     public static void main(String[] args) {

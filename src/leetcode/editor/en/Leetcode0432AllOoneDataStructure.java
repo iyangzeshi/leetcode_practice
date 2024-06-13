@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 // 2020-07-24 14:13:52
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0432AllOoneDataStructure{
     // Java: all-oone-data-structure
     public static void main(String[] args) {

@@ -40,7 +40,7 @@
 package leetcode.editor.en;
 
 // 2020-12-15 15:29:38
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0405ConvertANumberToHexadecimal{
     // Java: convert-a-number-to-hexadecimal
     public static void main(String[] args) {

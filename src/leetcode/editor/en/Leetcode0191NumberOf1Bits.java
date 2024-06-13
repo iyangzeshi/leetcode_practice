@@ -54,7 +54,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:52:56
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0191NumberOf1Bits{
     // Java: number-of-1-bits
     public static void main(String[] args) {

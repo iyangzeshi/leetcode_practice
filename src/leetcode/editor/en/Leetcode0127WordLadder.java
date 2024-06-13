@@ -170,7 +170,7 @@ class Solution1 {
 						return minLen + 1;
 					}
 					queue.offer(neighbor);
-					wordSet.remove(neighbor);
+					wordSet.remove(neighbor); // so that there is no duplicates
 				}
 			}
 			minLen++;

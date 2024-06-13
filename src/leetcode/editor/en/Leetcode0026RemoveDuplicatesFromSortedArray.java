@@ -49,7 +49,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:20:56
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0026RemoveDuplicatesFromSortedArray{
     // Java: remove-duplicates-from-sorted-array
     public static void main(String[] args) {

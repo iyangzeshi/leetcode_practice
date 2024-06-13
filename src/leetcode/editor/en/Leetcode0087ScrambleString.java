@@ -26,13 +26,13 @@
 //"great" --> "gr/eat" // divide at random index.
 //"gr/eat" --> "gr/eat" // random decision is not to swap the two substrings and
 // keep them in order.
-//"gr/eat" --> "g/r / e/at" // apply the same algorithm recursively on both subs
+//"gr/eat" --> "graph/r / e/at" // apply the same algorithm recursively on both subs
 //trings. divide at ranom index each of them.
-//"g/r / e/at" --> "r/g / e/at" // random decision was to swap the first substri
+//"graph/r / e/at" --> "r/graph / e/at" // random decision was to swap the first substri
 //ng and to keep the second substring in the same order.
-//"r/g / e/at" --> "r/g / e/ a/t" // again apply the algorithm recursively, divi
+//"r/graph / e/at" --> "r/graph / e/ a/t" // again apply the algorithm recursively, divi
 //de "at" to "a/t".
-//"r/g / e/ a/t" --> "r/g / e/ a/t" // random decision is to keep both substring
+//"r/graph / e/ a/t" --> "r/graph / e/ a/t" // random decision is to keep both substring
 //s in the same order.
 //The algorithm stops now and the result string is "rgeat" which is s2.
 //As there is one possible scenario that led s1 to be scrambled to s2, we return
@@ -69,7 +69,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2020-12-05 16:43:22
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0087ScrambleString{
     // Java: scramble-string
     public static void main(String[] args) {

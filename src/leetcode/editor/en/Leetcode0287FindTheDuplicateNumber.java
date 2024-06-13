@@ -42,7 +42,7 @@
 package leetcode.editor.en;
 
 // 2020-09-10 21:07:20
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0287FindTheDuplicateNumber{
     // Java: find-the-duplicate-number
     public static void main(String[] args) {

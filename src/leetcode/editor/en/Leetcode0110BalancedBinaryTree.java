@@ -45,7 +45,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 11:47:11
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0110BalancedBinaryTree{
     // Java: balanced-binary-tree
     public static void main(String[] args) {
@@ -70,6 +70,13 @@ public class Leetcode0110BalancedBinaryTree{
  *     }
  * }
  */
+/*
+bottom up
+找到左右子树的高度，check difference是否满足要求，
+如果满足要求，返回当前Node的height，如果不满足要求，就返回-1
+对所有的子树做相同的operation
+ */
+// T(n) = O(n), S(n) = O(h), h is height of the tree
 class Solution {
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
@@ -79,6 +86,11 @@ class Solution {
         return result != -1;
     
     }
+    
+    /*
+   如果这个点开始的树是平衡树，就返回高度
+   如果这个点开始的树不是平衡树，就返回-1
+   */
     private int getHeight(TreeNode root) {
         if (root == null) {
             return 0;
@@ -92,6 +104,10 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
+/*
+找到左右子树的高度，check difference是否满足要求，对所有的子树做相同的operation
+ */
+// T(n) = O(n^2), S(n) = O(h)
 class Solution1_1 {
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
@@ -116,6 +132,11 @@ class Solution1_1 {
         return Math.max(left, right) + 1;
     }
 }
+
+/*
+找到左右子树的高度，check difference是否满足要求，对所有的子树做相同的operation
+ */
+// T(n) = O(n^2), S(n) = O(h)
 class Solution1_2 {
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
@@ -131,6 +152,7 @@ class Solution1_2 {
         return isBalanced(root.left) && isBalanced(root.right);
 
     }
+    
     private int getHeight(TreeNode root) {
         if (root == null) {
             return 0;
@@ -139,11 +161,19 @@ class Solution1_2 {
         int right = getHeight(root.right);
         if (left == -2 || right == -2 || Math.abs(left - right) > 1) {
             return -2;
-            //这里不能设置成-1，否则想linkedlist的tree会多call很多次，一个treenode，左边是0，右边是-1
+            //这里不能设置成-1，否则想linkedlist的tree会多call很多次，一个treeNode，左边是0，右边是-1
         }
         return Math.max(left, right) + 1;
     }
 }
+
+/*
+bottom up
+找到左右子树的高度，check difference是否满足要求，
+如果满足要求，返回当前Node的height，如果不满足要求，就返回-1
+对所有的子树做相同的operation
+ */
+// T(n) = O(n), S(n) = O(h), h is height of the tree
 class Solution2 {
     public boolean isBalanced(TreeNode root) {
         if (root == null) {

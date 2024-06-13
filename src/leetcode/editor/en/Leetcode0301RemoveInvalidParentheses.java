@@ -27,7 +27,7 @@
 /*
   @ClassName: Leetcode301RemoveInvalidParentheses
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020/06/24 周二 23:05
  */
 package leetcode.editor.en;

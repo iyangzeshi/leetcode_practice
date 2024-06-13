@@ -41,7 +41,7 @@
 package leetcode.editor.en;
 
 // 2020-09-14 12:15:05
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0198HouseRobber{
     // Java: house-robber
     public static void main(String[] args) {

@@ -36,7 +36,7 @@
 package leetcode.editor.en;
 
 // 2020-11-10 13:57:16
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0135Candy{
     // Java: candy
     public static void main(String[] args) {

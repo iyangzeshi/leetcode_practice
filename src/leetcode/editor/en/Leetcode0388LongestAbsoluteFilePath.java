@@ -76,7 +76,7 @@ package leetcode.editor.en;
 import java.util.Stack;
 
 // 2020-09-12 18:14:28
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0388LongestAbsoluteFilePath{
     // Java: longest-absolute-file-path
     public static void main(String[] args) {

@@ -23,7 +23,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 12:11:20
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0369PlusOneLinkedList{
     // Java: plus-one-linked-list
     public static void main(String[] args) {

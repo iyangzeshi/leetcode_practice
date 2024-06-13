@@ -31,7 +31,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2020-10-22 22:50:49
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0265PaintHouseIi{
     // Java: paint-house-ii
     public static void main(String[] args) {

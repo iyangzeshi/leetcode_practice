@@ -21,7 +21,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:44:23
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0152MaximumProductSubarray{
     // Java: maximum-product-subarray
     public static void main(String[] args) {

@@ -34,7 +34,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 13:49:58
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0088MergeSortedArray{
     // Java: merge-sorted-array
     public static void main(String[] args) {

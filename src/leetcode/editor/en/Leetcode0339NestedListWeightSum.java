@@ -69,6 +69,14 @@ public class Leetcode0339NestedListWeightSum {
       public List<NestedInteger> getList();
   }
  */
+// Solution 1: BFS, T(n) = O(n), S(n) = O(n)
+// 2 ms,击败了18.29% 的Java用户,
+/*
+第i层的数字权重是i
+所以用BFS从上往下遍历，遍历的时候记录当前层的序号
+一层的合算出来之后*当前的层数的序号，就是这一层的加权合
+每一层的加权合加起来之后，就是结果
+ */
 class Solution {
 	
 	public int depthSum(List<NestedInteger> nestedList) {
@@ -129,6 +137,12 @@ class Solution1 {
 
 // Solution 2: DFS, T(n) = O(n), S(n) = O(n)
 // 0 ms,击败了100.00% 的Java用户, 36 MB,击败了96.00% 的Java用户
+/*
+第i层的数字权重是i
+所以用BFS从上往下遍历，遍历的时候记录当前层的序号
+一层的合算出来之后*当前的层数的序号，就是这一层的加权合
+每一层的加权合加起来之后，就是结果
+ */
 class Solution2 {
 	
 	public int depthSum(List<NestedInteger> nestedList) {

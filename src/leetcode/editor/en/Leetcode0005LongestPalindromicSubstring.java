@@ -21,7 +21,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:36:56
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0005LongestPalindromicSubstring{
     // Java: longest-palindromic-substring
     public static void main(String[] args) {

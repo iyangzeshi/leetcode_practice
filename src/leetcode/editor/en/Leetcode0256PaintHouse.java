@@ -49,7 +49,7 @@
 package leetcode.editor.en;
 
 // 2020-11-09 13:45:50
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0256PaintHouse{
     // Java: paint-house
     public static void main(String[] args) {

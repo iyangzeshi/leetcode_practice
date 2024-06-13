@@ -28,7 +28,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 14:00:14
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0004MedianOfTwoSortedArrays {
 	
 	// Java: median-of-two-sorted-arrays

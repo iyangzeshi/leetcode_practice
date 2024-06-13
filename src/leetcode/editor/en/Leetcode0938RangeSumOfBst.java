@@ -34,7 +34,7 @@ import leetcode.editor.TreeGenerator;
 import leetcode.editor.TreeNode;
 
 // 2020-11-15 16:28:43
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0938RangeSumOfBst{
     // Java: range-sum-of-bst
     public static void main(String[] args) {

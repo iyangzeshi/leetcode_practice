@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Map;
 
 // 2021-02-04 17:09:51
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0315CountOfSmallerNumbersAfterSelf{
     // Java: count-of-smaller-numbers-after-self
     public static void main(String[] args) {

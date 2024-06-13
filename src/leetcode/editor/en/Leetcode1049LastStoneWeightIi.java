@@ -60,7 +60,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 // 2021-03-28 13:38:18
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1049LastStoneWeightIi{
     // Java: last-stone-weight-ii
     public static void main(String[] args) {

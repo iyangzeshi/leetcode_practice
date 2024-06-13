@@ -31,7 +31,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:43:58
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0674LongestContinuousIncreasingSubsequence{
     // Java: longest-continuous-increasing-subsequence
     public static void main(String[] args) {

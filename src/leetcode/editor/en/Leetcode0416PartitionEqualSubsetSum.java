@@ -46,7 +46,7 @@ import java.util.List;
 import java.util.Set;
 
 // 2020-07-26 14:19:39
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0416PartitionEqualSubsetSum {
 
 	// Java: partition-equal-subset-sum

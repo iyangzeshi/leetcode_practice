@@ -63,14 +63,16 @@ class Solution {
         }
         
         int[] sell = new int[k + 1];
+        
+        // profit[i][j] means profit at the end of the j day at most i transactions
         int[] profit = new int[k + 1];
         for (int i = 1; i <= k; i++) {
             profit[i] = -prices[0];
         }
         for (int j = 1; j < len; j++) { // j在 [0, len - 1]之间
             for (int i = 1; i <= k; i++) { // i在[0, k]之间
-                sell[i] = Math.max(sell[i], profit[i] + prices[j]);
-                profit[i] = Math.max(profit[i], sell[i - 1] - prices[j]);
+                sell[i] = Math.max(sell[i], profit[i] + prices[j]); // sell stock
+                profit[i] = Math.max(profit[i], sell[i - 1] - prices[j]); // buy stock
             }
         }
         return sell[k];
@@ -103,14 +105,16 @@ class Solution1_1 {
         /* end 可有可没有 */
 
         int[][] buy = new int[k + 1][len];
+        
+        // profit[i][j] means profit at the end of the j day at most i transactions
         int[][] profit = new int[k + 1][len];
         for (int i = 1; i <= k; i++) {
             buy[i][0] = -prices[0];
         }
         for (int i = 1; i <= k; i++) { // i在[0, k]之间
             for (int j = 1; j < len; j++) { // j在 [0, len - 1]之间
-                profit[i][j] = Math.max(profit[i][j - 1], buy[i][j - 1] + prices[j]);
-                buy[i][j] = Math.max(buy[i][j - 1], profit[i - 1][j - 1] - prices[j]);
+                profit[i][j] = Math.max(profit[i][j - 1], buy[i][j - 1] + prices[j]); // sell stock
+                buy[i][j] = Math.max(buy[i][j - 1], profit[i - 1][j - 1] - prices[j]); // buy stock
             }
         }
         return profit[k][len - 1];

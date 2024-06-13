@@ -61,7 +61,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 // 2020-10-21 16:55:08
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0291WordPatternIi{
     // Java: word-pattern-ii
     public static void main(String[] args) {

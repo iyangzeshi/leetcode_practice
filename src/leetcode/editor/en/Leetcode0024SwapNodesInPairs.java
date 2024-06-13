@@ -18,7 +18,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 11:12:29
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0024SwapNodesInPairs{
     // Java: swap-nodes-in-pairs
     public static void main(String[] args) {

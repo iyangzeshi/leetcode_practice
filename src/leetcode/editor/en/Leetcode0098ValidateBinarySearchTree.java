@@ -152,7 +152,7 @@ class Solution1 {
 
 // Solution 2: recursion, post-order Traversal, bottom up.
 class Solution2 {
-    // Zeshi Yang's code
+    // Jesse Yang's code
     class subTree {
 
         Integer min;

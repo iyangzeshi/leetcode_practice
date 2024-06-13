@@ -37,7 +37,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-12-12 20:05:21
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0700SearchInABinarySearchTree{
     // Java: search-in-a-binary-search-tree
     public static void main(String[] args) {

@@ -24,7 +24,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-09-08 22:06:08
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0252MeetingRooms{
     // Java: meeting-rooms
     public static void main(String[] args) {

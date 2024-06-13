@@ -28,7 +28,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:19:22
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0033SearchInRotatedSortedArray{
     // Java: search-in-rotated-sorted-array
     public static void main(String[] args) {

@@ -66,7 +66,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2021-02-02 14:36:18
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1000MinimumCostToMergeStones{
     // Java: minimum-cost-to-merge-stones
     public static void main(String[] args) {

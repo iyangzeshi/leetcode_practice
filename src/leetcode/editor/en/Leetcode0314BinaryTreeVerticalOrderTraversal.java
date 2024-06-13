@@ -86,7 +86,7 @@ import java.util.*;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 12:00:56
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0314BinaryTreeVerticalOrderTraversal{
     // Java: binary-tree-vertical-order-traversal
     public static void main(String[] args) {

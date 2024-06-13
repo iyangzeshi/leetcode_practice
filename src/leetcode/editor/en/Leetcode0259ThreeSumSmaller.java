@@ -20,7 +20,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-24 15:19:10
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0259ThreeSumSmaller{
     // Java: 3sum-smaller
     public static void main(String[] args) {

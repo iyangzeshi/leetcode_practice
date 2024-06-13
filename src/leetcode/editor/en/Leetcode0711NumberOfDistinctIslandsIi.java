@@ -77,7 +77,7 @@ import java.util.List;
 import java.util.Set;
 
 // 2021-01-19 21:47:39
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0711NumberOfDistinctIslandsIi{
     // Java: number-of-distinct-islands-ii
     public static void main(String[] args) {

@@ -51,7 +51,7 @@
 package leetcode.editor.en;
 
 // 2020-12-16 16:31:43
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0038CountAndSay{
     // Java: count-and-say
     public static void main(String[] args) {

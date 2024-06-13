@@ -37,7 +37,7 @@
 //stk.top();     // return 1, [5, 1] the stack did not change.
 //stk.peekMax(); // return 5, [5, 1] the stack did not change.
 //stk.pop();     // return 1, [5] the top of the stack and the max element is no
-//w 5.
+//weight 5.
 //stk.top();     // return 5, [5] the stack did not change.
 // 
 //
@@ -64,7 +64,7 @@ import java.util.Stack;
 import java.util.TreeMap;
 
 // 2021-02-10 14:43:53
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0716MaxStack{
     // Java: max-stack
     public static void main(String[] args) {

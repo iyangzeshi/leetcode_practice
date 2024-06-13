@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 // 2020-07-26 11:51:04
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0215KthLargestElementInAnArray {
 
 	// Java: kth-largest-element-in-an-array

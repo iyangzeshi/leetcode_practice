@@ -32,7 +32,7 @@
 package leetcode.editor.en;
 
 // 2020-11-09 14:09:02
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0276PaintFence{
     // Java: paint-fence
     public static void main(String[] args) {

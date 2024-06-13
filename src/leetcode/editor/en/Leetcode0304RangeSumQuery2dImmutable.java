@@ -36,7 +36,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 13:33:17
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0304RangeSumQuery2dImmutable{
     // Java: range-sum-query-2d-immutable
     public static void main(String[] args) {

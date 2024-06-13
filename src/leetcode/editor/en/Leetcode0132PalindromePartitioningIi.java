@@ -18,7 +18,7 @@ package leetcode.editor.en;
 /**
  * @ClassName: Leetcode132PalindromePartitioningIi
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020/07/02 周四 13:32
  */
 public class Leetcode0132PalindromePartitioningIi {

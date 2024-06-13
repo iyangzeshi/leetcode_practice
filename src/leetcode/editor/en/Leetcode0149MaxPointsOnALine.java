@@ -45,7 +45,7 @@ import java.util.Map;
 import javafx.util.Pair;
 
 // 2020-09-10 23:14:09
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0149MaxPointsOnALine{
     // Java: max-points-on-a-line
     public static void main(String[] args) {

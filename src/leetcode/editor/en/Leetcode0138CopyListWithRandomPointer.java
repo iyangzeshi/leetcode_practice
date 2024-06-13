@@ -59,7 +59,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-26 14:07:52
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0138CopyListWithRandomPointer{
     // Java: copy-list-with-random-pointer
     public static void main(String[] args) {

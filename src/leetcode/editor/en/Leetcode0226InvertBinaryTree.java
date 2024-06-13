@@ -33,7 +33,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-08-04 11:57:20
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0226InvertBinaryTree{
     // Java: invert-binary-tree
     public static void main(String[] args) {

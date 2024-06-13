@@ -23,7 +23,7 @@
 package leetcode.editor.en;
 
 // 2021-02-02 12:19:45
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0485MaxConsecutiveOnes{
     // Java: max-consecutive-ones
     public static void main(String[] args) {

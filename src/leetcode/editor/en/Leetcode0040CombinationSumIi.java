@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 // 2020-07-26 12:18:22
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0040CombinationSumIi{
     // Java: combination-sum-ii
     public static void main(String[] args) {

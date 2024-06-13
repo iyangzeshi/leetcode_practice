@@ -34,7 +34,7 @@
 package leetcode.editor.en;
 
 // 2020-11-13 12:01:07
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0330PatchingArray{
     // Java: patching-array
     public static void main(String[] args) {

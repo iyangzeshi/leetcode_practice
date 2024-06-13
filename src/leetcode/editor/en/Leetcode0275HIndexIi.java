@@ -36,7 +36,7 @@
 package leetcode.editor.en;
 
 // 2020-07-25 12:35:13
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0275HIndexIi{
     // Java: h-index-ii
     public static void main(String[] args) {

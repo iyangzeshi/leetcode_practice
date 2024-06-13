@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 2020-07-26 13:50:13
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0001TwoSum{
     // Java: two-sum
     public static void main(String[] args) {

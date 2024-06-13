@@ -34,7 +34,7 @@
 package leetcode.editor.en;
 
 // 2021-01-27 00:45:53
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0780ReachingPoints{
     // Java: reaching-points
     public static void main(String[] args) {

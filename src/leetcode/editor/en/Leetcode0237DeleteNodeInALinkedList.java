@@ -1,4 +1,4 @@
-//Write a function to delete a node (except the tail) in a singly linked list, g
+//Write a function to delete a node (except the tail) in a singly linked list, graph
 //iven only access to that node. 
 //
 // Given linked list -- head = [4,5,1,9], which looks like following: 
@@ -44,7 +44,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 11:59:54
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0237DeleteNodeInALinkedList{
     // Java: delete-node-in-a-linked-list
     public static void main(String[] args) {

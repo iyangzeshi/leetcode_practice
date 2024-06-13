@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Map;
 
 // 2021-04-21 16:46:57
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0244ShortestWordDistanceIi{
     // Java: shortest-word-distance-ii
     public static void main(String[] args) {

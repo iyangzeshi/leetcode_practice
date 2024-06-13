@@ -18,7 +18,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 13:27:00
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0221MaximalSquare{
     // Java: maximal-square
     public static void main(String[] args) {

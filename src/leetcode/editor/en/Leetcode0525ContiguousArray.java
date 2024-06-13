@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 2024-02-27 20:32:19
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode0525ContiguousArray{
     // Java: contiguous-array
     public static void main(String[] args) {

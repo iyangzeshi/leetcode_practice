@@ -1,5 +1,5 @@
 //Given a n x n matrix where each of the rows and columns are sorted in ascendin
-//g order, find the kth smallest element in the matrix. 
+//graph order, find the kth smallest element in the matrix.
 //
 // 
 //Note that it is the kth smallest element in the sorted order, not the kth dist
@@ -30,7 +30,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 // 2020-07-26 12:04:44
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0378KthSmallestElementInASortedMatrix{
     // Java: kth-smallest-element-in-a-sorted-matrix
     public static void main(String[] args) {

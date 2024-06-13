@@ -28,7 +28,7 @@
 package leetcode.editor.en;
 
 // 2021-04-21 17:01:59
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0605CanPlaceFlowers{
     // Java: can-place-flowers
     public static void main(String[] args) {

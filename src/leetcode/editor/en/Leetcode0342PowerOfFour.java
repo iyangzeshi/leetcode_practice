@@ -23,7 +23,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 12:10:46
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0342PowerOfFour{
     // Java: power-of-four
     public static void main(String[] args) {

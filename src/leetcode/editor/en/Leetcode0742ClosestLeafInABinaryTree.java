@@ -79,7 +79,7 @@ import leetcode.editor.TreeGenerator;
 import leetcode.editor.TreeNode;
 
 // 2020-11-15 13:45:53
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0742ClosestLeafInABinaryTree{
     // Java: closest-leaf-in-a-binary-tree
     public static void main(String[] args) {

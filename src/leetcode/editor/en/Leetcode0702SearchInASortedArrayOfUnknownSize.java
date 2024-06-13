@@ -39,7 +39,7 @@
 package leetcode.editor.en;
 
 // 2020-09-24 15:32:36
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0702SearchInASortedArrayOfUnknownSize {
 	
 	// Java: search-in-a-sorted-array-of-unknown-size

@@ -75,6 +75,13 @@ public class Leetcode0364NestedListWeightSumIi {
  *     public List<NestedInteger> getList();
  * }
  */
+// Solution 1: BFS, 每增加一级，都加上原来所有数字的总和
+/*
+记录3个值
+res 从第1层开始到当前层，答案所要求的加权求和
+sum 从第1层开始到现在的算数（每一层权重1）求和
+每遍历完一层，就用res += sum
+ */
 class Solution {
 	
 	public int depthSumInverse(List<NestedInteger> nestedList) {
@@ -110,7 +117,7 @@ class Solution {
 /*
 记录3个值
 res 从第1层开始到当前层，答案所要求的加权求和
-sum 从第1层开始到现在的算出求和
+sum 从第1层开始到现在的算数（每一层权重1）求和
 每遍历完一层，就用res += sum
  */
 class Solution1 {

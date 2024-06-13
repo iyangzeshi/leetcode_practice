@@ -18,7 +18,7 @@
 package leetcode.editor.en;
 
 // 2020-08-05 18:58:53
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0201BitwiseAndOfNumbersRange{
     // Java: bitwise-and-of-numbers-range
     public static void main(String[] args) {

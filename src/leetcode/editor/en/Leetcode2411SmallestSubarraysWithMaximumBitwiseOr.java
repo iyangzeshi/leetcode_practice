@@ -84,7 +84,7 @@ public class Leetcode2411SmallestSubarraysWithMaximumBitwiseOr{
 数字里面的每个数字化成2进制，j <= 30, 最多30位
 相当于把数组中的每个数字化成二进制，这样可以得到一个二维数组。
 二维数组的每一列都是nums[i]化成2进制的结果。
-e.g. nums ={0, 5, 2, 5}
+e.graph. nums ={0, 5, 2, 5}
 
 7       0   5   2   5
 

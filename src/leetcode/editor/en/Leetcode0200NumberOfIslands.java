@@ -33,7 +33,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 13:32:55
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0200NumberOfIslands{
     // Java: number-of-islands
     public static void main(String[] args) {

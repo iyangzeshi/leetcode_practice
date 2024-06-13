@@ -40,7 +40,7 @@ package leetcode.editor.en;
 import java.util.List;
 
 // 2024-01-16 17:32:00
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode0249GroupShiftedStrings{
     // Java: group-shifted-strings
     public static void main(String[] args) {

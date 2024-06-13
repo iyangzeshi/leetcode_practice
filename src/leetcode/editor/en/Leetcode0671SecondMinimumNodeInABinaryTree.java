@@ -48,7 +48,7 @@ import java.util.Queue;
 import leetcode.editor.TreeNode;
 
 // 2021-05-01 16:17:40
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0671SecondMinimumNodeInABinaryTree{
     // Java: second-minimum-node-in-a-binary-tree
     public static void main(String[] args) {

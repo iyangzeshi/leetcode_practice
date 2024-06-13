@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 // 2020-07-25 19:10:23
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0015ThreeSum {
 
 	// Java: 3sum

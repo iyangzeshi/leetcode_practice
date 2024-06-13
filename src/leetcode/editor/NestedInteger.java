@@ -8,7 +8,7 @@ import java.util.Queue;
  * @Program: leetcode_practice
  * @ClassName: NestedInteger
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020-07-09 17:24
  */
 public class NestedInteger{

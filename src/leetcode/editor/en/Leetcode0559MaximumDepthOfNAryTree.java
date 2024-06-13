@@ -40,7 +40,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-12-02 15:53:04
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0559MaximumDepthOfNAryTree{
     // Java: maximum-depth-of-n-ary-tree
     public static void main(String[] args) {

@@ -19,7 +19,7 @@ package leetcode.editor.en;
 import java.util.Stack;
 
 // 2020-09-09 18:51:40
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0042TrappingRainWater{
     // Java: trapping-rain-water
     public static void main(String[] args) {

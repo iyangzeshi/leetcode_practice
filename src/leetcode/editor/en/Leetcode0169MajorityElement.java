@@ -22,7 +22,7 @@
 package leetcode.editor.en;
 
 // 2020-07-29 21:49:44
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0169MajorityElement {
 
 	// Java: majority-element

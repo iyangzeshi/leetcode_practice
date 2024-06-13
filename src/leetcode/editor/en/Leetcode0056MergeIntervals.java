@@ -28,7 +28,7 @@ import java.util.Comparator;
 import java.util.List;
 
 // 2020-07-27 17:10:48
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0056MergeIntervals{
     // Java: merge-intervals
     public static void main(String[] args) {

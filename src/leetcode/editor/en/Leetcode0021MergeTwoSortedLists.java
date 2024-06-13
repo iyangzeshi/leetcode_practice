@@ -15,7 +15,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 11:12:23
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0021MergeTwoSortedLists{
     // Java: merge-two-sorted-lists
     public static void main(String[] args) {

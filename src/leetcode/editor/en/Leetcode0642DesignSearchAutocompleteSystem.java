@@ -98,7 +98,7 @@ import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 // 2020-07-17 15:11:28
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0642DesignSearchAutocompleteSystem{
     // Java: design-search-autocomplete-system
     public static void main(String[] args) {

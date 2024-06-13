@@ -14,7 +14,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 11:55:11
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0203RemoveLinkedListElements{
     // Java: remove-linked-list-elements
     public static void main(String[] args) {

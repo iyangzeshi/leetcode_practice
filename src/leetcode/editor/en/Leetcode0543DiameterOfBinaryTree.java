@@ -31,7 +31,7 @@ import leetcode.editor.TreeGenerator;
 import leetcode.editor.TreeNode;
 
 // 2020-09-07 18:00:18
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0543DiameterOfBinaryTree{
     // Java: diameter-of-binary-tree
     public static void main(String[] args) {

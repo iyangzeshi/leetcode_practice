@@ -16,7 +16,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 11:30:12
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0092ReverseLinkedListIi{
     // Java: reverse-linked-list-ii
     public static void main(String[] args) {

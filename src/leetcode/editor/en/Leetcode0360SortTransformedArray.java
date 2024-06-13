@@ -30,7 +30,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2020-12-15 21:20:51
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0360SortTransformedArray{
     // Java: sort-transformed-array
     public static void main(String[] args) {

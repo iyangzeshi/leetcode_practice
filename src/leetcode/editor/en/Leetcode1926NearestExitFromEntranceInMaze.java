@@ -70,7 +70,7 @@ import java.util.Queue;
 import java.util.Set;
 
 // 2024-02-20 21:27:55
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode1926NearestExitFromEntranceInMaze{
     // Java: nearest-exit-from-entrance-in-maze
     public static void main(String[] args) {

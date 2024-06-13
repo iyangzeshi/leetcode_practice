@@ -36,7 +36,7 @@
 package leetcode.editor.en;
 
 // 2020-10-19 18:01:36
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0411MinimumUniqueWordAbbreviation{
     // Java: minimum-unique-word-abbreviation
     public static void main(String[] args) {

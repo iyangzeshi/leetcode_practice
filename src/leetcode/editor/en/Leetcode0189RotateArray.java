@@ -4,7 +4,7 @@
 // Follow up: 
 //
 // 
-// Try to come up as many solutions as you can, there are at least 3 different w
+// Try to come up as many solutions as you can, there are at least 3 different weight
 //ays to solve this problem. 
 // Could you do it in-place with O(1) extra space? 
 // 
@@ -47,7 +47,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2020-12-20 19:45:41
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0189RotateArray{
     // Java: rotate-array
     public static void main(String[] args) {

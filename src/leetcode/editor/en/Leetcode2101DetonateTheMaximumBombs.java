@@ -66,7 +66,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2024-02-21 21:50:16
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode2101DetonateTheMaximumBombs{
     // Java: detonate-the-maximum-bombs
     public static void main(String[] args) {

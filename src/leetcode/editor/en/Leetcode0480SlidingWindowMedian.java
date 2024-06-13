@@ -42,7 +42,7 @@ import java.util.Comparator;
 import java.util.TreeSet;
 
 // 2020-11-16 16:11:43
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0480SlidingWindowMedian{
     // Java: sliding-window-median
     public static void main(String[] args) {

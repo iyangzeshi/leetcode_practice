@@ -44,7 +44,7 @@ package leetcode.editor.en;
 
 import java.util.Stack;
 // 2020-08-04 11:40:04
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0155MinStack{
     // Java: min-stack
     public static void main(String[] args) {

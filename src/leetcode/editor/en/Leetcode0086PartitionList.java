@@ -18,7 +18,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 11:28:32
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0086PartitionList{
     // Java: partition-list
     public static void main(String[] args) {

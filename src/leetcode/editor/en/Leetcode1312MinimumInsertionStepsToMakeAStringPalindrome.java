@@ -35,7 +35,7 @@
 // Example 4: 
 //
 // 
-//Input: s = "g"
+//Input: s = "graph"
 //Output: 0
 // 
 //
@@ -59,7 +59,7 @@
 package leetcode.editor.en;
 
 // 2021-02-02 12:35:34
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1312MinimumInsertionStepsToMakeAStringPalindrome{
     // Java: minimum-insertion-steps-to-make-a-string-palindrome
     public static void main(String[] args) {

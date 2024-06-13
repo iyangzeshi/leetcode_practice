@@ -51,7 +51,7 @@ package leetcode.editor.en;
 
 import java.util.Stack;
 // 2020-07-26 12:14:56
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0020ValidParentheses{
     // Java: valid-parentheses
     public static void main(String[] args) {

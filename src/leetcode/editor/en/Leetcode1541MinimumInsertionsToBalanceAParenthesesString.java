@@ -76,7 +76,7 @@
 package leetcode.editor.en;
 
 // 2021-03-09 14:06:15
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1541MinimumInsertionsToBalanceAParenthesesString{
     // Java: minimum-insertions-to-balance-a-parentheses-string
     public static void main(String[] args) {

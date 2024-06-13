@@ -27,7 +27,7 @@ package leetcode.editor.en;
 import java.util.HashMap;
 import java.util.Map;
 // 2020-07-26 13:52:03
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0170TwoSumIiiDataStructureDesign{
     // Java: two-sum-iii-data-structure-design
     public static void main(String[] args) {

@@ -41,7 +41,7 @@
 package leetcode.editor.en;
 
 // 2021-02-14 14:11:25
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0516LongestPalindromicSubsequence{
     // Java: longest-palindromic-subsequence
     public static void main(String[] args) {

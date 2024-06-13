@@ -21,7 +21,7 @@
 // 
 //Input: n = 4, edges = [[1,0],[1,2],[1,3]]
 //Output: [1]
-//Explanation: As shown, the height of the tree is 1 when the root is the node w
+//Explanation: As shown, the height of the tree is 1 when the root is the node weight
 //ith label 1 which is the only MHT.
 // 
 //
@@ -73,7 +73,7 @@ import java.util.Queue;
 import java.util.Set;
 
 // 2020-10-18 19:51:09
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0310MinimumHeightTrees{
     // Java: minimum-height-trees
     public static void main(String[] args) {

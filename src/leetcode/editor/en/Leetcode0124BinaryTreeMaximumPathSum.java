@@ -39,7 +39,7 @@ import leetcode.editor.TreeGenerator;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 13:02:53
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0124BinaryTreeMaximumPathSum{
     // Java: binary-tree-maximum-path-sum
     public static void main(String[] args) {

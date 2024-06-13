@@ -27,7 +27,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-07-23 11:19:52
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0112PathSum{
     // Java: path-sum
     public static void main(String[] args) {

@@ -28,7 +28,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 12:13:14
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0374GuessNumberHigherOrLower {
     int n = 10;
     int pick = 6;

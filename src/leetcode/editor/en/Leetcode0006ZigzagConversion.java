@@ -59,7 +59,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-11-24 21:17:04
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0006ZigzagConversion{
     // Java: zigzag-conversion
     public static void main(String[] args) {

@@ -65,7 +65,7 @@
 package leetcode.editor.en;
 
 // 2024-02-29 20:55:32
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode1915NumberOfWonderfulSubstrings{
     // Java: number-of-wonderful-substrings
     public static void main(String[] args) {

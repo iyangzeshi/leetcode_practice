@@ -34,7 +34,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-08-04 11:32:22
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0101SymmetricTree{
     // Java: symmetric-tree
     public static void main(String[] args) {

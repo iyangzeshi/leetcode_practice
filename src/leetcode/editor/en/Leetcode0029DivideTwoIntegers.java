@@ -60,7 +60,7 @@ package leetcode.editor.en;
 import java.util.Random;
 
 // 2020-12-15 16:47:21
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0029DivideTwoIntegers{
     
     // Java: divide-two-integers

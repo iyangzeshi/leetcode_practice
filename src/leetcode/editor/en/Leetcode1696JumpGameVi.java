@@ -53,7 +53,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 // 2021-02-08 16:17:10
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1696JumpGameVi{
     // Java: jump-game-vi
     public static void main(String[] args) {

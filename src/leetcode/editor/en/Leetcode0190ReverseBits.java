@@ -46,7 +46,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:49:28
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0190ReverseBits{
     // Java: reverse-bits
     public static void main(String[] args) {

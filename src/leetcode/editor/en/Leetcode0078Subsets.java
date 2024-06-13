@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Queue;
 
 // 2020-07-26 12:08:12
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0078Subsets {
 
 	// Java: subsets

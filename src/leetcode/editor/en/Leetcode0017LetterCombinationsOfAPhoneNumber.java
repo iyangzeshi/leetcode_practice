@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  * ClassName: Leetcode17LetterCombinationsOfAPhoneNumber
  * Description:
- * Author: Zeshi(Jesse) Yang
+ * Author: Jesse Yang
  * Date: 2020/06/23 周二 13:20
  */
 public class Leetcode0017LetterCombinationsOfAPhoneNumber {

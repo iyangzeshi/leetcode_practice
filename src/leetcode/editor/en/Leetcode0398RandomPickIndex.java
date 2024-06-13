@@ -27,7 +27,7 @@ package leetcode.editor.en;
 import java.util.Random;
 
 // 2020-08-05 21:32:28
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0398RandomPickIndex {
 
 	// Java: random-pick-index

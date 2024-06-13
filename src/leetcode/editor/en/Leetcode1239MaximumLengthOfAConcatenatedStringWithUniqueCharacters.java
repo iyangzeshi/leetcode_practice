@@ -45,7 +45,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 import java.util.List;
 // 2020-12-23 20:13:58
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1239MaximumLengthOfAConcatenatedStringWithUniqueCharacters{
     // Java: maximum-length-of-a-concatenated-string-with-unique-characters
     public static void main(String[] args) {

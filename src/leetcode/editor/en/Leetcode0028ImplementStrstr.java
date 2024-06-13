@@ -37,7 +37,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:34:56
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0028ImplementStrstr{
     // Java: implement-strstr
     public static void main(String[] args) {

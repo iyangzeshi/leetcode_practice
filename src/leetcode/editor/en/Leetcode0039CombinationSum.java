@@ -54,7 +54,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 // 2020-07-26 12:17:20
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0039CombinationSum{
     // Java: combination-sum
     public static void main(String[] args) {
@@ -67,7 +67,7 @@ public class Leetcode0039CombinationSum{
 // Solution 2: BFS 第1类搜索树
 class Solution {
     
-    //Zeshi Yang's code
+    //Jesse Yang's code
     // BFS 第1类搜索树
     // if sum == target, size--;答案里加上这个答案
     // if sum > target， size--; continue

@@ -62,7 +62,7 @@
 package leetcode.editor.en;
 
 // 2020-09-26 17:51:40
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0707DesignLinkedList {
 	
 	// Java: design-linked-list

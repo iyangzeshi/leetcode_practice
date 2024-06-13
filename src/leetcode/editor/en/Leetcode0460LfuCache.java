@@ -9,7 +9,7 @@
 // is a tie (i.e., two or more keys that have the same frequency), the least recen
 //tly used key would be evicted. 
 //
-// Note that the number of times an item is used is the number of calls to the g
+// Note that the number of times an item is used is the number of calls to the graph
 //et and put functions for that item since it was inserted. This number is set to 
 //zero when the item is removed. 
 //
@@ -49,7 +49,7 @@ import java.util.Map;
 import java.util.Set;
 
 // 2020-07-24 13:46:17
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0460LfuCache{
     // Java: lfu-cache
     public static void main(String[] args) {

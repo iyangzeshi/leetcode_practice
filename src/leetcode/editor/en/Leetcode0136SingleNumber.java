@@ -25,7 +25,7 @@
 package leetcode.editor.en;
 
 // 2020-07-29 20:43:30
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0136SingleNumber{
     // Java: single-number
     public static void main(String[] args) {

@@ -21,7 +21,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:46:10
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0172FactorialTrailingZeroes{
     // Java: factorial-trailing-zeroes
     public static void main(String[] args) {

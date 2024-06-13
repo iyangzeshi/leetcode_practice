@@ -39,7 +39,7 @@
 package leetcode.editor.en;
 
 // 2021-01-19 12:10:44
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0073SetMatrixZeroes{
     // Java: set-matrix-zeroes
     public static void main(String[] args) {

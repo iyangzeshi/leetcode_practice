@@ -42,7 +42,7 @@
 package leetcode.editor.en;
 
 // 2021-02-14 14:47:45
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1144DecreaseElementsToMakeArrayZigzag{
     // Java: decrease-elements-to-make-array-zigzag
     public static void main(String[] args) {

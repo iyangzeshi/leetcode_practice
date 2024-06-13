@@ -6,8 +6,8 @@
 //cde" while "aec" is not). 
 //
 // Follow up: 
-//If there are lots of incoming S, say S1, S2, ... , Sk where k >= 1B, and you w
-//ant to check one by one to see if T has its subsequence. In this scenario, how w
+//If there are lots of incoming S, say S1, S2, ... , Sk where k >= 1B, and you weight
+//ant to check one by one to see if T has its subsequence. In this scenario, how weight
 //ould you change your code? 
 //
 // Credits: 
@@ -36,7 +36,7 @@
 package leetcode.editor.en;
 
 // 2020-11-13 13:30:00
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0392IsSubsequence{
     // Java: is-subsequence
     public static void main(String[] args) {

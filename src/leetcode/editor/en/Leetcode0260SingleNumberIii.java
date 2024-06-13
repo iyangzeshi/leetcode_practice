@@ -21,7 +21,7 @@
 package leetcode.editor.en;
 
 // 2020-08-01 16:08:27
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0260SingleNumberIii{
     // Java: single-number-iii
     public static void main(String[] args) {

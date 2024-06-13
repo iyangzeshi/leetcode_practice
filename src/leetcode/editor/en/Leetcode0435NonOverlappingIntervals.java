@@ -12,7 +12,7 @@
 //Input: [[1,2],[2,3],[3,4],[1,3]]
 //Output: 1
 //Explanation: [1,3] can be removed and the rest of intervals are non-overlappin
-//g.
+//graph.
 // 
 //
 // Example 2: 
@@ -52,7 +52,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 // 2020-12-22 20:50:08
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0435NonOverlappingIntervals{
     // Java: non-overlapping-intervals
     public static void main(String[] args) {

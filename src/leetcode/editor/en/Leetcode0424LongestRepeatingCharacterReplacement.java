@@ -46,7 +46,7 @@
 package leetcode.editor.en;
 
 // 2020-07-24 01:05:21
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0424LongestRepeatingCharacterReplacement {
 
 	// Java: longest-repeating-character-replacement

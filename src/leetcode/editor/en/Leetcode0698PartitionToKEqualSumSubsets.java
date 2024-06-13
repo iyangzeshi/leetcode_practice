@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 // 2021-03-11 16:13:13
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0698PartitionToKEqualSumSubsets{
     // Java: partition-to-k-equal-sum-subsets
     public static void main(String[] args) {

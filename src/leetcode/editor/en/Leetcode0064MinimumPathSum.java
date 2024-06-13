@@ -21,7 +21,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 13:24:02
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0064MinimumPathSum{
     // Java: minimum-path-sum
     public static void main(String[] args) {

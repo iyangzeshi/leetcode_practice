@@ -20,7 +20,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-09-14 12:35:38
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0002AddTwoNumbers{
     // Java: add-two-numbers
     public static void main(String[] args) {

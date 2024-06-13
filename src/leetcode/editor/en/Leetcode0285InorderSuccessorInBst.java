@@ -40,7 +40,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-07-16 11:42:34
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0285InorderSuccessorInBst{
     // Java: inorder-successor-in-bst
     public static void main(String[] args) {

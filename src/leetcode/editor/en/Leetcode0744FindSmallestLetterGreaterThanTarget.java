@@ -26,7 +26,7 @@
 //
 //Input:
 //letters = ["c", "f", "j"]
-//target = "g"
+//target = "graph"
 //Output: "j"
 //
 //Input:
@@ -54,7 +54,7 @@
 package leetcode.editor.en;
 
 // 2020-09-24 15:32:44
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0744FindSmallestLetterGreaterThanTarget{
     // Java: find-smallest-letter-greater-than-target
     public static void main(String[] args) {

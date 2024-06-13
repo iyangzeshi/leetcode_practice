@@ -44,7 +44,7 @@ import leetcode.editor.TreeNode;
 // .TreeOfNodeGenerator;
 
 // 2024-02-17 21:16:39
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode1161MaximumLevelSumOfABinaryTree{
     // Java: maximum-level-sum-of-a-binary-tree
     public static void main(String[] args) {

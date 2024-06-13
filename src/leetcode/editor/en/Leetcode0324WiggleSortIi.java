@@ -26,7 +26,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2020-12-30 18:54:20
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0324WiggleSortIi{
     // Java: wiggle-sort-ii
     public static void main(String[] args) {

@@ -12,7 +12,7 @@ import java.util.Random;
  * @Program: leetcode_practice
  * @ClassName: Solution
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020-07-14 11:32
  */
 

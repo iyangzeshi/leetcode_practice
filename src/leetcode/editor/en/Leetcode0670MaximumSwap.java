@@ -32,7 +32,7 @@
 package leetcode.editor.en;
 
 // 2023-12-29 17:18:25
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode0670MaximumSwap{
     // Java: maximum-swap
     public static void main(String[] args) {

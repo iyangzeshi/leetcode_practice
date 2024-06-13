@@ -36,7 +36,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-26 14:04:27
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0628MaximumProductOfThreeNumbers{
     // Java: maximum-product-of-three-numbers
     public static void main(String[] args) {

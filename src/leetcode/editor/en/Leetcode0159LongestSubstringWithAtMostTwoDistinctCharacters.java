@@ -22,7 +22,7 @@
 package leetcode.editor.en;
 
 // 2020-07-23 17:02:27
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0159LongestSubstringWithAtMostTwoDistinctCharacters {
 
 	// Java: longest-substring-with-at-most-two-distinct-characters

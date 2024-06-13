@@ -21,7 +21,7 @@ import java.util.Queue;
 import leetcode.editor.TreeNode;
 
 // 2020-11-15 13:24:14
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0404SumOfLeftLeaves{
     // Java: sum-of-left-leaves
     public static void main(String[] args) {

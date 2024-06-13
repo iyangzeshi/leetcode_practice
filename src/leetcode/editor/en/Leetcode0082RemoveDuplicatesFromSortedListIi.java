@@ -24,7 +24,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-12-16 15:29:14
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0082RemoveDuplicatesFromSortedListIi{
     // Java: remove-duplicates-from-sorted-list-ii
     public static void main(String[] args) {

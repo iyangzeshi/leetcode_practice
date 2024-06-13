@@ -22,7 +22,7 @@ package leetcode.editor.en;
 import java.util.ArrayList;
 import java.util.List;
 // 2020-09-10 16:55:08
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0229MajorityElementIi{
     // Java: majority-element-ii
     public static void main(String[] args) {

@@ -31,7 +31,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:59:43
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0052NQueensIi{
     // Java: n-queens-ii
     public static void main(String[] args) {
@@ -124,7 +124,7 @@ class Solution2_1 {
     // Solution 2_1: 先check是不是走到底了，走到底了，就return 1；
     // general case里面，直走valid的分支（先check valid，不valid就不走）
     /**
-     Zeshi Yang's code
+     Jesse Yang's code
      isValid，用投影的方式，把每个Q都投影到列，（主+次）对角线上，直接读值判断Q有没有冲突
      然后用backtracking
      */

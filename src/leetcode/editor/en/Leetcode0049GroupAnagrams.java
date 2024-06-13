@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 // 2020-08-04 11:22:56
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0049GroupAnagrams{
     // Java: group-anagrams
     public static void main(String[] args) {

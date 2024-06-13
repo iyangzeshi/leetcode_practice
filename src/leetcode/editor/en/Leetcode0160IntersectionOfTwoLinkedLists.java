@@ -72,7 +72,7 @@ import leetcode.editor.ListGenerator;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 11:40:18
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0160IntersectionOfTwoLinkedLists{
     // Java: intersection-of-two-linked-lists
     public static void main(String[] args) {

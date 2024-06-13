@@ -30,7 +30,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-12-16 15:22:27
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1119RemoveVowelsFromAString{
     // Java: remove-vowels-from-a-string
     public static void main(String[] args) {

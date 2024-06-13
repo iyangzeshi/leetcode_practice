@@ -30,7 +30,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 // 2020-07-23 17:23:28
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0340LongestSubstringWithAtMostKDistinctCharacters {
 
 	// Java: longest-substring-with-at-most-k-distinct-characters

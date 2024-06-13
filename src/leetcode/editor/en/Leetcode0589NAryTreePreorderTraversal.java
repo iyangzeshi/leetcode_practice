@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 2020-09-26 19:40:38
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0589NAryTreePreorderTraversal{
     // Java: n-ary-tree-preorder-traversal
     public static void main(String[] args) {

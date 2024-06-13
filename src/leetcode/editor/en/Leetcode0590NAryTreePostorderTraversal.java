@@ -49,7 +49,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 // 2020-12-02 11:09:43
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0590NAryTreePostorderTraversal{
     // Java: n-ary-tree-postorder-traversal
     public static void main(String[] args) {

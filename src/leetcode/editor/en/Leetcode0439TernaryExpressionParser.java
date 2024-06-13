@@ -67,7 +67,7 @@ package leetcode.editor.en;
 import java.util.Stack;
 
 // 2020-08-10 15:50:55
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0439TernaryExpressionParser {
 
 	// Java: ternary-expression-parser

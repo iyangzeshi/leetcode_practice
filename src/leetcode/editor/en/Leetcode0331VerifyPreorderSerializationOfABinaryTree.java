@@ -48,7 +48,7 @@
 package leetcode.editor.en;
 
 // 2020-08-13 22:29:49
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0331VerifyPreorderSerializationOfABinaryTree {
 
 	// Java: verify-preorder-serialization-of-a-binary-tree

@@ -65,7 +65,7 @@ import java.util.Map;
 import java.util.Set;
 
 // 2020-07-19 13:46:13
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0269AlienDictionary {
 
 	// Java: alien-dictionary

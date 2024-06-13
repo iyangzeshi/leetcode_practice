@@ -36,7 +36,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 12:09:47
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0328OddEvenLinkedList{
     // Java: odd-even-linked-list
     public static void main(String[] args) {

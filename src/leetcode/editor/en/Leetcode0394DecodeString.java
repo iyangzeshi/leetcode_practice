@@ -32,7 +32,7 @@ package leetcode.editor.en;
 import java.util.Stack;
 
 // 2020-08-04 12:34:12
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0394DecodeString {
 
 	// Java: decode-string

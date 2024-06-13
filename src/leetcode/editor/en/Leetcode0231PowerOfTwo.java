@@ -26,7 +26,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:59:48
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0231PowerOfTwo{
     // Java: power-of-two
     public static void main(String[] args) {

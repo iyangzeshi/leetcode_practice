@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 2021-02-01 15:06:54
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0992SubarraysWithKDifferentIntegers{
     // Java: subarrays-with-k-different-integers
     public static void main(String[] args) {

@@ -42,7 +42,7 @@
 package leetcode.editor.en;
 
 // 2020-12-14 21:01:17
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0629KInversePairsArray{
     // Java: k-inverse-pairs-array
     public static void main(String[] args) {

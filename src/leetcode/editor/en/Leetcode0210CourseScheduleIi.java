@@ -65,7 +65,7 @@ import java.util.Map;
 import java.util.Queue;
 
 // 2020-09-07 00:37:45
-// Zeshi Yang
+// Jesse Yang
 
 /**
  * There are total n courses you have to take labelled from 0 to n - 1. Given the total number of
@@ -84,7 +84,7 @@ public class Leetcode0210CourseScheduleIi {
 		System.out.println(Arrays.toString(res));
 	}
 //leetcode submit region begin(Prohibit modification and deletion)
-// in-degree写法
+// in-degree写法, T(v, e) = O(v + E), S(v,e) = O(v + e)
 class Solution {
     
     public int[] findOrder(int numCourses, int[][] prerequisites) {

@@ -55,7 +55,7 @@ package leetcode.editor.en;
 import java.util.Comparator;
 import java.util.TreeSet;
 // 2020-12-22 18:43:51
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0436FindRightInterval{
     // Java: find-right-interval
     public static void main(String[] args) {

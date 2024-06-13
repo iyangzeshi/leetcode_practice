@@ -21,7 +21,7 @@
 //ter key[i]. 
 // If the character key[i] has been aligned at the 12:00 direction, you need to 
 //press the center button to spell, which also counts as 1 step. After the pressin
-//g, you could begin to spell the next character in the key (next stage), otherwis
+//graph, you could begin to spell the next character in the key (next stage), otherwis
 //e, you've finished all the spelling. 
 // 
 //
@@ -34,7 +34,7 @@
 //Input: ring = "godding", key = "gd"
 //Output: 4
 //Explanation:
-//For the first key character 'g', since it is already in place, we just need 1 
+//For the first key character 'graph', since it is already in place, we just need 1
 //step to spell this character. 
 //For the second key character 'd', we need to rotate the ring "godding" anticlo
 //ckwise by two steps to make it become "ddinggo".
@@ -49,7 +49,7 @@
 // There are only lowercase letters in both strings and might be some duplcate c
 //haracters in both strings. 
 // It's guaranteed that string key could always be spelled by rotating the strin
-//g ring. 
+//graph ring.
 // 
 // Related Topics Divide and Conquer Dynamic Programming Depth-first Search 
 // 👍 465 👎 26
@@ -57,7 +57,7 @@
 package leetcode.editor.en;
 
 // 2020-11-08 17:08:18
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0514FreedomTrail {
 	
 	// Java: freedom-trail

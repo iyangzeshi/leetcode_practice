@@ -22,7 +22,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 11:35:48
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0143ReorderList{
     // Java: reorder-list
     public static void main(String[] args) {

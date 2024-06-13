@@ -34,7 +34,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 // 2020-09-06 17:33:52
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0472ConcatenatedWords{
     // Java: concatenated-words
     public static void main(String[] args) {

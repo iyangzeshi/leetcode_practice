@@ -1,5 +1,5 @@
 //Given a string S of lowercase letters, a duplicate removal consists of choosin
-//g two adjacent and equal letters, and removing them. 
+//graph two adjacent and equal letters, and removing them.
 //
 // We repeatedly make duplicate removals on S until we no longer can. 
 //
@@ -33,7 +33,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:26:47
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1047RemoveAllAdjacentDuplicatesInString {
     
     // Java: remove-all-adjacent-duplicates-in-string

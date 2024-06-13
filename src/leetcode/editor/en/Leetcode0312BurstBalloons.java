@@ -27,7 +27,7 @@ package leetcode.editor.en;
 /**
   *@ClassName: Leetcode312BurstBalloons
   *@Description:
-  *@Author: Zeshi(Jesse) Yang
+  *@Author: Jesse Yang
   *@Date: 2020/07/03 周五 00:20
   */
 public class Leetcode0312BurstBalloons {

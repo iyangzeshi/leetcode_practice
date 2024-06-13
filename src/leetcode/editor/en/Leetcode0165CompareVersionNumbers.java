@@ -58,7 +58,7 @@
 package leetcode.editor.en;
 
 // 2020-09-10 13:36:43
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0165CompareVersionNumbers{
     // Java: compare-version-numbers
     public static void main(String[] args) {

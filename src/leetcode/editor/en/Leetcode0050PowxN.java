@@ -34,7 +34,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:23:07
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0050PowxN{
     // Java: powx-n
     public static void main(String[] args) {
@@ -44,14 +44,18 @@ public class Leetcode0050PowxN{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+//用divide and conquer, T(n) = O(log(n)), S(n) = O(log(n))
 class Solution {
     
-    public double myPow(double x, int n) {
-        // corner cases
+    private double binaryExp(double x, long n) {
+        // base case
         if (n == 0) { // 0 to the power 0
             return 1;
         } else if (n == 1) {
             return x;
+        }
+        if (n < 0) {
+            return 1.0 / binaryExp(x, -n);
         }
         
         if (x == 0) {
@@ -62,17 +66,13 @@ class Solution {
             return (n % 2 == 0 ? 1 : -1);
         }
         
-        if (n == Integer.MIN_VALUE) {
-            return Math.abs(x) > 1 ? 0 : Integer.MAX_VALUE;
-        }
-        
-        if (n < 0) {
-            return 1.0 / myPow(x, -n);
-        }
-        
-        double temp = myPow(x, n / 2);
+        double temp = binaryExp(x, n / 2);
         
         return n % 2 == 0 ? temp * temp : temp * temp * x;
+    }
+    
+    public double myPow(double x, int n) {
+        return binaryExp(x, (long) n);
     }
     
 }

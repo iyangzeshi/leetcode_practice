@@ -78,7 +78,7 @@ import java.util.Set;
 /**
   *@ClassName: Leetcode752OpenTheLock
   *@Description:
-  *@Author: Zeshi(Jesse) Yang
+  *@Author: Jesse Yang
   *@Date: 2020/06/22 周一 18:17
   */
 public class Leetcode0752OpenTheLock {

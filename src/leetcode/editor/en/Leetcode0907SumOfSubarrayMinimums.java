@@ -61,7 +61,7 @@ package leetcode.editor.en;
 
 import java.util.Stack;
 // 2021-01-13 17:47:44
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0907SumOfSubarrayMinimums{
     // Java: sum-of-subarray-minimums
     public static void main(String[] args) {

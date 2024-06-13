@@ -47,7 +47,7 @@
 package leetcode.editor.en;
 
 // 2020-12-16 19:22:02
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0009PalindromeNumber{
     // Java: palindrome-number
     public static void main(String[] args) {

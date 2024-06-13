@@ -25,7 +25,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2020-09-10 16:38:13
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0238ProductOfArrayExceptSelf{
     // Java: product-of-array-except-self
     public static void main(String[] args) {

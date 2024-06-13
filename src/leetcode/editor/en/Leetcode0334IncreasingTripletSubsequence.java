@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 2020-07-25 14:02:51
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0334IncreasingTripletSubsequence {
 
 	// Java: increasing-triplet-subsequence

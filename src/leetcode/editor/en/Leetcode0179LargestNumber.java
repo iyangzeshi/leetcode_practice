@@ -23,7 +23,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-26 13:48:23
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0179LargestNumber{
     // Java: largest-number
     public static void main(String[] args) {

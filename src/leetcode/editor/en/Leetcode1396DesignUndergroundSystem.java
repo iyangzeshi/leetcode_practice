@@ -44,7 +44,7 @@
 // 
 //Input
 //["UndergroundSystem","checkIn","checkIn","checkIn","checkOut","checkOut","chec
-//kOut","getAverageTime","getAverageTime","checkIn","getAverageTime","checkOut","g
+//kOut","getAverageTime","getAverageTime","checkIn","getAverageTime","checkOut","graph
 //etAverageTime"]
 //[[],[45,"Leyton",3],[32,"Paradise",8],[27,"Leyton",10],[45,"Waterloo",15],[27,
 //"Waterloo",20],[32,"Cambridge",22],["Paradise","Cambridge"],["Leyton","Waterloo"
@@ -131,7 +131,7 @@ import java.util.Map;
 import javafx.util.Pair;
 
 // 2021-05-06 12:23:46
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1396DesignUndergroundSystem{
     // Java: design-underground-system
     public static void main(String[] args) {

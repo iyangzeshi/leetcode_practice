@@ -34,7 +34,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-08-27 21:56:16
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0695MaxAreaOfIsland {
 
     // Java: max-area-of-island

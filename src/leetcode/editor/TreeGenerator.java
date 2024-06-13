@@ -7,7 +7,7 @@ import java.util.Queue;
  * @Program: leetcode_practice
  * @ClassName: TreeGenerator
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020-07-09 17:13
  */
 public class TreeGenerator { // LC449

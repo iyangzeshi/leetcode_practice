@@ -42,7 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 2024-02-27 21:06:10
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode1010PairsOfSongsWithTotalDurationsDivisibleBy60{
     // Java: pairs-of-songs-with-total-durations-divisible-by-60
     public static void main(String[] args) {

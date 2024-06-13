@@ -27,7 +27,7 @@ import leetcode.editor.TreeGenerator;
 import leetcode.editor.TreeNode;
 
 // 2020-10-19 17:10:21
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0257BinaryTreePaths{
     // Java: binary-tree-paths
     public static void main(String[] args) {

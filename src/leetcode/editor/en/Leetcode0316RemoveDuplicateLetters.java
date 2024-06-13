@@ -40,7 +40,7 @@ import java.util.Set;
 import java.util.Stack;
 
 // 2024-02-26 21:23:27
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode0316RemoveDuplicateLetters{
     // Java: remove-duplicate-letters
     public static void main(String[] args) {

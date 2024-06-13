@@ -27,7 +27,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2020-07-26 12:30:34
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0796RotateString{
     // Java: rotate-string
     public static void main(String[] args) {

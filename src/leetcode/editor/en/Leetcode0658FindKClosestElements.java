@@ -26,7 +26,7 @@ package leetcode.editor.en;
 import java.util.ArrayList;
 import java.util.List;
 // 2020-08-04 12:36:59
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0658FindKClosestElements{
     // Java: find-k-closest-elements
     public static void main(String[] args) {

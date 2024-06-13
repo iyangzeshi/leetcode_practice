@@ -24,7 +24,7 @@ package leetcode.editor.en;
 import java.util.Stack;
 
 // 2020-09-06 16:08:29
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0032LongestValidParentheses {
 
     // Java: longest-valid-parentheses

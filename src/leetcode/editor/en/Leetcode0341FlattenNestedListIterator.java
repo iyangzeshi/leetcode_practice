@@ -36,7 +36,7 @@ import java.util.Queue;
 import leetcode.editor.NestedInteger;
 
 // 2020-09-12 18:56:31
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0341FlattenNestedListIterator{
     // Java: flatten-nested-list-iterator
     public static void main(String[] args) {

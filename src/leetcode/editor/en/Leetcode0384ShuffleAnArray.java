@@ -23,7 +23,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-08-05 23:01:55
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0384ShuffleAnArray{
     // Java: shuffle-an-array
     public static void main(String[] args) {

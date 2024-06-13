@@ -34,7 +34,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-26 12:35:55
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0205IsomorphicStrings{
     // Java: isomorphic-strings
     public static void main(String[] args) {

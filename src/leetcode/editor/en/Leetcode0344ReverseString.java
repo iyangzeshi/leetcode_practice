@@ -31,7 +31,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:27:16
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0344ReverseString{
     // Java: reverse-string
     public static void main(String[] args) {

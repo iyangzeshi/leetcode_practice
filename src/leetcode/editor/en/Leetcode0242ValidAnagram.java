@@ -27,7 +27,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:35:16
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0242ValidAnagram{
     // Java: valid-anagram
     public static void main(String[] args) {

@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Set;
 
 // 2021-02-06 20:48:39
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0187RepeatedDnaSequences{
     // Java: repeated-dna-sequences
     public static void main(String[] args) {

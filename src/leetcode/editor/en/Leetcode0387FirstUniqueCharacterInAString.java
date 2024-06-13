@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Queue;
 
 // 2020-09-15 16:54:43
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0387FirstUniqueCharacterInAString{
     // Java: first-unique-character-in-a-string
     public static void main(String[] args) {

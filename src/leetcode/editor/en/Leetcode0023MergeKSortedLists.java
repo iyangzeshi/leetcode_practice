@@ -24,7 +24,7 @@ import java.util.Queue;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 11:12:27
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0023MergeKSortedLists{
     // Java: merge-k-sorted-lists
     public static void main(String[] args) {

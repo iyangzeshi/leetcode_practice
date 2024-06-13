@@ -45,7 +45,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 // 2020-07-26 11:56:03
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0692TopKFrequentWords{
     // Java: top-k-frequent-words
     public static void main(String[] args) {

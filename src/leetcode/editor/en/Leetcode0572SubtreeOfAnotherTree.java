@@ -55,7 +55,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-08-04 12:36:05
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0572SubtreeOfAnotherTree{
     // Java: subtree-of-another-tree
     public static void main(String[] args) {

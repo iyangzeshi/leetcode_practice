@@ -73,7 +73,7 @@
 package leetcode.editor.en;
 
 // 2021-02-08 16:16:12
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1340JumpGameV{
     // Java: jump-game-v
     public static void main(String[] args) {

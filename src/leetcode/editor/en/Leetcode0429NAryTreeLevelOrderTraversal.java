@@ -40,7 +40,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 // 2020-12-02 16:32:32
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0429NAryTreeLevelOrderTraversal{
     // Java: n-ary-tree-level-order-traversal
     public static void main(String[] args) {

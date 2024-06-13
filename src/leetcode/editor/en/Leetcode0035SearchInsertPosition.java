@@ -36,7 +36,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:19:25
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0035SearchInsertPosition{
     // Java: search-insert-position
     public static void main(String[] args) {

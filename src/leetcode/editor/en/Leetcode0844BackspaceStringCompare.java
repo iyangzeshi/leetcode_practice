@@ -52,7 +52,7 @@
 package leetcode.editor.en;
 
 // 2021-05-12 16:24:29
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0844BackspaceStringCompare{
     // Java: backspace-string-compare
     public static void main(String[] args) {

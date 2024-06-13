@@ -25,7 +25,7 @@ import java.util.Map;
 /**
   *@ClassName: Leetcode294FlipGameIi
   *@Description:
-  *@Author: Zeshi(Jesse) Yang
+  *@Author: Jesse Yang
   *@Date: 2020/06/30 周二 18:34
   */
 public class Leetcode0294FlipGameIi {

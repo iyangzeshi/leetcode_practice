@@ -54,7 +54,7 @@ import java.util.Map;
 import java.util.Set;
 
 // 2020-07-21 14:53:21
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0721AccountsMerge {
 
 	// Java: accounts-merge

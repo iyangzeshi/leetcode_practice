@@ -57,7 +57,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-12-21 14:13:45
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1249MinimumRemoveToMakeValidParentheses{
     // Java: minimum-remove-to-make-valid-parentheses
     public static void main(String[] args) {

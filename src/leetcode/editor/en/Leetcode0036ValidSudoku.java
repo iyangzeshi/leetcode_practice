@@ -71,7 +71,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-26 12:59:57
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0036ValidSudoku{
     // Java: valid-sudoku
     public static void main(String[] args) {

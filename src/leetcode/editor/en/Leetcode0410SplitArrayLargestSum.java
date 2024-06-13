@@ -44,7 +44,7 @@ package leetcode.editor.en;
 
 import java.util.Arrays;
 // 2020-09-24 15:32:23
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0410SplitArrayLargestSum{
     // Java: split-array-largest-sum
     public static void main(String[] args) {

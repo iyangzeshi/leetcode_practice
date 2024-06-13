@@ -48,7 +48,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 // 2020-09-08 22:13:36
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0759EmployeeFreeTime{
     // Java: employee-free-time
     public static void main(String[] args) {

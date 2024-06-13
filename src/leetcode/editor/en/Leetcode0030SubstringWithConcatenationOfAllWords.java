@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Map;
 
 // 2020-11-28 16:48:43
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0030SubstringWithConcatenationOfAllWords{
     // Java: substring-with-concatenation-of-all-words
     public static void main(String[] args) {

@@ -27,7 +27,7 @@
 package leetcode.editor.en;
 
 // 2020-07-24 23:15:06
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0069Sqrtx {
 
 	// Java: sqrtx

@@ -52,7 +52,7 @@ import java.util.Map;
 import java.util.Stack;
 
 // 2020-09-10 14:07:09
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0496NextGreaterElementI{
     // Java: next-greater-element-i
     public static void main(String[] args) {

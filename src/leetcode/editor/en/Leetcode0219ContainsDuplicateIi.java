@@ -35,7 +35,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-08-04 11:56:20
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0219ContainsDuplicateIi{
     // Java: contains-duplicate-ii
     public static void main(String[] args) {

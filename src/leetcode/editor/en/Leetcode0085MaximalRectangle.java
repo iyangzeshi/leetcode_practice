@@ -1,55 +1,44 @@
-//Given a rows x cols binary matrix filled with 0's and 1's, find the largest
-//rectangle containing only 1's and return its area.
-//
-// 
-// Example 1: 
-//
-// 
-//Input: matrix = [['1','0','1','0','0'],['1','0','1','1','1'],['1','1','1','1',
-//'1'],['1','0','0','1','0']]
-//Output: 6
-//Explanation: The maximal rectangle is shown in the above picture.
-// 
-//
-// Example 2: 
-//
-// 
-//Input: matrix = []
-//Output: 0
-// 
-//
-// Example 3: 
-//
-// 
-//Input: matrix = [['0']]
-//Output: 0
-// 
-//
-// Example 4: 
-//
-// 
-//Input: matrix = [['1']]
-//Output: 1
-// 
-//
-// Example 5: 
-//
-// 
-//Input: matrix = [['0','0']]
-//Output: 0
-// 
-//
-// 
-// Constraints: 
-//
-// 
-// rows == matrix.length 
-// cols == matrix.length 
-// 0 <= row, cols <= 200 
-// matrix[i][j] is '0' or '1'. 
-// 
-// Related Topics Array Hash Table Dynamic Programming Stack 
-// 👍 3723 👎 81
+/*
+Given a rows x cols binary matrix filled with 0's and 1's, find the largest
+rectangle containing only 1's and return its area.
+
+ 
+ Example 1:
+Input: matrix = [['1','0','1','0','0'],['1','0','1','1','1'],['1','1','1','1',
+'1'],['1','0','0','1','0']]
+Output: 6
+Explanation: The maximal rectangle is shown in the above picture.
+ 
+
+ Example 2:
+Input: matrix = []
+Output: 0
+ 
+
+ Example 3:
+Input: matrix = [['0']]
+Output: 0
+ 
+
+ Example 4:
+Input: matrix = [['1']]
+Output: 1
+ 
+
+ Example 5:
+Input: matrix = [['0','0']]
+Output: 0
+ 
+ Constraints:
+ 
+ rows == matrix.length
+ cols == matrix.length
+ 0 <= row, cols <= 200
+ matrix[i][j] is '0' or '1'.
+ 
+ Related Topics Array Hash Table Dynamic Programming Stack
+ 👍 3723 👎 81
+*/
 
 package leetcode.editor.en;
 
@@ -57,7 +46,7 @@ import java.util.Arrays;
 import java.util.Stack;
 
 // 2021-01-14 14:55:25
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0085MaximalRectangle{
     // Java: maximal-rectangle
     public static void main(String[] args) {
@@ -73,6 +62,14 @@ public class Leetcode0085MaximalRectangle{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+// Solution 2: DP，对于每一个连续的高度，找到往左边和往右边能拓展到哪里，对每一个高度计算一下area
+// T(n, m) = O(n * m), S(n, m) = O(n)
+// 2 ms,击败了99.29% 的Java用户, 42.7 MB,击败了26.05% 的Java用户
+/*
+对于matrix, 遍历每一层， rolling base
+设置left[], right[]数组表示每一层每一个位置，左边和右边比它自己小的边界(]
+height[]数组表示当前这个地方往上看有多少个连续的1
+ */
 class Solution {
     
     public int maximalRectangle(char[][] matrix) {
@@ -165,6 +162,12 @@ class Solution1_1 {
         return maxRect;
     }
     
+    /**
+     * T(n, m) = O(n * m), S(n, m) = O(n * m)
+     * @param matrix given matrix
+     * @return an array dp[][] that dp[i][j] means the number of consecutive 1 upward
+     */
+    
     private int[][] getHeights(char[][] matrix) {
         int rows = matrix.length;
         int cols = matrix[0].length;
@@ -173,7 +176,7 @@ class Solution1_1 {
         state transaction function,
         if i == 0 : dp[i][j] =  (matrix[i][j] == '1')
         if i > 0  : dp[i][j] =  dp[i][j] + 1 if matrix[i][j] == '1'
-                    dp[i][j] =  0 if matrix[i][j] == '1'
+                    dp[i][j] =  0 if matrix[i][j] == '0'
         */
         for(int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -265,11 +268,16 @@ class Solution1_2 {
 // Solution 2: DP，对于每一个连续的高度，找到往左边和往右边能拓展到哪里，对每一个高度计算一下area
 // T(n, m) = O(n * m), S(n, m) = O(n)
 // 2 ms,击败了99.29% 的Java用户, 42.7 MB,击败了26.05% 的Java用户
+/*
+对于matrix, 遍历每一层， rolling base
+设置left[], right[]数组表示每一层每一个位置，左边和右边比它自己小的边界(]
+height[]数组表示当前这个地方往上看有多少个连续的1
+ */
 class Solution2 {
     
     public int maximalRectangle(char[][] matrix) {
         //给定矩阵坐标，其中求出最大面积的表示
-        //采用分别记录左右高可达边界坐标，从而面积值为（右-左）*gao
+        //采用分别记录左右高可达边界坐标，从而面积值为（右-左）*高
         if (matrix == null || matrix.length == 0) {
             return 0;
         }
@@ -294,7 +302,7 @@ class Solution2 {
                 }
             }
             
-            //求左边界
+            //求左边界[ 闭区间
             for (int j = 0; j < cols; j++) {
                 if (chars[j] == '1') {
                     left[j] = Math.max(left[j], curLeft);

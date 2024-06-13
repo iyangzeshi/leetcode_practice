@@ -25,7 +25,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-26 12:40:12
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0118PascalsTriangle{
     // Java: pascals-triangle
     public static void main(String[] args) {

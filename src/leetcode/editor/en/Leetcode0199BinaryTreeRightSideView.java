@@ -25,7 +25,7 @@ import java.util.Queue;
 import leetcode.editor.TreeNode;
 
 // 2020-09-08 14:47:49
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0199BinaryTreeRightSideView{
     // Java: binary-tree-right-side-view
     public static void main(String[] args) {

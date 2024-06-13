@@ -45,7 +45,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-07-26 11:55:08
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0147InsertionSortList{
     // Java: insertion-sort-list
     public static void main(String[] args) {

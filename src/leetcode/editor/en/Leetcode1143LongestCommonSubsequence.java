@@ -50,7 +50,7 @@
 package leetcode.editor.en;
 
 // 2021-02-14 14:47:41
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1143LongestCommonSubsequence{
     // Java: longest-common-subsequence
     public static void main(String[] args) {

@@ -33,7 +33,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-26 12:58:22
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0051NQueens{
     // Java: n-queens
     public static void main(String[] args) {
@@ -47,7 +47,7 @@ public class Leetcode0051NQueens{
 // isValid，用3个array，投影的方式，投影到行，列，主次斜对角线上看有没有冲突
 class Solution {
     /**
-     Zeshi Yang's code
+     Jesse Yang's code
      Solution 2
      isValid，用投影的方式，把每个Q都投影到列，（主+次）对角线上，直接读值判断Q有没有冲突
      然后用backtracking
@@ -197,7 +197,7 @@ class Solution1 {
 // isValid，用3个array，投影的方式，投影到行，列，主次斜对角线上看有没有冲突
 class Solution2 {
     /**
-     Zeshi Yang's code
+     Jesse Yang's code
      Solution 2
      isValid，用投影的方式，把每个Q都投影到列，（主+次）对角线上，直接读值判断Q有没有冲突
      然后用backtracking

@@ -73,7 +73,7 @@
 // size and K are positive integers, which are in the range of [1, 100].
 // In the matrix flights, all the values are integers in the range of [0, 1]. 
 // In the matrix days, all the values are integers in the range [0, 7]. 
-// You could stay at a city beyond the number of vacation days, but you should w
+// You could stay at a city beyond the number of vacation days, but you should weight
 //ork on the extra days, which won't be counted as vacation days. 
 // If you fly from the city A to the city B and take the vacation on that day, t
 //he deduction towards vacation days will count towards the vacation days of city 
@@ -89,7 +89,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2020-11-07 17:34:13
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0568MaximumVacationDays{
     // Java: maximum-vacation-days
     public static void main(String[] args) {

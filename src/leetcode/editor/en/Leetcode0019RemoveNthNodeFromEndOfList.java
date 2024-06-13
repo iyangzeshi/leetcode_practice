@@ -25,7 +25,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-07-26 14:00:03
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0019RemoveNthNodeFromEndOfList {
     
     // Java: remove-nth-node-from-end-of-list

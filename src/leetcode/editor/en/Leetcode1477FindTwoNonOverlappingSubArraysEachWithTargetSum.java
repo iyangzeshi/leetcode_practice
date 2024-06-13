@@ -68,7 +68,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2020-07-24 14:52:42
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1477FindTwoNonOverlappingSubArraysEachWithTargetSum{
     // Java: find-two-non-overlapping-sub-arrays-each-with-target-sum
     public static void main(String[] args) {
@@ -81,7 +81,7 @@ public class Leetcode1477FindTwoNonOverlappingSubArraysEachWithTargetSum{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // Zeshi Yang's code
+    // Jesse Yang's code
     public int minSumOfLengths(int[] arr, int target) {
         // corner case
         if (arr == null || arr.length == 0) {

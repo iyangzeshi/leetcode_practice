@@ -26,7 +26,7 @@ package leetcode.editor.en;
 
 import java.util.Arrays;
 // 2020-08-29 16:51:09
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0322CoinChange{
     // Java: coin-change
     public static void main(String[] args) {

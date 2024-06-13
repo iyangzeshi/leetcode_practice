@@ -35,7 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 
 // 2020-07-26 13:00:15
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0037SudokuSolver {
     
     // Java: sudoku-solver

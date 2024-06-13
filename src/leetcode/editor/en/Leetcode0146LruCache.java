@@ -38,7 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 2020-09-09 17:16:07
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0146LruCache {
     // Java: lru-cache
     public static void main(String[] args) {
@@ -47,7 +47,7 @@ public class Leetcode0146LruCache {
         // TO TEST
         cache.put(2, 1);
         cache.put(2, 2);
-        cache.get(2);
+        System.out.println(cache.get(2));
         cache.put(1, 1);
         cache.put(4, 1);
         cache.get(2);

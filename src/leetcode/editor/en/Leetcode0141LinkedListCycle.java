@@ -60,7 +60,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 // 2020-08-04 11:35:46
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0141LinkedListCycle{
     // Java: linked-list-cycle
     public static void main(String[] args) {

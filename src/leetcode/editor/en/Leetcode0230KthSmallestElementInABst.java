@@ -50,7 +50,7 @@ import java.util.Stack;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 14:12:01
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0230KthSmallestElementInABst{
     // Java: kth-smallest-element-in-a-bst
     public static void main(String[] args) {

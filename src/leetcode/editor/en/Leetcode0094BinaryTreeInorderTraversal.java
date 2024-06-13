@@ -26,7 +26,7 @@ import leetcode.editor.TreeGenerator;
 import leetcode.editor.TreeNode;
 
 // 2020-08-04 11:30:17
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0094BinaryTreeInorderTraversal{
     // Java: binary-tree-inorder-traversal
     public static void main(String[] args) {

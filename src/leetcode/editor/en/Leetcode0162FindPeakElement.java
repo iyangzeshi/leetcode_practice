@@ -33,7 +33,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:43:46
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0162FindPeakElement {
 
 	// Java: find-peak-element

@@ -23,7 +23,7 @@
 package leetcode.editor.en;
 
 // 2020-07-21 13:38:51
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0261GraphValidTree {
 
 	// Java: graph-valid-tree

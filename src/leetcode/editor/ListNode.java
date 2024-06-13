@@ -4,7 +4,7 @@ package leetcode.editor;
  * @Program: leetcode_practice
  * @ClassName: ListNode
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020-07-09 20:53
  */
 public class ListNode {

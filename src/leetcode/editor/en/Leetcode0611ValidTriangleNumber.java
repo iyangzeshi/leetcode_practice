@@ -35,7 +35,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2021-05-02 16:51:30
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0611ValidTriangleNumber{
     // Java: valid-triangle-number
     public static void main(String[] args) {

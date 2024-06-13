@@ -1,38 +1,40 @@
-//Given an array nums, there is a sliding window of size k which is moving from 
-//the very left of the array to the very right. You can only see the k numbers in 
-//the window. Each time the sliding window moves right by one position. Return the
-// max sliding window. 
-//
-// Follow up: 
-//Could you solve it in linear time? 
-//
-// Example: 
-//
-// 
-//Input: nums = [1,3,-1,-3,5,3,6,7], and k = 3
-//Output: [3,3,5,5,6,7] 
-//Explanation: 
-//
-//Window position                Max
-//---------------               -----
-//[1  3  -1] -3  5  3  6  7       3
-// 1 [3  -1  -3] 5  3  6  7       3
-// 1  3 [-1  -3  5] 3  6  7       5
-// 1  3  -1 [-3  5  3] 6  7       5
-// 1  3  -1  -3 [5  3  6] 7       6
-// 1  3  -1  -3  5 [3  6  7]      7
-// 
-//
-// 
-// Constraints: 
-//
-// 
-// 1 <= nums.length <= 10^5 
-// -10^4 <= nums[i] <= 10^4 
-// 1 <= k <= nums.length 
-// 
-// Related Topics Heap Sliding Window 
-// 👍 3526 👎 170
+/*
+Given an array nums, there is a sliding window of size k which is moving from
+the very left of the array to the very right. You can only see the k numbers in
+the window. Each time the sliding window moves right by one position. Return the
+ max sliding window.
+
+ Follow up:
+Could you solve it in linear time?
+
+ Example:
+
+ 
+Input: nums = [1,3,-1,-3,5,3,6,7], and k = 3
+Output: [3,3,5,5,6,7]
+Explanation:
+
+Window position                Max
+---------------               -----
+[1  3  -1] -3  5  3  6  7       3
+ 1 [3  -1  -3] 5  3  6  7       3
+ 1  3 [-1  -3  5] 3  6  7       5
+ 1  3  -1 [-3  5  3] 6  7       5
+ 1  3  -1  -3 [5  3  6] 7       6
+ 1  3  -1  -3  5 [3  6  7]      7
+ 
+
+ 
+ Constraints:
+
+ 
+ 1 <= nums.length <= 10^5
+ -10^4 <= nums[i] <= 10^4
+ 1 <= k <= nums.length
+ 
+ Related Topics Heap Sliding Window
+ 👍 3526 👎 170
+*/
 
 package leetcode.editor.en;
 
@@ -40,7 +42,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 // 2020-07-26 14:05:02
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0239SlidingWindowMaximum{
     // Java: sliding-window-maximum
     public static void main(String[] args) {
@@ -107,6 +109,12 @@ class Solution {
 // 29 ms,击败了61.48% 的Java用户, 54 MB,击败了48.61% 的Java用户
 //
 /*
+deque的经典模型：
+sliding window max / min
+用法：在一个长度为k的字段（滑窗）内，在对头维护当前字段的max/min
+复杂度: T(n) = O(n)
+ */
+/*
 直觉
 如何优化时间复杂度呢？首先想到的是使用BST，因为在最大堆中 heap[0]永远是最大的元素。
 在大小为 k 的堆中插入/删除一个元素消耗 log(k) 时间，因此算法的时间复杂度为 O(n * log(k))。
@@ -119,7 +127,7 @@ deque中的第1个元素永远是sliding window里面的最大值，deque中的�
 遍历整个数组。在每一步 :
 清理双向队列 :
   - 只保留当前滑动窗口中有的元素的索引。
-  - 移除比当前元素小的所有元素，它们不可能是最大的。
+  - 移除比当前元素小的所有元素，因为它们不可能是最大的。
 将当前元素添加到双向队列中。
 将 deque[0] 添加到输出中。
 返回输出数组。

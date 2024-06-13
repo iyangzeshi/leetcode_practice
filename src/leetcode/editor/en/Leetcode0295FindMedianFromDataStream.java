@@ -45,7 +45,7 @@ package leetcode.editor.en;
 import java.util.Collections;
 import java.util.PriorityQueue;
 // 2020-07-26 14:00:36
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0295FindMedianFromDataStream{
     // Java: find-median-from-data-stream
     public static void main(String[] args) {

@@ -28,7 +28,7 @@ package leetcode.editor.en;
 
 import java.util.PriorityQueue;
 // 2020-09-08 18:23:56
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0703KthLargestElementInAStream{
     // Java: kth-largest-element-in-a-stream
     public static void main(String[] args) {

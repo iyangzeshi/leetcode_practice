@@ -31,7 +31,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:40:03
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0154FindMinimumInRotatedSortedArrayIi{
     // Java: find-minimum-in-rotated-sorted-array-ii
     public static void main(String[] args) {

@@ -36,7 +36,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 11:25:35
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0070ClimbingStairs{
     // Java: climbing-stairs
     public static void main(String[] args) {

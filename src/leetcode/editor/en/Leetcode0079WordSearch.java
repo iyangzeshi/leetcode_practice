@@ -32,7 +32,7 @@
 /*
   @ClassName: Leetcode79WordSearch
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020/06/23 周二 18:36
  */
 package leetcode.editor.en;

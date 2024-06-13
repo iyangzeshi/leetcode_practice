@@ -34,7 +34,7 @@ package leetcode.editor.en;
 import java.util.Stack;
 
 // 2020-08-13 20:04:08
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0255VerifyPreorderSequenceInBinarySearchTree{
     // Java: verify-preorder-sequence-in-binary-search-tree
     public static void main(String[] args) {

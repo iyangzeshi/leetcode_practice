@@ -38,7 +38,7 @@ package leetcode.editor.en;
 import leetcode.editor.TreeNode;
 
 // 2020-11-18 15:57:26
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0783MinimumDistanceBetweenBstNodes{
     // Java: minimum-distance-between-bst-nodes
     public static void main(String[] args) {

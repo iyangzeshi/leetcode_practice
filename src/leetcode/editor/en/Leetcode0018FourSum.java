@@ -25,7 +25,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-26 13:58:46
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0018FourSum{
     // Java: 4sum
     public static void main(String[] args) {

@@ -62,7 +62,7 @@ import java.util.Set;
 import java.util.Stack;
 
 // 2020-12-01 19:23:41
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1650LowestCommonAncestorOfABinaryTreeIii {
 	
 	// Java: lowest-common-ancestor-of-a-binary-tree-iii

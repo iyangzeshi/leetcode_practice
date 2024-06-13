@@ -31,7 +31,7 @@
 package leetcode.editor.en;
 
 // 2021-01-14 16:36:00
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0007ReverseInteger{
     // Java: reverse-integer
     public static void main(String[] args) {

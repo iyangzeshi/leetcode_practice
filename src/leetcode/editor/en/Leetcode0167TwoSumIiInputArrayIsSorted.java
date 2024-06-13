@@ -24,7 +24,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 13:51:44
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0167TwoSumIiInputArrayIsSorted{
     // Java: two-sum-ii-input-array-is-sorted
     public static void main(String[] args) {

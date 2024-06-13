@@ -54,7 +54,7 @@ import java.util.Queue;
 import java.util.Set;
 
 // 2021-02-06 20:47:52
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1306JumpGameIii{
     // Java: jump-game-iii
     public static void main(String[] args) {

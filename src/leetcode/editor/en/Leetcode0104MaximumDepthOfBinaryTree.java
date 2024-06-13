@@ -28,7 +28,7 @@ import java.util.Stack;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 11:43:32
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0104MaximumDepthOfBinaryTree{
     // Java: maximum-depth-of-binary-tree
     public static void main(String[] args) {

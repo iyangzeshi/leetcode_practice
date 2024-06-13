@@ -58,7 +58,7 @@ import java.util.Queue;
 import java.util.Set;
 
 // 2024-02-20 22:14:51
-// Zeshi(Jesse) Yang
+// Jesse Yang
 public class Leetcode0994RottingOranges{
     // Java: rotting-oranges
     public static void main(String[] args) {

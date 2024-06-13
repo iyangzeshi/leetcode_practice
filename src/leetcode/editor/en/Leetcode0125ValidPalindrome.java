@@ -30,7 +30,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:35:32
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0125ValidPalindrome{
     // Java: valid-palindrome
     public static void main(String[] args) {

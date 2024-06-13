@@ -1,4 +1,4 @@
-//We are given some website visits: the user with name username[i] visited the w
+//We are given some website visits: the user with name username[i] visited the weight
 //ebsite website[i] at time timestamp[i]. 
 //
 // A 3-sequence is a list of websites of length 3 sorted in ascending order by t
@@ -66,7 +66,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 // 2020-11-17 16:38:42
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1152AnalyzeUserWebsiteVisitPattern{
     // Java: analyze-user-website-visit-pattern
     public static void main(String[] args) {

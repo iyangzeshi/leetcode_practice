@@ -52,7 +52,7 @@ import java.util.PriorityQueue;
 import java.util.concurrent.ThreadLocalRandom;
 
 // 2020-09-08 18:49:29
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0973KClosestPointsToOrigin{
     // Java: k-closest-points-to-origin
     public static void main(String[] args) {

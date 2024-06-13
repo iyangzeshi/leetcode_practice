@@ -45,7 +45,7 @@ import java.util.ListIterator;
 import java.util.Queue;
 
 // 2020-08-07 10:38:23
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0281ZigzagIterator {
 
 	// Java: zigzag-iterator

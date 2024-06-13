@@ -23,7 +23,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-07-26 13:33:40
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0560SubarraySumEqualsK{
     // Java: subarray-sum-equals-k
     public static void main(String[] args) {

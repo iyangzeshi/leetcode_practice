@@ -29,7 +29,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-09-14 16:51:49
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0061RotateList{
     // Java: rotate-list
     public static void main(String[] args) {

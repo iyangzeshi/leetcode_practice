@@ -38,7 +38,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 // 2020-07-26 13:32:09
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0130SurroundedRegions{
     // Java: surrounded-regions
     public static void main(String[] args) {

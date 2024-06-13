@@ -7,7 +7,7 @@ import java.util.List;
  * @Program: leetcode_practice
  * @ClassName: TrieNode
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020-07-16 12:56
  */
 public class TrieNode {

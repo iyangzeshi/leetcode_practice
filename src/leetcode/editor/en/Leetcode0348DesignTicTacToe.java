@@ -61,7 +61,7 @@
 package leetcode.editor.en;
 
 // 2020-09-09 17:48:25
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0348DesignTicTacToe{
     // Java: design-tic-tac-toe
     public static void main(String[] args) {

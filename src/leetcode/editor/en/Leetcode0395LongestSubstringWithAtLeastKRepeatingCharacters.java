@@ -36,7 +36,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2021-01-30 17:28:52
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0395LongestSubstringWithAtLeastKRepeatingCharacters{
     // Java: longest-substring-with-at-least-k-repeating-characters
     public static void main(String[] args) {

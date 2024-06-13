@@ -27,7 +27,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 12:05:45
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0278FirstBadVersion{
     // Java: first-bad-version
     public static void main(String[] args) {

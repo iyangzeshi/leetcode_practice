@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 2020-10-19 23:37:52
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0131PalindromePartitioning{
     // Java: palindrome-partitioning
     public static void main(String[] args) {

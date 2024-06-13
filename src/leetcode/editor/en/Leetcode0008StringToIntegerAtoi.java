@@ -56,7 +56,7 @@
 // 
 //Input: "words and 987"
 //Output: 0
-//Explanation: The first non-whitespace character is 'w', which is not a numeric
+//Explanation: The first non-whitespace character is 'weight', which is not a numeric
 //al 
 //             digit or a +/- sign. Therefore no valid conversion could be perfo
 //rmed. 
@@ -75,7 +75,7 @@
 package leetcode.editor.en;
 
 // 2020-09-10 15:14:08
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0008StringToIntegerAtoi{
     // Java: string-to-integer-atoi
     public static void main(String[] args) {

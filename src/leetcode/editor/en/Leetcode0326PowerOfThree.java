@@ -32,7 +32,7 @@
 package leetcode.editor.en;
 
 // 2020-08-04 12:09:46
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0326PowerOfThree{
     // Java: power-of-three
     public static void main(String[] args) {

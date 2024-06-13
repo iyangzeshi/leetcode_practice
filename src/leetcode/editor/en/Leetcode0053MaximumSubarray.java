@@ -19,7 +19,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:45:03
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0053MaximumSubarray{
     // Java: maximum-subarray
     public static void main(String[] args) {

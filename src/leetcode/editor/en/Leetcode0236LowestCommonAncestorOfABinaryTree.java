@@ -49,7 +49,7 @@ import leetcode.editor.TreeGenerator;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 13:02:11
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0236LowestCommonAncestorOfABinaryTree{
     // Java: lowest-common-ancestor-of-a-binary-tree
     public static void main(String[] args) {

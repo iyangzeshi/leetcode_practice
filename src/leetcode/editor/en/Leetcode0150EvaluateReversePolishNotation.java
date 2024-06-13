@@ -48,7 +48,7 @@ package leetcode.editor.en;
 
 import java.util.Stack;
 // 2020-08-04 11:36:08
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0150EvaluateReversePolishNotation{
     // Java: evaluate-reverse-polish-notation
     public static void main(String[] args) {

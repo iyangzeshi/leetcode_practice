@@ -48,7 +48,7 @@ import java.util.Queue;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 12:03:06
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0958CheckCompletenessOfABinaryTree{
     // Java: check-completeness-of-a-binary-tree
     public static void main(String[] args) {

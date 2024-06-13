@@ -40,7 +40,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 // 2020-08-27 23:14:47
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0212WordSearchIi{
     // Java: word-search-ii
     public static void main(String[] args) {

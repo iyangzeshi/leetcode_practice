@@ -54,7 +54,7 @@ package leetcode.editor.en;
 
 import java.util.*;
 // 2020-12-21 18:38:41
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1190ReverseSubstringsBetweenEachPairOfParentheses{
     // Java: reverse-substrings-between-each-pair-of-parentheses
     public static void main(String[] args) {

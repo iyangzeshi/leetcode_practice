@@ -62,7 +62,7 @@ import java.util.Arrays;
 import java.util.Stack;
 
 // 2020-12-21 14:32:59
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0735AsteroidCollision {
 	
 	// Java: asteroid-collision

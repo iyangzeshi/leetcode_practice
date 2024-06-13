@@ -53,7 +53,7 @@ package leetcode.editor.en;
 import java.util.Arrays;
 
 // 2021-09-15 19:59:24
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode1877MinimizeMaximumPairSumInArray{
     // Java: minimize-maximum-pair-sum-in-array
     public static void main(String[] args) {

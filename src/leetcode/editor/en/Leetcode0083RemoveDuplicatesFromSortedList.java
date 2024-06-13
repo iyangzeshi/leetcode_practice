@@ -22,7 +22,7 @@ package leetcode.editor.en;
 import leetcode.editor.ListNode;
 
 // 2020-08-04 11:29:08
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0083RemoveDuplicatesFromSortedList{
     // Java: remove-duplicates-from-sorted-list
     public static void main(String[] args) {

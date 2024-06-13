@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.Queue;
 
 // 2021-02-25 14:18:22
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0428SerializeAndDeserializeNAryTree{
     // Java: serialize-and-deserialize-n-ary-tree
     public static void main(String[] args) {

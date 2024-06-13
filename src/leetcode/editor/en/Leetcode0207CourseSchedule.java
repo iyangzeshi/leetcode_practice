@@ -53,7 +53,7 @@ import java.util.Map;
 import java.util.Queue;
 
 // 2020-09-06 17:50:53
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0207CourseSchedule{
     // Java: course-schedule
     public static void main(String[] args) {

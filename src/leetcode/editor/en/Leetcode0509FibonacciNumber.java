@@ -46,7 +46,7 @@
 package leetcode.editor.en;
 
 // 2020-07-26 12:37:26
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0509FibonacciNumber{
     // Java: fibonacci-number
     public static void main(String[] args) {
@@ -79,6 +79,7 @@ class Solution {
 }
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: Recursion
+// T(n) = O(2^n), S(n) = O(n)
 class Solution1 {
     
     // Time complexity : O(2^n)
@@ -92,7 +93,8 @@ class Solution1 {
     
 }
 
-// Solution 2: Bottom-Up Solution using Memoization
+// Solution 2: DP: Bottom-Up Solution using Memoization
+// T(n) = O(n), S(n) = O(n)
 class Solution2 {
     
     public int fib(int n) {
@@ -114,7 +116,8 @@ class Solution2 {
     
 }
 
-// Solution 3: Top-Down Solution using Memoization
+// Solution 3: DFS, Top-Down Solution using Memoization
+// T(n) = O(n), S(n) = O(n)
 class Solution3 {
     
     private Integer[] cache = new Integer[31];
@@ -138,7 +141,8 @@ class Solution3 {
     
 }
 
-// Solution 4: Iterative Top-Down Solution
+// Solution 4: DP, Iterative Top-Down Solution, rooling base
+// T(n) = O(n), S(n) = O(1)
 class Solution4 {
     public int fib(int n) {
         if (n <= 1) {
@@ -160,9 +164,47 @@ class Solution4 {
         return current;
     }
 }
-
-// Solution 5: Math
+// DPS: 每次计算n/2项的结果，T(n) = O(log(n)), S(n) = O(log(n))
 class Solution5 {
+    int fib(int N) {
+        if (N <= 1) {
+            return N;
+        }
+        int[][] A = new int[][]{{1, 1}, {1, 0}};
+        matrixPower(A, N - 1);
+        
+        return A[0][0];
+    }
+    
+    void matrixPower(int[][] A, int N) {
+        if (N <= 1) {
+            return;
+        }
+        matrixPower(A, N / 2);
+        multiply(A, A);
+        
+        int[][] B = new int[][]{{1, 1}, {1, 0}};
+        if (N % 2 != 0) {
+            multiply(A, B);
+        }
+    }
+    
+    void multiply(int[][] A, int[][] B) {
+        int x = A[0][0] * B[0][0] + A[0][1] * B[1][0];
+        int y = A[0][0] * B[0][1] + A[0][1] * B[1][1];
+        int z = A[1][0] * B[0][0] + A[1][1] * B[1][0];
+        int w = A[1][0] * B[0][1] + A[1][1] * B[1][1];
+        
+        A[0][0] = x;
+        A[0][1] = y;
+        A[1][0] = z;
+        A[1][1] = w;
+    }
+}
+
+// Solution 6: Math
+// T(n) = O(1), S(n) = O(1)
+class Solution6 {
     
     public int fib(int n) {
         double goldenRatio = (1 + Math.sqrt(5)) / 2;

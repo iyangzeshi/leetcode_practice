@@ -147,7 +147,7 @@ class Solution1_2 {
 	        profit1 = Math.max(profit1, price + buy1); // (不卖当前这个股票，卖了当前这个股票）
 	        buy1 = Math.max(buy1, -price); // (不把当前这个股票当作买的第1个股票，买当前这个股票作为第1个买的股票）
 	
-	        profit2 = Math.max(profit2, price + buy2); // 对于第2个股票，（卖了当前这个股票，卖了当前这个股票）
+	        profit2 = Math.max(profit2, price + buy2); // 对于第2个股票，（不卖当前这个股票，卖了当前这个股票）
 	        buy2 = Math.max(buy2, profit1 - price); // 对于第2个股票： (不买当前这个股票，买当前这个股票）
         }
         return profit2;

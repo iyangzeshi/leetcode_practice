@@ -61,7 +61,7 @@ package leetcode.editor.en;
 import java.util.LinkedList;
 import java.util.Queue;
 // 2020-12-12 20:09:24
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0225ImplementStackUsingQueues{
     // Java: implement-stack-using-queues
     public static void main(String[] args) {

@@ -46,7 +46,7 @@ import java.util.Map;
 /**
  * @ClassName: Leetcode464CanIWin
  * @Description:
- * @Author: Zeshi(Jesse) Yang
+ * @Author: Jesse Yang
  * @Date: 2020/06/30 周二 19:12
  */
 public class Leetcode0464CanIWin {

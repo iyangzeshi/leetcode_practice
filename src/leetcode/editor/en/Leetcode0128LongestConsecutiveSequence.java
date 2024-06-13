@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.Set;
 
 // 2020-11-25 20:44:05
-// Zeshi Yang
+// Jesse Yang
 public class Leetcode0128LongestConsecutiveSequence{
     // Java: longest-consecutive-sequence
     public static void main(String[] args) {
