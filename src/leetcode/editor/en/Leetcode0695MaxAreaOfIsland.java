@@ -47,10 +47,114 @@ public class Leetcode0695MaxAreaOfIsland {
     }
 
 //leetcode submit region begin(Prohibit modification and deletion)
+/*
+Solution 1: DFS, T(m,n) = O(m,n), S(m,n) = O(m,n)
+用DFS计算每个岛的面积，然后求他们中间的最大值
+ */
 class Solution {
 
     private final int[][] DIRECTIONS = new int[][]{{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
 
+    public int maxAreaOfIsland(int[][] grid) {
+        // corner case
+        if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0) {
+            return 0;
+        }
+        
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int maxArea = 0;
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] == 1) {
+                    int[] area = new int[1];
+                    doDFSsearch(grid, i, j, area);
+                    maxArea = Math.max(maxArea, area[0]);
+                }
+            }
+        }
+        return maxArea;
+    }
+    
+    private void doDFSsearch(int[][] grid, int row, int col, int[] area) {
+        //base case - failure case
+        if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length
+                || grid[row][col] == 0 || grid[row][col] == 2) {
+            return;
+        }
+        
+        grid[row][col] = 2;
+        area[0]++;
+        
+        //general case
+        for (int[] direction: DIRECTIONS) {
+            int r = row + direction[0];
+            int c = col + direction[1];
+            doDFSsearch(grid, r, c, area);
+        }
+    }
+
+}
+//leetcode submit region end(Prohibit modification and deletion)
+/*
+Solution 1: DFS, T(m,n) = O(m,n), S(m,n) = O(m,n)
+用DFS计算每个岛的面积，然后求他们中间的最大值
+ */
+class Solution1 {
+    
+    private final int[][] DIRECTIONS = new int[][]{{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
+    
+    public int maxAreaOfIsland(int[][] grid) {
+        // corner case
+        if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0) {
+            return 0;
+        }
+        
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int maxArea = 0;
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] == 1) {
+                    int[] area = new int[1];
+                    doDFSsearch(grid, i, j, area);
+                    maxArea = Math.max(maxArea, area[0]);
+                }
+            }
+        }
+        return maxArea;
+    }
+    
+    private void doDFSsearch(int[][] grid, int row, int col, int[] area) {
+        //base case - failure case
+        if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length
+                || grid[row][col] == 0 || grid[row][col] == 2) {
+            return;
+        }
+        
+        grid[row][col] = 2;
+        area[0]++;
+        
+        //general case
+        for (int[] direction: DIRECTIONS) {
+            int r = row + direction[0];
+            int c = col + direction[1];
+            doDFSsearch(grid, r, c, area);
+        }
+    }
+    
+}
+
+/*
+Solution 2: BFS, T(m,n) = O(m,n), S(m,n) = O(m,n)
+用BFS计算每个岛的面积，然后求他们中间的最大值
+ */
+class Solution2 {
+    
+    private final int[][] DIRECTIONS = new int[][]{{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
+    
     public int maxAreaOfIsland(int[][] grid) {
         int maxArea = 0;
         Set<Integer> visited = new HashSet<>();
@@ -66,15 +170,15 @@ class Solution {
         }
         return maxArea;
     }
-
+    
     private int bfs(int i, int j, Set<Integer> visited, int[][] grid) {
         int rows = grid.length;
         int cols = grid[0].length;
         visited.add(i * cols + j);
-
+        
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(i * cols + j);
-
+        
         int area = 1;
         while (!queue.isEmpty()) {
             int index = queue.poll();
@@ -94,7 +198,6 @@ class Solution {
         }
         return area;
     }
-
+    
 }
-//leetcode submit region end(Prohibit modification and deletion)
 }

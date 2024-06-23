@@ -252,6 +252,14 @@ class Solution1 {
 		return res;
 	}
 	
+	/**
+	 *
+	 * @param cur current word
+	 * @param target target word
+	 * @param list list from the target heading to begin word
+	 * @param paths List of Paths from target to begin word
+	 * @param graph graph from this word to list of its next neighbor words
+	 */
 	private void dfsBuildPaths(String cur, String target, List<String> list,
 			List<List<String>> paths, Map<String, List<String>> graph) {
 		// base case

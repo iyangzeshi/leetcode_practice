@@ -52,6 +52,13 @@ public class Leetcode0073SetMatrixZeroes{
 // in place操作，先遍历第一行和第一列，再遍历剩下的点，为0做标记, T(n, m) = O(n * m), S(n, m) = O(1)
 // 1 ms,击败了92.24% 的Java用户, 40.8 MB,击败了42.51% 的Java用户
 /*
+为了避免直接修改矩阵导致信息丢失，
+可以使用两个标记数组（或者利用矩阵的第一行和第一列来充当标记），
+分别用来标记哪些行和列需要被置为0。
+为了省空间，就把inplace把原数组的第一行和第一列设成标记数组；
+但是需要先记录原来的第一行和第一列是否本来就存在0，
+这样最后的时候看是否要把第一行第一列都置0
+
 step1 :
     设置两个boolean firstRow 和 firstCol,分别表示第一行和第一列有没有0
     遍历第一行和第一列，update firstRow 和 firstCol
@@ -65,6 +72,7 @@ step3:
 step 4:
      如果firstRow == true，把第一行都变成0
      如果firstCol == true，把第一列都变成0
+ T(m,n) = O(m*n), O(m,n) = O(1)
  */
 class Solution {
     
@@ -112,18 +120,18 @@ class Solution {
             }
         }
         
-        // step 4: update first row and column to 0 if need
+        // step 4: update first row and column to 0 if necessary
+        if (row0Has0) {
+            for (int j = 0; j < cols; j++) {
+                matrix[0][j] = 0;
+            }
+        }
         if (col0Has0) {
             for (int i = 0; i < rows; i++) {
                 matrix[i][0] = 0;
             }
         }
-        if (row0Has0) {
-            for (int j = 0; j < cols; j++) {
-                matrix[0][j] = 0;
-            }
-            
-        }
+        
         
     }
     

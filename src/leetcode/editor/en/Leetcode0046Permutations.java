@@ -38,6 +38,14 @@ public class Leetcode0046Permutations{
     }
     
 //leetcode submit region begin(Prohibit modification and deletion)
+// Solution 1_1: using swap to avoid duplicate 第1类搜索树, T(n) = O(n!), S(n) = (n * n!)
+// 1 ms,击败了93.75% 的Java用户, 38.7 MB,击败了99.64% 的Java用户
+/*
+divided array into 2 parts, visited and visiting
+every time, we can choose a number(any number) from visiting and add it to the visiting
+using dfs
+List<Integer> path is the current path.
+ */
 class Solution {
     
     public List<List<Integer>> permute(int[] nums) {

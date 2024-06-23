@@ -36,13 +36,20 @@ public class Leetcode0049GroupAnagrams{
         // TO TEST
         String[] strs = {"eat","tea","tan","ate","nat","bat"};
         List<List<String>> res = sol.groupAnagrams(strs);
+        Arrays.asList(new String[]{"1", "2"});
+        // throw new RuntimeException("Not valid");
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 /* T(n, k) = O(n*k), S(n,k) = O(n,k),
-assuming n is number of words, k is  length of longest word
+assuming n is number of words, k is length of longest word
+Initialize a hash map to store the grouped anagrams.
 build a hashmap to traverse all the words
-the key is the char count of that anagram, value is the list of anagram of the key
+the key is the size 26 of char count of that anagram, value is the list of anagram of the key
+
+If the key is not present in the hash map, add it with a new list as the value.
+Append the original string to the list corresponding to the key.
+After processing all strings, extract the values from the hash map, which are the grouped anagrams.
  */
  
 class Solution {
