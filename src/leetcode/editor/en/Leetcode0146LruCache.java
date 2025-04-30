@@ -62,33 +62,33 @@ public class Leetcode0146LruCache {
 // T(n) = O(1), S(n) = O(n)
 /*
 using the double LinkedList and HashMap to implement the function
+HashMap {key: int; value: Node}
+Node {
+    int key;
+    int val;
+}
 
+head <-> node1 <-> node2 <-> ... <-> node5 <-> tail
 1.
-
-    if   HashMap查询是否存在{
-        // 存在
+step 1: HashMap查询key是否存在
+    case 1.1 : exist
         (1)存在则将节点移动到LinkedList头部（因为它最近被用到了）；
         (2)返回value
-    }
+    case 1.2 not exist 返回-1 // 没查到
     
-    返回-1 // 没查到
-2. put method:
-    if   HashMap查询是否存在{
-            // 存在
+step 2. put method: HashMap查询key是否存在
+    case 2.1 存在
             (1) 更新节点值；
             (2) 并且将节点移动到头部（被用到）；
-    } else{
-            // 不存在
-            (1) if 当前缓存空间是否够用 {
-                    // 不够用 则需要LRU淘汰
-                    (1) 删除链表尾部节点
-                    (2) 删除HashMap中尾部节点Key
-            }
+    case 2.2 不存在
+    查询当前缓存空间是否够用
+        case 2.2.1: 不够用 则需要LRU淘汰
+            (1) 删除链表尾部节点 tail.prev
+            (2) 删除HashMap中尾部节点tail.prev
     
-            // 正常加入即可
+        case 2.2.2: 缓存空间够用，正常加入即可
             (1) 链表添加新节点
             (2) HashMap增加新KV
-    }
 */
 class LRUCache {
     
@@ -137,10 +137,11 @@ class LRUCache {
     
     private void AddToHead(Node node) {
         // move node to first place
-        node.next = head.next;
+        Node following = head.next;
         head.next = node;
+        node.next = following;
         node.prev = head;
-        node.next.prev = node;
+        following.prev = node;
     }
     
 }
@@ -148,7 +149,7 @@ class LRUCache {
 class Node {
     
     /* these fields, to do private, add getter & setter */
-    int key;
+    final int key;
     int val; // value paired to key
     Node prev;
     Node next;

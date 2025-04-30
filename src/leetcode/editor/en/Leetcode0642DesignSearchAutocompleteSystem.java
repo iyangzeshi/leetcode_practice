@@ -678,7 +678,9 @@ class AutocompleteSystem2_2 {
 }
 
 // Solution 2_3:
-// 103 ms,击败了94.64% 的Java用户, 49.1 MB,击败了43.72% 的Java用户
+/*
+和Solution 2_2的区别： countMap只需要生成一个，这里是在Trie里面生成
+ */
 class AutocompleteSystem2_3 {
     
     class Trie {

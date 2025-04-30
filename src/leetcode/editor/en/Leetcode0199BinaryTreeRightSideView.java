@@ -136,6 +136,7 @@ class Solution2 {
         return rightSideList;
     }
 
+    // pre-order traverse the tree: right, cur, left
     private void dfs (int index, TreeNode cur, List<Integer> rightSideList) {
         // corner case
         if (cur == null) {

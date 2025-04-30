@@ -71,6 +71,22 @@ public class Leetcode0225ImplementStackUsingQueues{
         System.out.println();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+// Solution 1: push: T(n) = O(n); peek: T(n) = O(1), pop: T(n) = O(1)
+// 0 ms,击败了100.00% 的Java用户, 36.1 MB,击败了98.97% 的Java用户
+    /**
+     * 用queue实现stack，
+     * queue是FIFO, stack是LIFO有两种方法
+     * 第1种方法：
+     *      stack：左边是底，右边是head，[1，2，3，4，5]
+     *      设置一个queue来模拟stack，queue:左进右出[1，2，3，4]， 5
+     *      step1: mimic stack push: T(n) = O(n)
+     *          把queue里面原先所有的element一次poll出来在offer到queue的末尾, O(n)
+     *          [5,1,2,3,4] ->[4,5,1,2,3] ->[4,5,1,2,3] -> .. -> [1,2,3,4,5]
+     *      step2: mimic stack peek, T(n) = O(1)
+     *          把queue里面的第一个元素peek出来, peek 5
+     *      step3: mimic stack pop, T(n) = O(1)
+     *          把queue里面的第一个元素poll出来, pop 5
+     */
 class MyStack {
     
     private Queue<Integer> q1;
@@ -126,12 +142,17 @@ class MyStack {
 // 0 ms,击败了100.00% 的Java用户, 36.1 MB,击败了98.97% 的Java用户
 /**
  * 用queue实现stack，
- * queue是FIFO, stack是FILO有两种方法
+ * queue是FIFO, stack是LIFO有两种方法
  * 第1种方法：
- *      设置一个queue
- *      实现stack的push, 把queue里面原先所有的element一次poll出来在offer到queue的末尾, O(n)
- *      实现stack的peek, 把queue里面的第一个元素peek出来, O(1)
- *      实现stack的pop, 把queue里面的第一个元素poll出来, O(1)
+ *      stack：左边是底，右边是head，[1，2，3，4，5]
+ *      设置一个queue来模拟stack，queue:左进右出[1，2，3，4]， 5
+ *      step1: mimic stack push: T(n) = O(n)
+ *          把queue里面原先所有的element一次poll出来在offer到queue的末尾, O(n)
+ *          [5,1,2,3,4] ->[4,5,1,2,3] ->[4,5,1,2,3] -> .. -> [1,2,3,4,5]
+ *      step2: mimic stack peek, T(n) = O(1)
+ *          把queue里面的第一个元素peek出来, peek 5
+ *      step3: mimic stack pop, T(n) = O(1)
+ *          把queue里面的第一个元素poll出来, pop 5
  */
 class MyStack1 {
     
@@ -173,10 +194,22 @@ class MyStack1 {
 // 0 ms,击败了100.00% 的Java用户, 36.8 MB,击败了69.07% 的Java用户
 /**
  * 第2种方法：
+ *      stack：左边是底，右边是head，[1，2，3，4，5]
  *      设置两个queue
- *      实现stack的push, 直接把新的元素放到offer到queue里面
- *      实现stack的peek, 把queue1里面所有元素，都依次offer另外一个queue2里面，return queue1里面的最后一个元素
- *      实现stack里面的pop，把queue1里面除了最后一个元素以外的其他元素，都依次offer到queue2里面，queue1里面的最后一个元素poll出来
+ *          queue 1: [5,4,3,2,1]
+ *          queue 2: []
+ *      step 1: mimic stack push, T(n) = O(1)
+ *          直接把新的元素放到offer到queue里面[4,3,2,1] and 5 to [5,4,3,2,1]
+ *
+ *      step 2: mimic stack pop，T(n) = O(n)
+ *          把queue1里面除了最后一个元素以外的其他元素，都依次offer到queue2里面，queue1里面的最后一个元素poll出来
+ *          queue 1: pop all elements to queue 2 except the last one
+ *                 queue 1 [5,4,3,2,1] -> [5]
+ *                 queue 2 [] ->          [4,3,2,1]
+ *                 then pop 5
+ *      step 3: mimic stack peek, T(n) = O(1)
+ *          part 1: everytime new element is pushed to stack, store the element as top
+ *          part 2: everytime pop element, store the last element in the new queue
  *
  */
 class MyStack2 {

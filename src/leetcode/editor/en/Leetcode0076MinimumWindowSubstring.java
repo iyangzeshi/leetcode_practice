@@ -41,9 +41,8 @@ public class Leetcode0076MinimumWindowSubstring{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// T(n) = O(n), S(n) = O(1)
-// 4 ms,击败了83.71% 的Java用户, 39.3 MB,击败了64.99% 的Java用户
 /*
+Sliding window: T(n) = O(n), S(n) = O(1)
 用一个int[] dict统计t String里面每个字母出现的次数
 用两个指针right, left遍历s String
 int total表示还需要t里面的字母数
@@ -61,8 +60,7 @@ class Solution {
         }
         
         int[] dict = new int[128]; // ASCII
-        for (int i = 0; i < t.length(); i++) {
-            char ch = t.charAt(i);
+        for (char ch: t.toCharArray()) {
             dict[ch]++; // 记录target string进入dict
         }
         

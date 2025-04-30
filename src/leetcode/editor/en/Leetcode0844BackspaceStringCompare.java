@@ -64,6 +64,15 @@ public class Leetcode0844BackspaceStringCompare{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+/*
+设置skip为需要backspace的count
+每次走的时候，遇到#就就把skip++把这个一直往前跳，找到这个单词前面第一个能比较的char为止
+对s和t都是这样
+如果发现两个都走到的头了，就return true
+如果发现有一个走到头了，另外一个没走到头，return false
+两个都没有走到头，比较两个char是否相等，如果不相等的话，return false；否则继续走
+T(n) = O(n), S(n) = O(1)
+ */
 class Solution {
     
     public boolean backspaceCompare(String s, String t) {
@@ -116,6 +125,7 @@ class Solution {
 }
 //leetcode submit region end(Prohibit modification and deletion)
 /** 面试的时候，用Solution 2_1 */
+
 // Solution 1: using 2 stacks(actually using the StringBuilder)
 // T(n) = O(n), S(n) = O(n)
 // 0 ms,击败了100.00% 的Java用户, 36.9 MB,击败了85.33% 的Java用户
@@ -150,14 +160,14 @@ class Solution1 {
 // Solution 2: 从后往前比较
 
 // Solution 2_1: 从后往前比较
-// T(n) = O(n), S(n) = O(1)
-// 0 ms,击败了100.00% 的Java用户, 37.3 MB,击败了48.60% 的Java用户
 /*
-每次走的时候，遇到#就把这个一直往后跳，找到这个单词前面第一个能比较的char为止
+设置skip为需要backspace的count
+每次走的时候，遇到#就就把skip++把这个一直往前跳，找到这个单词前面第一个能比较的char为止
 对s和t都是这样
 如果发现两个都走到的头了，就return true
 如果发现有一个走到头了，另外一个没走到头，return false
 两个都没有走到头，比较两个char是否相等，如果不相等的话，return false；否则继续走
+T(n) = O(n), S(n) = O(1)
  */
 class Solution2_1 {
     

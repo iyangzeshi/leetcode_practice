@@ -88,7 +88,7 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1_1:time = O(n), space = O(k)
+// Solution 1_1:T(n) = O(n), S(n, k) = O(k),n is the length of String s, k is count of unique letters
 /**
  * 本题思路：移动window做法，[left, right)，窗口内不能有重复数字
  * 检查重复用HashSet
@@ -101,7 +101,7 @@ class Solution1_1 {
             return 0;
         }
         int len = s.length();
-        // use moving window[left, right), the char inside has not duplicates, and traverse the s
+        // use moving window[left, right), there shall be no duplicates in the window
         int left = 0;
         int right = 1;
         int maxLen = 1;
@@ -123,6 +123,7 @@ class Solution1_1 {
 
 // Solution 2:
 /**
+ * T(n) = O(n), S(n, k) = O(k),n is the length of String s, k is count of unique letters
  * 本题思路：移动window做法，[left, right]，窗口内不能有重复数字
  * right一直往右走，走到让windows出现重复数字的时候，就让left跳到让windows不重复的地方,
  * 走到和right的char重复为止

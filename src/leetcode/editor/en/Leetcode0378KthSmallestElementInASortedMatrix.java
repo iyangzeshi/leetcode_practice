@@ -29,6 +29,8 @@ package leetcode.editor.en;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Set;
+
 // 2020-07-26 12:04:44
 // Jesse Yang
 public class Leetcode0378KthSmallestElementInASortedMatrix{
@@ -94,7 +96,11 @@ class Solution {
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: minHeap + creating a boolean matrix visited to record whether it is in the heap
+/* Solution 1: BFS, minHeap + visited[][]去重，
+从左上角开始，每次把当前点的右边和下面放进minHeap，往外pop出去的第k个数字就是答案
+minHeap + creating a boolean matrix visited to record whether it is in the heap
+T(n,k) = O(K * log(min(k,n)), S(n, k) = O(min(m,k))
+ */
 class Solution1 {
     
     public int kthSmallest(int[][] matrix, int k) {
@@ -151,7 +157,11 @@ class Solution1 {
     
 }
 
-// Solution 2: minHeap + check whether hashSet visited  contains i * cols + j
+/* Solution 2_1: BFS, minHeap + hashSet visited去重，
+从左上角开始，每次把当前点的右边和下面放进minHeap，往外pop出去的第k个数字就是答案
+minHeap + creating a boolean matrix visited to record whether it is in the heap
+T(n,k) = O(K * log(min(k,n)), S(n, k) = O(min(m,k))
+ */
 class Solution2 {
     
     public int kthSmallest(int[][] matrix, int k) {
@@ -169,7 +179,7 @@ class Solution2 {
         PriorityQueue<Node> minHeap = new PriorityQueue<>(Comparator.comparingInt(n -> n.value));
         minHeap.add(new Node(0, 0, matrix[0][0]));
         
-        HashSet<Integer> visited = new HashSet<>();
+        Set<Integer> visited = new HashSet<>();
         int row = 0;
         int col = 0;
         visited.add(row * cols + col);
@@ -209,7 +219,11 @@ class Solution2 {
     
 }
 
-// Solution 3: creating a heap to store the index of the matrix，简化S2
+/* Solution 2_2: BFS, minHeap + hashSet visited去重，2_1的简化版本
+从左上角开始，每次把当前点的右边和下面放进minHeap，往外pop出去的第k个数字就是答案
+minHeap + creating a boolean matrix visited to record whether it is in the heap
+T(n,k) = O(K * log(min(k,n)), S(n, k) = O(min(m,k))
+ */
 class Solution3 {
     
     public int kthSmallest(int[][] matrix, int k) {
@@ -228,7 +242,7 @@ class Solution3 {
                 Comparator.comparingInt(n -> matrix[n / cols][n % cols]));
         minHeap.offer(0);
         
-        HashSet<Integer> visited = new HashSet<>();
+        Set<Integer> visited = new HashSet<>();
         visited.add(0);
         
         for (int i = 0; i < k - 1; i++) {
@@ -255,14 +269,18 @@ class Solution3 {
     
 }
 
-// Solution 4: binary search (把matrix看成是一个sorted array就行了）
+/*
+ Solution 3: binary search (把matrix看成是一个sorted array就行了）
+ T(n,k) = O(n* log(n)), S(n,k) = O(1)
+ */
 class Solution4 {
     
-    // Solution 4: binary search
+    // binary search
     public int kthSmallest(int[][] matrix, int k) {
         
         int n = matrix.length;
-        int start = matrix[0][0], end = matrix[n - 1][n - 1];
+        int start = matrix[0][0];
+        int end = matrix[n - 1][n - 1];
         while (start < end) {
             
             int mid = start + (end - start) / 2;
@@ -282,12 +300,17 @@ class Solution4 {
         return start;
     }
     
+    /*
+    从左下角开始，一直往右上角扫，看每一列有多少个数字比mid要小，count一下
+     */
     private int countLessEqual(int[][] matrix, int mid, int[] smallLargePair) {
         
         int count = 0;
-        int n = matrix.length, row = n - 1, col = 0;
+        int n = matrix.length;
+        int row = n - 1;
+        int col = 0;
         
-        while (row >= 0 && col < n) {
+        while (row >= 0 && col < n) { // 统计每一列有多少个数字比当前数字mid要小
             
             if (matrix[row][col] > mid) {
                 
@@ -295,8 +318,7 @@ class Solution4 {
                 // smallest number greater than the mid
                 smallLargePair[1] = Math.min(smallLargePair[1], matrix[row][col]);
                 row--;
-                
-            } else {
+            } else { // matrix[row][col] <= mid
                 
                 // as matrix[row][col] is less than or equal to the mid, let's keep track of the
                 // biggest number less than or equal to the mid

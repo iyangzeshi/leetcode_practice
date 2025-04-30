@@ -118,7 +118,7 @@ class Solution2 {
         if (strs == null || strs.length == 0) {
             return new ArrayList<>();
         }
-        Map<String, List<String>> ans = new HashMap<>();
+        Map<String, List<String>> map = new HashMap<>();
         int[] count = new int['z' - 'a' + 1];
         for (String str : strs) {
             Arrays.fill(count, 0);
@@ -127,9 +127,9 @@ class Solution2 {
             }
             
             String key = Arrays.toString(count);
-            ans.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
+            map.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
         }
-        return new ArrayList<>(ans.values());
+        return new ArrayList<>(map.values());
     }
     
 }

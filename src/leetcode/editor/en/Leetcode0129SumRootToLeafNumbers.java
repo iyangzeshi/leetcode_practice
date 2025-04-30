@@ -77,6 +77,18 @@ public class Leetcode0129SumRootToLeafNumbers{
  */
 // recursion, pre order dfs, T(n) = O(n), S(n) = O(h), lgn <= h <= n
 // 0 ms,击败了100.00% 的Java用户, 36.1 MB,击败了98.97% 的Java用户
+// Solution 1: recursion, pre order dfs, T(n) = O(n), S(n) = O(h), lgn <= h <= n
+// 0 ms,击败了100.00% 的Java用户, 36.1 MB,击败了98.97% 的Java用户
+ /*
+            4
+        9       0
+      6   1
+
+496 + 491 + 40
+we need to form the number from root to leaves and sum them up.
+1. using dfs to traverse the tree and carry the current path number
+2. add path number when confronting with leaf and sum them up
+ */
 class Solution {
     
     public int sumNumbers(TreeNode root) {
@@ -92,6 +104,8 @@ class Solution {
             return;
         }
         path = path * 10 + node.val;
+        
+        // if both children are null, this is leaf node
         if (node.left == null && node.right == null) {
             sum[0] += path;
         }
@@ -104,6 +118,16 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 // Solution 1: recursion, pre order dfs, T(n) = O(n), S(n) = O(h), lgn <= h <= n
 // 0 ms,击败了100.00% 的Java用户, 36.1 MB,击败了98.97% 的Java用户
+ /*
+            4
+        9       0
+      6   1
+
+496 + 491 + 40
+we need to form the number from root to leaves and sum them up.
+1. using dfs to traverse the tree and carry the current path number
+2. add path number when confronting with leaf and sum them up
+ */
 class Solution1 {
     
     public int sumNumbers(TreeNode root) {
@@ -119,12 +143,40 @@ class Solution1 {
             return;
         }
         path = path * 10 + node.val;
+        
+        // if both children are null, this is leaf node
         if (node.left == null && node.right == null) {
             sum[0] += path;
         }
         
         dfs(node.left, path, sum);
         dfs(node.right, path, sum);
+    }
+    
+}
+
+class Solution2 {
+    
+    public int sumNumbers(TreeNode root) {
+        // int[] sum = {0};
+        return dfs(root, 0);
+        // return sum[0];
+    }
+    
+    // pre order dfs
+    private int dfs(TreeNode node, int path) {
+        // base case
+        if (node == null) {
+            return 0;
+        }
+        path = path * 10 + node.val;
+        
+        // if both children are null, this is leaf node
+        if (node.left == null && node.right == null) {
+            return path;
+        }
+        
+        return dfs(node.left, path) + dfs(node.right, path);
     }
     
 }

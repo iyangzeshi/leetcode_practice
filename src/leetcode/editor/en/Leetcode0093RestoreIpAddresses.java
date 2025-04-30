@@ -53,7 +53,7 @@ class Solution {
             return;
         }
         
-        // failture case
+        // failure case
         if (idx >= s.length() || num >= 4) {
             return;
         }

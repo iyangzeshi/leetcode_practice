@@ -24,7 +24,6 @@ package leetcode.editor.en;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 // 2020-07-27 17:10:48
@@ -40,6 +39,12 @@ public class Leetcode0056MergeIntervals{
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 // Solution : sort by left points
+/*
+step 1: sort the interval, T(n) = O(nlog(n)), S(n) = O(n)
+step 2: traverse interval and merge overlapped intervals，  T(n) = O(n)， S(n) = O(1)
+
+complexity analysis: T(n) = O(nlog(n)), S(n) = O(n)
+ */
 class Solution {
     public int[][] merge(int[][] intervals) {
         // corner case
@@ -48,9 +53,11 @@ class Solution {
             return new int[][]{};
         }
         // general case
-        Arrays.sort(intervals, Comparator.comparingInt(n -> n[0]));
+        // Arrays.sort(intervals, Comparator.comparingInt(n -> n[0]));
+        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
         List<int[]> res = new ArrayList<>();
         int[] prev = intervals[0]; // to record previous interval's right border
+        
         for (int[] interval: intervals) {
             if (prev[1] >= interval[0]) {
                 prev[1] = Math.max(prev[1], interval[1]);
@@ -61,7 +68,8 @@ class Solution {
 
         }
         res.add(prev);
-        return res.toArray(new int[][]{new int[res.size()]});
+        // 或者用这个return res.toArray(new int[][]{new int[res.size()]});
+        return res.toArray(new int[res.size()][]);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
