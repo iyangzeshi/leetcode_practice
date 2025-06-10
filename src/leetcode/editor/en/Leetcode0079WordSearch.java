@@ -111,8 +111,13 @@ class Solution {
 	
 }
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1: DFS, T(m,n) = O(m * n * 3^o), S(m,n) = O(m*n), o is the length of the word
-// 82 ms,击败了26.81% 的Java用户, 37 MB,击败了88.93% 的Java用户
+
+/*
+Solution 1: DFS, T(m,n) = O(m * n * 3^l), S(m,n) = O(m*n),
+m is number of rows
+n is number of cols
+l is the length of the word
+ */
 class Solution1 {
 	
 	private final int[][] DIRECTIONS = new int[][]{{1, 0}, {0, -1}, {-1, 0}, {0, 1}};

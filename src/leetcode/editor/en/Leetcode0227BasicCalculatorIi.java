@@ -1,36 +1,38 @@
-//Implement a basic calculator to evaluate a simple expression string. 
-//
-// The expression string contains only non-negative integers, +, -, *, / operato
-//rs and empty spaces . The integer division should truncate toward zero. 
-//
-// Example 1: 
-//
-// 
-//Input: "3+2*2"
-//Output: 7
-// 
-//
-// Example 2: 
-//
-// 
-//Input: " 3/2 "
-//Output: 1 
-//
-// Example 3: 
-//
-// 
-//Input: " 3+5 / 2 "
-//Output: 5
-// 
-//
-// Note: 
-//
-// 
-// You may assume that the given expression is always valid. 
-// Do not use the eval built-in library function. 
-// 
-// Related Topics String 
-// 👍 1450 👎 250
+/*
+Implement a basic calculator to evaluate a simple expression string.
+
+ The expression string contains only non-negative integers, +, -, *, / operators
+and empty spaces . The integer division should truncate toward zero.
+
+ Example 1:
+
+ 
+Input: "3+2*2"
+Output: 7
+ 
+
+ Example 2:
+
+ 
+Input: " 3/2 "
+Output: 1
+
+ Example 3:
+
+ 
+Input: " 3+5 / 2 "
+Output: 5
+ 
+
+ Note:
+
+ 
+ You may assume that the given expression is always valid.
+ Do not use the eval built-in library function.
+ 
+ Related Topics String
+ 👍 1450 👎 250
+*/
 
 package leetcode.editor.en;
 
@@ -238,12 +240,12 @@ class Solution1_2 {
     
     /**
     * show whether we should calculate previous operator,
-    * return false, only if c1 is * or /, and c2 is + or -;
+    * return false, only if cur is * or /, and prev is + or -;
     * else return true
     */
-    private boolean calculatePreviousOper(char c1, char c2) {
-        // return 0, only if c1 is * or /, and c2 is + or -; else return 1
-        return !((c1 == '*' || c1 == '/') && (c2 == '+' || c2 == '-'));
+    private boolean calculatePreviousOper(char cur, char prev) {
+        // return 0, only if cur is * or /, and prev is + or -; else return 1
+        return !((cur == '*' || cur == '/') && (prev == '+' || prev == '-'));
     }
 
     private int operate(char c, int thisNum, int prevNum) {

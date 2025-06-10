@@ -70,8 +70,6 @@ public class Leetcode0885SpiralMatrixIii{
         System.out.println(Arrays.deepToString(res));
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// T(R, C) = O(max(R, C) ^2), S(R, C) = O(R, C)
-// 3 ms,击败了87.24% 的Java用户, 39.9 MB,击败了82.18% 的Java用户
 /*
 定义好方向，按顺序分别是右，下，左，上
 分别走，size步，size步, size + 1步，size + 1步
@@ -79,6 +77,7 @@ public class Leetcode0885SpiralMatrixIii{
 从size = 1开始往右走，每次走完一圈之后，就size += 2
 如果走到的位置在矩阵外面，就不加到res[][]里面，让他继续走，走到能在matrix里面的范围为止
 走到数组int[][] res放满的时候，循环结束
+T(R, C) = O(max(R, C) ^2), S(R, C) = O(R, C)
  */
 class Solution {
     
@@ -96,7 +95,72 @@ class Solution {
             return res;
         }
     
-        for (int size = 1;; size += 2) {/* size < 2 * (R + C)这一句可以删掉*/
+        /*for (int size = 1;; size += 2) {// size < 2 * (R + C)这一句可以删掉
+            for (int dir = 0; dir < 4; dir++) {  // dir: direction index
+                int steps = size + (dir / 2);  // number of steps in this direction
+                for (int step = 0; step < steps; step++) {  // for each step in this direction...
+                    // step in the dir-th direction
+                    row += DIRECTIONS[dir][0];
+                    col += DIRECTIONS[dir][1];
+                    if (0 <= row && row < R && 0 <= col && col < C) {
+                        res[index++] = new int[]{row, col};
+                        if (index == R * C) {
+                            return res;
+                        }
+                    }
+                }
+            }
+        }*/
+        int size = 0;
+        while(true) {/* size < 2 * (R + C)这一句可以删掉*/
+            for (int dir = 0; dir < 4; dir++) {  // dir: direction index
+                if (dir == 0 || dir == 2) {
+                    size++;
+                }
+                for (int step = 0; step < size; step++) {  // for each step in this direction...
+                    // step in the dir-th direction
+                    row += DIRECTIONS[dir][0];
+                    col += DIRECTIONS[dir][1];
+                    if (0 <= row && row < R && 0 <= col && col < C) {
+                        res[index++] = new int[]{row, col};
+                        if (index == R * C) {
+                            return res;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
+//leetcode submit region end(Prohibit modification and deletion)
+
+/*
+定义好方向，按顺序分别是右，下，左，上
+分别走，size步，size步, size + 1步，size + 1步
+起点initialize之后
+从size = 1开始往右走，每次走完一圈之后，就size += 2
+如果走到的位置在矩阵外面，就不加到res[][]里面，让他继续走，走到能在matrix里面的范围为止
+走到数组int[][] res放满的时候，循环结束
+T(R, C) = O(max(R, C) ^2), S(R, C) = O(R, C)
+ */
+class Solution1 {
+    
+    final int[][] DIRECTIONS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    
+    public int[][] spiralMatrixIII(int R, int C, int r0, int c0) {
+        
+        int[][] res = new int[R * C][2];
+        int index = 0; // index in the output
+        int row = r0;
+        int col = c0;
+        
+        res[index++] = new int[]{row, col};
+        if (R * C == 1) {
+            return res;
+        }
+        
+        for (int size = 1; ; size += 2) {// size < 2 * (R + C)这一句可以删掉
             for (int dir = 0; dir < 4; dir++) {  // dir: direction index
                 int steps = size + (dir / 2);  // number of steps in this direction
                 for (int step = 0; step < steps; step++) {  // for each step in this direction...
@@ -115,6 +179,52 @@ class Solution {
     }
     
 }
-//leetcode submit region end(Prohibit modification and deletion)
 
+/*
+定义好方向，按顺序分别是右，下，左，上
+分别走，size步，size步, size + 1步，size + 1步
+起点initialize之后
+从size = 1开始往右走，每次走完一圈之后，就size += 2
+如果走到的位置在矩阵外面，就不加到res[][]里面，让他继续走，走到能在matrix里面的范围为止
+走到数组int[][] res放满的时候，循环结束
+T(R, C) = O(max(R, C) ^2), S(R, C) = O(R, C)
+ */
+class Solution2 {
+    
+    final int[][] DIRECTIONS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    
+    public int[][] spiralMatrixIII(int R, int C, int r0, int c0) {
+        
+        int[][] res = new int[R * C][2];
+        int index = 0; // index in the output
+        int row = r0;
+        int col = c0;
+        
+        res[index++] = new int[]{row, col};
+        if (R * C == 1) {
+            return res;
+        }
+        
+        int size = 0;
+        while (true) {/* size < 2 * (R + C)这一句可以删掉*/
+            for (int dir = 0; dir < 4; dir++) {  // dir: direction index
+                if (dir == 0 || dir == 2) {
+                    size++;
+                }
+                for (int step = 0; step < size; step++) {  // for each step in this direction...
+                    // step in the dir-th direction
+                    row += DIRECTIONS[dir][0];
+                    col += DIRECTIONS[dir][1];
+                    if (0 <= row && row < R && 0 <= col && col < C) {
+                        res[index++] = new int[]{row, col};
+                        if (index == R * C) {
+                            return res;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
 }

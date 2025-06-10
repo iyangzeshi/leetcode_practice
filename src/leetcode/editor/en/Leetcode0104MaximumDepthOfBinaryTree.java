@@ -25,6 +25,8 @@ package leetcode.editor.en;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
+import javafx.util.Pair;
+import leetcode.editor.TreeGenerator;
 import leetcode.editor.TreeNode;
 
 // 2020-07-26 11:43:32
@@ -34,8 +36,9 @@ public class Leetcode0104MaximumDepthOfBinaryTree{
     public static void main(String[] args) {
         Solution sol = new Leetcode0104MaximumDepthOfBinaryTree().new Solution();
         // TO TEST
-        
-        System.out.println();
+        TreeNode root = TreeGenerator.deserialize("3,9,20,null,null,15,7");
+        int res = sol.maxDepth(root);
+        System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -53,41 +56,66 @@ public class Leetcode0104MaximumDepthOfBinaryTree{
  *     }
  * }
  */
+
+/*
+ Solution 1_2: post order DFS recursion using stack
+ T(n) = O(n), S(n) = O(h), lg(n) <= h <= n
+*/
 class Solution {
     
+    class Node {
+        TreeNode treeNode;
+        Node left;
+        Node right;
+        Integer height;
+        
+        public Node(TreeNode treeNode) {
+            this.treeNode = treeNode;
+        }
+        
+    }
+    
     public int maxDepth(TreeNode root) {
-        //corner case
         if (root == null) {
             return 0;
         }
-        Queue<TreeNode> queue = new LinkedList<>();
-        int depth = 0;
+        Stack<Node> stack = new Stack<>();
+        Node rootNode = new Node(root);
+        stack.push(rootNode);
         
-        queue.offer(root);
-        
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            
-            while (size > 0) {
-                size--;
-                TreeNode node = queue.poll();
-                if (node.left != null) {
-                    queue.offer(node.left);
-                }
-                if (node.right != null) {
-                    queue.offer(node.right);
-                }
+        while (!stack.isEmpty()) {
+            Node node = stack.pop();
+            // corner case
+            if (node.treeNode == null) {
+                node.height = 0;
+                continue;
             }
-            depth++;
+            
+            if (node.left != null && node.left.height != null
+                    && node.right != null && node.right.height != null) {
+                node.height = Math.max(node.left.height, node.right.height) + 1;
+                continue;
+            }
+            
+            Node right = new Node(node.treeNode.right);
+            node.right = right;
+            stack.push(right);
+            
+            Node left = new Node(node.treeNode.left);
+            node.left = left;
+            stack.push(left);
         }
-        return depth;
+        
+        return 0;
     }
-    
 }
+    
 //leetcode submit region end(Prohibit modification and deletion)
-// Solution 1_1: DFS recursion
-// T(n) = O(n), S(n) = O(h), lgn <= h <= n
-// 0 ms,击败了100.00% 的Java用户, 39.3 MB,击败了21.72% 的Java用户
+
+/*
+ Solution 1_1: post order DFS recursion
+ T(n) = O(n), S(n) = O(h), lg(n) <= h <= n
+*/
 class Solution1_1 {
     
     public int maxDepth(TreeNode root) {
@@ -101,10 +129,81 @@ class Solution1_1 {
     
 }
 
-// Solution 1_2: DFS using while and stack
-// T(n) = O(n), S(n) = O(h), lgn <= h <= n
-// 1 ms,击败了14.50% 的Java用户, 39.2 MB,击败了37.42% 的Java用户
+
+
+/* Solution 2_1: DFS recursion pre-order traverse
+T(n) = O(n), S(n) = O(h), lg(n) <= h <= n
+use maxDepth to update the longest length from root to current node
+ */
+class Solution2_1 {
+    
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int[] maxDepth = {1};
+        dfs(root, 1, maxDepth);
+        return maxDepth[0];
+    }
+    // depth: the length from root(inclusive) to current node(inclusive)
+    private void dfs(TreeNode root, int depth, int[] maxDepth) {
+        // corner case
+        if (root == null) {
+            return;
+        }
+        
+        // general case
+        maxDepth[0] = Math.max(depth, maxDepth[0]);
+        dfs(root.left, depth + 1, maxDepth);
+        dfs(root.right, depth + 1, maxDepth);
+    }
+}
+
 /*
+ Solution 2_3: pre-order traverse DFS : using while and stack，
+ stack中存的是模拟堆栈的行为，current call完之后，删除掉，把左右子树的call存进去
+ */
+class Solution2_2{
+    
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        
+        /*
+        Pair
+            TreeNode: current node
+            Integer: the depth from root to current node
+         */
+        Stack<Pair<TreeNode, Integer>> stack = new Stack<>();
+        stack.push(new Pair<>(root, 1));  // 初始节点，深度为 1
+        
+        int maxDepth = 0;
+        
+        while (!stack.isEmpty()) {
+            Pair<TreeNode, Integer> current = stack.pop();
+            TreeNode node = current.getKey();
+            int depth = current.getValue();
+            
+            if (node != null) {
+                maxDepth = Math.max(maxDepth, depth);
+                
+                // 注意：先压 right，再压 left，保证前序顺序：根 → 左 → 右
+                if (node.right != null) {
+                    stack.push(new Pair<>(node.right, depth + 1));
+                }
+                if (node.left != null) {
+                    stack.push(new Pair<>(node.left, depth + 1));
+                }
+            }
+        }
+        
+        return maxDepth;
+    }
+}
+/*
+Solution 2_3: pre-order traverse DFS : using while and stack，stack中存的是root到current的路径
+T(n) = O(n), S(n) = O(h), lgn <= h <= n
 post order traverse dfs by stack
 stack是一条从root开始到下面的path，post order遍历就行了
 preprocessing，先往下走（尽量沿着左边走）
@@ -114,7 +213,7 @@ preprocessing，先往下走（尽量沿着左边走）
     如果cur是parent的left child，就走parent的右子树，尽量往下走，走到底
     如果cur是parent的right child，就说明这个parent的所有subtree走完了（下次就会把parent给pop出来了）
  */
-class Solution1_2 {
+class Solution2_3 {
     
     public int maxDepth(TreeNode root) {
         if (root == null) {
@@ -154,7 +253,7 @@ class Solution1_2 {
     
 }
 
-// Solution 2: BFS, T(n) = O(n), S(n) = O(n)
+// Solution 3: BFS, T(n) = O(n), S(n) = O(n)
 // 1 ms,击败了14.50% 的Java用户, 38.8 MB,击败了85.92% 的Java用户
 class Solution2 {
     

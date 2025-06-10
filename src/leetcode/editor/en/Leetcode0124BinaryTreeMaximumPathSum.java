@@ -66,6 +66,15 @@ public class Leetcode0124BinaryTreeMaximumPathSum{
  *     }
  * }
  */
+/*
+        10
+    -9       20
+        15      7
+
+15+ 20 = 35
+9 + -10 +35 = 34
+max pathsum = 35
+ */
 class Solution {
     
     public int maxPathSum(TreeNode root) {
@@ -79,6 +88,8 @@ class Solution {
         
     }
     
+    /* post DFS, return the max sum from the current node to its
+    descendant node(can include leaf or not) */
     private int maxPathSum(TreeNode root, int[] max) {
         // base case
         if (root == null) {

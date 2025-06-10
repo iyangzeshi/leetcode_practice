@@ -26,6 +26,7 @@ package leetcode.editor.en;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 // 2020-07-08 00:23:55
 public class Leetcode0300LongestIncreasingSubsequence{
     // Java: longest-increasing-subsequence
@@ -124,7 +125,7 @@ class Solution1 {
 // Solution 2: Greedy: T(n) = O(nlog(n)), S(n) = O(n)
 //4 ms,击败了74.71% 的Java用户, 38.6 MB,击败了35.23% 的Java用户
 /*
-
+keep increasing list buffer
  */
 class Solution2 {
     

@@ -52,6 +52,7 @@ class Solution {
         List<List<Integer>> res = new ArrayList<>();
         
         Map<Integer, Integer> countMap = new HashMap<>(); //key; num, value: count of this number
+        countMap.put(1, countMap.getOrDefault(1, 0) + 1);
         for (int num : nums) {
             countMap.put(num, countMap.getOrDefault(num, 0) + 1);
         }

@@ -90,7 +90,7 @@ class Solution {
 // T(n) = O(nlog(n)), S(n) = O(n)
 // 7 ms,击败了38.84% 的Java用户, 40.3 MB,击败了8.55% 的Java用户
 /**
- * 把interval打散成point，按照point的时间升序排序，如果时间相同的话，right优先
+ * 把interval打散成point，按照point。start的时间升序排序，如果时间相同的话，right优先
  * 然后从前往后遍历，遇到start需要多加一个房间，遇到end，减小一个房间。 global max就是最小房间数
  */
 class Solution1_1 {
@@ -150,7 +150,9 @@ class Solution1_2 {
                 intervals[0] == null || intervals[0].length == 0) {
             return 0;
         }
-        Map<Integer, Integer> map = new TreeMap<>(); // key - time, value - interval delta number
+        Map<Integer, Integer> map = new TreeMap<>();
+        /* key: time;
+        value: interval delta number(new room opened + or closed - at this time) */
         for (int[] interval : intervals) {
             int start = interval[0];
             int end = interval[1];
@@ -222,16 +224,18 @@ class Solution2_1 {
             return 0;
         }
         
-        PriorityQueue<Integer> allocator = new PriorityQueue<>(intervals.length); // min heap
+        // min heap, store the end time of the interval
+        PriorityQueue<Integer> roomAllocator = new PriorityQueue<>(intervals.length);
         
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0])); // (a, b) -> a[0] - b[0]
+        
         for (int[] interval : intervals) {
-            if (!allocator.isEmpty() && interval[0] >= allocator.peek()) {
-                allocator.poll();
+            if (!roomAllocator.isEmpty() && interval[0] >= roomAllocator.peek()) {
+                roomAllocator.poll();
             }
-            allocator.add(interval[1]);
+            roomAllocator.add(interval[1]);
         }
-        return allocator.size();
+        return roomAllocator.size();
     }
 }
 
