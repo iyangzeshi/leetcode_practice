@@ -108,10 +108,10 @@ class Solution1_1 {
         if (root == null) {
             return false;
         }
-        // general case
         if(root.left == null && root.right == null) {
             return sum - root.val == 0;
         }
+        // general case
         return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
 }
@@ -131,19 +131,19 @@ class Solution1_2 {
         if (root == null) {
             return false;
         }
-        // general case
         curSum += root.val;
         if (root.left == null && root.right == null) {
             if (curSum == sum) {
                 return true;
             }
         }
+        // general case
         return hashPathSum(root.left, curSum, sum) || hashPathSum(root.right, curSum, sum);
     }
 }
 
 // Solution 2: 用stack来模拟DFS
-class Solution2 {
+class Solution2_1 {
     
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) {
@@ -208,5 +208,43 @@ class Solution2 {
         }
         return false;
     }
+}
+
+// Solution 2: 用stack来模拟DFS
+class Solution2_2 {
+    
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if (root == null) {
+            return false;
+        }
+        
+        Stack<TreeNode> nodeStack = new Stack<>();
+        Stack<Integer> sumStack = new Stack<>();
+        
+        nodeStack.push(root);
+        sumStack.push(root.val);
+        
+        while (!nodeStack.isEmpty()) {
+            TreeNode current = nodeStack.pop();
+            int currentSum = sumStack.pop();
+            
+            if (current.left == null && current.right == null && currentSum == sum) {
+                return true;
+            }
+            
+            if (current.right != null) {
+                nodeStack.push(current.right);
+                sumStack.push(currentSum + current.right.val);
+            }
+            
+            if (current.left != null) {
+                nodeStack.push(current.left);
+                sumStack.push(currentSum + current.left.val);
+            }
+        }
+        
+        return false;
+    }
+    
 }
 }

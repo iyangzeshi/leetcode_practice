@@ -166,7 +166,7 @@ class Solution2_1 {
 	
 }
 
-// Solution 2_2 BFS, 第1类搜索树
+// Solution 2_2 BFS, 第2类搜索树
 class Solution2_2 {
 	public List<List<Integer>> combine(int n, int k) {
 		List<List<Integer>> res = new ArrayList<>();

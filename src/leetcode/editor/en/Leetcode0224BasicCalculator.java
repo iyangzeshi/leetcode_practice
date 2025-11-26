@@ -50,10 +50,13 @@ public class Leetcode0224BasicCalculator{
 //leetcode submit region begin(Prohibit modification and deletion)
 // Solution 2:
 /*
-1. 本题同上题III相比，因为只有+和-，所以不需要考虑运算符之间的优先级，可以用1和-1分别代表+和-。
-2. 本题由于注明不存在负数，所以不用考虑一上来就是 - 的情况。
-3. 为了保证最后加和出结果，我们需要在最后面手动加上一个+号，来促成这最后一次运算。
-4. numStack和optrStack在初始以及出现左括号的情况下，初始化都是在numStack里加0，而在optrStack里加1，也就是一起初始化成 0 + 的状态，这样可以避免在call stack的pop时出现NullPointerException()，而同时也不会影响最后的结果。
+stack里存以前的数字结果和符号
+res存当前这一层到目前为止或者到(的结果
+从左到右扫描字符串：
+    case 1 number：累积多位数并立即用当前 sign 加入到 result 中
+    case 2: operator 运算符 + / -：更新 sign 为 1 或 -1
+    case 3: left parenthesis 左括号 (：将当前 result 和 sign 入栈，开启新的表达式计算
+    case 4: right parenthesis 右括号 )：出栈并合并之前的结果和符号（即将括号内结果反弹回上层）
  */
 class Solution {
     
@@ -64,7 +67,7 @@ class Solution {
             return 0;
         }
         Stack<Integer> stack = new Stack<>();
-        int result = 0;
+        int res = 0;
         int sign = 1;
         
         for (int i = 0; i < s.length(); i++) {
@@ -76,21 +79,21 @@ class Solution {
                     num = num * 10 + (s.charAt(i + 1) - '0');
                     i++;
                 }
-                result += num * sign;
+                res += num * sign;
             } else if (c == '+') {
                 sign = 1;
             } else if (c == '-') {
                 sign = -1;
             } else if (c == '(') {
-                stack.push(result);
+                stack.push(res);
                 stack.push(sign);
-                result = 0;
+                res = 0;
                 sign = 1;
             } else if (c == ')') {
-                result = result * stack.pop() + stack.pop();
+                res = res * stack.pop() + stack.pop();
             }
         }
-        return result;
+        return res;
     }
     
 }
@@ -98,7 +101,7 @@ class Solution {
 // Solution 1:
 /*
 设置两个stack,分别是numStack, operStack,前者放数字,后者放符号
-opeStack需要先push '(',最后的时候,需要人为加 )
+operStack需要先push '(',最后的时候,需要人为加 )
 当看到 +- 的时候,
     首先判断是不是第一个符号,或者是 ( 后的第一个符号,是的话,在numStack里面 push 0
     看前面的符号是否是+-,是的话,就像运行前面的符号,把运行结果push到numStack里面.
@@ -181,47 +184,56 @@ class Solution1 {
 
 // Solution 2:
 /*
-1. 本题同上题III相比，因为只有+和-，所以不需要考虑运算符之间的优先级，可以用1和-1分别代表+和-。
-2. 本题由于注明不存在负数，所以不用考虑一上来就是 - 的情况。
-3. 为了保证最后加和出结果，我们需要在最后面手动加上一个+号，来促成这最后一次运算。
-4. numStack和optrStack在初始以及出现左括号的情况下，初始化都是在numStack里加0，而在optrStack里加1，也就是一起初始化成 0 + 的状态，这样可以避免在call stack的pop时出现NullPointerException()，而同时也不会影响最后的结果。
+stack里存以前的数字结果和符号
+从左到右扫描字符串：
+    case 1 number：累积多位数并立即用当前 sign 加入到 result 中
+    case 2: operator 运算符 + / -：更新 sign 为 1 或 -1
+    case 3: left parenthesis 左括号 (：将当前 result 和 sign 入栈，开启新的表达式计算
+    case 4: right parenthesis 右括号 )：出栈并合并之前的结果和符号（即将括号内结果反弹回上层）
  */
 class Solution2 {
     
     public int calculate(String s) {
-        // because there is only + - ( ), when we have not confront (, calculate the result,
+        // because there is only + - ( ), when we have not confronted (, calculate the result,
         // unless push the result
-        if (s == null | s.length() == 0) {
+        int len = s.length();
+        if (s == null | len == 0) {
             return 0;
         }
         Stack<Integer> stack = new Stack<>();
-        int result = 0;
+        int res = 0;
         int sign = 1;
         
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            
             if (Character.isDigit(c)) {
-                int num = c - '0';
+                int j = i + 1;
+                while (j < len && Character.isDigit(s.charAt(j))) {
+                    j++;
+                } // after while loop, s[j] is not char
+                int num = Integer.parseInt(s.substring(i, j));
+                i = j - 1;
+                /*int num = c - '0';
                 while (i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
                     num = num * 10 + (s.charAt(i + 1) - '0');
                     i++;
-                }
-                result += num * sign;
+                }*/
+                res += num * sign;
             } else if (c == '+') {
                 sign = 1;
             } else if (c == '-') {
                 sign = -1;
             } else if (c == '(') {
-                stack.push(result);
+                stack.push(res);
                 stack.push(sign);
-                result = 0;
+                res = 0;
                 sign = 1;
             } else if (c == ')') {
-                result = result * stack.pop() + stack.pop();
+                // 1st stack.pop() is sign +1 or -1, 2nd stack.pop() is previous res
+                res = res * stack.pop() + stack.pop();
             }
         }
-        return result;
+        return res;
     }
     
 }

@@ -33,7 +33,7 @@ public class Leetcode0300LongestIncreasingSubsequence{
     public static void main(String[] args) {
         Solution sol = new Leetcode0300LongestIncreasingSubsequence().new Solution();
         // TO TEST
-        int[] nums = {0,1,0,3,2,3};
+        int[] nums = {10,9,2,5,3,7,101,18,19};
         int res = sol.lengthOfLIS(nums);
         System.out.println(res);
     }
@@ -59,7 +59,7 @@ class Solution {
         return buffer.size();
     }
     
-    // 在buffer中找到>= target的值的索引index
+    // 在buffer中找到 > target值的第1个索引index
     private int getIndex(List<Integer> buffer, int target) {
         int len = buffer.size();
         // corner case
@@ -75,7 +75,7 @@ class Solution {
         int right = len - 1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            if (buffer.get(mid) == target) {
+            if (buffer.get(mid) == target) { // since buffer is increasing(no duplicate)
                 return mid;
             } else if (buffer.get(mid) < target) {
                 left = mid + 1;
@@ -84,7 +84,6 @@ class Solution {
             }
         }
         return left;
-        
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

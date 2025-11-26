@@ -227,7 +227,6 @@ class Solution2 {
         
         List<Integer> list = new ArrayList<>();
         int sum = 0;
-        int level = 0;
         int index = 0;
         getResult(index, sum, target, candidates, list, result);
         return result;

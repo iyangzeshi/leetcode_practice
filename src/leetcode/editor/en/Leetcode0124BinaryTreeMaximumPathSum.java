@@ -85,7 +85,6 @@ class Solution {
         int[] max = new int[]{Integer.MIN_VALUE};
         maxPathSum(root, max);
         return max[0];
-        
     }
     
     /* post DFS, return the max sum from the current node to its

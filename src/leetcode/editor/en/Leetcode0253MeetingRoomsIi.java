@@ -225,17 +225,17 @@ class Solution2_1 {
         }
         
         // min heap, store the end time of the interval
-        PriorityQueue<Integer> roomAllocator = new PriorityQueue<>(intervals.length);
+        PriorityQueue<Integer> allocator = new PriorityQueue<>(intervals.length);
         
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0])); // (a, b) -> a[0] - b[0]
         
         for (int[] interval : intervals) {
-            if (!roomAllocator.isEmpty() && interval[0] >= roomAllocator.peek()) {
-                roomAllocator.poll();
+            if (!allocator.isEmpty() && interval[0] >= allocator.peek()) {
+                allocator.poll();
             }
-            roomAllocator.add(interval[1]);
+            allocator.add(interval[1]);
         }
-        return roomAllocator.size();
+        return allocator.size();
     }
 }
 
@@ -298,20 +298,20 @@ class FollowupSolution1 {
         }
     
         List<Point> points = getAndSortPoints(intervals);
-        Map<Integer, int[]> intervalIdMap = getIdToInterval(intervals);
+        Map<Integer, int[]> intervalToId = buildIdIntervalMap(intervals);
     
         int roomId = 0;
         Queue<Integer> rooms = new LinkedList<>(); // available rooms
-        Map<Integer, Integer> intervalToRoom = new HashMap<>(); // interval # to Room #
+        Map<Integer, Integer> intervalIDToRoom = new HashMap<>(); // interval # to Room #
         Map<Integer, List<int[]>> roomToInterval = new HashMap<>(); // room # to interval
         for (Point point : points) { // --> O(n)
             if (point.isStart) { // 要开始一个interval
                 int room = rooms.isEmpty() ? roomId++ : rooms.poll();
-                intervalToRoom.put(point.id, room);
-                int[] interval = intervalIdMap.get(point.id); // 以这个点为起点的第一个interval
+                intervalIDToRoom.put(point.id, room);
+                int[] interval = intervalToId.get(point.id); // 以这个点为起点的第一个interval
                 roomToInterval.computeIfAbsent(room, k -> new ArrayList<>()).add(interval);
             } else {
-                int room = intervalToRoom.get(point.id);
+                int room = intervalIDToRoom.get(point.id);
                 rooms.offer(room);
             }
         }
@@ -329,7 +329,7 @@ class FollowupSolution1 {
         return points;
     }
     
-    private Map<Integer, int[]> getIdToInterval(int[][] intervals) {
+    private Map<Integer, int[]> buildIdIntervalMap(int[][] intervals) {
         Map<Integer, int[]> map = new HashMap<>(); // interval # to interval
         for (int i = 0; i < intervals.length; i++) {
             int[] interval = intervals[i]; // --> O(n)
@@ -352,7 +352,7 @@ class FollowupSolution1 {
     
     class Point implements Comparable<Point> {
         
-        final int id;
+        final int id; // ID of interval
         final int val;
         final boolean isStart;
         
@@ -407,7 +407,7 @@ class FollowupSolution2 {
             allocator.offer(room);
         }
         List<Room> rooms = new ArrayList<>(allocator);
-        rooms.sort(Comparator.comparingInt(o -> o.id));
+        // rooms.sort(Comparator.comparingInt(o -> o.id));
         for (Room room : rooms) {
             String roomAndIntervals = room.toString();
             res.add(roomAndIntervals);
@@ -415,7 +415,7 @@ class FollowupSolution2 {
         return res;
     }
     
-    class Room implements Comparable<Room> {
+    class Room /*implements Comparable<Room>*/ {
         
         final int id;
         private final List<int[]> holdIntervals;
@@ -429,10 +429,10 @@ class FollowupSolution2 {
             holdIntervals.add(interval);
         }
         
-        @Override
-        /*
+        /*@Override
+        *//*
           return id of room and its all hold intervals
-         */
+         *//*
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append("room ").append(id).append(": ");
@@ -447,7 +447,7 @@ class FollowupSolution2 {
         @Override
         public int compareTo(Room that) {
             return this.endTime() - that.endTime();
-        }
+        }*/
         
         public int endTime() { // the end time of last interval in this room
             return holdIntervals.get(holdIntervals.size() - 1)[1];

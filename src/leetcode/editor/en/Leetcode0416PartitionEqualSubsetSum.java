@@ -72,8 +72,8 @@ public class Leetcode0416PartitionEqualSubsetSum {
             }
         }
         System.out.println("succeed");*/
-        Solution sol = new Leetcode0416PartitionEqualSubsetSum().new Solution();
-        int[] nums = {14,9,8,4,3,2};
+        Solution1_1 sol = new Leetcode0416PartitionEqualSubsetSum().new Solution1_1();
+        int[] nums = {1,3,2};
         boolean res = sol.canPartition(nums);
         System.out.println(res);
     }
@@ -145,18 +145,18 @@ class Solution1_1 {
         }
         
         int len = nums.length;
-        Arrays.sort(nums);
+        // Arrays.sort(nums);
         int target = sum / 2;
         return dfs(len - 1, target, nums);
     }
     
     private boolean dfs(int idx, int remainSum, int[] nums) {
         // base case
-        if (remainSum < 0 || idx == -1) {
-            return false;
-        }
         if (remainSum == 0) {
             return true;
+        }
+        if (remainSum < 0 || idx == -1) {
+            return false;
         }
         
         for (int i = idx; i >= 0; i--) {
@@ -200,11 +200,11 @@ class Solution1_2 {
      */
     private boolean dfs(int idx, int remainSum, int[] nums) {
         // base case
-        if (idx == -1 || remainSum < 0) {
-            return false;
-        }
         if (remainSum == 0) {
             return true;
+        }
+        if (idx < 0 || remainSum < 0) {
+            return false;
         }
         
         for (int i = idx; i >= 0; i--) {
@@ -255,17 +255,16 @@ class Solution1_3 {
      */
     private boolean dfs(int idx, int remainSum, int[] nums, Boolean[][] visited) {
         // base case
+        if (remainSum == 0) {
+            return true;
+        }
         if (remainSum < 0 || idx < 0) {
             return false;
-        }
-        if (remainSum == 0) {
-            visited[idx][remainSum] = true;
-            return true;
         }
         if (visited[idx][remainSum] != null) {
             return visited[idx][remainSum];
         }
-        
+        // general case
         for (int i = idx; i >= 0; i--) {
             if (dfs(i - 1, remainSum - nums[i], nums, visited)) {
                 visited[idx][remainSum] = true;
@@ -307,16 +306,17 @@ class Solution1_4 {
      */
     private boolean dfs(int idx, int remainSum, int[] nums, Boolean[][] visited) {
         // base case
-        if (remainSum < 0) {
-            return false;
-        }
         if (remainSum == 0) {
             return true;
+        }
+        if (remainSum < 0 || idx < 0) {
+            return false;
         }
         if (visited[idx][remainSum] != null) {
             return visited[idx][remainSum];
         }
         
+        //general case
         for (int i = idx; i >= 0; i--) {
             if (dfs(i - 1, remainSum - nums[i], nums, visited)) {
                 visited[idx][remainSum] = true;
@@ -443,12 +443,11 @@ class Solution2_3 {
     
     private boolean dfs(int idx, int remainSum, int[] nums, Boolean[][] visited) {
         // base case
+        if (remainSum == 0) {
+            return true;
+        }
         if (idx < 0 || remainSum < 0) {
             return false;
-        }
-        if (remainSum == 0) {
-            visited[idx][remainSum] = true;
-            return true;
         }
         if (visited[idx][remainSum] != null) {
             return visited[idx][remainSum];
@@ -491,17 +490,16 @@ class Solution2_4 {
     }
     
     private boolean dfs(int idx, int remainSum, int[] nums, Boolean[][] visited) {
+        if (remainSum == 0) {
+            return true;
+        }
         if (idx < 0 || remainSum < 0) {
             return false;
-        }
-        if (remainSum == 0) {
-            visited[idx][remainSum] = true;
-            return true;
         }
         if (visited[idx][remainSum] != null) {
             return visited[idx][remainSum];
         }
-        
+        // general case
         if (dfs(idx - 1, remainSum - nums[idx], nums, visited)) {
             visited[idx][remainSum] = true;
             return true;
@@ -534,28 +532,35 @@ class Solution3_1 {
         }
         
         int len = nums.length;
-        Arrays.sort(nums);
+        // Arrays.sort(nums);
         int target = sum / 2;
         
-        // dp[i][j]: if number in nums[i, len - 1] can be formed subsets to sum up to j
-        boolean[][] dp = new boolean[len + 1][target + 1];
+        // dp[i][j] 表示是否能从 nums[0..i] 中选出若干数，使得它们的和为 j
+        boolean[][] dp = new boolean[len][target + 1];
         
-        // initialization
-        for (int i = 0; i <= len; i++) {
+        // initialization: dp[i][0] = true（不选任何元素即可得到 0）
+        for (int i = 0; i < len; i++) {
             dp[i][0] = true;
         }
+        // 初始化第一行: 只有 nums[0] == j 时，dp[0][j] 才是 true
+        if (nums[0] <= target) {
+            dp[0][nums[0]] = true;
+        }
         
-        for (int i = len - 1; i >= 0; i--) {
+        // recursive formula
+        for (int i = 1; i < len; i++) {
+            int num = nums[i];
             for (int j = 1; j <= target; j++) {
-                if (j - nums[i] >= 0) { // whether choose current nums[i]
-                    dp[i][j] = dp[i + 1][j - nums[i]] || dp[i + 1][j];
+                // do not choose nums[i]
+                dp[i][j] = dp[i - 1][j];
+                // choose nums[i]（if j >= nums[i]）
+                if (j >= nums[i]) {
+                    dp[i][j] |= dp[i - 1][j - num];
                 }
             }
-            if (dp[i][target]) {
-                return true;
-            }
+            
         }
-        return false;
+        return dp[len - 1][target];
     }
     
 }
@@ -578,39 +583,16 @@ class Solution3_2 {
             return false;
         }
         
-        int len = nums.length;
-        Arrays.sort(nums);
+        // Arrays.sort(nums);
         int target = sum / 2;
         boolean[] dp = new boolean[target + 1]; // dp[i]表示是否存在某些元素，使得这些元素的加合 = i
         dp[0] = true; // 空状态默认初始为true，表示空状态默认也是可以平均分割的
-        /*List<Integer> list = new ArrayList<>();
-        for (int i = len - 1; i >= 0; i--) {
-            int num = nums[i];
-            list.clear();
-            for (int j = 0; j < target; j++) {
-                if (dp[j]) {
-                    list.add(j);
-                }
-            }
-            for (Integer j : list) {
-                if (j + num < target) {
-                    dp[j + num] = true;
-                } else if (j + num == target) {
-                    return true;
-                }
-            }
-        }*/
-        // 上面的注释部分可以优化成下面
-        for (int i = len - 1; i >= 0; i--) {
-            int num = nums[i];
+        for (int num : nums) {
             for (int j = target; j >= num; j--) {
                 dp[j] = dp[j] || dp[j - num];
             }
-            if (dp[target]) {
-                return true;
-            }
         }
-        return false;
+        return dp[target];
     }
     
 }

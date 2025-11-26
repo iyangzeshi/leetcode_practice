@@ -43,7 +43,7 @@ public class Leetcode0186ReverseWordsInAStringIi{
             for (int i = 0; i <= length; i++) {
                 if (i == length || s[i] == ' ') {
                     reverse(s, left, i - 1);
-                    left = i + 1;
+                    left = i;
                 }
             }
 

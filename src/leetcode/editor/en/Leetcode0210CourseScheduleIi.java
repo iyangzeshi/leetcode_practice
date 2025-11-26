@@ -235,7 +235,11 @@ class Solution1 {
 }
 
 // Solution 2: build graph and in-Degree check: T(v,e) = O(v + e), S(v, e) = O(v + e)
-/**每次都选则没有先修课要求，或者自己已经满足先修课要求的课一次次往更高level的课选课 */
+/*每次都选则没有先修课要求，或者自己已经满足先修课要求的课一次次往更高level的课选课
+steps:
+    traverse all the courses without pre-requisites(in degree is 0),
+and adding their following courses into the queue
+*/
 class Solution2 {
     
     public int[] findOrder(int numCourses, int[][] prerequisites) {
