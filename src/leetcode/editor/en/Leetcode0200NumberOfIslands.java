@@ -154,7 +154,7 @@ class Solution2 {
     private final int[][] DIRECTIONS = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
     private final char LAND = '1';
     private final char WATER = '0';
-    private final char VISITEDWATER = '2';
+    private final char VISITED = '2';
     
     public int numIslands(char[][] grid) {
         // corner case
@@ -173,7 +173,7 @@ class Solution2 {
                 if (grid[i][j] == LAND) {
                     count++;
                     queue.offer(new int[] {i, j});
-                    grid[i][j] = WATER;
+                    grid[i][j] = VISITED;
                     while (!queue.isEmpty()) {
                         int[] cur = queue.poll();
                         int row = cur[0];
@@ -183,7 +183,7 @@ class Solution2 {
                             int c = col + dir[1];
                             if (r >= 0 && r < rows && c >= 0 && c < cols && grid[r][c] == LAND) {
                                 queue.offer(new int[] {r, c});
-                                grid[r][c] = VISITEDWATER;
+                                grid[r][c] = VISITED;
                             }
                         }
                     }

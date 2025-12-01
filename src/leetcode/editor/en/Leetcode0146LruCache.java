@@ -69,8 +69,9 @@ Node {
 }
 
 head <-> node1 <-> node2 <-> ... <-> node5 <-> tail
+最新的node放在head
 1.
-step 1: HashMap查询key是否存在
+step 1: get method: HashMap查询key是否存在
     case 1.1 : exist
         (1)存在则将节点移动到LinkedList头部（因为它最近被用到了）；
         (2)返回value
@@ -81,14 +82,9 @@ step 2. put method: HashMap查询key是否存在
             (1) 更新节点值；
             (2) 并且将节点移动到头部（被用到）；
     case 2.2 不存在
-    查询当前缓存空间是否够用
-        case 2.2.1: 不够用 则需要LRU淘汰
-            (1) 删除链表尾部节点 tail.prev
-            (2) 删除HashMap中尾部节点tail.prev
-    
-        case 2.2.2: 缓存空间够用，正常加入即可
-            (1) 链表添加新节点
-            (2) HashMap增加新KV
+        加入最新的key value pair to head of Double linked list和 Map
+        缓存空间如果不够用
+            LRU从Double LinkedList和Map中淘汰最老的key value pair
 */
 class LRUCache {
     
@@ -112,7 +108,7 @@ class LRUCache {
         }
         Node node = map.get(key);
         node.disconnectNeighbor();
-        AddToHead(node);
+        addToHead(node);
         return node.val;
     }
     
@@ -122,20 +118,19 @@ class LRUCache {
             node = map.get(key);
             node.val = value;
             node.disconnectNeighbor();
-            AddToHead(node);
         } else {
             node = new Node(key, value);
             map.put(key, node);
-            AddToHead(node);
             if (map.size() > capacity) { // remove last one to get the place for new node
                 Node lastNode = tail.prev;
                 lastNode.disconnectNeighbor();
                 map.remove(lastNode.key);
             }
         }
+        addToHead(node);
     }
     
-    private void AddToHead(Node node) {
+    private void addToHead(Node node) {
         // move node to first place
         Node following = head.next;
         head.next = node;

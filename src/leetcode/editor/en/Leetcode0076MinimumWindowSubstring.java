@@ -43,13 +43,15 @@ public class Leetcode0076MinimumWindowSubstring{
 //leetcode submit region begin(Prohibit modification and deletion)
 /*
 Sliding window: T(n) = O(n), S(n) = O(1)
-用一个int[] dict统计t String里面每个字母出现的次数
-用两个指针right, left遍历s String
-int total表示还需要t里面的字母数
-right指针每次遇到一个新的值的时候，dict[ch - 'a']--，
+step 1: 用一个int[] dict统计t String里面每个字母出现的次数
+    int total表示还需要t里面的字母数
+step 2: 用两个指针right, left遍历s String
+
+step 3: right指针每次遇到一个新的值的时候，dict[ch - 'a']--，
     如果ch还需要出现的次数dict[ch] > 0的话，就把total--
-    每次total = 0的时候，left指针就一直往右走，走到total != 0位置，
-    这个就是right 指针在当前位置的最小长度
+step 4: 在right指针的吗每个地方，每次total = 0的时候，说明当前的substring符合条件，尽量收缩窗口，
+    left指针就一直往右走，走到total != 0位置，这个就是right 指针在当前位置的最小长度
+step 5: 更新窗口的最小值
  */
 class Solution {
     
@@ -74,14 +76,15 @@ class Solution {
             if (dict[ch]-- > 0) {
                 total--; // 注意这里无论如何，dict[c]都需要--而变化，哪怕if条件不满足导致total不变！！！
             }
-            while (total == 0) {
+            while (total == 0) { // satisfy the requirement
                 if (right - left + 1 < min) {
                     min = right - left + 1;
                     start = left;
                 }
                 // 访问过的char由于左端窗口收缩，又都在收缩的同时dict里加了回来
-                char chLeft = s.charAt(left++);
-                if (++dict[chLeft] > 0) {
+                char leftChar = s.charAt(left++);
+                dict[leftChar]++;
+                if (dict[leftChar] > 0) {
                     total++;
                 }
             }

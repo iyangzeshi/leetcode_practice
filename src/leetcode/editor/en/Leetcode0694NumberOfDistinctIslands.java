@@ -72,7 +72,17 @@ public class Leetcode0694NumberOfDistinctIslands {
 	}
 
 //leetcode submit region begin(Prohibit modification and deletion)
+/*
+核心: 岛屿形状相同 = 岛屿中所有坐标点的相对位置相同
+step 1: DFS 找到一个岛屿的所有坐标
+step 2: normalize（归一化）让形状可以对比
+step 3: 把 normalize 后的 shape 放进 HashSet 去重
+T(m,n) = O(m × n)
+S(m,n) = O(m × n)
+ */
 class Solution {
+    
+    private final int[][] DIRECTIONS = new int[][]{{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
     
     public int numDistinctIslands(int[][] grid) {
         // corner case
@@ -101,19 +111,6 @@ class Solution {
         return shapes.size();
     }
     
-    private void normalize(List<List<Integer>> shape) {
-        /*shape.sort((o1, o2) -> o1.get(0) - o2.get(0) != 0 ?
-                o1.get(0) - o2.get(0) :
-                o1.get(1) - o2.get(1));*/
-        // the coordinate of the most left point in first row of the shape
-        List<Integer> upperLeft = new ArrayList<>(shape.get(0));
-        for (List<Integer> list: shape) {
-            for (int i = 0; i < list.size(); i++) {
-                list.set(i, list.get(i) - upperLeft.get(i));
-            }
-        }
-    }
-    
     private void dfs(int[][] board, int row, int col, List<List<Integer>> shape,
             Set<Integer> visited) {
         int rows = board.length;
@@ -127,11 +124,22 @@ class Solution {
         }
         visited.add(row * cols + col);
         shape.add(Arrays.asList(row, col));
-        
-        dfs(board, row - 1, col, shape, visited); // go upper
-        dfs(board, row, col + 1, shape, visited); // go right
-        dfs(board, row + 1, col, shape, visited); // go down
-        dfs(board, row, col - 1, shape, visited); // go left
+        for (int[] dir: DIRECTIONS) {
+            dfs(board, row + dir[0], col + dir[1], shape, visited);
+        }
+    }
+    
+    private void normalize(List<List<Integer>> shape) {
+        /*shape.sort((o1, o2) -> o1.get(0) - o2.get(0) != 0 ?
+                o1.get(0) - o2.get(0) :
+                o1.get(1) - o2.get(1));*/
+        // the coordinate of the most left point in first row of the shape
+        List<Integer> upperLeft = new ArrayList<>(shape.get(0));
+        for (List<Integer> list: shape) {
+            for (int i = 0; i < list.size(); i++) {
+                list.set(i, list.get(i) - upperLeft.get(i));
+            }
+        }
     }
     
 }

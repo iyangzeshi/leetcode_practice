@@ -65,86 +65,78 @@ public class Leetcode0827MakingALargeIsland{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
-// DFS: T(n) = O(n*2 log(n)), S(n) = O(n^2)
+// DFS: T(n) = O(n*2), S(n) = O(n^2)
 /*
 Solution: DFS
-1. traverse the matrix, using DFS find the size of each connected islands and record their size
-2. traverse the all 0 to check whether they have connected 1 and connected largest one
-
+1. traverse the matrix, using DFS find the size of each connected island and record their size
+2. traverse the all 0 to check whether they have connected 1 and connected the largest one
  */
 class Solution {
     
-    private final int[][] DIRECTIONS = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    private final int[][] DIRECTIONS = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     
     public int largestIsland(int[][] grid) {
-        // corner case
-        if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0) {
+        int n = grid.length;
+        int id = 2; // island id starts from 2, not overlap with 0 or 1
+        int[] size = new int[n * n + 2]; // size[id] = area of island id
+        int max = 0;
+        
+        // 1. DFS label each island with its id
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                if (grid[row][col] == 1) {
+                    size[id] = dfs(grid, row, col, id);
+                    max = Math.max(max, size[id]);
+                    id++;
+                }
+            }
+        }
+        
+        // 2. Try turning each 0 → 1
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                if (grid[row][col] == 0) {
+                    Set<Integer> seen = new HashSet<>();
+                    int islandSize = 1; // we turn this 0 to 1
+                    
+                    for (int[] dir : DIRECTIONS) {
+                        int r = row + dir[0];
+                        int c = col + dir[1];
+                        if (r < 0 || r >= n || c < 0 || c >= n) {
+                            continue;
+                        }
+                        
+                        int neighborId = grid[r][c];
+                        if (neighborId >= 2 && seen.add(neighborId)) {
+                            islandSize += size[neighborId];
+                        }
+                    }
+                    
+                    max = Math.max(max, islandSize);
+                }
+            }
+        }
+        
+        return max; // special case: whole grid is 1
+    }
+    
+    private int dfs(int[][] grid, int r, int c, int id) {
+        int n = grid.length;
+        if (r < 0 || r >= n || c < 0 || c >= n || grid[r][c] != 1) {
             return 0;
         }
         
-        int len = grid.length;
-        // key: element, value: 1st element in the group
-        Map<Integer, Integer> mapToGroup = new HashMap<>();
-        // key first element in the group, value: size of group
-        Map<Integer, Integer> groupToSize = new HashMap<>();
+        grid[r][c] = id;
+        int area = 1;
         
-        int maxArea = 0;
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                if (grid[i][j] == 1) {
-                    int[] area = new int[1];
-                    doDFSsearch(grid, i, j, i, j, area, mapToGroup);
-                    groupToSize.put(i * len + j, area[0]);
-                    maxArea = Math.max(maxArea, area[0]);
-                }
-            }
+        for (int[] dir : DIRECTIONS) {
+            area += dfs(grid, r + dir[0], c + dir[1], id);
         }
-        
-        for (int row = 0; row < len; row++) {
-            for (int col = 0; col < len; col++) {
-                Set<Integer> groupSet = new HashSet<>();
-                if (grid[row][col] == 0) {
-                    int tempSize = 1;
-                    for(int[] dir: DIRECTIONS) {
-                        int i = row + dir[0];
-                        int j = col + dir[1];
-                        if (i < 0 || i >= len || j < 0 || j >= len || grid[i][j] == 0) {
-                            continue;
-                        }
-                        int groupIndex = mapToGroup.get(i * len + j);
-                        if (!groupSet.contains(groupIndex)) {
-                            groupSet.add(groupIndex);
-                            tempSize += groupToSize.get(groupIndex);
-                        }
-                    }
-                    maxArea = Math.max(maxArea, tempSize);
-                }
-            }
-        }
-        return maxArea;
+        return area;
     }
     
-    private void doDFSsearch(int[][] grid, int startRow, int startCol, int row, int col, int[] area,
-            Map<Integer, Integer> mapToGroup) {
-        //base case - failure case
-        int len = grid.length;
-        if (row < 0 || row >= len || col < 0 || col >= len
-                || grid[row][col] == 0 || grid[row][col] == 2) {
-            return;
-        }
-        
-        grid[row][col] = 2;
-        mapToGroup.put(row * len + col, startRow * len + startCol);
-        area[0]++;
-        
-        //general case
-        for (int[] direction: DIRECTIONS) {
-            int r = row + direction[0];
-            int c = col + direction[1];
-            doDFSsearch(grid, startRow, startCol, r, c, area, mapToGroup);
-        }
-    }
 }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 // 面试用Solution 1
@@ -153,80 +145,71 @@ class Solution {
 Solution 1: DFS: T(n) = O(n^2), S(n) = O(n^2)
 1. traverse the matrix, using DFS find the size of each connected islands and record their size
 2. traverse the all 0 to check whether they have connected 1, if connected combine these groups
-
  */
 class Solution1 {
     
-    private final int[][] DIRECTIONS = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    private final int[][] DIRECTIONS = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     
     public int largestIsland(int[][] grid) {
-        // corner case
-        if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0) {
+        int n = grid.length;
+        int id = 2; // island id starts from 2, not overlap with 0 or 1
+        int[] size = new int[n * n + 2]; // size[id] = area of island id
+        int max = 0;
+        
+        // 1. DFS label each island with its id
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                if (grid[row][col] == 1) {
+                    size[id] = dfs(grid, row, col, id);
+                    max = Math.max(max, size[id]);
+                    id++;
+                }
+            }
+        }
+        
+        // 2. Try turning each 0 → 1
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                if (grid[row][col] == 0) {
+                    Set<Integer> seen = new HashSet<>();
+                    int islandSize = 1; // we turn this 0 to 1
+                    
+                    for (int[] dir : DIRECTIONS) {
+                        int r = row + dir[0];
+                        int c = col + dir[1];
+                        if (r < 0 || r >= n || c < 0 || c >= n) {
+                            continue;
+                        }
+                        
+                        int neighborId = grid[r][c];
+                        if (neighborId >= 2 && seen.add(neighborId)) {
+                            islandSize += size[neighborId];
+                        }
+                    }
+                    
+                    max = Math.max(max, islandSize);
+                }
+            }
+        }
+        
+        return max; // special case: whole grid is 1
+    }
+    
+    private int dfs(int[][] grid, int r, int c, int id) {
+        int n = grid.length;
+        if (r < 0 || r >= n || c < 0 || c >= n || grid[r][c] != 1) {
             return 0;
         }
         
-        int len = grid.length;
-        // key: element, value: 1st element in the group
-        Map<Integer, Integer> mapToGroup = new HashMap<>();
-        // key first element in the group, value: size of group
-        Map<Integer, Integer> groupToSize = new HashMap<>();
-        int maxArea = 0;
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                if (grid[i][j] == 1) {
-                    int[] area = new int[1];
-                    doDFSsearch(grid, i, j, i, j, area, mapToGroup);
-                    groupToSize.put(i * len + j, area[0]);
-                    maxArea = Math.max(maxArea, area[0]);
-                }
-            }
-        }
+        grid[r][c] = id;
+        int area = 1;
         
-        
-        for (int row = 0; row < len; row++) {
-            for (int col = 0; col < len; col++) {
-                Set<Integer> groupSet = new HashSet<>();
-                if (grid[row][col] == 0) {
-                    int tempSize = 1;
-                    for(int[] dir: DIRECTIONS) {
-                        int i = row + dir[0];
-                        int j = col + dir[1];
-                        if (i < 0 || i >= len || j < 0 || j >= len || grid[i][j] == 0) {
-                            continue;
-                        }
-                        int groupIndex = mapToGroup.get(i * len + j);
-                        if (!groupSet.contains(groupIndex)) {
-                            groupSet.add(groupIndex);
-                            tempSize += groupToSize.get(groupIndex);
-                        }
-                    }
-                    maxArea = Math.max(maxArea, tempSize);
-                }
-            }
+        for (int[] dir : DIRECTIONS) {
+            area += dfs(grid, r + dir[0], c + dir[1], id);
         }
-        return maxArea;
+        return area;
     }
     
-    private void doDFSsearch(int[][] grid, int startRow, int startCol, int row, int col, int[] area,
-            Map<Integer, Integer> mapToGroup) {
-        //base case - failure case
-        int len = grid.length;
-        if (row < 0 || row >= len || col < 0 || col >= len
-                || grid[row][col] == 0 || grid[row][col] == 2) {
-            return;
-        }
-        
-        grid[row][col] = 2;
-        mapToGroup.put(row * len + col, startRow * len + startCol);
-        area[0]++;
-        
-        //general case
-        for (int[] direction: DIRECTIONS) {
-            int r = row + direction[0];
-            int c = col + direction[1];
-            doDFSsearch(grid, startRow, startCol, r, c, area, mapToGroup);
-        }
-    }
 }
 
 /*

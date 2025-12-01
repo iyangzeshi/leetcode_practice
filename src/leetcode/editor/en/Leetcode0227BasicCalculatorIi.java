@@ -268,6 +268,7 @@ class Solution1_2 {
  *      -:把前面遇到的数字取相反数变成-num push到stack进去
  * 如果当前遇到的是 * /:
  *      把stack里面的数字stack.pop()/num在push到stack里面
+ * 处理完前面的符号，再更新符号
  *
  * 到最后一个数字结束的时候，把stack里面的所有数字求和
  */

@@ -25,9 +25,13 @@
 package leetcode.editor.en;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 public class Leetcode0296BestMeetingPoint {
 
@@ -41,6 +45,18 @@ public class Leetcode0296BestMeetingPoint {
 	}
 
 //leetcode submit region begin(Prohibit modification and deletion)
+// Solution 2:数学解
+// T(m,n) = O(mn), S(m,n) = O(mn)
+/**
+ * 数学解，遍历所有点，根据绝对值，找到x坐标和y坐标的中位数。
+ * (xMedian, yMedian)这个中位数就是地址，找到之后和每个点算距离，相加.
+ *
+ * step 1: traverse the grid to get x-coordinate in ascending order
+ *     math justification: the best point's x cooridate in manhattan distance is median of the x-coordinates:
+ *         |x1 - x| + |x2 - x| >= |x1 - x2|, best x is between (x1 and x2)
+ * step 2: calculate the manhattan distance in x-coordinates
+ * step 3: repeat process for Y coordinates
+ */
 class Solution {
 	
 	// time = O(m * n), space = O（m * n)
@@ -62,16 +78,17 @@ class Solution {
 				}
 			}
 		}
-		for (int i = 0; i < cols; i++) {
-			for (int j = 0; j < rows; j++) {
-				if (grid[j][i] == 1) {
-					yList.add(i);
+		for (int j = 0; j < cols; j++) {
+			for (int i = 0; i < rows; i++) {
+				if (grid[i][j] == 1) {
+					yList.add(j);
 				}
 			}
 		}
 		return getMD(xList) + getMD(yList);
 	}
 	
+	// get best manhattan distance for list
 	private int getMD(List<Integer> list) {
 		int i = 0;
 		int j = list.size() - 1;
