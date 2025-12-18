@@ -1,50 +1,46 @@
-//Given a string s, find the length of the longest substring without repeating c
-//haracters. 
-//
-// 
-// Example 1: 
-//
-// 
-//Input: s = "abcabcbb"
-//Output: 3
-//Explanation: The answer is "abc", with the length of 3.
-// 
-//
-// Example 2: 
-//
-// 
-//Input: s = "bbbbb"
-//Output: 1
-//Explanation: The answer is "b", with the length of 1.
-// 
-//
-// Example 3: 
-//
-// 
-//Input: s = "pwwkew"
-//Output: 3
-//Explanation: The answer is "wke", with the length of 3.
-//Notice that the answer must be a substring, "pwke" is a subsequence and not a 
-//substring.
-// 
-//
-// Example 4: 
-//
-// 
-//Input: s = ""
-//Output: 0
-// 
-//
-// 
-// Constraints: 
-//
-// 
-// 0 <= s.length <= 5 * 104 
-// s consists of English letters, digits, symbols and spaces. 
-// 
-// Related Topics Hash Table Two Pointers String Sliding Window 
-// 👍 11791 👎 637
+/**
+Given a string s, find the length of the longest substring without duplicate 
+characters. 
 
+ 
+ Example 1: 
+
+ 
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3. Note that "bca" and 
+"cab" are also correct answers.
+ 
+
+ Example 2: 
+
+ 
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+ 
+
+ Example 3: 
+
+ 
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a 
+substring.
+ 
+
+ 
+ Constraints: 
+
+ 
+ 0 <= s.length <= 5 * 10⁴ 
+ s consists of English letters, digits, symbols and spaces. 
+ 
+
+ Related Topics Hash Table String Sliding Window 👍 43696 👎 2140
+
+*/
 package leetcode.editor.en;
 
 import java.util.HashMap;
@@ -64,6 +60,12 @@ public class Leetcode0003LongestSubstringWithoutRepeatingCharacters{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+/**
+ * T(n) = O(n), S(n, k) = O(k),n is the length of String s, k is count of unique letters
+ * 本题思路：移动window做法，[left, right]，窗口内不能有重复数字
+ * right一直往右走，走到让windows出现重复数字的时候，就让left跳到让windows不重复的地方,
+ * 走到和right的char重复为止
+ */
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         // corner case
@@ -128,7 +130,6 @@ class Solution1_1 {
  * right一直往右走，走到让windows出现重复数字的时候，就让left跳到让windows不重复的地方,
  * 走到和right的char重复为止
  */
-
 class Solution2 {
     public int lengthOfLongestSubstring(String s) {
         // corner case

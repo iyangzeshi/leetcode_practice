@@ -53,7 +53,7 @@ public class Leetcode0224BasicCalculator{
 stack里存以前的数字结果和符号
 res存当前这一层到目前为止或者到(的结果
 从左到右扫描字符串：
-    case 1 number：累积多位数并立即用当前 sign 加入到 result 中
+    case 1: number：累积多位数并立即用当前 sign 加入到 result 中
     case 2: operator 运算符 + / -：更新 sign 为 1 或 -1
     case 3: left parenthesis 左括号 (：将当前 result 和 sign 入栈，开启新的表达式计算
     case 4: right parenthesis 右括号 )：出栈并合并之前的结果和符号（即将括号内结果反弹回上层）

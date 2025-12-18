@@ -209,15 +209,15 @@ class Solution2 {
             row++;
             col++;
         }
-    /* after for loop, height <= 1 or width <= 1, which means
-    (width, height) =
-        (1,1) traverse
-        (1,0) traverse
-        (0,1) traverse
-        (0,0) stop
-    case 1: height == 1 or width == 1, need to continue traversre
-    case 2: height = 0 or width == 0; stop traverse
-     */
+        /* after for loop, height <= 1 or width <= 1, which means
+        (width, height) =
+            (1,1) traverse
+            (1,0) traverse
+            (0,1) traverse
+            (0,0) stop
+        case 1: height == 1 or width == 1, need to continue traverse
+        case 2: height = 0 or width == 0; stop traverse
+         */
         
         if (width == 1) {
             int size = height;

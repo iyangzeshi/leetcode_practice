@@ -50,125 +50,85 @@ public class Leetcode0273IntegerToEnglishWords{
 in English counting, every 3 digits will carry another units, (thousand, million, billion)
 so we can transfer the question to the 3 digits number + units(thousand, million, billion)
 in 3 digits number, there are several cases:
-    <= 20, do the hashMap to mimic the operation
+    <= 20, do the hashMap/array to mimic the operation
     >= 20, calculate the number in the ten place
     >= 100, calculate the number in the hundred place
  */
 class Solution {
-    public String oneDigit(int num) {
-        switch(num) {
-            case 1: return "One";
-            case 2: return "Two";
-            case 3: return "Three";
-            case 4: return "Four";
-            case 5: return "Five";
-            case 6: return "Six";
-            case 7: return "Seven";
-            case 8: return "Eight";
-            case 9: return "Nine";
-            default: return "";
-        }
-    }
-
-    public String twoDigitsLessThan20(int num) {
-        switch(num) {
-            case 10: return "Ten";
-            case 11: return "Eleven";
-            case 12: return "Twelve";
-            case 13: return "Thirteen";
-            case 14: return "Fourteen";
-            case 15: return "Fifteen";
-            case 16: return "Sixteen";
-            case 17: return "Seventeen";
-            case 18: return "Eighteen";
-            case 19: return "Nineteen";
-            default: return "";
-        }
-    }
-
-    public String twoDigitsDivisibleBy10(int num) {
-        switch(num) {
-            case 2: return "Twenty";
-            case 3: return "Thirty";
-            case 4: return "Forty";
-            case 5: return "Fifty";
-            case 6: return "Sixty";
-            case 7: return "Seventy";
-            case 8: return "Eighty";
-            case 9: return "Ninety";
-            default: return "";
-        }
-    }
-
-    public String twoDigits(int num) {
-        if (num == 0) {
-            return "";
-        } else if (num < 10) {
-            return oneDigit(num);
-        } else if (num < 20) {
-            return twoDigitsLessThan20(num);
-        } else {
-            int tenner = num / 10;
-            int rest = num - tenner * 10;
-            if (rest != 0) {
-                return twoDigitsDivisibleBy10(tenner) + " " + oneDigit(rest);
-            } else {
-                return twoDigitsDivisibleBy10(tenner);
-            }
-        }
-    }
-
-    public String threeDigits(int num) {
-        int hundred = num / 100;
-        int rest = num % 100;
-        String res = "";
-        if (hundred * rest != 0) { // hundred and rest are both 0
-            res = oneDigit(hundred) + " Hundred " + twoDigits(rest);
-        } else if ((hundred == 0) && (rest != 0)) {
-            res = twoDigits(rest);
-        } else if ((hundred != 0) && (rest == 0)) {
-            res = oneDigit(hundred) + " Hundred";
-        }
-        return res;
-    }
-
+    
+    private final String[] LESS_THAN_20 = {
+            "",
+            "One",
+            "Two",
+            "Three",
+            "Four",
+            "Five",
+            "Six",
+            "Seven",
+            "Eight",
+            "Nine",
+            "Ten",
+            "Eleven",
+            "Twelve",
+            "Thirteen",
+            "Fourteen",
+            "Fifteen",
+            "Sixteen",
+            "Seventeen",
+            "Eighteen",
+            "Nineteen"
+    };
+    
+    private final String[] TENS = {
+            "",
+            "Ten",
+            "Twenty",
+            "Thirty",
+            "Forty",
+            "Fifty",
+            "Sixty",
+            "Seventy",
+            "Eighty",
+            "Ninety"
+    };
+    
+    private final String[] ThousandsCarry = {
+            "",
+            "Thousand",
+            "Million",
+            "Billion"
+    };
+    
     public String numberToWords(int num) {
         if (num == 0) {
             return "Zero";
         }
-
-        int billion = num / 1000000000;
-        int leftNum = num % 1000000000;
-        int million = leftNum / 1000000;
-        leftNum = leftNum % 1000000;
-        int thousand = leftNum / 1000;
-        leftNum = leftNum % 1000;
-        int rest = leftNum;
-
-        String result = "";
-        if (billion != 0) {
-            result = threeDigits(billion) + " Billion";
-        }
-        if (million != 0) {
-            if (!result.isEmpty()) {
-                result += " ";
+        
+        int i = 0;
+        StringBuilder words = new StringBuilder();
+        while (num > 0) {
+            if (num % 1000 != 0) {
+                words.insert(0, dfs(num % 1000) + ThousandsCarry[i] + " ");
             }
-            result += threeDigits(million) + " Million";
+            num /= 1000;
+            i++;
         }
-        if (thousand != 0) {
-            if (!result.isEmpty()) {
-                result += " ";
-            }
-            result += threeDigits(thousand) + " Thousand";
-        }
-        if (rest != 0) {
-            if (!result.isEmpty()) {
-                result += " ";
-            }
-            result += threeDigits(rest);
-        }
-        return result;
+        
+        return words.toString().trim();
     }
+    
+    private String dfs(int num) {
+        if (num == 0) {
+            return "";
+        } else if (num < 20) {
+            return LESS_THAN_20[num] + " ";
+        } else if (num < 100) {
+            return TENS[num / 10] + " " + dfs(num % 10);
+        } else { // num >= 100
+            return LESS_THAN_20[num / 100] + " Hundred " + dfs(num % 100);
+        }
+    }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
@@ -361,7 +321,7 @@ class Solution2 {
         StringBuilder words = new StringBuilder();
         while (num > 0) {
             if (num % 1000 != 0) {
-                words.insert(0, helper(num % 1000) + ThousandsCarry[i] + " ");
+                words.insert(0, dfs(num % 1000) + ThousandsCarry[i] + " ");
             }
             num /= 1000;
             i++;
@@ -370,17 +330,18 @@ class Solution2 {
         return words.toString().trim();
     }
     
-    private String helper(int num) {
+    private String dfs(int num) {
         if (num == 0) {
             return "";
         } else if (num < 20) {
             return LESS_THAN_20[num] + " ";
         } else if (num < 100) {
-            return TENS[num / 10] + " " + helper(num % 10);
-        } else {
-            return LESS_THAN_20[num / 100] + " Hundred " + helper(num % 100);
+            return TENS[num / 10] + " " + dfs(num % 10);
+        } else { // num >= 100
+            return LESS_THAN_20[num / 100] + " Hundred " + dfs(num % 100);
         }
     }
+    
     
 }
 }

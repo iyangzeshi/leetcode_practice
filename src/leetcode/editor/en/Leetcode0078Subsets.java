@@ -55,17 +55,18 @@ public class Leetcode0078Subsets {
 class Solution {
 	
 	public List<List<Integer>> subsets(int[] nums) {
-		List<List<Integer>> result = new ArrayList<>();
+		List<List<Integer>> res = new ArrayList<>();
 		// corner case
 		if (nums == null) {
-			return result;
+			return res;
 		}
-		result.add(new ArrayList<>());
-		dfs(0, new ArrayList<>(), nums, result);
-		return result;
+        List<Integer> list = new ArrayList<>(); // 空的第一层List
+		res.add(list);
+		dfs(0, new ArrayList<>(), nums, res);
+		return res;
 	}
 	
-	private void dfs(int idx, List<Integer> list, int[] nums, List<List<Integer>> result) {
+	private void dfs(int idx, List<Integer> list, int[] nums, List<List<Integer>> res) {
 		// base case
 		if (idx == nums.length) {
 			return;
@@ -73,8 +74,8 @@ class Solution {
 		
 		for (int i = idx; i < nums.length; i++) {
 			list.add(nums[i]);
-			result.add(new ArrayList<>(list));
-			dfs(i + 1, list, nums, result);
+			res.add(new ArrayList<>(list));
+			dfs(i + 1, list, nums, res);
 			// wall
 			list.remove(list.size() - 1);
 		}
@@ -86,7 +87,7 @@ class Solution {
 // Solution 1: 1ms, BFS 第1类搜索树
 // 5 ms,击败了5.30% 的Java用户, 40.2 MB,击败了5.99% 的Java用户
 /*
-        [a,b,c]
+for        [a,b,c]
                           {}
  level0           {a}     {b}     {c}     1st can choose either a b c    i = 0, 1, 2
  level1       {a,b}{a,c}  {b,c}           2st can choose what's left     i = 1, 2
@@ -96,11 +97,11 @@ class Solution {
 class Solution1 {
 
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
 
         //corner case
         if (nums == null) {
-            return result;
+            return res;
         }
 		
         int length = nums.length;
@@ -121,7 +122,7 @@ class Solution1 {
                 ArrayList<Integer> indexList = indexQueue.poll();
                 int index = indexList.get(indexList.size() - 1);
                 temp = numberQueue.poll();
-                result.add(new ArrayList<>(temp));
+                res.add(new ArrayList<>(temp));
                 //找到poll出来的结果里面最后一个数字的index，下面的从index + 1的数字开始加
                 for (int i = index + 1; i < length; i++) {
                     temp.add(nums[i]);
@@ -135,7 +136,7 @@ class Solution1 {
                 size--;
             }
         }
-        return result;
+        return res;
     }
 
     private int indexOf(int[] nums, int num) {

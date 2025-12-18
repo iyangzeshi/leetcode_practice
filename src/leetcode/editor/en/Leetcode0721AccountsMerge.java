@@ -46,7 +46,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -72,20 +71,30 @@ public class Leetcode0721AccountsMerge {
         }
 	}
 //leetcode submit region begin(Prohibit modification and deletion)
+/*
+ Solution 1: dfs,相邻的email之间建立双向图。T(m,n) = O(mn log(mn),  worst case, 所有人属于一个账号
+ m是accounts的个数，n是一个account里面的最大长度
+
+相邻的email之间建立双向图。设置Set<String> visited存已经访问过的email
+每次遇到一个新的name的List的时候，
+    如果这个list的第一个email没有访问过，就dfs把这个email的所有通路走一遍，走到底，放到这个名字里面
+    如果已经访问过了，这个account就可以跳过去了
+ */
 class Solution {
     
     public List<List<String>> accountsMerge(List<List<String>> accounts) {
         if (accounts == null) {
             throw new RuntimeException("no accounts");
         }
-        // email-email bi-directional graph
-        Map<String, List<String>> graph = buildGraph(accounts);
+        
+        Map<String, List<String>> graph = buildGraph(accounts); // email-email bi-directional graph
         Set<String> visited = new HashSet<>(); // store the visited emails.
         List<List<String>> res = new ArrayList<>();
+        
+        // traverse account to do DFS merge account part
         for (List<String> account : accounts) {
-            ListIterator<String> emailIterator = account.listIterator();
-            String name = emailIterator.next();
-            String firstEmail = emailIterator.next();
+            String name = account.get(0);
+            String firstEmail = account.get(1);
             LinkedList<String> emails = new LinkedList<>();
             dfs(firstEmail, visited, graph, emails);
             if (!emails.isEmpty()) {
@@ -97,50 +106,51 @@ class Solution {
         return res;
     }
     
-    private void dfs(String vertex, Set<String> visited, Map<String, List<String>> graph,
-            List<String> emails) {
-        // base case
-        if (visited.contains(vertex)) {
-            return;
-        }
-        // general case
-        emails.add(vertex);
-        visited.add(vertex);
-        
-        for (String neighbor : graph.get(vertex)) {
-            dfs(neighbor, visited, graph, emails);
-        }
-    }
-    
     /*
-    双向存图
-    Time complexity = O(sum(a_i)), a_i is the length of the name i
+    build a graph that
+    Key: email
+    value: list of its connected emails
+    
+    Time complexity = O(m*n)
+    m是accounts的个数，n是一个account里面的最大长度
      */
     private Map<String, List<String>> buildGraph(List<List<String>> accounts) {
         Map<String, List<String>> graph = new HashMap<>();
-        for (List<String> list : accounts) {
-            ListIterator<String> listIterator = list.listIterator();
-            String prev = null;
-            listIterator.next();// 名字不需要存图
-            while (listIterator.hasNext()) {
-                String cur = listIterator.next();
-                List<String> neighbors = graph.computeIfAbsent(cur, k -> new ArrayList<>());
-                if (prev != null) {
-                    neighbors.add(prev);
-                    graph.get(prev).add(cur);
+        for (List<String> account : accounts) {
+            String firstEmail = account.get(1);
+            for (String email: account.subList(1, account.size())) { // 名字不需要存图
+                List<String> neighbors = graph.computeIfAbsent(email, k -> new ArrayList<>());
+                if (firstEmail != null) {
+                    neighbors.add(firstEmail);
+                    graph.get(firstEmail).add(email);
                 }
-                prev = cur;
             }
         }
         return graph;
     }
     
+    private void dfs(String node, Set<String> visited, Map<String, List<String>> graph,
+            List<String> emails) {
+        // base case
+        if (visited.contains(node)) {
+            return;
+        }
+        // general case
+        emails.add(node);
+        visited.add(node);
+        
+        for (String neighbor : graph.get(node)) {
+            dfs(neighbor, visited, graph, emails);
+        }
+    }
+    
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-// Solution 1: dfs,相邻的email之间建立双向图。T(m,n) = O(mn), m是accounts的个数，n是一个account里面的最大长度
-// 28 ms,击败了90.01% 的Java用户, 44.5 MB,击败了49.74% 的Java用户
 /*
+ Solution 1: dfs,相邻的email之间建立双向图。T(m,n) = O(mn log(mn),  worst case, 所有人属于一个账号
+ m是accounts的个数，n是一个account里面的最大长度
+
 相邻的email之间建立双向图。设置Set<String> visited存已经访问过的email
 每次遇到一个新的name的List的时候，
     如果这个list的第一个email没有访问过，就dfs把这个email的所有通路走一遍，走到底，放到这个名字里面
@@ -152,14 +162,15 @@ class Solution1 {
         if (accounts == null) {
             throw new RuntimeException("no accounts");
         }
-        // email-email bi-directional graph
-        Map<String, List<String>> graph = buildGraph(accounts);
+        
+        Map<String, List<String>> graph = buildGraph(accounts); // email-email bi-directional graph
         Set<String> visited = new HashSet<>(); // store the visited emails.
         List<List<String>> res = new ArrayList<>();
+        
+        // traverse account to do DFS merge account part
         for (List<String> account : accounts) {
-            ListIterator<String> emailIterator = account.listIterator();
-            String name = emailIterator.next();
-            String firstEmail = emailIterator.next();
+            String name = account.get(0);
+            String firstEmail = account.get(1);
             LinkedList<String> emails = new LinkedList<>();
             dfs(firstEmail, visited, graph, emails);
             if (!emails.isEmpty()) {
@@ -171,42 +182,42 @@ class Solution1 {
         return res;
     }
     
-    private void dfs(String vertex, Set<String> visited, Map<String, List<String>> graph,
-            List<String> emails) {
-        // base case
-        if (visited.contains(vertex)) {
-            return;
-        }
-        // general case
-        emails.add(vertex);
-        visited.add(vertex);
-        
-        for (String neighbor : graph.get(vertex)) {
-            dfs(neighbor, visited, graph, emails);
-        }
-    }
-    
     /*
-    双向存图
-    Time complexity = O(sum(a_i)), a_i is the length of the name i
+    build a graph that
+    Key: email
+    value: list of its connected emails
+    
+    Time complexity = O(m*n)
+    m是accounts的个数，n是一个account里面的最大长度
      */
     private Map<String, List<String>> buildGraph(List<List<String>> accounts) {
         Map<String, List<String>> graph = new HashMap<>();
-        for (List<String> list : accounts) {
-            ListIterator<String> listIterator = list.listIterator();
-            String prev = null;
-            listIterator.next();// 名字不需要存图
-            while (listIterator.hasNext()) {
-                String cur = listIterator.next();
-                List<String> neighbors = graph.computeIfAbsent(cur, k -> new ArrayList<>());
-                if (prev != null) {
-                    neighbors.add(prev);
-                    graph.get(prev).add(cur);
+        for (List<String> account : accounts) {
+            String firstEmail = account.get(1);
+            for (String email: account.subList(1, account.size())) { // 名字不需要存图
+                List<String> neighbors = graph.computeIfAbsent(email, k -> new ArrayList<>());
+                if (firstEmail != null) {
+                    neighbors.add(firstEmail);
+                    graph.get(firstEmail).add(email);
                 }
-                prev = cur;
             }
         }
         return graph;
+    }
+    
+    private void dfs(String node, Set<String> visited, Map<String, List<String>> graph,
+            List<String> emails) {
+        // base case
+        if (visited.contains(node)) {
+            return;
+        }
+        // general case
+        emails.add(node);
+        visited.add(node);
+        
+        for (String neighbor : graph.get(node)) {
+            dfs(neighbor, visited, graph, emails);
+        }
     }
     
 }
@@ -214,7 +225,7 @@ class Solution1 {
 // Solution 2: Union-Find
 // 29 ms,击败了87.73% 的Java用户, 45 MB,击败了44.28% 的Java用户
 /*
-HashMap<String, String> emailToName
+HashMap<String, Integer> emailToUserMap
 HashMap<Integer, HashSet<String>> userToEmailMap
 建立union find:
     union find,里面存的是user的编号
@@ -252,21 +263,18 @@ class Solution2 {
     
     private void unionAccounts(UnionFind uf, List<List<String>> accounts,
             Map<String, Integer> map) {
-        int len = accounts.size();
-        Iterator<List<String>> accountsIterator = accounts.iterator();
-        for (int i = 0; i < len; i++) {
-            List<String> account = accountsIterator.next();
-            Iterator<String> emailIterator = account.iterator();
-            emailIterator.next();
-            while (emailIterator.hasNext()) {
-                String email = emailIterator.next();
-                Integer user = map.get(email);
-                if (user == null) {
-                    map.put(email, i);
+        int index = 0;
+        for (List<String> account : accounts) {
+            for (String email : account.subList(1, account.size())) { // skip name
+                // map.putIfAbsent(email, index);
+                Integer prevIndex = map.get(email);
+                if (prevIndex == null) {
+                    map.put(email, index);
                 } else {
-                    uf.union(user, i);
+                    uf.union(prevIndex, index);
                 }
             }
+            index++;
         }
     }
     
@@ -274,17 +282,12 @@ class Solution2 {
             Map<Integer, HashSet<String>> map) {
         int len = accounts.size();
         
-        Iterator<List<String>> accountsIterator = accounts.iterator();
-        for (int i = 0; i < len; i++) {
-            int root = uf.getRoot(i);
-            if (!map.containsKey(root)) {
-                map.put(root, new HashSet<>());
-            }
-            List<String> account = accountsIterator.next();
-            Iterator<String> emails = account.iterator();
-            emails.next();
-            while (emails.hasNext()) {
-                map.get(root).add(emails.next());
+        int index = 0;
+        for (List<String> account : accounts) {
+            int root = uf.getRoot(index++);
+            map.putIfAbsent(root, new HashSet<>());  // 更简洁
+            for (String email : account.subList(1, account.size())) { // 跳过名字，从 index = 1 开始
+                map.get(root).add(email);
             }
         }
     }
