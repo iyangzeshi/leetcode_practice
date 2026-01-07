@@ -116,6 +116,7 @@ class Solution1 {
             }
             max = Math.max(max, dp[i]);
         }
+        
         return max;
     }
     

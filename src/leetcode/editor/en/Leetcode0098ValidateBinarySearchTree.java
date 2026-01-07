@@ -134,7 +134,7 @@ class Solution1 {
         //corner case
         return isBST(root, null, null);
     }
-
+    
     private boolean isBST(TreeNode root, Integer lowerBound, Integer upperBound) {
         // base case - success
         if (root == null) {
