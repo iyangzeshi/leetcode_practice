@@ -127,103 +127,16 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 /* 面试的时候，用Solution 2_3 */
 
-// Solution 1_1: DFS, 第1类搜索树
-// Time Limit Exceeded
-class Solution1_1 {
-    
-    public boolean canPartition(int[] nums) {
-        // corner case
-        if (nums == null || nums.length == 0) {
-            return false;
-        }
-        int sum = 0;
-        for (int n : nums) {
-            sum += n;
-        }
-        if (sum % 2 != 0) {
-            return false;
-        }
-        
-        int len = nums.length;
-        // Arrays.sort(nums);
-        int target = sum / 2;
-        return dfs(len - 1, target, nums);
-    }
-    
-    private boolean dfs(int idx, int remainSum, int[] nums) {
-        // base case
-        if (remainSum == 0) {
-            return true;
-        }
-        if (remainSum < 0 || idx == -1) {
-            return false;
-        }
-        
-        for (int i = idx; i >= 0; i--) {
-            if (dfs(i - 1, remainSum - nums[i], nums)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-}
+/*
+Solution 1_3: DFS,第1类搜索树，pruning with Boolean[][]
+相对这个nums排序，做DFS
 
-// Solution 1_2: DFS,第1类搜索树，去重（重复的数字）
-// Time Limit Exceeded
-class Solution1_2 {
-    
-    public boolean canPartition(int[] nums) {
-        // corner case
-        if (nums == null || nums.length == 0) {
-            return false;
-        }
-        int sum = 0;
-        for (int n : nums) {
-            sum += n;
-        }
-        if (sum % 2 != 0) {
-            return false;
-        }
-        
-        int len = nums.length;
-        Arrays.sort(nums);
-        int target = sum / 2;
-        return dfs(len - 1, target, nums);
-    }
-    
-    /**
-     * @param idx:       index
-     * @param remainSum: remaining sum need to be achieved by left nums[idx] tp nums[0]
-     * @param nums:      given array
-     * @return: boolean
-     */
-    private boolean dfs(int idx, int remainSum, int[] nums) {
-        // base case
-        if (remainSum == 0) {
-            return true;
-        }
-        if (idx < 0 || remainSum < 0) {
-            return false;
-        }
-        
-        for (int i = idx; i >= 0; i--) {
-            if (dfs(i - 1, remainSum - nums[i], nums)) {
-                return true;
-            }
-            int j = i;
-            while (j >= 0 && nums[j] == nums[i]) {
-                j--;
-            }
-            i = j + 1;
-        }
-        return false;
-    }
-    
-}
+每次从nums[0, idx]中取一个数字 nums[i]
+再让idx = i
+repeat这个过程
 
-// Solution 1_3: DFS,第1类搜索树，pruning with Boolean[][]
-// 204 ms,击败了6.67% 的Java用户, 48.8 MB,击败了31.35% 的Java用户
+T(n, k) = O(n * k), S(n, k) = O(n * k)
+ */
 class Solution1_3 {
     
     public boolean canPartition(int[] nums) {
@@ -242,18 +155,18 @@ class Solution1_3 {
         int len = nums.length;
         Arrays.sort(nums);
         int target = sum / 2;
-        Boolean[][] visited = new Boolean[len + 1][target + 1];
-        return dfs(len - 1, target, nums, visited);
+        Boolean[][] memo = new Boolean[len + 1][target + 1];
+        return dfs(len - 1, target, nums, memo);
     }
     
     /**
      * @param idx: index
-     * @param remainSum: remaining sum need to be achieved by left nums[idx] tp nums[end]
+     * @param remainSum: remaining sum needed to be achieved by left nums[0 to idx]
      * @param nums: given array
-     * @param visited : visited[i][j]表示从nums[i]开始往前面任意取元素求和的结果能不能为j，如果是就true；否则false
+     * @param memo : memo[i][j]表示从nums[i]开始往前面任意取元素求和的结果能不能为j，如果是就true；否则false
      * @return: boolean
      */
-    private boolean dfs(int idx, int remainSum, int[] nums, Boolean[][] visited) {
+    private boolean dfs(int idx, int remainSum, int[] nums, Boolean[][] memo) {
         // base case
         if (remainSum == 0) {
             return true;
@@ -261,17 +174,17 @@ class Solution1_3 {
         if (remainSum < 0 || idx < 0) {
             return false;
         }
-        if (visited[idx][remainSum] != null) {
-            return visited[idx][remainSum];
+        if (memo[idx][remainSum] != null) {
+            return memo[idx][remainSum];
         }
         // general case
         for (int i = idx; i >= 0; i--) {
-            if (dfs(i - 1, remainSum - nums[i], nums, visited)) {
-                visited[idx][remainSum] = true;
+            if (dfs(i - 1, remainSum - nums[i], nums, memo)) {
+                memo[idx][remainSum] = true;
                 return true;
             }
         }
-        visited[idx][remainSum] = false;
+        memo[idx][remainSum] = false;
         return false;
     }
     
@@ -322,7 +235,7 @@ class Solution1_4 {
                 visited[idx][remainSum] = true;
                 return true;
             }
-            int j = i + 1;
+            int j = i;
             while (j >= 0 && nums[j] == nums[i]) {
                 j--;
             }
@@ -334,90 +247,12 @@ class Solution1_4 {
     
 }
 
-// Solution 2_1: DFS 第2类搜索树
-// Time limit Exceeded
-class Solution2_1 {
-    
-    public boolean canPartition(int[] nums) {
-        // corner case
-        if (nums == null || nums.length == 0) {
-            return false;
-        }
-        int sum = 0;
-        for (int n : nums) {
-            sum += n;
-        }
-        if (sum % 2 != 0) {
-            return false;
-        }
-        
-        int len = nums.length;
-        Arrays.sort(nums);
-        int target = sum / 2;
-        return dfs(len - 1, target, nums);
-    }
-    
-    private boolean dfs(int idx, int remainSum, int[] nums) {
-        // base case
-        if (remainSum == 0) {
-            return true;
-        }
-        if (idx < 0 || remainSum < 0) {
-            return false;
-        }
-        
-        return dfs(idx - 1, remainSum, nums) || dfs(idx - 1, remainSum - nums[idx], nums);
-    }
-    
-}
-
-//Solution 2_2: DFS, 第2类搜索树，去重（去重重复的数字）
-// Time Limit Exceeded
-class Solution2_2 {
-    
-    public boolean canPartition(int[] nums) {
-        // corner case
-        if (nums == null || nums.length == 0) {
-            return false;
-        }
-        int sum = 0;
-        for (int n : nums) {
-            sum += n;
-        }
-        if (sum % 2 != 0) {
-            return false;
-        }
-        int len = nums.length;
-        int target = sum / 2;
-        return dfs(len - 1, target, nums);
-    }
-    
-    private boolean dfs(int idx, int remainSum, int[] nums) {
-        // base case
-        if (remainSum == 0) {
-            return true;
-        }
-        if (idx < 0 || remainSum < 0) {
-            return false;
-        }
-        
-        if (dfs(idx - 1, remainSum - nums[idx], nums)) {
-            return true;
-        }
-        int j = idx - 1;
-        while (j >= 0 && nums[j] == nums[idx]) {
-            j--;
-        }
-        return dfs(j, remainSum, nums);
-    }
-    
-}
-
 // Solution 2_3: DFS 第2类搜索树， Pruning with Boolean[][]
 // 54 ms,击败了28.34% 的Java用户, 49.2 MB,击败了24.22% 的Java用户
 /*
 第2类搜索树，
 遇到每一个点的时候，都有两种情况，一种是选择这个点，还有一种是舍弃这个点
+T(n, k) = O(n * k), S(n, k) = O(n * k)
  */
 class Solution2_3 {
     
@@ -437,11 +272,11 @@ class Solution2_3 {
         int len = nums.length;
         Arrays.sort(nums);
         int target = sum / 2;
-        Boolean[][] visited = new Boolean[len + 1][target + 1];
-        return dfs(len - 1, target, nums, visited);
+        Boolean[][] memo = new Boolean[len + 1][target + 1];
+        return dfs(len - 1, target, nums, memo);
     }
     
-    private boolean dfs(int idx, int remainSum, int[] nums, Boolean[][] visited) {
+    private boolean dfs(int idx, int remainSum, int[] nums, Boolean[][] memo) {
         // base case
         if (remainSum == 0) {
             return true;
@@ -449,8 +284,8 @@ class Solution2_3 {
         if (idx < 0 || remainSum < 0) {
             return false;
         }
-        if (visited[idx][remainSum] != null) {
-            return visited[idx][remainSum];
+        if (memo[idx][remainSum] != null) {
+            return memo[idx][remainSum];
         }
         
         int len = nums.length;
@@ -458,10 +293,10 @@ class Solution2_3 {
             return false;
         }
         
-        visited[idx][remainSum] =
-                dfs(idx - 1, remainSum, nums, visited) ||
-                        dfs(idx - 1, remainSum - nums[idx], nums, visited);
-        return visited[idx][remainSum];
+        memo[idx][remainSum]
+            = dfs(idx - 1, remainSum, nums, memo)
+            || dfs(idx - 1, remainSum - nums[idx], nums, memo);
+        return memo[idx][remainSum];
     }
     
 }
@@ -514,8 +349,14 @@ class Solution2_4 {
     
 }
 
-//Solution 3_1: DP with for loop, T(n, k) = O(n * k), S(n, k) = O(n * k)
-// 20 ms,击败了75.66% 的Java用户, 39.6 MB,击败了59.31% 的Java用户
+/*
+Solution 3_1: DP with for loop,
+dp[i][j]=true if the sum j can be formed by array elements in subset nums[0]..nums[i],
+otherwise dp[i][j]=false
+dp[i][j] |= dp[i - 1][j - num];
+
+T(n, k) = O(n * k), S(n, k) = O(n * k)
+* */
 class Solution3_1 {
     
     public boolean canPartition(int[] nums) {
@@ -553,7 +394,7 @@ class Solution3_1 {
             for (int j = 1; j <= target; j++) {
                 // do not choose nums[i]
                 dp[i][j] = dp[i - 1][j];
-                // choose nums[i]（if j >= nums[i]）
+                // choose nums[i] (if j >= nums[i]）
                 if (j >= nums[i]) {
                     dp[i][j] |= dp[i - 1][j - num];
                 }
@@ -565,9 +406,25 @@ class Solution3_1 {
     
 }
 
-// Solution 3_2: DP with rolling(reduced space complexity) T(n, k) = O(n * k), S(n, k) = O(k)
-// 13 ms,击败了86.58% 的Java用户, 38.2 MB,击败了88.45% 的Java用户
-// 如果换成注释部分，37 ms,击败了55.87% 的Java用户，38.7 MB,击败了78.37% 的Java用户
+/*
+ Solution 3_2: DP with rolling(reduced space complexity)
+
+dp[i][j]=true if the sum j can be formed by array elements in subset nums[0]..nums[i],
+otherwise dp[i][j]=false
+
+dp[i][j] |= dp[i - 1][j - num];
+
+loop for i
+    loop for j
+        dp[i][j] |= dp[i - 1][j - num];
+
+now
+loop for i
+    loop for j
+        dp[j] |= dp[j - num];
+with rolling base, we can reuse the array
+T(n, k) = O(n * k), S(n, k) = O(k)
+*/
 class Solution3_2 {
     
     public boolean canPartition(int[] nums) {
@@ -589,7 +446,7 @@ class Solution3_2 {
         dp[0] = true; // 空状态默认初始为true，表示空状态默认也是可以平均分割的
         for (int num : nums) {
             for (int j = target; j >= num; j--) {
-                dp[j] = dp[j] || dp[j - num];
+                dp[j] |= dp[j - num];
             }
         }
         return dp[target];
@@ -623,7 +480,9 @@ class Solution3_3 {
             int num = nums[i];
             List<Integer> temp = new ArrayList<>(set);
             for (int n : temp) {
-                set.add(n + num);
+                if (n + num <= target) {
+                    set.add(n + num);
+                }
             }
             if (set.contains(target)) {
                 return true;

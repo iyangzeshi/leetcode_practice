@@ -146,7 +146,7 @@ class Solution1 {
 /*
 Solution 2: BFS
 step 1: for every island 1, mark all connected island as 2 (visited) by doing bfs search
-step 2: after every new dfs search, add count of island by 1
+step 2: after every new bfs search, add count of island by 1
 T(m,n) = O(m*n), S(m,n) = O(min(m,n))
  */
 class Solution2 {

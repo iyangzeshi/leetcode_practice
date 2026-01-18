@@ -59,18 +59,18 @@ class Solution {
             return false;
         }
 
-        int sIndex = 0;
-        int tIndex = 0;
+        int i = 0;
+        int j = 0;
         int sLen = s.length();
         int tLen = t.length();
-        while (sIndex < sLen && tIndex < tLen) {
-            if (s.charAt(sIndex) == t.charAt(tIndex)) {
-                sIndex++;
+        while (i < sLen && j < tLen) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
             }
-            tIndex++;
+            j++;
         }
         // post processing
-        return sIndex == sLen;
+        return i == sLen;
 
     }
 }
