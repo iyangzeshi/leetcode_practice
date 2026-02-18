@@ -1,4 +1,5 @@
-//Sort a linked list using insertion sort. 
+
+//Sort a linked list using insertion sort.
 //
 // 
 // 
@@ -66,7 +67,13 @@ public class Leetcode0147InsertionSortList{
  * }
  */
 class Solution {
-    
+    /*
+    设置一个dummy node，它的next指向head
+    [head, cur] is sorted [cur.next, last) is pending
+    dummy -> head 4 -> 2 -> 1 -> 3
+                 cur next
+    每次从后面取出一个next node
+     */
     public ListNode insertionSortList(ListNode head) {
         if (head == null || head.next == null) {
             return head;

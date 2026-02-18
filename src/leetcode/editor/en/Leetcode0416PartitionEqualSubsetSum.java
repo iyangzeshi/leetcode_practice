@@ -72,7 +72,7 @@ public class Leetcode0416PartitionEqualSubsetSum {
             }
         }
         System.out.println("succeed");*/
-        Solution1_1 sol = new Leetcode0416PartitionEqualSubsetSum().new Solution1_1();
+        Solution1_3 sol = new Leetcode0416PartitionEqualSubsetSum().new Solution1_3();
         int[] nums = {1,3,2};
         boolean res = sol.canPartition(nums);
         System.out.println(res);

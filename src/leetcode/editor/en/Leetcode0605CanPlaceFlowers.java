@@ -42,6 +42,7 @@ public class Leetcode0605CanPlaceFlowers{
 /*
 用greedy的做法
 假设当前位置是i，如果i-1, i, i+1都是空着的，这个位置就可以放花，否则不可以
+T(n) = O(n), S(n) = O(1)
  */
 class Solution {
     
@@ -62,5 +63,29 @@ class Solution {
     
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/*
+思路：
+对于一段长度 为k的连续个0, 可种 (k - 1) / 2 朵
+T(n) = O(n), S(n) = O(1)
+ */
+// 不需要修改数组，也不用创建数组的T(n) = O(n)的做法
+class Solution2 {
+    
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        int count = 0;
+        int zeros = 1; // 左边假设有一个 0
+        for (int plot : flowerbed) {
+            if (plot == 0) {
+                zeros++;
+            } else {
+                count += (zeros - 1) / 2;
+                zeros = 0;
+            }
+        }
+        zeros++; // 右边补一个 0
+        count += (zeros - 1) / 2;
+        return count >= n;
+    }
+    
+}
 }

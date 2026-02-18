@@ -85,6 +85,9 @@ class Solution {
 // 0 ms,击败了100.00% 的Java用户,38.8 MB,击败了68.98% 的Java用户
 class Solution1 {
     
+    /*
+    binary search： 始终让left <= minIndex <= right，每次排除一部分错误区间
+     */
     public int findMin(int[] nums) {
         //corner case
         if (nums == null || nums.length == 0) {

@@ -197,58 +197,20 @@ class MaxStack1 {
 // 15 ms,击败了85.16% 的Java用户, 40.9 MB,击败了80.87% 的Java用户
 /*
 思想：维护一个DDL和TreeMap
-DDL是按照时间顺序排好的DDL
+DLL(double linkedlist)是按照时间顺序排好的DLL
 TreeMap的key是数字，List<Node> 是这个数字的一系列位置
  */
 class MaxStack2 {
     
-    TreeMap<Integer, List<Node>> map;
-    DoubleLinkedList dll;
-    
-    // O(1)
-    public MaxStack2() {
-        map = new TreeMap<>();
-        dll = new DoubleLinkedList();
-    }
-    
-    // O(lgn)
-    public void push(int x) {
-        Node node = new Node(x);
-        dll.add(node);
-        map.computeIfAbsent(x, k -> new ArrayList<>()).add(node);
-    }
-    
-    // O(lgn)
-    public int pop() {
-        int val = dll.pop();
-        List<Node> list = map.get(val);
-        list.remove(list.size() - 1);
-        if (list.isEmpty()) {
-            map.remove(val);
+    class Node {
+        
+        int val;
+        Node prev, next;
+        
+        public Node(int v) {
+            val = v;
         }
-        return val;
-    }
-    
-    // O(1)
-    public int top() {
-        return dll.peek();
-    }
-    
-    // O(lgn)
-    public int peekMax() {
-        return map.lastKey();
-    }
-    
-    // O(lgn)
-    public int popMax() {
-        int max = peekMax();
-        List<Node> list = map.get(max);
-        Node node = list.remove(list.size() - 1);
-        dll.unlink(node);
-        if (list.isEmpty()) {
-            map.remove(max);
-        }
-        return max;
+        
     }
     
     class DoubleLinkedList {
@@ -281,18 +243,56 @@ class MaxStack2 {
             node.next.prev = node.prev;
             return node;
         }
-        
+    
     }
     
-    class Node {
-        
-        int val;
-        Node prev, next;
-        
-        public Node(int v) {
-            val = v;
+    TreeMap<Integer, List<Node>> map;
+    DoubleLinkedList dll;
+    // O(1)
+    
+    public MaxStack2() {
+        map = new TreeMap<>();
+        dll = new DoubleLinkedList();
+    }
+    // O(lgn)
+    
+    public void push(int x) {
+        Node node = new Node(x);
+        dll.add(node);
+        map.computeIfAbsent(x, k -> new ArrayList<>()).add(node);
+    }
+    // O(lgn)
+    
+    public int pop() {
+        int val = dll.pop();
+        List<Node> list = map.get(val);
+        list.remove(list.size() - 1);
+        if (list.isEmpty()) {
+            map.remove(val);
         }
-        
+        return val;
+    }
+    // O(1)
+    
+    public int top() {
+        return dll.peek();
+    }
+    // O(lgn)
+    
+    public int peekMax() {
+        return map.lastKey();
+    }
+    // O(lgn)
+    
+    public int popMax() {
+        int max = peekMax();
+        List<Node> list = map.get(max);
+        Node node = list.remove(list.size() - 1);
+        dll.unlink(node);
+        if (list.isEmpty()) {
+            map.remove(max);
+        }
+        return max;
     }
     
 }

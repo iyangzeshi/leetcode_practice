@@ -126,6 +126,30 @@ class Solution1 {
 //4 ms,击败了74.71% 的Java用户, 38.6 MB,击败了35.23% 的Java用户
 /*
 keep increasing list buffer
+
+从DP的方法推导出来
+step1 :
+我们定义dp[i] 为以 nums[i] 结尾的最长长度。为了算 dp[i]，我们要看前面所有的 dp[j]。这太慢了。
+
+step 2:
+与其记录“以哪个位置结尾”，不如记录**“达到某个长度，最少需要多大的末尾数字”**？
+长度为 1 的序列，末尾最小能是多少？
+长度为 2 的序列，末尾最小能是多少？
+{10, 20, 30, 5, 6, 7, 8}
+len 1: 5
+len 2: 5,6
+len 3: 5,6,7
+len 4: 5,6,7,8
+
+
+step 3:
+sequence 不同len的candidate他们的最后一个元素都是递增的，所以
+
+step 4:：引入二分既然 tails 是有序的，当我们看到一个新的数字 $x$ 时，我们就不需要遍历 tails了。
+直接用二分查找找到它该去的位置：如果它能让某个长度的“最小末尾”变得更小，就替换它（贪心）。
+如果它比所有的末尾都大，就开辟一个新的长度（增加长度）。
+
+最终结果
  */
 class Solution2 {
     
@@ -149,6 +173,13 @@ class Solution2 {
     }
     
     // using binary search 在buffer中找到>= target的值的索引index
+    
+    /**
+     *
+     * @param buffer 加油
+     * @param target
+     * @return
+     */
     private int getIndex(List<Integer> buffer, int target) {
         int len = buffer.size();
         // corner case

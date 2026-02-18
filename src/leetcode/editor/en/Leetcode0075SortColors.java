@@ -48,6 +48,9 @@ class Solution {
         1 in [pZero,pOne)
         to be checked in [pOne, pTwo)
         2 in (pTwo, right]
+        
+        T(n) = O(n)
+        S(n) = O(1)
         */
         if (nums == null || nums.length == 0) {
             return;

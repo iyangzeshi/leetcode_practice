@@ -47,6 +47,15 @@ public class Leetcode0275HIndexIi{
         System.out.println(res);
     }
 //leetcode submit region begin(Prohibit modification and deletion)
+/*
+find the max {len - i} such that citations[i] >= len - i
+i is within [left, right]
+citations =     [0,1,2,5,6]
+len - i =       [5,4,3,2,1]
+i =             [0,1,2,3,4]
+
+T(n) = O(n)
+ */
 class Solution {
     public int hIndex(int[] citations) {
         // corner case
@@ -63,7 +72,7 @@ class Solution {
                 return len - mid;
             } else if (citations[mid] < len - mid) {
                 left = mid + 1;
-            } else {
+            } else { // citations[mid] < len - mid
                 right = mid - 1;
             }
         }

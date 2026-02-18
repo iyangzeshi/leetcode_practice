@@ -244,8 +244,14 @@ class Solution2_1 {
 // T(m,n) = O(mn), S(m,n) = O(mn)
 
 /**
- * 算出横坐标的投影的xList，纵坐标投影给yList，变成一维的meeting问题，绝对值方法来解
- * 分别计算出两个List从结尾走到中间的距离，绝对值问题，两个list各自从两边往中间走
+ * 数学解，遍历所有点，根据绝对值，找到x坐标和y坐标的中位数。
+ * (xMedian, yMedian)这个中位数就是地址，找到之后和每个点算距离，相加.
+ *
+ * step 1: traverse the grid to get x-coordinate in ascending order
+ *     math justification: the best point's x cooridate in manhattan distance is median of the x-coordinates:
+ *         |x1 - x| + |x2 - x| >= |x1 - x2|, best x is between (x1 and x2)
+ * step 2: calculate the manhattan distance in x-coordinates
+ * step 3: repeat process for Y coordinates
  */
 class Solution2_2 {
 
